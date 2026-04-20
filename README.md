@@ -77,10 +77,3 @@ Each building unlocks after completing its mini-game.
 
 ---
 
-## 🚀 Getting Started
-
-```bash
-# Clone repository
-git clone https://github.com/your-repo-name.git
-
-# Open index.html in browser
