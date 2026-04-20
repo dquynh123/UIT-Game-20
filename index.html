@@ -1,30 +1,46 @@
 <!DOCTYPE html>
-<html lang = "vi">
-    <head>
-        <meta charset = "UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>
-            Guided By Memories
-        </title>
-        <link rel="stylesheet" href="css/style.css">
-    </head>
-    <body>
-        <div id="toa-a">
-            <div id="start-screen" class="screen-container">
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guided By Memories</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="fade-overlay"></div>
+    <div id="main-menu" class="screen">
+        <img src="assets/images/anh2.png" alt="Guided by Memories" class="game-title-img">
+    
+        <button id="main-start-btn" class="img-btn">
+            <img src="assets/images/anh3.png" alt="PRESS ANY BUTTON TO START">
+        </button>
+    </div>
+
+    <div id="name-screen" class="screen hidden">
+        <div class="name-content">
+            <p>(Kimi no na wa)</p>
+            <h2>Nhập tên của bạn</h2>
+            <input type="text" id="user-name" placeholder="Tên của bạn...">
+            <button id="enter-btn">ENTER</button>
+        </div>
+    </div>
+
+    <div id="game-scene" class="hidden">
+        
+        <div id="toa-a" class="building-container">
+            <div id="start-screen-toa-a" class="screen-container">
                 <h2>THƯ VIỆN TÒA A</h2>
                 <p>Sắp xếp sách vào đúng ngăn có dán nhãn trước khi hết giờ!</p>
                 <p id="level-info">Màn 1: 4 Ngăn (20 ĐRL)</p>
-                <button id="start-btn" class="action-btn">BẮT ĐẦU</button>
+                <button id="toa-a-start-btn" class="action-btn">BẮT ĐẦU</button>
             </div>
 
-            <div id="game-screen" class="screen-container hidden">
+            <div id="game-screen-toa-a" class="screen-container hidden">
                 <div class="game-hud">
                     <div class="hud-item timer-box">⏳ <span id="time-display">00:30</span></div>
                     <div class="hud-item score-box">⭐ ĐRL: <span id="drl-display">0</span></div>
                 </div>
-
-                <div id="shelf-grid">
-                </div>
+                <div id="shelf-grid"></div>
             </div>
 
             <div id="level-complete-screen" class="screen-container hidden">
@@ -40,24 +56,22 @@
             </div>
         </div>
 
-        <div id="toa-b">
-         </div>
+        <div id="toa-b" class="building-container"></div>
+        <div id="toa-c" class="screen hidden"> 
+            <div class="quiz-container">
+                <div class="question-section">
+                    <h2 id="question-text">Đang tải câu hỏi...</h2>
+                </div>
 
-        <div id="toa-c">
+                <div id="answer-buttons" class="answers-section">
+                </div>
+            </div>
         </div>
+        <div id="toa-d" class="building-container"></div>
+        <div id="toa-e" class="building-container"></div>
+    </div>
 
-        <div id="toa-d">
-        </div>
-
-        <div id="toa-e">
-        </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
-        <script type="module" src="js/main.js"></script>
-        
-        <!--<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
-        <script src="js/buildings/toaA.js"></script>
-        <script src="js/main.js"></script>
-        <script src="js/buildings/toaE.js"></script>-->
-    </body>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
 </html>

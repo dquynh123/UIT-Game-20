@@ -1,0 +1,143 @@
+/* ============================================================
+   CONFIG CHUNG: KHÓA CHẶT TỈ LỆ 16:9 - KHÔNG TRÀN MÀN
+   ============================================================ */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Ngăn chặn cuộn trang toàn cục */
+}
+
+.screen {
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    overflow: hidden;
+    /* Tăng thời gian transition để khớp với logic JavaScript (0.8s) */
+    transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out; 
+    z-index: 10;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ============================================================
+   MÀN HÌNH 1: MAIN MENU
+   ============================================================ */
+#main-menu {
+    background-image: url('../assets/images/anh1.png');
+}
+
+.game-title-img {
+    width: 30%;
+    height: auto;
+    margin-bottom: 20px;
+    animation: floating 3s ease-in-out infinite;
+}
+
+#main-start-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+#main-start-btn img {
+    width: 280px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+#main-start-btn:hover img {
+    transform: scale(1.1);
+}
+
+/* ============================================================
+   MÀN HÌNH 2: NHẬP TÊN
+   ============================================================ */
+#name-screen {
+    background-image: url('../assets/images/anh1.png');
+}
+
+.name-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #000000;
+}
+
+.name-content h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.name-content input {
+    width: 300px;
+    padding: 12px;
+    font-size: 18px;
+    border: 2px solid #000;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #000;
+    margin-bottom: 20px;
+    outline: none;
+}
+
+#enter-btn {
+    padding: 10px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+}
+
+/* ============================================================
+   HIỆU ỨNG: CHUYỂN CẢNH & LƠ LỬNG
+   ============================================================ */
+
+/* Hiệu ứng trượt sang trái + Mờ dần */
+.fade-out-left {
+    transform: translateX(-150px) !important; /* Đẩy sang trái */
+    opacity: 0 !important; /* Mờ dần */
+    pointer-events: none;
+}
+
+/* Keyframes lơ lửng cho tên game */
+@keyframes floating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* Lớp phủ chuyển cảnh toàn màn hình (Fade to Black) */
+#fade-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: opacity 0.8s ease-in-out;
+}
+
+#fade-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
