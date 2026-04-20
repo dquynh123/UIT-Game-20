@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="game-wrapper-e">
             <div class="left-column">
                 <div id="visual-board" class="visual-board">
-                    <img id="chibi-player" src="assets/images/chibi.png" class="chibi" alt="chibi">
+                    <img id="chibi-player" src="assets/images/chibi.jpg" class="chibi" alt="chibi">
                     <div id="grid-overlay" style="display: contents;"></div>
                 </div>
             </div>
@@ -30,6 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
 
+                <div class="dice-visualizer">
+                    <div id="dice-face" class="dice-face">🎲</div>
+                </div>
+
+                <div class="dice-controls">
+
                 <div id="action-log" class="action-log">Nhật ký: Sẵn sàng!</div>
             </div>
         </div>
@@ -41,7 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
         drl: 200,
         turns: 0,
         maxTurns: 25,
-        isGameOver: false
+        isGameOver: false,
+        isRolling: false
     };
 
     // 3. CẤU TRÚC DỮ LIỆU ĐIỀU HƯỚNG (Hash Map)
@@ -78,52 +85,118 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 5. LOGIC CHÍNH XỬ LÝ LƯỢT ĐI
 function rollDice(diceType, cost) {
-        if (state.isGameOver) return;
+        if (state.isGameOver || state.isRolling) return;
 
-        // BƯỚC 1: KIỂM TRA XEM CÓ ĐỦ TIỀN MUA LOẠI XÚC XẮC VỪA CHỌN KHÔNG
+        // 1. KIỂM TRA ĐIỀU KIỆN
         if (state.drl < cost) {
-            // Kiểm tra xem liệu có còn đủ tiền cho loại rẻ nhất (D4 - giá 3) không
             if (state.drl < 3) {
-                endGame("Bạn đã cạn kiệt ĐRL và không thể mua bất kỳ xúc xắc nào nữa!");
+                endGame("Bạn đã hết sạch ĐRL và không thể mua bất kỳ xúc xắc nào nữa!");
             } else {
-                // Chỉ cảnh báo, không kết thúc game
                 logArea.innerHTML = `<span style="color: orange;"> Bạn không đủ ĐRL cho D${diceType} (cần ${cost}). Hãy chọn loại rẻ hơn!</span>`;
             }
-            return; // Thoát hàm, không thực hiện lượt đi này
+            return; 
         }
 
-        // BƯỚC 2: NẾU ĐỦ TIỀN THÌ MỚI TRỪ ĐIỂM VÀ ĐI TIẾP
+        // 2. KHỞI ĐỘNG XÚC XẮC
         state.drl -= cost;
         state.turns += 1;
+        state.isRolling = true; 
+        diceButtons.forEach(btn => btn.style.opacity = '0.5'); 
+        updateUI(); 
 
-        const rollResult = Math.floor(Math.random() * diceType) + 1;
-        state.pos += rollResult;
+        const diceFace = document.getElementById('dice-face');
+        if (diceFace) diceFace.classList.add('rolling'); 
+        logArea.innerHTML = `<em>Đang xóc D${diceType}... Cầu trời khấn phật...</em>`;
 
-        let logMsg = `Đổ D${diceType} ra ${rollResult}. Đi đến ô ${state.pos}.`;
+        let rollInterval = setInterval(() => {
+            let tempNum = Math.floor(Math.random() * diceType) + 1;
+            if (diceFace) diceFace.innerHTML = `${tempNum}`;
+        }, 50);
 
-        if (state.pos >= 120) {
-            state.pos = 120;
-            updateUI();
-            endGame("CHÚC MỪNG! Bạn đã vào được Hội trường tòa E để tham dự seminar.");
-            return;
-        }
+        // 3. XỬ LÝ DI CHUYỂN BẰNG ASYNC/AWAIT
+        // Thêm chữ "async" trước function để dùng được lệnh chờ "await"
+        setTimeout(async () => {
+            clearInterval(rollInterval); 
+            if (diceFace) diceFace.classList.remove('rolling'); 
+            
+            const rollResult = Math.floor(Math.random() * diceType) + 1;
+            if (diceFace) {
+                diceFace.innerHTML = `${rollResult}`; 
+                diceFace.style.color = "#FF7F00";
+            }
 
-        if (portals[state.pos]) {
-            const newPos = portals[state.pos];
-            logMsg += newPos > state.pos ? ` 🚀 Thang máy lên ô ${newPos}!` : ` 🪜 Cầu thang xuống ô ${newPos}!`;
-            state.pos = newPos;
-        }
+            let targetPos = state.pos + rollResult;
+            if (targetPos > 120) targetPos = 120; // Giới hạn mốc 120
 
-        logArea.innerText = logMsg;
-        updateUI();
+            // ----------------------------------------------------
+            // KỊCH BẢN 1: ĐI BỘ TỪNG Ô MỘT
+            // ----------------------------------------------------
+            logArea.innerHTML = `Đổ ra <strong>${rollResult}</strong>. Đang di chuyển...`;
+            for (let current = state.pos + 1; current <= targetPos; current++) {
+                state.pos = current;
+                updateUI(); // Vừa cập nhật số ở bảng điều khiển, vừa ép Chibi nhích đi
+                await new Promise(resolve => setTimeout(resolve, 300)); // Đợi 0.3s cho mỗi bước
+            }
 
-        // BƯỚC 3: KIỂM TRA ĐIỀU KIỆN KẾT THÚC VÒNG SAU KHI ĐI
-        if (state.turns >= state.maxTurns) {
-            endGame("Hết 25 lượt đi. Kết thúc vòng chạy!");
-        } else if (state.drl < 3) {
-            // Kiểm tra lại sau khi trừ điểm, nếu không còn đủ 3đ cho lượt sau thì nghỉ luôn
-            endGame("Số ĐRL còn lại không đủ để thực hiện thêm lượt đi nào.");
-        }
+            let logMsg = `Đổ D${diceType} ra <strong>${rollResult}</strong>. Đi đến ô ${state.pos}.`;
+
+            if (state.pos === 120) {
+                logArea.innerHTML = logMsg;
+                endGame("CHÚC MỪNG! Bạn đã vào được Hội trường tòa E để tham dự seminar!");
+                return;
+            }
+
+            // ----------------------------------------------------
+            // KỊCH BẢN 2: KIỂM TRA ĐẠP TRÚNG PORTAL (Thang máy / Cầu thang)
+            // ----------------------------------------------------
+            if (portals[state.pos]) {
+                const newPos = portals[state.pos];
+                const chibi = document.getElementById('chibi-player');
+
+                if (newPos > state.pos) {
+                    // PHẦN A: THANG MÁY (Tàng hình rồi dịch chuyển)
+                    logMsg += `<br>🚀 Tinh! Cửa thang máy mở ra, bạn đi đến ô ${newPos}!`;
+                    logArea.innerHTML = logMsg; 
+                    
+                    if (chibi) chibi.style.opacity = '0'; // Tàng hình
+                    await new Promise(resolve => setTimeout(resolve, 400)); // Đợi Chibi mờ hẳn đi
+
+                    // Tắt hiệu ứng trượt mượt để dịch chuyển tức thời
+                    if (chibi) chibi.style.transition = 'none'; 
+                    state.pos = newPos;
+                    updateUI(); // Cắm Chibi xuống tọa độ mới lúc đang tàng hình
+
+                    // Bật lại hiệu ứng và cho xuất hiện
+                    await new Promise(resolve => setTimeout(resolve, 50)); // Chờ code load
+                    if (chibi) chibi.style.transition = 'left 0.3s linear, bottom 0.3s linear, opacity 0.4s ease';
+                    if (chibi) chibi.style.opacity = '1'; // Hiện hình
+                    await new Promise(resolve => setTimeout(resolve, 400)); // Đợi Chibi rõ nét hẳn
+
+                } else {
+                    // PHẦN B: CẦU THANG (Trượt thẳng đường chim bay)
+                    logMsg += `<br>🪜 Bạn buộc phải đi thang bộ xuống ${newPos}!`;
+                    logArea.innerHTML = logMsg;
+
+                    state.pos = newPos;
+                    updateUI(); // Vì transition vẫn đang bật nên Chibi sẽ lướt thẳng xuống
+                    await new Promise(resolve => setTimeout(resolve, 500)); // Đợi trượt xong
+                }
+            } else {
+                logArea.innerHTML = logMsg; // Nếu ô thường thì in log bình thường
+            }
+
+            // 4. KẾT THÚC LƯỢT VÀ MỞ KHÓA NÚT
+            state.isRolling = false;
+            diceButtons.forEach(btn => btn.style.opacity = '1');
+            updateUI(); 
+
+            if (state.turns >= state.maxTurns) {
+                endGame("Hết 25 lượt đi. Kết thúc vòng chạy!");
+            } else if (state.drl < 3) {
+                endGame("Số ĐRL còn lại không đủ để thực hiện thêm lượt đi nào.");
+            }
+
+        }, 1000); 
     }
 
 function updateUI() {
@@ -153,9 +226,10 @@ function updateUI() {
             let leftPercentage = col * 10; 
             let bottomPercentage = row * (100 / 12); 
 
-            // Ép tọa độ mới vào CSS của bé Chibi
-            chibi.style.left = `${leftPercentage}%`;
-            chibi.style.bottom = `${bottomPercentage}%`;
+            // CỘNG THÊM OFFSET ĐỂ CĂN GIỮA
+            // 1.5 là bù trừ chiều ngang, 1.25 là bù trừ chiều dọc
+            chibi.style.left = `${leftPercentage + 1.5}%`;
+            chibi.style.bottom = `${bottomPercentage + 1.25}%`;
         }
     }
 
@@ -208,4 +282,35 @@ function updateUI() {
     
     // Chạy hàm vẽ lưới
     drawGrid();
+
+    // --- HỆ THỐNG IDLE ANIMATION (HÀNH ĐỘNG NGẪU NHIÊN KHI ĐỨNG YÊN) ---
+    
+    // Danh sách các "tuyệt chiêu" đã định nghĩa bên CSS
+    const idleClasses = ['idle-spin', 'idle-jump', 'idle-nod', 'idle-flatten', 'idle-flip', 'idle-panic'];
+    
+    // Cứ mỗi 3 giây (3000ms), đạo diễn sẽ xem xét cho diễn 1 lần
+    setInterval(() => {
+        const chibi = document.getElementById('chibi-player');
+        
+        // NGUYÊN TẮC 1: Đang đổ xúc xắc, đang chạy, hoặc game over thì KHÔNG DIỄN
+        if (state.isGameOver || state.isRolling || !chibi) return;
+
+        // NGUYÊN TẮC 2: Tỉ lệ 50% là đứng im cho tự nhiên, 50% mới làm hành động
+        // (Để tránh việc bé Chibi bị tăng động, múa may liên tục)
+        if (Math.random() > 0.5) return; 
+
+        // Bốc thăm ngẫu nhiên 1 trong 3 hành động
+        const randomAction = idleClasses[Math.floor(Math.random() * idleClasses.length)];
+
+        // Hô "Action!": Gắn class vào để Chibi diễn
+        chibi.classList.add(randomAction);
+
+        // Hô "Cắt!": Xóa class đi sau khi diễn xong (0.8 giây) để lần sau diễn tiếp được
+        setTimeout(() => {
+            if (chibi) chibi.classList.remove(randomAction);
+        }, 800);
+
+    }, 3000);
+
+    updateUI();
 });
