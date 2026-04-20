@@ -1,0 +1,138 @@
+.game-board-e {
+    background-color: #f8f9fa;
+    border: 3px solid #00529C;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.floor-title {
+    color: #FF7F00;
+    text-align: center;
+    border-bottom: 2px dashed #ccc;
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+.stats-panel {
+    display: flex;
+    justify-content: space-around;
+    background-color: #e9ecef;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.highlight {
+    color: #00529C;
+    font-size: 22px;
+}
+
+.dice-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.btn-dice {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.1s, background-color 0.2s;
+    background-color: #00529C;
+    color: white;
+}
+
+.btn-dice:hover { background-color: #003d73; }
+.btn-dice:active { transform: scale(0.95); }
+.btn-dice:disabled { background-color: #ccc; cursor: not-allowed; }
+
+.action-log {
+    background: #fff;
+    padding: 15px;
+    border-left: 5px solid #FF7F00;
+    font-size: 16px;
+    min-height: 50px;
+}
+/* Khung chứa bản đồ */
+.visual-board {
+    width: 100%;
+    max-width: 400px; 
+    aspect-ratio: 10 / 12; 
+    
+    background-color: #d1e7dd; 
+    background-size: cover;
+    position: relative; 
+    margin: 0 auto;
+    border: 3px solid #00529C;
+    
+    /* Bật chế độ Grid Lưới lên */
+    display: grid;
+    grid-template-columns: repeat(10, 1fr); /* 10 cột bằng nhau */
+    grid-template-rows: repeat(12, 1fr);    /* 12 hàng bằng nhau */
+}
+
+/* Các ô vuông lưới (Để Artist nhìn dễ vẽ) */
+.debug-cell {
+    border: 1px dashed rgba(0, 0, 0, 0.2); /* Viền đứt nét, mờ 20% */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.3); /* Số mờ mờ */
+    font-size: 10px;
+    font-weight: bold;
+    z-index: 1;
+}
+
+/* Sửa Chibi một xíu cho nó nằm chính giữa tâm của ô */
+.chibi {
+    width: 10%; 
+    height: 8.33%; /* 100% / 12 hàng */
+    object-fit: contain; /* Ép hình không bị méo */
+    position: absolute; 
+    bottom: 0%; 
+    left: 0%;   
+    transition: left 0.5s ease-in-out, bottom 0.5s ease-in-out; 
+    z-index: 10; 
+}
+
+/* Khung bao bọc toàn bộ game Tòa E */
+.game-wrapper-e {
+    display: flex;          /* Bật Flexbox */
+    flex-direction: row;    /* Ép nằm ngang hàng */
+    gap: 30px;              /* Khoảng cách giữa 2 cột */
+    align-items: flex-start;
+    padding: 20px;
+    background: #fff;
+    border-radius: 15px;
+}
+
+/* Cột bên trái chiếm 60% độ rộng */
+.left-column {
+    flex: 6; 
+    text-align: center;
+}
+
+/* Cột bên phải chiếm 40% độ rộng */
+.right-column {
+    flex: 4;
+    display: flex;
+    flex-direction: column; /* Các mục bên phải vẫn xếp chồng lên nhau */
+    gap: 15px;
+}
+
+/* Responsive: Nếu màn hình điện thoại quá nhỏ, tự động quay về hàng dọc */
+@media (max-width: 768px) {
+    .game-wrapper-e {
+        flex-direction: column;
+    }
+}
