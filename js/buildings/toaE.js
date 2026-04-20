@@ -143,6 +143,13 @@ function rollDice(diceType, cost) {
             if (state.pos === 120) {
                 logArea.innerHTML = logMsg;
                 endGame("CHÚC MỪNG! Bạn đã vào được Hội trường tòa E để tham dự seminar!");
+                
+                // --- BƯỚC 2 NẰM Ở ĐÂY ---
+                // Sau khi báo thắng, đếm ngược 3 giây (3000ms) rồi tự động bay sang Tòa A
+                setTimeout(() => {
+                    transitionToToaA();
+                }, 3000);
+                
                 return;
             }
 
@@ -314,3 +321,13 @@ function updateUI() {
 
     updateUI();
 });
+
+function transitionToToaA() {
+    // Gọi hàm điều phối toàn cục từ main.js
+    if (typeof window.switchBuilding === 'function') {
+        window.switchBuilding('toa-a');
+        
+        // Nếu tòa A có hàm bắt đầu game riêng, hãy gọi nó ở đây
+        // Ví dụ: if (typeof window.initToaA === 'function') window.initToaA();
+    }
+}

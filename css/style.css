@@ -1,0 +1,8 @@
+/* Nạp CSS của Tòa A và Tòa E vào đây */
+@import url('./buildings/toaA.css');
+@import url('./buildings/toaE.css');
+
+/* THÊM DÒNG NÀY ĐỂ SỬA LỖI HIỆN TẤT CẢ CÙNG LÚC */
+.hidden {
+    display: none !important;
+}

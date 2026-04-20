@@ -70,7 +70,7 @@
     aspect-ratio: 10 / 12; 
     
     background-color: palevioletred; 
-    background-image: url('../assets/images/board.jpg');
+    background-image: url('../../assets/images/board.jpg');
     background-size: cover;
     position: relative; 
     background-position: center;
