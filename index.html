@@ -10,6 +10,34 @@
     </head>
     <body>
         <div id="toa-a">
+            <div id="start-screen" class="screen-container">
+                <h2>THƯ VIỆN TÒA A</h2>
+                <p>Sắp xếp sách vào đúng ngăn có dán nhãn trước khi hết giờ!</p>
+                <p id="level-info">Màn 1: 4 Ngăn (20 ĐRL)</p>
+                <button id="start-btn" class="action-btn">BẮT ĐẦU</button>
+            </div>
+
+            <div id="game-screen" class="screen-container hidden">
+                <div class="game-hud">
+                    <div class="hud-item timer-box">⏳ <span id="time-display">00:30</span></div>
+                    <div class="hud-item score-box">⭐ ĐRL: <span id="drl-display">0</span></div>
+                </div>
+
+                <div id="shelf-grid">
+                </div>
+            </div>
+
+            <div id="level-complete-screen" class="screen-container hidden">
+                <h2 id="complete-title">QUA MÀN!</h2>
+                <p>Bạn nhận được: <span id="reward-display" class="highlight">20 ĐRL</span></p>
+                <button id="next-level-btn" class="action-btn">Chơi Màn Tiếp Theo</button>
+            </div>
+
+            <div id="game-over-screen" class="screen-container hidden">
+                <h2>HẾT GIỜ!</h2>
+                <p>Thủ thư đã phát hiện kệ sách bừa bộn.</p>
+                <button id="retry-btn" class="action-btn">Chơi lại màn này</button>
+            </div>
         </div>
 
         <div id="toa-b">
@@ -23,6 +51,9 @@
 
         <div id="toa-e">
         </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+        <script src="js/buildings/toaA.js"></script>
         <script src="js/main.js"></script>
     </body>
 </html>
