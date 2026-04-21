@@ -26,33 +26,58 @@
     </div>
 
     <div id="game-scene" class="hidden">
-        
-        <div id="toa-a" class="building-container">
-            <div id="start-screen-toa-a" class="screen-container">
-                <h2>THƯ VIỆN TÒA A</h2>
-                <p>Sắp xếp sách vào đúng ngăn có dán nhãn trước khi hết giờ!</p>
-                <p id="level-info">Màn 1: 4 Ngăn (20 ĐRL)</p>
-                <button id="toa-a-start-btn" class="action-btn">BẮT ĐẦU</button>
+        <!--======================================================-->
+        <div id="toa-a" class="building-container" style="display: none;">
+            <div id="start-screen-toa-a" class="overlay-screen">
+                <h1 class="game-title-yellow">Băng Chuyền Thư Viện</h1>
+                <p>Kéo sách vào ĐÚNG NGĂN. Sách cũ/hỏng ném hết vào THÙNG SÁCH CŨ.</p>
+                <p class="small-text">Click 3 lần vào "Sách Tạ" để có thể kéo.</p>
+                <button id="toa-a-start-btn" class="orange-btn">BẮT ĐẦU</button>
             </div>
 
             <div id="game-screen-toa-a" class="screen-container hidden">
-                <div class="game-hud">
-                    <div class="hud-item timer-box">⏳ <span id="time-display">00:30</span></div>
-                    <div class="hud-item score-box">⭐ ĐRL: <span id="drl-display">0</span></div>
+                <div class="game-header">
+                    <div class="header-item">⏱️ <span id="time-display">0</span>s</div>
+                    <div class="header-item score-text">🌟 Điểm: <span id="score-display">0</span></div>
+                    <div class="header-item text-yellow">❤️ Mạng: <span id="life-display">3</span></div>
                 </div>
-                <div id="shelf-grid"></div>
-            </div>
 
-            <div id="level-complete-screen" class="screen-container hidden">
-                <h2 id="complete-title">QUA MÀN!</h2>
-                <p>Bạn nhận được: <span id="reward-display" class="highlight">20 ĐRL</span></p>
-                <button id="next-level-btn" class="action-btn">Chơi Màn Tiếp Theo</button>
-            </div>
+                <div class="play-area">
+                    <div class="top-row">
+                        <div id="bin-sach-cu" class="drop-zone" data-accept="OLD">
+                            <span>📦 THÙNG<br>SÁCH CŨ</span>
+                        </div>
+                        
+                        <div id="conveyor-container">
+                            <div id="conveyor-belt"></div>
+                        </div>
+                        
+                        <div id="cliff">
+                            <span class="vertical-text">Vực Thẳm</span>
+                        </div>
+                    </div>
 
-            <div id="game-over-screen" class="screen-container hidden">
-                <h2>HẾT GIỜ!</h2>
-                <p>Thủ thư đã phát hiện kệ sách bừa bộn.</p>
-                <button id="retry-btn" class="action-btn">Chơi lại màn này</button>
+                    <div id="complex-shelves-grid">
+                        <div class="shelf-column">
+                            <div class="shelf-title">Giáo Trình (GT)</div>
+                            <div class="compartment drop-zone" data-accept="GT-01"><span class="comp-label">GT-01</span><div class="spines-container"></div></div>
+                            <div class="compartment drop-zone" data-accept="GT-02"><span class="comp-label">GT-02</span><div class="spines-container"></div></div>
+                            <div class="compartment drop-zone" data-accept="GT-03"><span class="comp-label">GT-03</span><div class="spines-container"></div></div>
+                        </div>
+                        <div class="shelf-column">
+                            <div class="shelf-title">Luận Văn (LV)</div>
+                            <div class="compartment drop-zone" data-accept="LV-01"><span class="comp-label">LV-01</span><div class="spines-container"></div></div>
+                            <div class="compartment drop-zone" data-accept="LV-02"><span class="comp-label">LV-02</span><div class="spines-container"></div></div>
+                            <div class="compartment drop-zone" data-accept="LV-03"><span class="comp-label">LV-03</span><div class="spines-container"></div></div>
+                        </div>
+                        <div class="shelf-column">
+                            <div class="shelf-title">Đồ Án (DA)</div>
+                            <div class="compartment drop-zone" data-accept="DA-01"><span class="comp-label">DA-01</span><div class="spines-container"></div></div>
+                            <div class="compartment drop-zone" data-accept="DA-02"><span class="comp-label">DA-02</span><div class="spines-container"></div></div>
+                            <div class="compartment drop-zone" data-accept="DA-03"><span class="comp-label">DA-03</span><div class="spines-container"></div></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -71,8 +96,18 @@
                     </div>
             </div>
         </div>
-        <div id="toa-d" class="building-container"></div>
-        <div id="toa-e" class="building-container"></div>
+        <div id="toa-d" class="building-container"style="display: none;">
+        </div>
+        <div id="toa-e" class="building-container"style="display: none;">
+            <div class="screen-container" style="text-align: center; margin-top: 20vh;">
+                <h2>ĐÂY LÀ KHU VỰC TÒA E</h2>
+                <p>(Khu vực này team đang xây dựng...)</p>
+                <br>
+                <button onclick="window.switchBuilding('toa-a')" class="action-btn">
+                    Chạy sang Tòa A 👉
+                </button>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
