@@ -37,7 +37,7 @@ body {
    MÀN HÌNH 1: MAIN MENU
    ============================================================ */
 #main-menu {
-    background-image: url('../assets/images/anh1.png');
+    background-image: url('../assets/images/anh1.webp');
 }
 
 .game-title-img {
@@ -68,7 +68,7 @@ body {
    MÀN HÌNH 2: NHẬP TÊN
    ============================================================ */
 #name-screen {
-    background-image: url('../assets/images/anh1.png');
+    background-image: url('../assets/images/anh1.webp');
 }
 
 .name-content {

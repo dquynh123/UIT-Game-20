@@ -12,7 +12,7 @@
         <img src="assets/images/anh2.png" alt="Guided by Memories" class="game-title-img">
     
         <button id="main-start-btn" class="img-btn">
-            <img src="assets/images/anh3.png" alt="PRESS ANY BUTTON TO START">
+            <img src="assets/images/anh3.webp" alt="PRESS ANY BUTTON TO START">
         </button>
     </div>
 
@@ -57,14 +57,18 @@
         </div>
 
         <div id="toa-b" class="building-container"></div>
-        <div id="toa-c" class="screen hidden"> 
+        <div id="toa-c" class="building-container" style="display: none;">
+            <div class="header-info">
+                <div class="info-box timer-box">⏳ <span id="timer-display">10</span>s</div>
+                <div class="info-box score-box">⭐ Điểm: <span id="score">0</span></div>
+            </div>
+
             <div class="quiz-container">
                 <div class="question-section">
                     <h2 id="question-text">Đang tải câu hỏi...</h2>
                 </div>
-
-                <div id="answer-buttons" class="answers-section">
-                </div>
+                <div id="answer-buttons" class="answers-grid">
+                    </div>
             </div>
         </div>
         <div id="toa-d" class="building-container"></div>
