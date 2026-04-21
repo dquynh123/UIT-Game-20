@@ -68,14 +68,15 @@
     width: 100%;
     max-width: 400px; 
     aspect-ratio: 10 / 12; 
-    
-    background-color: palevioletred; 
-    background-image: url('../../assets/images/board.jpg');
+
+    background-color: #79c5e946; /* Cho một cái màu nền sáng sủa làm sàn nhà */
+    background-image: url('../../assets/images/board.png');
     background-size: cover;
     position: relative; 
     background-position: center;
     margin: 0 auto;
     border: 3px solid #00529C;
+    z-index: 10;
     
     /* Bật chế độ Grid Lưới lên */
     display: grid;
@@ -83,16 +84,41 @@
     grid-template-rows: repeat(12, 1fr);    /* 12 hàng bằng nhau */
 }
 
+/* THÊM ĐOẠN NÀY ĐỂ TẠO LỚP BẢN ĐỒ NẰM TRÊN LƯỚI */
+.visual-board::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0; /* Ép nó che kín toàn bộ khung grid */
+    opacity: 1;
+    
+    /* Gắn link tới ảnh PNG TRONG SUỐT của bạn */
+    background-image: url('../../assets/images/board.png'); 
+    background-size: cover;
+    background-position: center;
+    
+    /* Quan trọng nhất: Đưa nó lên Layer 5 (Nằm TRÊN cái lưới Layer 1) */
+    z-index: 5;
+    
+    /* Cực kỳ quan trọng: Xuyên thấu click! 
+       Nếu không có dòng này, lớp kính ảo sẽ chặn không cho bạn click vào các thứ bên dưới */
+    pointer-events: none;
+}
+
 /* Các ô vuông lưới (Để Artist nhìn dễ vẽ) */
 .debug-cell {
-    border: 1px dashed rgba(0, 0, 0, 0.2); /* Viền đứt nét, mờ 20% */
+    /* ĐỔI TỪ NÉT ĐỨT (dashed) SANG NÉT LIỀN (solid) */
+    border: 1px solid rgba(0, 0, 0, 0.4); /* Nét liền, màu đen hơi mờ 40% cho đỡ chói */
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-end; /* Đẩy con số sang sát mép BÊN PHẢI */
+    align-items: flex-end;     /* Đẩy con số xuống sát mép BÊN DƯỚI */
+    
+    /* Thêm một chút lớp đệm để số không bị dính chặt vào đường viền */
+    padding: 2px 5px;
+
     color: rgba(0, 0, 0, 0.3); /* Số mờ mờ */
-    font-size: 10px;
+    font-size: 8px;
     font-weight: bold;
-    z-index: 1;
+    z-index: -1;
 }
 
 /* Sửa Chibi một xíu cho nó nằm chính giữa tâm của ô */
@@ -106,7 +132,7 @@
     bottom: 0%; 
     left: 0%;   
     transition: left 0.3s linear, bottom 0.3s linear, opacity 0.4s ease;
-    z-index: 10; 
+    z-index: 10;
     opacity: 1;
     transform-origin: center;
 }

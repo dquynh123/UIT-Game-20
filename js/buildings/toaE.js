@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="game-wrapper-e">
             <div class="left-column">
                 <div id="visual-board" class="visual-board">
-                    <img id="chibi-player" src="assets/images/chibi.jpg" class="chibi" alt="chibi">
+                    <img id="chibi-player" src="assets/images/chibi.png" class="chibi" alt="chibi">
                     <div id="grid-overlay" style="display: contents;"></div>
                 </div>
             </div>
@@ -16,9 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h2 id="floor-display" class="floor-title">Tầng 1: Sảnh chính tòa E</h2>
                 
                 <div class="stats-panel">
-                    <div class="stat-box">ĐRL: <span id="drl-display" class="highlight">200</span></div>
-                    <div class="stat-box">Lượt: <span id="turn-display">0/25</span></div>
-                    <div class="stat-box">Vị trí: <span id="pos-display" class="highlight">1</span></div>
+                    <div class="stat-box">ĐRL: <span id="drl-display-e" class="highlight">200</span></div>
+                    <div class="stat-box">Lượt: <span id="turn-display-e">0/25</span></div>
+                    <div class="stat-box">Vị trí: <span id="pos-display-e" class="highlight">1</span></div>
                 </div>
 
                 <div class="dice-controls">
@@ -76,9 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Kết nối DOM
-    const displayDrl = document.getElementById('drl-display');
-    const displayTurn = document.getElementById('turn-display');
-    const displayPos = document.getElementById('pos-display');
+    const displayDrl = document.getElementById('drl-display-e');
+    const displayTurn = document.getElementById('turn-display-e');
+    const displayPos = document.getElementById('pos-display-e');
     const displayFloor = document.getElementById('floor-display');
     const logArea = document.getElementById('action-log');
     const diceButtons = document.querySelectorAll('.btn-dice');
@@ -162,7 +162,7 @@ function rollDice(diceType, cost) {
 
                 if (newPos > state.pos) {
                     // PHẦN A: THANG MÁY (Tàng hình rồi dịch chuyển)
-                    logMsg += `<br>🚀 Tinh! Cửa thang máy mở ra, bạn đi đến ô ${newPos}!`;
+                    logMsg += `<br>Tinh! Cửa thang máy mở ra, bạn đi đến ô ${newPos}!`;
                     logArea.innerHTML = logMsg; 
                     
                     if (chibi) chibi.style.opacity = '0'; // Tàng hình
@@ -181,12 +181,22 @@ function rollDice(diceType, cost) {
 
                 } else {
                     // PHẦN B: CẦU THANG (Trượt thẳng đường chim bay)
-                    logMsg += `<br>🪜 Bạn buộc phải đi thang bộ xuống ${newPos}!`;
+                    logMsg += `<br>Tinh! Bạn buộc phải đi thang máy xuống ô ${newPos}!`;
                     logArea.innerHTML = logMsg;
 
+                    if (chibi) chibi.style.opacity = '0'; // Tàng hình
+                    await new Promise(resolve => setTimeout(resolve, 400)); // Đợi Chibi mờ hẳn đi
+
+                    // Tắt hiệu ứng trượt mượt để dịch chuyển tức thời
+                    if (chibi) chibi.style.transition = 'none'; 
                     state.pos = newPos;
-                    updateUI(); // Vì transition vẫn đang bật nên Chibi sẽ lướt thẳng xuống
-                    await new Promise(resolve => setTimeout(resolve, 500)); // Đợi trượt xong
+                    updateUI(); // Cắm Chibi xuống tọa độ mới lúc đang tàng hình
+
+                    // Bật lại hiệu ứng và cho xuất hiện
+                    await new Promise(resolve => setTimeout(resolve, 50)); // Chờ code load
+                    if (chibi) chibi.style.transition = 'left 0.3s linear, bottom 0.3s linear, opacity 0.4s ease';
+                    if (chibi) chibi.style.opacity = '1'; // Hiện hình
+                    await new Promise(resolve => setTimeout(resolve, 400)); // Đợi Chibi rõ nét hẳn
                 }
             } else {
                 logArea.innerHTML = logMsg; // Nếu ô thường thì in log bình thường
@@ -252,6 +262,8 @@ function updateUI() {
         
         // Disable các nút xúc xắc
         diceButtons.forEach(btn => btn.disabled = true);
+        // Chuyển thử qua a
+        transitionToToaA();
     }
 
     // Gắn sự kiện cho các nút xúc xắc
