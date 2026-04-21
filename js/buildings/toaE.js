@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="game-wrapper-e">
             <div class="left-column">
                 <div id="visual-board" class="visual-board">
-                    <img id="chibi-player" src="assets/images/chibi.jpg" class="chibi" alt="chibi">
+                    <img id="chibi-player" src="assets/images/chibi.png" class="chibi" alt="chibi">
                     <div id="grid-overlay" style="display: contents;"></div>
                 </div>
             </div>
@@ -16,9 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h2 id="floor-display" class="floor-title">Tầng 1: Sảnh chính tòa E</h2>
                 
                 <div class="stats-panel">
-                    <div class="stat-box">ĐRL: <span id="drl-display" class="highlight">200</span></div>
-                    <div class="stat-box">Lượt: <span id="turn-display">0/25</span></div>
-                    <div class="stat-box">Vị trí: <span id="pos-display" class="highlight">1</span></div>
+                    <div class="stat-box">ĐRL: <span id="drl-display-e" class="highlight">200</span></div>
+                    <div class="stat-box">Lượt: <span id="turn-display-e">0/25</span></div>
+                    <div class="stat-box">Vị trí: <span id="pos-display-e" class="highlight">1</span></div>
                 </div>
 
                 <div class="dice-controls">
@@ -48,14 +48,16 @@ document.addEventListener('DOMContentLoaded', () => {
         turns: 0,
         maxTurns: 25,
         isGameOver: false,
-        isRolling: false
+        isRolling: false,
+        isNight: false,
+        dayNightCycle: 0
     };
 
     // 3. CẤU TRÚC DỮ LIỆU ĐIỀU HƯỚNG (Hash Map)
-    // Key là ô hiện tại, Value là ô sẽ nhảy tới (Thang máy hoặc Cầu thang bộ)
+    // Key là ô hiện tại, Value là ô sẽ nhảy tới (Thang máy lên hoặc xuống)
     const portals = {
         4: 14, 9: 31, 40: 41, 58: 71, 67: 76, 87: 91, // Thang máy (Lên)
-        17: 7, 45: 1, 53: 48, 64: 19, 74: 34, 105: 77, 119: 62 // Cầu thang bộ (Xuống)
+        17: 7, 45: 1, 53: 48, 64: 19, 74: 34, 105: 77, 119: 62 // Thang máy (Xuống)
     };
 
     // 4. LOGIC XÁC ĐỊNH TẦNG THEO VỊ TRÍ
@@ -76,12 +78,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Kết nối DOM
-    const displayDrl = document.getElementById('drl-display');
-    const displayTurn = document.getElementById('turn-display');
-    const displayPos = document.getElementById('pos-display');
+    const displayDrl = document.getElementById('drl-display-e');
+    const displayTurn = document.getElementById('turn-display-e');
+    const displayPos = document.getElementById('pos-display-e');
     const displayFloor = document.getElementById('floor-display');
     const logArea = document.getElementById('action-log');
     const diceButtons = document.querySelectorAll('.btn-dice');
+    const visualBoard = document.getElementById('visual-board');
+
+    // HÀM TOGGLE CHU KỲ NGÀY/ĐÊM
+    function toggleDayNightCycle() {
+        const cycleNum = state.dayNightCycle;
+        const timeOfDay = state.isNight ? 'ỐI! CHUYỆN GÌ ĐÃ XẢY RA?' : 'SÁNG LẠI RỒI!';
+        const message = state.isNight ? '"Hệ thống đã cúp điện toàn bộ đèn tòa E!"' : '"Cảm ơn phòng kỹ thuật đã bật lại đèn cho tòa E!"';
+        const prompt = '<br><strong style="color: #00529C; font-size: 16px;">👉 Hãy chọn xúc xắc để tiếp tục!</strong>';
+        
+        if (visualBoard) {
+            if (state.isNight) {
+                visualBoard.classList.add('night-mode');
+            } else {
+                visualBoard.classList.remove('night-mode');
+            }
+        }
+        
+        logArea.innerHTML = `<strong style="color: #120736; font-size: 18px;">${timeOfDay}</strong><br><em style="color: #323232;">${message}</em>${prompt}`;
+    }
 
     // 5. LOGIC CHÍNH XỬ LÝ LƯỢT ĐI
 function rollDice(diceType, cost) {
@@ -100,18 +121,33 @@ function rollDice(diceType, cost) {
         // 2. KHỞI ĐỘNG XÚC XẮC
         state.drl -= cost;
         state.turns += 1;
+        
+        // Kiểm tra nếu đạt 10 lượt để kích hoạt chu kỳ ngày/đêm
+        const isNightCycleTriggered = state.turns % 10 === 0;
+        if (isNightCycleTriggered) {
+            state.isNight = !state.isNight;
+            state.dayNightCycle = Math.floor(state.turns / 10);
+        }
+        
         state.isRolling = true; 
         diceButtons.forEach(btn => btn.style.opacity = '0.5'); 
         updateUI(); 
 
         const diceFace = document.getElementById('dice-face');
-        if (diceFace) diceFace.classList.add('rolling'); 
+        if (diceFace) diceFace.classList.add('rolling');
+        
+        // Always show rolling message immediately
         logArea.innerHTML = `<em>Đang xóc D${diceType}... Cầu trời khấn phật...</em>`;
 
-        let rollInterval = setInterval(() => {
-            let tempNum = Math.floor(Math.random() * diceType) + 1;
-            if (diceFace) diceFace.innerHTML = `${tempNum}`;
-        }, 50);
+        const rollDelay = 1000;
+
+        let rollInterval;
+        setTimeout(() => {
+            rollInterval = setInterval(() => {
+                let tempNum = Math.floor(Math.random() * diceType) + 1;
+                if (diceFace) diceFace.innerHTML = `${tempNum}`;
+            }, 50);
+        }, 0);
 
         // 3. XỬ LÝ DI CHUYỂN BẰNG ASYNC/AWAIT
         // Thêm chữ "async" trước function để dùng được lệnh chờ "await"
@@ -162,7 +198,7 @@ function rollDice(diceType, cost) {
 
                 if (newPos > state.pos) {
                     // PHẦN A: THANG MÁY (Tàng hình rồi dịch chuyển)
-                    logMsg += `<br>🚀 Tinh! Cửa thang máy mở ra, bạn đi đến ô ${newPos}!`;
+                    logMsg += `<br>Tinh! Cửa thang máy đi lên mở ra, bạn thong thả đi đến ô ${newPos}!`;
                     logArea.innerHTML = logMsg; 
                     
                     if (chibi) chibi.style.opacity = '0'; // Tàng hình
@@ -181,15 +217,32 @@ function rollDice(diceType, cost) {
 
                 } else {
                     // PHẦN B: CẦU THANG (Trượt thẳng đường chim bay)
-                    logMsg += `<br>🪜 Bạn buộc phải đi thang bộ xuống ${newPos}!`;
+                    logMsg += `<br>Tinh? Bạn bị hệ thống lôi vào thang máy và phải xuống ô ${newPos}!`;
                     logArea.innerHTML = logMsg;
 
+                    if (chibi) chibi.style.opacity = '0'; // Tàng hình
+                    await new Promise(resolve => setTimeout(resolve, 400)); // Đợi Chibi mờ hẳn đi
+
+                    // Tắt hiệu ứng trượt mượt để dịch chuyển tức thời
+                    if (chibi) chibi.style.transition = 'none'; 
                     state.pos = newPos;
-                    updateUI(); // Vì transition vẫn đang bật nên Chibi sẽ lướt thẳng xuống
-                    await new Promise(resolve => setTimeout(resolve, 500)); // Đợi trượt xong
+                    updateUI(); // Cắm Chibi xuống tọa độ mới lúc đang tàng hình
+
+                    // Bật lại hiệu ứng và cho xuất hiện
+                    await new Promise(resolve => setTimeout(resolve, 50)); // Chờ code load
+                    if (chibi) chibi.style.transition = 'left 0.3s linear, bottom 0.3s linear, opacity 0.4s ease';
+                    if (chibi) chibi.style.opacity = '1'; // Hiện hình
+                    await new Promise(resolve => setTimeout(resolve, 400)); // Đợi Chibi rõ nét hẳn
                 }
             } else {
                 logArea.innerHTML = logMsg; // Nếu ô thường thì in log bình thường
+            }
+
+            // Show day/night cycle message if triggered
+            if (isNightCycleTriggered) {
+                await new Promise(resolve => setTimeout(resolve, 800));
+                toggleDayNightCycle();
+                await new Promise(resolve => setTimeout(resolve, 2000)); // Wait for 2 seconds before allowing next roll
             }
 
             // 4. KẾT THÚC LƯỢT VÀ MỞ KHÓA NÚT
@@ -203,7 +256,7 @@ function rollDice(diceType, cost) {
                 endGame("Số ĐRL còn lại không đủ để thực hiện thêm lượt đi nào.");
             }
 
-        }, 1000); 
+        }, rollDelay); 
     }
 
 function updateUI() {
@@ -252,6 +305,8 @@ function updateUI() {
         
         // Disable các nút xúc xắc
         diceButtons.forEach(btn => btn.disabled = true);
+        // Chuyển thử qua a
+        transitionToToaA();
     }
 
     // Gắn sự kiện cho các nút xúc xắc
@@ -320,6 +375,8 @@ function updateUI() {
     }, 3000);
 
     updateUI();
+
+
 });
 
 function transitionToToaA() {
