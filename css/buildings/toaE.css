@@ -77,11 +77,33 @@
     margin: 0 auto;
     border: 3px solid #00529C;
     z-index: 10;
+    transition: background-color 1s ease, filter 1s ease;
     
     /* Bật chế độ Grid Lưới lên */
     display: grid;
     grid-template-columns: repeat(10, 1fr); /* 10 cột bằng nhau */
     grid-template-rows: repeat(12, 1fr);    /* 12 hàng bằng nhau */
+}
+
+/* Night mode overlay - làm tối board khi đêm */
+.visual-board.night-mode {
+    background-color: #1a2a3a;
+    background-image: none !important;
+    filter: brightness(0.6) saturate(0.8);
+}
+
+/* Hide board image at night so player must remember the layout */
+.visual-board.night-mode::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(89, 83, 101, 0.9);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.visual-board.night-mode::after {
+    opacity: 0 !important;
 }
 
 /* THÊM ĐOẠN NÀY ĐỂ TẠO LỚP BẢN ĐỒ NẰM TRÊN LƯỚI */
