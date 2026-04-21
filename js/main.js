@@ -70,6 +70,7 @@ userInput.addEventListener('keypress', (e) => {
 
 import './buildings/toaA.js';
 import './buildings/toaE.js';
+import './buildings/toaC.js';
 
 /**
  * Hiển thị một tòa nhà và ẩn tất cả các tòa khác (Kết hợp Fade cho mượt)
