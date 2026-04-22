@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('toa-e');
     if (!container) return;
 // 1. TỰ ĐỘNG BƠM GIAO DIỆN VÀO KHUNG (Bố cục Trái - Phải mới)
-    container.innerHTML = `
+container.innerHTML = `
         <div class="game-wrapper-e">
             <div class="left-column">
                 <div id="visual-board" class="visual-board">
@@ -13,31 +13,34 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
 
             <div class="right-column">
-                <h2 id="floor-display" class="floor-title">Tầng 1: Sảnh chính tòa E</h2>
                 
-                <div class="stats-panel">
-                    <div class="stat-box">ĐRL: <span id="drl-display-e" class="highlight">200</span></div>
-                    <div class="stat-box">Lượt: <span id="turn-display-e">0/25</span></div>
-                    <div class="stat-box">Vị trí: <span id="pos-display-e" class="highlight">1</span></div>
-                </div>
-
-                <div class="dice-controls">
-                    <p style="text-align: center; font-weight: bold; margin-bottom: 5px;">Chọn loại xúc xắc:</p>
-                    <div style="display: flex; gap: 10px; justify-content: center;">
-                        <button class="btn-dice" data-type="4" data-cost="3">🎲 D4 (-3)</button>
-                        <button class="btn-dice" data-type="6" data-cost="5">🎲 D6 (-5)</button>
-                        <button class="btn-dice" data-type="20" data-cost="25">🎲 D20 (-25)</button>
+                <div class="glass-panel">
+                    
+                    <h2 id="floor-display" class="floor-title">Tầng 1: Sảnh chính tòa E</h2>
+                    
+                    <div class="stats-panel">
+                        <div class="stat-box">ĐRL: <span id="drl-display-e" class="highlight">200</span></div>
+                        <div class="stat-box">Lượt: <span id="turn-display-e">0/25</span></div>
+                        <div class="stat-box">Vị trí: <span id="pos-display-e" class="highlight">1</span></div>
                     </div>
+
+                    <div class="dice-controls">
+                        <p style="text-align: center; font-weight: bold; margin-bottom: 5px;">Chọn loại xúc xắc:</p>
+                        <div style="display: flex; gap: 10px; justify-content: center;">
+                            <button class="btn-dice" data-type="4" data-cost="3">🎲 D4 (-3)</button>
+                            <button class="btn-dice" data-type="6" data-cost="5">🎲 D6 (-5)</button>
+                            <button class="btn-dice" data-type="20" data-cost="25">🎲 D20 (-25)</button>
+                        </div>
+                    </div>
+
+                    <div class="dice-visualizer">
+                        <div id="dice-face" class="dice-face">🎲</div>
+                    </div>
+
+                    <div id="action-log" class="action-log">Nhật ký: Sẵn sàng!</div>
+                
+                </div> 
                 </div>
-
-                <div class="dice-visualizer">
-                    <div id="dice-face" class="dice-face">🎲</div>
-                </div>
-
-                <div class="dice-controls">
-
-                <div id="action-log" class="action-log">Nhật ký: Sẵn sàng!</div>
-            </div>
         </div>
     `;
 
@@ -56,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. CẤU TRÚC DỮ LIỆU ĐIỀU HƯỚNG (Hash Map)
     // Key là ô hiện tại, Value là ô sẽ nhảy tới (Thang máy lên hoặc xuống)
     const portals = {
-        4: 14, 9: 31, 40: 41, 58: 71, 67: 76, 87: 91, // Thang máy (Lên)
+        4: 14, 9: 31, 40: 41, 67: 76, 87: 91, // Thang máy (Lên)
         17: 7, 45: 1, 53: 48, 64: 19, 74: 34, 105: 77, 119: 62 // Thang máy (Xuống)
     };
 
