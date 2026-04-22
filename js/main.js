@@ -1,5 +1,5 @@
 // js/main.js
-
+import { playVN } from './dialogue.js';
 // 1. Khai báo các thành phần giao diện
 const mainMenu = document.getElementById('main-menu');
 const nameScreen = document.getElementById('name-screen');
@@ -54,7 +54,7 @@ function handleStartGame() {
             nameScreen.classList.add('hidden'); 
             gameScene.classList.remove('hidden'); 
             console.log("Người chơi:", localStorage.getItem('currentPlayerName'));
-            startGame(); 
+            window.startGame(); 
         });
     } else {
         alert("Vui lòng nhập tên để lưu ký ức nhé!");
@@ -77,7 +77,7 @@ import './buildings/toaC.js';
  */
 window.switchBuilding = (buildingId) => {
     sceneTransition(() => {
-        const allBuildings = ['toa-a', 'toa-b', 'toa-c', 'toa-d', 'toa-e'];
+        const allBuildings = ['vn-screen','toa-a', 'toa-b', 'toa-c', 'toa-d', 'toa-e'];
         allBuildings.forEach(id => {
             const element = document.getElementById(id);
             if (element) {
@@ -88,11 +88,58 @@ window.switchBuilding = (buildingId) => {
     });
 };
 
-function startGame() {
-    console.log("Trò chơi bắt đầu!");
-    // Khởi đầu tại tòa E
-    window.switchBuilding('toa-e');
-}
+//VISUAL NOVEL ==================
+window.startGame = function() {
+    console.log("Trò chơi bắt đầu! Đang tải kịch bản test...");
+    
+    const testStory = [
+        {
+            id: "test_01",
+            name: "",
+            text: "Đây là màn hình test hệ thống Visual Novel của team...",
+            bg: "",
+            sprite: "",
+            nextId: "test_02"
+        },
+        {
+            id: "test_02",
+            name: "Sinh viên ATTT Tài năng",
+            text: "Chào {PLAYER}, nhìn anh có vẻ đã 'tốt nghiệp' từ lâu rồi nhỉ? Anh đã làm xong minigame băng chuyền chưa?",
+            bg: "",
+            sprite: "assets/images/chibi.png", // Bạn có thể xóa dòng này nếu không muốn hiện cái đầu
+            nextId: "test_03"
+        },
+        {
+            id: "test_03",
+            name: "{PLAYER}",
+            text: "Tôi chưa làm xong, code còn đang lỗi tè le đây này! Giúp tôi fix bug để tôi qua Tòa A với!",
+            bg: "",
+            sprite: "assets/images/test_main.png",
+            nextId: "test_04" // 👉 KHÔNG DÙNG CHOICES NỮA, TRỎ THẲNG SANG CÂU TIẾP THEO
+        },
+        {
+            id: "test_04",
+            name: "Sinh viên ATTT Tài năng",
+            text: "Ok ông anh. Fix xong rồi đó, anh đi thẳng qua sảnh Tòa A nhé. Chúc may mắn!",
+            bg: "",
+            sprite: "assets/images/chibi.png",
+            nextId: "end_test" // 👉 TRỎ THẲNG ĐẾN KẾT THÚC
+        },
+        {
+            id: "end_test",
+            name: "Hệ thống",
+            text: "[Hệ thống] Đang chuyển cảnh sang Minigame Tòa A...",
+            bg: "",
+            sprite: "assets/images/test_main.png",
+            nextId: null // Bắt buộc phải có null ở câu cuối để game biết đường tắt hộp thoại
+        }
+    ];
+
+    playVN(testStory, "test_01", () => {
+        console.log("Hết hội thoại! Chuyển sang Tòa E...");
+        window.switchBuilding('toa-e'); 
+    });
+};
 
 // Khởi tạo mặc định khi load trang
 document.addEventListener('DOMContentLoaded', () => {

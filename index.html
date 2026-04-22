@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guided By Memories</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dialogue.css">
 </head>
 <body>
     <div id="fade-overlay"></div>
@@ -25,20 +26,45 @@
         </div>
     </div>
 
-    <div id="game-scene" class="hidden">
+    <div id="game-scene" class="screen hidden">
+        <div id="vn-screen" class="building-container" style="display: none;">
+            <div id="vn-background" class="vn-layer"></div>
+            <img id="vn-sprite" class="vn-layer hidden" src="" alt="Character">
+
+            <div id="dialogue-box" class="uit-dialogue-box">
+                <div id="speaker-name" class="uit-name-tag">Tên nhân vật</div>
+                <div id="dialogue-text">...</div>
+                <div id="next-indicator" class="uit-blink">▼</div>
+                <div id="choice-container" class="hidden"></div>
+            </div>
+        </div>
         <!--======================================================-->
         <div id="toa-a" class="building-container" style="display: none;">
             <div id="start-screen-toa-a" class="overlay-screen">
                 <h1 class="game-title-yellow">Băng Chuyền Thư Viện</h1>
-                <p>Kéo sách vào ĐÚNG NGĂN. Sách cũ/hỏng ném hết vào THÙNG SÁCH CŨ.</p>
-                <p class="small-text">Click 3 lần vào "Sách Tạ" để có thể kéo.</p>
+                <p>Băng chuyền sách chạy liên tục như dòng chảy thời gian. Sách tuôn ra như thác.</p>
+                <p class="small-text">Liệu rằng có thể thoát ra khỏi đây hay vĩnh viện kẹt lại trong vòng lặp vô tận!</p>
                 <button id="toa-a-start-btn" class="orange-btn">BẮT ĐẦU</button>
+            </div>
+
+            <div id="instruction-screen-toa-a" class="overlay-screen hidden">
+                <h1 class="game-title-yellow">Hướng Dẫn Công Việc</h1>
+                <div class="instruction-box">
+                    <p><b>Người chơi cần phân loại những cuốn sách đó vào đúng ngăn kệ với tên tương ứng trên cuốn sách.</b></p>
+                    <p><b>Sách:</b> Kéo và thả vào đúng kệ có môn học tương ứng.</p>
+                    <p><b>Sách dày:</b> Hãy <b>CLICK 3 LẦN</b> để tháo gỡ nó, sau đó mới xếp vào kệ.</p>
+                    <p><b>Sách Cũ:</b> Xếp vào <b>THÙNG SÁCH CŨ</b>.</p>
+                    <hr>
+                    <p class="text-danger">⚠️ LƯU Ý: Xếp nhầm Sách Cũ lên kệ và phân loại sách sai ngăn kệ, bạn sẽ lập tức bị cô thủ thư thu hồi kí ức (Game Over)!</p>
+                </div>
+                <button id="toa-a-play-btn" class="orange-btn">ĐÃ HIỂU! CHƠI NGAY</button>
             </div>
 
             <div id="game-screen-toa-a" class="screen-container hidden">
                 <div class="game-header">
                     <div class="header-item">⏱️ <span id="time-display">0</span>s</div>
                     <div class="header-item score-text">🌟 Điểm: <span id="score-display">0</span></div>
+                    <div>Tiến độ: <span id="sorted-display" class="text-yellow">0</span>/45</div>
                     <div class="header-item text-yellow">❤️ Mạng: <span id="life-display">3</span></div>
                 </div>
 
@@ -59,22 +85,19 @@
 
                     <div id="complex-shelves-grid">
                         <div class="shelf-column">
-                            <div class="shelf-title">Giáo Trình (GT)</div>
-                            <div class="compartment drop-zone" data-accept="GT-01"><span class="comp-label">GT-01</span><div class="spines-container"></div></div>
-                            <div class="compartment drop-zone" data-accept="GT-02"><span class="comp-label">GT-02</span><div class="spines-container"></div></div>
-                            <div class="compartment drop-zone" data-accept="GT-03"><span class="comp-label">GT-03</span><div class="spines-container"></div></div>
+                            <div class="compartment drop-zone" data-accept="HDH"><span class="comp-label">HỆ ĐIỀU HÀNH</span><div class="spines-container"></div></div>
+                            <div class="compartment drop-zone" data-accept="MMT"><span class="comp-label">MẠNG MÁY TÍNH</span><div class="spines-container"></div></div>
+                            <div class="compartment drop-zone" data-accept="DSTT"><span class="comp-label">ĐẠI SỐ TUYẾN TÍNH</span><div class="spines-container"></div></div>
                         </div>
                         <div class="shelf-column">
-                            <div class="shelf-title">Luận Văn (LV)</div>
-                            <div class="compartment drop-zone" data-accept="LV-01"><span class="comp-label">LV-01</span><div class="spines-container"></div></div>
-                            <div class="compartment drop-zone" data-accept="LV-02"><span class="comp-label">LV-02</span><div class="spines-container"></div></div>
-                            <div class="compartment drop-zone" data-accept="LV-03"><span class="comp-label">LV-03</span><div class="spines-container"></div></div>
+                            <div class="compartment drop-zone" data-accept="CSDL"><span class="comp-label">CƠ SỞ DỮ LIỆU</span><div class="spines-container"></div></div>
+                            <div class="compartment drop-zone" data-accept="CNPM"><span class="comp-label">NHẬP MÔN CNPM</span><div class="spines-container"></div></div>
+                            <div class="compartment drop-zone" data-accept="NMPTGame"><span class="comp-label">NHẬP MÔN PHÁT TRIỂN GAME</span><div class="spines-container"></div></div>
                         </div>
                         <div class="shelf-column">
-                            <div class="shelf-title">Đồ Án (DA)</div>
-                            <div class="compartment drop-zone" data-accept="DA-01"><span class="comp-label">DA-01</span><div class="spines-container"></div></div>
-                            <div class="compartment drop-zone" data-accept="DA-02"><span class="comp-label">DA-02</span><div class="spines-container"></div></div>
-                            <div class="compartment drop-zone" data-accept="DA-03"><span class="comp-label">DA-03</span><div class="spines-container"></div></div>
+                            <div class="compartment drop-zone" data-accept="TTNT"><span class="comp-label">TRÍ TUỆ NHÂN TẠO</span><div class="spines-container"></div></div>
+                            <div class="compartment drop-zone" data-accept="DSA"><span class="comp-label">DSA</span><div class="spines-container"></div></div>
+                            <div class="compartment drop-zone" data-accept="VDK"><span class="comp-label">VI ĐIỀU KHIỂN</span><div class="spines-container"></div></div>
                         </div>
                     </div>
                 </div>

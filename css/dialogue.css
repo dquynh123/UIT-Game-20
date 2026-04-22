@@ -1,0 +1,61 @@
+/* ============================================================
+   HỆ THỐNG VISUAL NOVEL - PHONG CÁCH UIT (XANH/TRẮNG)
+   ============================================================ */
+#vn-screen { 
+    position: fixed; 
+    top: 0; 
+    left: 0;
+    width: 100vw; 
+    height: 100vh; 
+    background-color: #0a192f; 
+    overflow: hidden; 
+    z-index: 999; /* Ép nổi lên trên cùng */
+}
+.vn-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; transition: background-image 0.5s ease; }
+#vn-sprite { 
+    width: auto; 
+    height: 85%; 
+    bottom: 0; 
+    top: auto; 
+    left: 5%; /* Ép nhân vật đứng sát lề trái, cách lề 5% */
+    object-fit: contain; 
+    transition: opacity 0.3s ease; 
+    filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.2)); 
+}
+
+/* Hộp thoại công nghệ / Xuyên không */
+.uit-dialogue-box {
+    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+    width: 85%; min-height: 160px;
+    background: rgba(10, 25, 47, 0.9); 
+    border: 2px solid #00d2ff; 
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.8);
+    border-radius: 8px;
+    padding: 35px 25px 25px 25px;
+    color: #e6f1ff; 
+    font-size: 1.2rem; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6; cursor: pointer; z-index: 100;
+}
+
+/* Thẻ tên nhân vật */
+.uit-name-tag {
+    position: absolute; top: -20px; left: 20px;
+    background: #004080; color: #ffffff;
+    padding: 5px 25px; 
+    border: 2px solid #00d2ff; border-radius: 4px;
+    font-weight: bold; font-size: 1.1rem; letter-spacing: 1px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.uit-blink { position: absolute; bottom: 10px; right: 20px; color: #00d2ff; animation: fadePulse 1s infinite; }
+@keyframes fadePulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+/* Nút Lựa Chọn (Choices) */
+#choice-container { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; pointer-events: auto; }
+.uit-choice-btn {
+    background: rgba(0, 64, 128, 0.6); color: #ffffff;
+    border: 1px solid #00d2ff; border-radius: 4px;
+    padding: 12px; font-size: 1.1rem; font-family: inherit; 
+    cursor: pointer; transition: all 0.2s; text-align: left; padding-left: 20px;
+}
+.uit-choice-btn:hover { background: #00d2ff; color: #0a192f; font-weight: bold; transform: translateX(10px); box-shadow: 0 0 10px rgba(0, 210, 255, 0.5); }
