@@ -30,32 +30,84 @@ function sceneTransition(action) {
 }
 
 // LOGIC MÀN HÌNH CHÍNH & NHẬP TÊN
-
 // Chuyển từ Menu chính sang Màn nhập tên (Dùng hiệu ứng Slide + Fade cũ)
+
 startBtn.addEventListener('click', () => {
+
     mainMenu.classList.add('fade-out-left');
-    
     setTimeout(() => {
+
         mainMenu.style.display = 'none';
+
         nameScreen.classList.remove('hidden');
-        userInput.focus(); 
+
+        userInput.focus();
+
     }, 800);
+
 });
 
+
+
 // Hàm xử lý khi vào Game (Sử dụng hệ thống Fade đen mới)
+
 function handleStartGame() {
     const userName = userInput.value.trim();
 
     if (userName !== "") {
-        localStorage.setItem('currentPlayerName', userName);
-        
-        // Gọi hệ thống chuyển cảnh mờ dần sang màn chơi game
-        sceneTransition(() => {
-            nameScreen.classList.add('hidden'); 
-            gameScene.classList.remove('hidden'); 
-            console.log("Người chơi:", localStorage.getItem('currentPlayerName'));
-            startGame(); 
-        });
+        try {
+            // 1. Lấy danh sách cũ từ kho lưu trữ
+            let savedData = localStorage.getItem('allPlayers');
+            let playerList = [];
+            
+            try {
+                playerList = savedData ? JSON.parse(savedData) : [];
+                if (!Array.isArray(playerList)) playerList = [];
+            } catch (e) {
+                playerList = [];
+            }
+
+            // 2. KIỂM TRA TRÙNG TÊN
+            const isDuplicate = playerList.some(player => player.name.toLowerCase() === userName.toLowerCase());
+
+            if (isDuplicate) {
+                alert("Tên này đã có người sử dụng rồi, bạn chọn tên khác nhé!");
+                userInput.value = ""; 
+                userInput.focus();
+                return; // Dừng lại, không cho vào game
+            }
+
+            // 3. Nếu không trùng, tiến hành lưu thông tin
+            localStorage.setItem('currentPlayerName', userName);
+            
+            const newSession = {
+                name: userName,
+                score: 0,
+                time: new Date().toLocaleString(),
+                timestamp: Date.now() 
+            };
+
+            playerList.push(newSession);
+            localStorage.setItem('allPlayers', JSON.stringify(playerList));
+            localStorage.setItem('currentSessionId', newSession.timestamp);
+
+            // 4. Hiệu ứng chuyển cảnh vào game
+            sceneTransition(() => {
+                nameScreen.classList.add('hidden'); 
+                gameScene.classList.remove('hidden'); 
+                console.log("Người chơi hiện tại:", userName);
+                startGame(); 
+            });
+
+        } catch (err) {
+            console.error("Lỗi hệ thống:", err);
+            // Nếu có lỗi lưu trữ, vẫn cho người dùng vào game để tránh kẹt nút
+            sceneTransition(() => {
+                nameScreen.classList.add('hidden'); 
+                gameScene.classList.remove('hidden'); 
+                startGame(); 
+            });
+        }
     } else {
         alert("Vui lòng nhập tên để lưu ký ức nhé!");
     }
@@ -71,6 +123,7 @@ userInput.addEventListener('keypress', (e) => {
 import './buildings/toaA.js';
 import './buildings/toaE.js';
 import './buildings/toaC.js';
+import './buildings/toaD.js'; 
 
 /**
  * Hiển thị một tòa nhà và ẩn tất cả các tòa khác (Kết hợp Fade cho mượt)
