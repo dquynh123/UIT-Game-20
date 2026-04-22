@@ -119,7 +119,26 @@
                     </div>
             </div>
         </div>
-        <div id="toa-d" class="building-container"style="display: none;">
+        <div id="toa-d" class="building-container" style="display: none; position: relative; width: 100%; height: 100vh; overflow: hidden;">
+            <div id="ui-toa-d">
+                <div>Điểm: <span id="score-toa-d">0</span></div>
+                <div>Thời gian: <span id="timer-toa-d">02:00</span></div>
+            </div>
+
+            <div id="start-screen-toa-d" class="overlay-screen">
+                <h1 class="game-title-green">Tòa D Typing Game</h1>
+                <p>Gõ các chữ cái trên lá để được cộng điểm rèn luyện!</p>
+                <button id="toa-d-start-btn" class="green-btn">BẮT ĐẦU CHƠI</button>
+            </div>
+
+            <div id="end-screen-toa-d" class="overlay-screen" style="display: none;">
+                <h1 class="game-title-green">KẾT THÚC</h1>
+                <p id="final-msg-toa-d">Bạn đã hoàn thành thử thách!</p>
+                <div class="huge-score" id="final-score-toa-d">0</div>
+                <button id="to-toa-c-btn" class="green-btn">TIẾP TỤC</button>
+            </div>
+
+            <canvas id="gameCanvasToaD"></canvas>
         </div>
         <div id="toa-e" class="building-container"style="display: none;">
             <div class="screen-container" style="text-align: center; margin-top: 20vh;">

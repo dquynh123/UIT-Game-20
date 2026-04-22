@@ -155,6 +155,21 @@ function endGame() {
         confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#3742fa', '#7158e2'] });
         if (Date.now() < end) requestAnimationFrame(frame);
     }());
+
+    // 👇 THÊM ĐOẠN CODE CHUYỂN TÒA VÀO ĐÂY 👇
+    setTimeout(() => {
+        // 1. Ẩn Tòa C đi
+        document.querySelector('#toa-c').style.display = 'none';
+        
+        // 2. Hiện Tòa D lên
+        const toaD = document.querySelector('#toa-d');
+        if (toaD) {
+            toaD.style.display = 'block';
+            
+            // 3. Khởi động game Tòa D (Hỏi team xem hàm chạy Tòa D tên là gì thì bỏ dấu // ở trước đi nhé)
+            // startToaDGame(); 
+        }
+    }, 3500); // Hẹn giờ 3.5 giây (Để pháo hoa bắn 3s xong, ngắm thêm 0.5s rồi mới qua màn)
 }
 
 /**

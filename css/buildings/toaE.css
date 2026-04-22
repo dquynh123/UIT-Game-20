@@ -69,7 +69,7 @@
     max-width: 400px; 
     aspect-ratio: 10 / 12; 
 
-    background-color: #79c5e946; /* Cho một cái màu nền sáng sủa làm sàn nhà */
+    background-color: #98daf8; /* Cho một cái màu nền sáng sủa làm sàn nhà */
     background-image: url('../../assets/images/board.png');
     background-size: cover;
     position: relative; 
@@ -286,4 +286,51 @@
     80% { transform: translate(-1px, -1px) rotate(10deg); }
     90% { transform: translate(2px, 2px) rotate(0deg); }
     100% { transform: translate(1px, -2px) rotate(-10deg); }
+}
+
+/* Hiệu ứng Kính mờ cho bảng điều khiển */
+.glass-panel {
+    /* Màu nền trắng với độ trong suốt 20% (bạn có thể tăng giảm số 0.2 để đổi độ trong) */
+    background: rgba(255, 255, 255, 0.2); 
+    
+    /* MA THUẬT NẰM Ở ĐÂY: Làm mờ những thứ nằm phía dưới tấm kính */
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px); /* Dành cho trình duyệt Safari */
+    
+    /* Bo góc và tạo viền sáng mỏng để nhìn giống viền kính */
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    
+    /* Đổ bóng nhẹ để khung nổi bật lên khỏi nền */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+    
+    /* Khoảng cách lề bên trong */
+    padding: 20px;
+    
+    /* (Tùy chọn) Giới hạn chiều rộng nếu cần */
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+
+.game-wrapper-e {
+    /* CHÈN ẢNH NỀN TỪ FOLDER ASSETS */
+    /* Đường dẫn ../ nghĩa là lùi ra khỏi thư mục css, rồi chui vào assets/images */
+    background-image: url('../../assets/images/background-e.png'); 
+    
+    background-size: cover; /* Ép ảnh phủ kín toàn bộ màn hình */
+    background-position: center; /* Căn giữa ảnh */
+    background-repeat: no-repeat; /* Không cho ảnh lặp lại */
+    background-attachment: fixed; /* Tùy chọn: Giữ ảnh đứng im khi bạn cuộn chuột */
+    
+    /* Đảm bảo khung này luôn cao bằng 100% màn hình */
+    min-height: 100vh;
+    width: 100%; /* Fill full width */
+    
+    /* (Giữ nguyên các thuộc tính chia 2 cột cũ của bạn, ví dụ display: flex; ...) */
+    display: flex;
+    justify-content: center; /* Căn giữa nội dung theo chiều ngang */
+    align-items: center; /* Căn giữa nội dung theo chiều dọc */
+    gap: 30px;
+    padding: 20px;
 }
