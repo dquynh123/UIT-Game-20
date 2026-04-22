@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. CẤU TRÚC DỮ LIỆU ĐIỀU HƯỚNG (Hash Map)
     // Key là ô hiện tại, Value là ô sẽ nhảy tới (Thang máy lên hoặc xuống)
     const portals = {
-        4: 14, 9: 31, 40: 41, 58: 71, 67: 76, 87: 91, // Thang máy (Lên)
+        4: 14, 9: 31, 40: 41, 67: 76, 87: 91, // Thang máy (Lên)
         17: 7, 45: 1, 53: 48, 64: 19, 74: 34, 105: 77, 119: 62 // Thang máy (Xuống)
     };
 
