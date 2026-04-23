@@ -48,6 +48,8 @@ if (btnPlayToaA) {
     });
 }
 
+setupDropZones();
+
 function startToaAGame() {
     document.querySelector('#toa-a #start-screen-toa-a').style.display = 'none';
     document.querySelector('#toa-a #game-screen-toa-a').classList.remove('hidden');
@@ -61,7 +63,7 @@ function startToaAGame() {
     document.querySelectorAll('.spines-container').forEach(c => c.innerHTML = '');
 
     startGameLoops();
-    setupDropZones();
+    //setupDropZones();
 }
 
 function startGameLoops() {
@@ -231,8 +233,8 @@ function setupDropZones() {
 
             if (bookType === targetType) {
                 // Thả đúng!
-                score += 10;
                 sortedBooks++;
+                score = sortedBooks;
                 updateHUD();
                 
                 // Nếu thả lên kệ (không phải thùng rác) -> Vẽ gáy sách
@@ -246,9 +248,7 @@ function setupDropZones() {
                 }
 
                 if(draggedBook) draggedBook.remove();
-                if (sortedBooks >= 45) { 
-                    winGameToaA();
-                }
+                
             } else {
                 loseLife("Xếp sai vị trí!");
                 if(draggedBook) draggedBook.style.animationPlayState = 'running'; 
@@ -279,8 +279,22 @@ function gameOver(reason) {
     document.querySelectorAll('.conveyor-book').forEach(b => b.style.animationPlayState = 'paused');
     
     setTimeout(() => {
-        alert(`GAME OVER!\nLý do: ${reason}\nĐiểm: ${score}\nThời gian: ${timeElapsed}s`);
-        location.reload(); 
+        // 1. Đổi chữ thông báo cho tích cực hơn
+        alert(`KẾT THÚC CA LÀM!\nLý do: ${reason}\nSố sách hoàn thành: ${sortedBooks}\nThời gian: ${timeElapsed}s`);
+        
+        // 2. Dọn sạch sách cũ để game không bị nặng
+        document.querySelectorAll('.conveyor-book').forEach(b => b.remove());
+        document.querySelectorAll('.spines-container').forEach(c => c.innerHTML = '');
+        
+        // 3. Ẩn Tòa A
+        document.querySelector('#toa-a').style.display = 'none';
+        
+        // 4. Mở Tòa C
+        const toaB = document.querySelector('#toa-b');
+        if (toaB) {
+            toaB.style.display = 'block'; 
+            new ToaBGame('game-container');
+        }
     }, 100);
 }
 

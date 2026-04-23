@@ -55,15 +55,7 @@ function handleStartGame() {
     const userName = userInput.value.trim();
 
     if (userName !== "") {
-        localStorage.setItem('currentPlayerName', userName);
         
-        // Gọi hệ thống chuyển cảnh mờ dần sang màn chơi game
-        sceneTransition(() => {
-            nameScreen.classList.add('hidden'); 
-            gameScene.classList.remove('hidden'); 
-            console.log("Người chơi:", localStorage.getItem('currentPlayerName'));
-            window.startGame(); 
-        });
         try {
             // 1. Lấy danh sách cũ từ kho lưu trữ
             let savedData = localStorage.getItem('allPlayers');
