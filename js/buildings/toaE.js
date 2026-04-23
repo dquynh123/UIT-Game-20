@@ -66,11 +66,11 @@ container.innerHTML = `
     // 4. LOGIC XÁC ĐỊNH TẦNG THEO VỊ TRÍ
     function getFloorName(pos) {
         if (pos <= 10) return "Tầng 1: Sảnh chính tòa E";
-        if (pos <= 15) return "Tầng 2: Tầng 2 tòa E";
+        if (pos <= 15) return "Tầng 2: Các phòng học";
         if (pos <= 20) return "Tầng 2: Thư viện tòa E"; // Qua nửa tầng 2
         if (pos <= 40) return `Tầng ${Math.ceil(pos/10)}: Các phòng học`;
-        if (pos <= 50) return "Tầng 5: Khoa Khoa học máy tính";
-        if (pos <= 55) return "Tầng 5: MMLab UIT";
+        if (pos <= 45) return "Tầng 5: Khoa Khoa học máy tính";
+        if (pos <= 50) return "Tầng 5: MMLab UIT";
         if (pos <= 60) return "Tầng 6: Khoa Kỹ thuật máy tính";
         if (pos <= 70) return "Tầng 7: Khoa Công nghệ phần mềm";
         if (pos <= 80) return "Tầng 8: Khoa Mạng máy tính và truyền thông";
