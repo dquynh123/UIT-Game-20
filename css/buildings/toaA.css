@@ -1,14 +1,30 @@
 /* --- GIAO DIỆN TÒA A - 1 BẪY DUY NHẤT --- */
-#toa-a #start-screen-toa-a { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(25, 25, 25, 0.95); display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; z-index: 100; }
-#toa-a .game-title-yellow { color: #f1c40f; font-size: 3rem; margin-bottom: 20px; text-align: center; }
-#toa-a .small-text { font-size: 1rem; margin-bottom: 30px; color: #ccc; }
-#toa-a .orange-btn { background-color: #e67e22; color: white; border: none; padding: 15px 40px; font-size: 1.5rem; font-weight: bold; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 0 #d35400; }
+#toa-a #start-screen-toa-a { 
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+    background-color: rgba(244, 247, 246, 0.95); /* Đổi sang nền xám nhạt giống Tòa B */
+    font-family: Arial, sans-serif; /* Đồng bộ Font chữ */
+    display: flex; flex-direction: column; align-items: center; justify-content: center; 
+    color: #2d3748; /* Đổi sang chữ tối màu */
+    z-index: 100; 
+}
+#toa-a .game-title-yellow { 
+    color: #2b6cb0; 
+    font-size: 3rem; 
+    margin-bottom: 20px; 
+    text-align: center; 
+
+    text-transform: uppercase;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+#toa-a .small-text { font-size: 1.1rem; margin-bottom: 30px; color: #4a5568; }
+#toa-a .orange-btn { background-color: #2b6cb0; color: white; border: none; padding: 15px 40px; font-size: 1.5rem; font-weight: bold; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.15);transition: all 0.3s ease; }
 #toa-a .orange-btn:active { transform: translateY(4px); box-shadow: none; }
+#toa-a .orange-btn:hover { background-color: #2c5282; }
 
 /* Nền trắng tinh khôi */
 #toa-a #game-screen-toa-a { display: flex; flex-direction: column; height: 100%; background-color: #ffffff; }
 #toa-a .game-header { background-color: #2c3e50; color: white; display: flex; justify-content: space-between; padding: 10px 30px; font-weight: bold; font-size: 1.1rem; }
-#toa-a .text-yellow { color: #f1c40f; }
+#toa-a .text-yellow { color: #16bee9; }
 
 #toa-a .play-area { padding: 20px; display: flex; flex-direction: column; gap: 20px; }
 
@@ -16,11 +32,22 @@
 #toa-a .top-row { display: flex; height: 140px; }
 
 #toa-a #bin-sach-cu { 
-    width: 120px; margin-right: 15px; 
-    background-color: #7f8c8d; color: white; font-weight: bold; font-size: 0.9rem;
+    width: 200px; 
+    height: 150px;
+    margin-right: 25px; 
+    
+    background-image: url('../../assets/images/box.png'); 
+    
+    background-size: contain; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent !important; /* Ép trong suốt */
+    border: none !important; /* Ép xóa viền */
+    
     display: flex; align-items: center; justify-content: center; text-align: center; 
-    border-radius: 8px; border: 3px solid #34495e; cursor: pointer; 
+    border-radius: 8px; cursor: pointer; 
 }
+
 
 #toa-a #conveyor-container { flex-grow: 1; position: relative; overflow: hidden; background: #7f8c8d; border-top: 8px solid #95a5a6; border-bottom: 8px solid #95a5a6; }
 #toa-a #conveyor-belt { position: absolute; width: 200%; height: 100%; background: repeating-linear-gradient(90deg, #636e72, #636e72 40px, #555 40px, #555 80px); animation: moveBelt 2s linear infinite; }
@@ -56,26 +83,31 @@
 /* --- BẢNG HƯỚNG DẪN TÒA A --- */
 #toa-a #instruction-screen-toa-a {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background-color: rgba(25, 25, 25, 0.98);
+    background-color: rgba(244, 247, 246, 0.98);
+    font-family: Arial, sans-serif;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    color: white; z-index: 105;
+    color: #333; z-index: 105;
 }
 
 #toa-a .instruction-box {
-    background: rgba(0, 0, 0, 0.6);
+    background: #ffffff; /* Nền trắng sáng */
     padding: 30px 40px;
     border-radius: 12px;
-    border: 2px solid #f1c40f;
+    border: 2px solid #2b6cb0; /* Viền xanh Tòa B */
     margin-bottom: 30px;
     text-align: left;
     width: 90%;
     max-width: 600px;
-    max-height: 80vh; /* Không bao giờ cao vượt quá 80% chiều cao màn hình */
-    overflow-y: auto; /* Nếu nội dung dài hơn 80vh, tự động hiện thanh cuộn */
-    box-shadow: 0 0 20px rgba(241, 196, 15, 0.2);
+    max-height: 80vh; 
+    overflow-y: auto; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Bóng đổ nhẹ nhàng */
 }
 
-#toa-a .instruction-box p { font-size: 1.2rem; line-height: 1.6; margin-bottom: 15px; }
-#toa-a .instruction-box b { color: #f1c40f; }
-#toa-a .instruction-box hr { border-color: rgba(255,255,255,0.2); margin: 20px 0; }
-#toa-a .text-danger { color: #ff4757 !important; font-weight: bold; }
+#toa-a .instruction-box p { font-size: 1.2rem; line-height: 1.6; margin-bottom: 15px; color: #2d3748;}
+#toa-a .instruction-box b { color: #2b6cb0; }
+#toa-a .instruction-box hr { 
+    border: none;
+    border-top: 1px dashed #cbd5e0; 
+    margin: 20px 0;
+}
+#toa-a .text-danger { color: #e53e3e !important; font-weight: bold; }
