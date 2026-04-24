@@ -382,12 +382,75 @@ function updateUI() {
 
 });
 
+const storyToaA = [
+    {
+        id: "ht_01",
+        name: "Anh chàng CTV Khoa X",
+        text: "Ơ... anh ơi! Anh thấy cô Thủ thư đâu không? Cô ấy giận em rồi, chạy nhanh như Naruto ấy, bỏ lại đống sách này bắt em phân loại... mà em baka quá, nhìn đống này là chóng mặt..",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: "ht_02"
+    },
+    {
+        id: "ht_02",
+        name: "Cô Thủ thư",
+        text: "Cậu lại lười biếng rồi đấy à? UIT không có chỗ cho sự chậm trễ đâu!",
+        bg: "",
+        sprite: "assets/images/test_cothuthu.png",
+        nextId: "ht_03" 
+    },
+
+    {
+        id: "ht_03",
+        name: "Cô Thủ thư",
+        text: "Cả anh nữa. Anh muốn lấy mảnh ký ức tiếp theo? Thư viện đang quá tải vì đợt kỷ niệm 20 năm, sách và tài liệu cứ tuôn ra như thác đổ. Giúp tôi một tay đi, rồi tôi sẽ chỉ đường cho.",
+        bg: "",
+        sprite: "assets/images/test_cothuthu.png",
+        nextId: "ht_04" 
+    },
+
+    {
+        id: "ht_04",
+        name: "{PLAYER}",
+        text: "Tôi chỉ cần đặt chúng đúng chỗ thôi đúng không?",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "ht_05" 
+    },
+
+    {
+        id: "ht_05",
+        name: "Cô Thủ thư",
+        text: "Không đơn giản như thế đâu!!",
+        bg: "",
+        sprite: "assets/images/test_cothuthu.png",
+        nextId: null 
+    },
+];
+
 function transitionToToaA() {
-    // Gọi hàm điều phối toàn cục từ main.js
-    if (typeof window.switchBuilding === 'function') {
-        window.switchBuilding('toa-a');
-        
-        // Nếu tòa A có hàm bắt đầu game riêng, hãy gọi nó ở đây
-        // Ví dụ: if (typeof window.initToaA === 'function') window.initToaA();
+    // 1. Tắt màn hình Tòa E đi
+    document.getElementById('toa-e').style.display = 'none';
+
+    // 2. Mở màn hình Hội thoại lên
+    const vnScreen = document.getElementById('vn-screen');
+    if (vnScreen) vnScreen.style.display = 'block';
+
+    // 3. Gọi playVN để chạy hội thoại. Khi hội thoại XONG thì mới vào Tòa A
+    if (typeof window.playVN === 'function') {
+        window.playVN(storyToaA, "intro_toa_a_01", () => {
+            console.log("Xong hội thoại! Chuyển sang Minigame Tòa A...");
+            
+            // Hàm chuyển đổi tòa nhà của main.js
+            if (typeof window.switchBuilding === 'function') {
+                window.switchBuilding('toa-a');
+            }
+        });
+    } else {
+        // Fallback phòng hờ lỡ file main.js bị lỗi không gọi được playVN
+        // Thì đành cho nhảy thẳng qua Tòa A luôn
+        if (typeof window.switchBuilding === 'function') {
+            window.switchBuilding('toa-a');
+        }
     }
 }

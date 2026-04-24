@@ -55,7 +55,7 @@ function handleStartGame() {
     const userName = userInput.value.trim();
 
     if (userName !== "") {
-        
+
         try {
             // 1. Lấy danh sách cũ từ kho lưu trữ
             let savedData = localStorage.getItem('allPlayers');
@@ -146,50 +146,58 @@ window.switchBuilding = (buildingId) => {
 window.startGame = function() {
     console.log("Trò chơi bắt đầu! Đang tải kịch bản test...");
     
-    const testStory = [
+    const StoryToaE = [
         {
             id: "test_01",
-            name: "",
-            text: "Đây là màn hình test hệ thống Visual Novel của team...",
+            name: "Sinh viên ATTT Tài năng",
+            text: "Lại thêm một ông nữa lạc vào đây à? Nhìn bộ đồ với cái mặt này... chắc anh 'ra trường' mấy mùa quýt rồi nhỉ?",
             bg: "",
-            sprite: "",
+            sprite: "assets/images/chibi.png",
             nextId: "test_02"
         },
         {
             id: "test_02",
-            name: "Sinh viên ATTT Tài năng",
-            text: "Chào {PLAYER}, nhìn anh có vẻ đã 'tốt nghiệp' từ lâu rồi nhỉ? Anh đã làm xong minigame băng chuyền chưa?",
+            name: "{PLAYER}",
+            text: "Ý là bảo tôi già chứ gì? Mà đúng thật, tôi đến đây không phải để học mà đang tìm đường về qua mấy cái mảnh ký ức quái ác này đây.",
             bg: "",
-            sprite: "assets/images/chibi.png", // Bạn có thể xóa dòng này nếu không muốn hiện cái đầu
+            sprite: "assets/images/test_main.png", // Bạn có thể xóa dòng này nếu không muốn hiện cái đầu
             nextId: "test_03"
         },
         {
             id: "test_03",
-            name: "{PLAYER}",
-            text: "Tôi chưa làm xong, code còn đang lỗi tè le đây này! Giúp tôi fix bug để tôi qua Tòa A với!",
+            name: "Sinh viên ATTT Tài năng",
+            text: "Ký ức à... Nếu là mấy thứ nặng nề ấy thì chắc nó vẫn nằm trên tầng 12 thôi. Nhưng nói trước, thang bộ tòa này 'ám' lắm, anh già rồi thì leo từ tốn thôi, coi chừng đứt hơi giữa chừng.",
             bg: "",
-            sprite: "assets/images/test_main.png",
+            sprite: "assets/images/chibi.png",
             nextId: "test_04" // 👉 KHÔNG DÙNG CHOICES NỮA, TRỎ THẲNG SANG CÂU TIẾP THEO
         },
         {
             id: "test_04",
             name: "Sinh viên ATTT Tài năng",
-            text: "Ok ông anh. Fix xong rồi đó, anh đi thẳng qua sảnh Tòa A nhé. Chúc may mắn!",
+            text: "Mà cũng đúng thôi, cái tòa E này nó thế. Muốn biết mình là ai, muốn nhìn cho rõ cái tương lai mờ mịt phía trước thì cứ phải lết lên đến cái đỉnh cao nhất kia kìa. Đứng trên ấy gió lộng, nhìn xuống thấy người ta bé như kiến, lúc đấy mới thấy mấy cái rắc rối dưới này chả là gì.",
             bg: "",
             sprite: "assets/images/chibi.png",
-            nextId: "end_test" // 👉 TRỎ THẲNG ĐẾN KẾT THÚC
+            nextId: "test_05" // 👉 TRỎ THẲNG ĐẾN KẾT THÚC
         },
         {
-            id: "end_test",
-            name: "Hệ thống",
-            text: "[Hệ thống] Đang chuyển cảnh sang Minigame Tòa A...",
+            id: "test_05",
+            name: "{PLAYER}",
+            text: "Nói thì hay lắm, nhưng giờ đường xá trong đầu tôi nó cứ mờ mịt thế này, biết lối nào mà leo?",
             bg: "",
             sprite: "assets/images/test_main.png",
-            nextId: null // Bắt buộc phải có null ở câu cuối để game biết đường tắt hộp thoại
-        }
+            nextId: "test_06" 
+        },
+        {
+            id: "test_06",
+            name: "Sinh viên ATTT Tài năng",
+            text: "Dùng 'Điểm rèn luyện' (ĐRL) của anh đi. Đó là loại vật phẩm trao đổi duy nhất có giá trị ở đây. Anh có thể chọn tung xúc xắc an toàn, hoặc đánh cược tất cả để tiến nhanh hơn. Nhưng cẩn thận... cái thang máy tòa này nó ảo lắm, lên nhanh được thì rơi tự do cũng nhanh lắm đấy. Cân nhắc cho kỹ.",
+            bg: "",
+            sprite: "assets/images/chibi.png",
+            nextId: null 
+        },
     ];
 
-    playVN(testStory, "test_01", () => {
+    playVN(StoryToaE, "test_01", () => {
         console.log("Hết hội thoại! Chuyển sang Tòa E...");
         window.switchBuilding('toa-e'); 
     });
@@ -204,3 +212,5 @@ document.addEventListener('DOMContentLoaded', () => {
         if (element) element.style.display = 'none';
     });
 });
+
+window.playVN = playVN;
