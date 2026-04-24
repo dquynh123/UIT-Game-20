@@ -111,3 +111,43 @@
     margin: 20px 0;
 }
 #toa-a .text-danger { color: #e53e3e !important; font-weight: bold; }
+
+/* 1. Xử lý cái khung nền bao trùm màn hình hướng dẫn */
+.overlay-screen {
+    /* Đảm bảo khung này luôn vừa khít 100% màn hình, không bị tràn */
+    position: absolute;
+    top: 0; left: 0;
+    width: 100vw; 
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Canh giữa theo chiều dọc */
+    align-items: center;     /* Canh giữa theo chiều ngang */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* 2. MA THUẬT NẰM Ở ĐÂY: Xử lý hộp chứa chữ hướng dẫn */
+.instruction-box {
+    max-height: 50vh; /* Khống chế hộp chữ chỉ được cao tối đa bằng 50% màn hình */
+    overflow-y: auto; /* Nếu chữ dài hơn 50% màn hình -> Tự xuất hiện thanh cuộn bên TRONG hộp */
+    
+    /* Trang trí thêm cho đẹp (bạn có thể giữ nguyên style cũ của bạn, chỉ cần thêm 2 dòng trên) */
+    width: 80%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid #ff9800;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Tùy chỉnh thanh cuộn cho nó mang phong cách Game một chút (tùy chọn) */
+.instruction-box::-webkit-scrollbar {
+    width: 8px;
+}
+.instruction-box::-webkit-scrollbar-thumb {
+    background: #bed7f1; 
+    border-radius: 4px;
+}
