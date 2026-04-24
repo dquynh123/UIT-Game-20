@@ -1,38 +1,50 @@
 #toaB-game-wrapper {
     display: flex;
     font-family: Arial, sans-serif;
-    width: 95vw;
-    max-width: 1600px;
-    margin: 0 auto;
+    
+    /* 1. Kích thước chuẩn chỉnh */
+    width: 100%;
+    max-width: 1500px;
+    height: 100%; /* Thêm chiều cao để game kéo dài xuống lấp đầy màn hình */
+    
+    /* 2. Bộ 4 dòng ma thuật giúp căn giữa TUYỆT ĐỐI trên mọi màn hình */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
     background: #f4f7f6;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3); /* Làm bóng viền đậm hơn cho nổi bật */
     overflow: hidden;
 }
 
 /* Phần hiển thị thẻ bài (2/3) */
 #board-section {
     flex: 3;
-    padding: 30px;
+    padding: 20px 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
     border-right: 2px solid #ddd;
+    overflow-y: auto;
 }
 
 #grid-container {
     display: grid;
-    gap: 15px;
+    gap: 12px;
     width: 100%;
     max-width: 1000px;
-    margin-top: 20px;
+    margin-top: 15px;
+    padding-bottom: 30px;
 }
 
 /* Cấu hình các loại thẻ */
 .card {
     perspective: 1000px;
     cursor: pointer;
-    min-height: 110px;
+    min-height: 90px;
 }
 
 .card-inner {
@@ -113,6 +125,7 @@
     display: flex;
     flex-direction: column;
     min-width: 250px; /* Đảm bảo wishlist không bị ép quá nhỏ trên màn hình */
+    overflow-y: auto;
 }
 
 .status-bar {

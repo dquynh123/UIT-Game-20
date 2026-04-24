@@ -48,6 +48,8 @@ if (btnPlayToaA) {
     });
 }
 
+setupDropZones();
+
 function startToaAGame() {
     document.querySelector('#toa-a #start-screen-toa-a').style.display = 'none';
     document.querySelector('#toa-a #game-screen-toa-a').classList.remove('hidden');
@@ -61,7 +63,7 @@ function startToaAGame() {
     document.querySelectorAll('.spines-container').forEach(c => c.innerHTML = '');
 
     startGameLoops();
-    setupDropZones();
+    //setupDropZones();
 }
 
 function startGameLoops() {
@@ -100,41 +102,42 @@ function spawnBook() {
         book.dataset.code = "OLD"; 
     } else if (randType >= 6 && randType <= 7) { 
         // SÁCH NẶNG (TẠ)
-        book.classList.add('book-heavy');
-        book.innerText = 'Sách Dày\n(3 click)';
+        book.classList.add('book-heavy', 'book-heavy-image');
         book.draggable = false;
         book.dataset.clicks = 3;
         book.dataset.code = randCode;
-        
+
+        // Xóa sạch nội dung cũ trước khi thêm nhãn mới
+        book.innerHTML = ""; 
+        const clicksSpan = document.createElement('span');
+        clicksSpan.className = 'clicks-text';
+        clicksSpan.innerHTML = `Sách Dày<br>(3 click)`;
+        book.appendChild(clicksSpan);
+
         book.addEventListener('click', function() {
             let clk = parseInt(this.dataset.clicks) - 1;
             this.dataset.clicks = clk;
             
-            // Giấu tên sách đi, chỉ hiện số click còn lại để tạo bất ngờ
-            this.innerText = `Sách Dày\n(${clk} click)`;
+            const clicksTextSpan = this.querySelector('span.clicks-text');
+            if (clicksTextSpan) clicksTextSpan.innerHTML = `Sách Dày<br>(${clk} click)`;
             
             if (clk <= 0) {
                 this.draggable = true;
-
+                if (clicksTextSpan) clicksTextSpan.remove();
+                
+                // QUAN TRỌNG: Lột bỏ ảnh "Sách Dày" để hiện ảnh "Môn học thật"
+                this.classList.remove('book-heavy-image'); 
+                
                 if (bookImages[randCode]) {
-                    // Nếu CÓ ảnh -> Hiện ảnh, giấu chữ, xóa viền
-                    this.innerText = ""; 
                     this.style.backgroundImage = `url(${bookImages[randCode]})`;
                     this.style.backgroundSize = "100% 100%";
-                    this.style.backgroundRepeat = "no-repeat";
                     this.style.backgroundColor = "transparent";
                     this.style.border = "none";
-                    this.style.boxShadow = "none";
                 } else {
-                    // Phao cứu sinh nếu thiếu ảnh
                     this.innerText = randCode;
                     this.style.backgroundColor = "#3498db"; 
-                    this.style.color = "white";
-                    this.style.border = "2px solid #2980b9";
                     this.style.backgroundImage = "none";
                 }
-                
-                // Đã xóa 2 dòng code cũ cản trở việc hiện ảnh ở đây!
             }
         });
     } else { 
@@ -231,8 +234,8 @@ function setupDropZones() {
 
             if (bookType === targetType) {
                 // Thả đúng!
-                score += 10;
                 sortedBooks++;
+                score = sortedBooks;
                 updateHUD();
                 
                 // Nếu thả lên kệ (không phải thùng rác) -> Vẽ gáy sách
@@ -246,9 +249,7 @@ function setupDropZones() {
                 }
 
                 if(draggedBook) draggedBook.remove();
-                if (sortedBooks >= 45) { 
-                    winGameToaA();
-                }
+                
             } else {
                 loseLife("Xếp sai vị trí!");
                 if(draggedBook) draggedBook.style.animationPlayState = 'running'; 
@@ -279,8 +280,22 @@ function gameOver(reason) {
     document.querySelectorAll('.conveyor-book').forEach(b => b.style.animationPlayState = 'paused');
     
     setTimeout(() => {
-        alert(`GAME OVER!\nLý do: ${reason}\nĐiểm: ${score}\nThời gian: ${timeElapsed}s`);
-        location.reload(); 
+        // 1. Đổi chữ thông báo cho tích cực hơn
+        alert(`KẾT THÚC CA LÀM!\nLý do: ${reason}\nSố sách hoàn thành: ${sortedBooks}\nThời gian: ${timeElapsed}s`);
+        
+        // 2. Dọn sạch sách cũ để game không bị nặng
+        document.querySelectorAll('.conveyor-book').forEach(b => b.remove());
+        document.querySelectorAll('.spines-container').forEach(c => c.innerHTML = '');
+        
+        // 3. Ẩn Tòa A
+        document.querySelector('#toa-a').style.display = 'none';
+        
+        // 4. Mở Tòa C
+        const toaB = document.querySelector('#toa-b');
+        if (toaB) {
+            toaB.style.display = 'block'; 
+            new ToaBGame('game-container');
+        }
     }, 100);
 }
 

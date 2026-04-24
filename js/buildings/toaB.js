@@ -234,6 +234,19 @@ class ToaBGame {
                 <h2 style="font-size: 30px; color: #38a169;">Tổng ĐRL thu được: ${this.drl}</h2>
             </div>
         `;
+        setTimeout(() => {
+            // Ẩn Tòa B
+            document.getElementById('toa-b').style.display = 'none';
+            
+            // Mở Tòa D
+            const toaD = document.getElementById('toa-d');
+            if (toaD) {
+                toaD.style.display = 'block';
+                
+                // Kích hoạt game Tòa D (nếu team dùng hàm này)
+                // startToaDGame(); 
+            }
+        }, 3000);
     }
 }
 

@@ -6,6 +6,7 @@
     <title>Guided By Memories</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/dialogue.css">
+    <link rel="stylesheet" href="css/buildings/toaB.css">
 </head>
 <body>
     <div id="fade-overlay"></div>
@@ -55,7 +56,7 @@
                     <p><b>Sách dày:</b> Hãy <b>CLICK 3 LẦN</b> để tháo gỡ nó, sau đó mới xếp vào kệ.</p>
                     <p><b>Sách Cũ:</b> Xếp vào <b>THÙNG SÁCH CŨ</b>.</p>
                     <hr>
-                    <p class="text-danger">⚠️ LƯU Ý: Xếp nhầm Sách Cũ lên kệ và phân loại sách sai ngăn kệ, bạn sẽ lập tức bị cô thủ thư thu hồi kí ức (Game Over)!</p>
+                    <p class="text-danger">⚠️ LƯU Ý: Xếp nhầm Sách Cũ lên kệ bạn sẽ lập tức bị cô thủ thư thu hồi kí ức (Game Over)!</p>
                 </div>
                 <button id="toa-a-play-btn" class="orange-btn">ĐÃ HIỂU! CHƠI NGAY</button>
             </div>
@@ -64,14 +65,13 @@
                 <div class="game-header">
                     <div class="header-item">⏱️ <span id="time-display">0</span>s</div>
                     <div class="header-item score-text">🌟 Điểm: <span id="score-display">0</span></div>
-                    <div>Tiến độ: <span id="sorted-display" class="text-yellow">0</span>/45</div>
                     <div class="header-item text-yellow">❤️ Mạng: <span id="life-display">3</span></div>
                 </div>
 
                 <div class="play-area">
                     <div class="top-row">
                         <div id="bin-sach-cu" class="drop-zone" data-accept="OLD">
-                            <span>📦 THÙNG<br>SÁCH CŨ</span>
+                            
                         </div>
                         
                         <div id="conveyor-container">
@@ -104,8 +104,8 @@
             </div>
         </div>
 
-        <div id="toa-b" class="building-container">
-            <div id="game-container"></div>
+        <div id="toa-b" class="building-container" style="display: none; width: 100vw; height: 100vh; overflow: hidden; background-color: #333;">
+            <div id="game-container" style="width: 100%; height: 100%; padding: 20px; box-sizing: border-box;"></div>
         </div>
         
         <div id="toa-c" class="building-container" style="display: none;">
@@ -186,5 +186,6 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
     <script src="js/quizData.js"></script>
     <script type="module" src="js/main.js"></script>
+    <script src="js/buildings/toaB.js"></script>
 </body>
 </html>
