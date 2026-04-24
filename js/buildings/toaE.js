@@ -179,7 +179,7 @@ function rollDice(diceType, cost) {
 
             let logMsg = `Đổ D${diceType} ra <strong>${rollResult}</strong>. Đi đến ô ${state.pos}.`;
 
-            if (state.pos === 120) {
+            if (state.pos >1) {
                 logArea.innerHTML = logMsg;
                 endGame("CHÚC MỪNG! Bạn đã vào được Hội trường tòa E để tham dự seminar!");
                 
@@ -427,28 +427,44 @@ const storyToaA = [
         nextId: null 
     },
 ];
-
+let hasTransitionedToToaA = false;
 function transitionToToaA() {
-    // 1. Tắt màn hình Tòa E đi
-    document.getElementById('toa-e').style.display = 'none';
+    // 2. KHÓA CHỐNG SPAM: Nếu đã chuyển rồi thì tuyệt đối không chạy lại lần 2
+    if (hasTransitionedToToaA) return;
+    hasTransitionedToToaA = true;
 
-    // 2. Mở màn hình Hội thoại lên
+    // Tắt màn hình Tòa E đi
+    const toaE = document.getElementById('toa-e');
+    if (toaE) toaE.style.display = 'none';
+
     const vnScreen = document.getElementById('vn-screen');
-    if (vnScreen) vnScreen.style.display = 'block';
+    if (!vnScreen) return;
 
-    // 3. Gọi playVN để chạy hội thoại. Khi hội thoại XONG thì mới vào Tòa A
+    // 3. DỌN SẠCH TÀN DƯ QUYẾT LIỆT: Tìm mọi thẻ chứa chữ trong hộp thoại và xóa sạch
+    const textElements = vnScreen.querySelectorAll('p, span, h2, h3, div[id*="text"], div[id*="name"], div[class*="text"], div[class*="name"]');
+    textElements.forEach(el => el.innerHTML = "");
+
+    // 4. ÉP TÀNG HÌNH: Đưa opacity về 0 (Trong suốt) trước khi bật display lên
+    vnScreen.style.opacity = '0';
+    vnScreen.style.display = 'block';
+
+    // 5. Gọi playVN chạy ngầm trong bóng tối
     if (typeof window.playVN === 'function') {
-        window.playVN(storyToaA, "intro_toa_a_01", () => {
+        window.playVN(storyToaA, "ht_01", () => {
             console.log("Xong hội thoại! Chuyển sang Minigame Tòa A...");
-            
-            // Hàm chuyển đổi tòa nhà của main.js
             if (typeof window.switchBuilding === 'function') {
                 window.switchBuilding('toa-a');
             }
         });
+
+        // 6. HIỆU ỨNG FADE-IN: Chờ 100 mili-giây cho VN thay đồ xong, rồi từ từ hiện lên
+        setTimeout(() => {
+            vnScreen.style.transition = 'opacity 0.4s ease'; // Hiệu ứng mượt mà
+            vnScreen.style.opacity = '1'; // Hiện hình!
+        }, 100);
+
     } else {
-        // Fallback phòng hờ lỡ file main.js bị lỗi không gọi được playVN
-        // Thì đành cho nhảy thẳng qua Tòa A luôn
+        // Fallback an toàn
         if (typeof window.switchBuilding === 'function') {
             window.switchBuilding('toa-a');
         }
