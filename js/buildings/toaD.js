@@ -176,7 +176,7 @@ function initToaD() {
     scoreToaD = 0;
     scoreElToaD.innerText = scoreToaD;
     timeLeftToaD = configToaD.gameDuration;
-    timerElToaD.innerText = "02:00";
+    timerElToaD.innerText = "01:00";
     
     spawnLeaf();
     gameIntervalToaD = setInterval(updateTimerToaD, 1000);
