@@ -102,41 +102,42 @@ function spawnBook() {
         book.dataset.code = "OLD"; 
     } else if (randType >= 6 && randType <= 7) { 
         // SÁCH NẶNG (TẠ)
-        book.classList.add('book-heavy');
-        book.innerText = 'Sách Dày\n(3 click)';
+        book.classList.add('book-heavy', 'book-heavy-image');
         book.draggable = false;
         book.dataset.clicks = 3;
         book.dataset.code = randCode;
-        
+
+        // Xóa sạch nội dung cũ trước khi thêm nhãn mới
+        book.innerHTML = ""; 
+        const clicksSpan = document.createElement('span');
+        clicksSpan.className = 'clicks-text';
+        clicksSpan.innerHTML = `Sách Dày<br>(3 click)`;
+        book.appendChild(clicksSpan);
+
         book.addEventListener('click', function() {
             let clk = parseInt(this.dataset.clicks) - 1;
             this.dataset.clicks = clk;
             
-            // Giấu tên sách đi, chỉ hiện số click còn lại để tạo bất ngờ
-            this.innerText = `Sách Dày\n(${clk} click)`;
+            const clicksTextSpan = this.querySelector('span.clicks-text');
+            if (clicksTextSpan) clicksTextSpan.innerHTML = `Sách Dày<br>(${clk} click)`;
             
             if (clk <= 0) {
                 this.draggable = true;
-
+                if (clicksTextSpan) clicksTextSpan.remove();
+                
+                // QUAN TRỌNG: Lột bỏ ảnh "Sách Dày" để hiện ảnh "Môn học thật"
+                this.classList.remove('book-heavy-image'); 
+                
                 if (bookImages[randCode]) {
-                    // Nếu CÓ ảnh -> Hiện ảnh, giấu chữ, xóa viền
-                    this.innerText = ""; 
                     this.style.backgroundImage = `url(${bookImages[randCode]})`;
                     this.style.backgroundSize = "100% 100%";
-                    this.style.backgroundRepeat = "no-repeat";
                     this.style.backgroundColor = "transparent";
                     this.style.border = "none";
-                    this.style.boxShadow = "none";
                 } else {
-                    // Phao cứu sinh nếu thiếu ảnh
                     this.innerText = randCode;
                     this.style.backgroundColor = "#3498db"; 
-                    this.style.color = "white";
-                    this.style.border = "2px solid #2980b9";
                     this.style.backgroundImage = "none";
                 }
-                
-                // Đã xóa 2 dòng code cũ cản trở việc hiện ảnh ở đây!
             }
         });
     } else { 

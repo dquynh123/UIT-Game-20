@@ -69,9 +69,36 @@
 #toa-a .conveyor-book { position: absolute; top: 10px; width: 70px; height: 95px; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: bold; font-size: 0.8rem; color: white; cursor: grab; z-index: 5; animation: slideBook var(--speed) linear forwards; border-radius: 4px; box-shadow: 2px 2px 5px rgba(0,0,0,0.5); }
 #toa-a .conveyor-book:hover { animation-play-state: paused !important; transform: scale(1.15); z-index: 100; }
 
-
-
-#toa-a .book-heavy { background-color: #e74c3c; border: 3px solid #c0392b; cursor: pointer; }
+#toa-a .book-heavy-image {
+    background-image: url('../../assets/images/thick_book.png'); /* Đổi tên file cho đúng nhé */
+    background-size: 140% 140%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    display: flex; align-items: center; justify-content: center; /* Căn giữa text click */
+}
+#toa-a .book-heavy { 
+    cursor: pointer;
+    color: white !important; /* Text clicks màu trắng đè lên ảnh */
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.2;
+    font-size: 0.65rem; /* Text clicks nhỏ hơn một chút */
+    padding: 0px;
+}
+#toa-a .book-heavy span.clicks-text {
+    background-color: transparent; 
+    
+    /* Mẹo: Vì xóa nền đi rồi nên chữ trắng có thể bị lẫn vào sách, 
+       chúng ta thêm viền đen mỏng xung quanh chữ để nó luôn nổi bật */
+    text-shadow: 1px 1px 2px black, -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black;
+    
+    display: block; 
+    width: 100%; 
+    padding: 0 5px; /* Ép chữ không bao giờ chạm mép ảnh */
+}
 #toa-a .book-old { 
     background-color: #95a5a6; border: 2px solid #7f8c8d; 
 } /* Chỉ giữ lại class Sách Cũ */
