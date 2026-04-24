@@ -72,3 +72,9 @@ body { margin: 0; padding: 0; overflow: hidden; }
     height: 100%;
     position: relative;
 }
+
+/* Ghi đè thuộc tính overflow riêng cho Tòa B để có thể cuộn lướt xem thẻ */
+#toa-b {
+    overflow-y: auto !important; /* Cho phép cuộn dọc */
+    overflow-x: hidden; /* Vẫn khóa cuộn ngang cho an toàn */
+}
