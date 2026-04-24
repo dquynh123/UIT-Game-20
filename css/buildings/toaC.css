@@ -1,109 +1,186 @@
-/* ============================================================
-   ÉP KHUNG GAME RA CHÍNH GIỮA MÀN HÌNH
-   ============================================================ */
+
 #toa-c {
-    position: fixed;
-    top: 0;
-    left: 0;
+    position: relative;
     width: 100vw;
     height: 100vh;
-    z-index: 100;
-    background: rgba(0, 0, 0, 0.5); /* Thêm lớp nền mờ phía sau cho nổi bật game */
+    background-color: #0f3460;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.quiz-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+/* Hiển thị Canvas */
+#toa-c #canvas { display: none; cursor: crosshair; }
+#toa-c.game-playing #canvas { display: block; }
 
-    width: 850px; 
-    height: 550px; 
-    background: #ffffff;
-    border-radius: 25px; /* Bo tròn hiện đại hơn */
+/* 1. HEADER (Sửa lỗi mất chữ khi End Game) */
+#toa-c #header {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    background: rgba(10, 30, 60, 0.85);
+    border-bottom: 2px solid #ffd700;
+    padding: 15px 0;
+    z-index: 100;
+    display: none;
+}
+
+#toa-c #score-board {
+    position: absolute;
+    left: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #44ff62;
+    font-weight: bold;
+}
+
+#toa-c #quiz-area {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    border: none; /* Bỏ viền cũ, dùng shadow làm điểm nhấn */
-}
-
-/* ============================================================
-   PHẦN CÂU HỎI (GRADIENT HIỆN ĐẠI)
-   ============================================================ */
-.question-section {
-    flex: 4; 
-    display: flex;
-    justify-content: center;
     align-items: center;
-    padding: 40px;
-    /* GRADIENT XANH DƯƠNG SANG TÍM */
-    background: linear-gradient(135deg, #3742fa 0%, #7158e2 100%);
-    text-align: center;
+    gap: 8px;
 }
 
-#question-text {
-    font-size: 32px; 
-    color: #ffffff; /* Chữ trắng trên nền tối */
-    font-weight: 700;
-    margin: 0;
-    line-height: 1.4;
-}
-
-/* ============================================================
-   PHẦN ĐÁP ÁN (CHIA 2x2 CÓ KHOẢNG CÁCH)
-   ============================================================ */
-#answer-buttons {
-    flex: 6; 
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 15px; /* Tạo khoảng cách giữa các nút */
-    padding: 25px;
-    background-color: #f1f2f6; /* Nền xám nhạt phía dưới */
-}
-
-/* Ô ĐÁP ÁN */
-.answer-btn {
-    background: #ffffff;
-    border: none;
-    border-radius: 15px; /* Bo góc từng nút đáp án */
+#toa-c #question {
+    color: #fff;
     font-size: 22px;
+    margin: 0;
+    text-align: center;
+    max-width: 70%;
     font-weight: 600;
-    color: #2f3542;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05); /* Đổ bóng nhẹ tạo chiều sâu */
+}
+
+#toa-c #timer-bar-container {
+    width: 250px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+#toa-c #timer-progress {
+    width: 100%; height: 100%;
+    background: #00d2ff;
+    box-shadow: 0 0 10px #00d2ff;
+    transition: width 0.1s linear;
+}
+
+/* 2. MENU HƯỚNG DẪN (GIỐNG TÒA A - CHỮ TRẮNG - NÚT GIỮA) */
+#toa-c #start-menu {
+    position: absolute;
+    inset: 0;
+    background: #0f3460;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    z-index: 200;
 }
 
-/* Hiệu ứng khi rê chuột vào */
-.answer-btn:hover {
-    transform: translateY(-3px); /* Nút bay lên nhẹ */
-    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-    color: #3742fa;
+#toa-c .menu-content {
+    background: #16213e;
+    padding: 40px;
+    border-radius: 20px;
+    border: 2px solid #f1c40f; /* Viền vàng giống tòa A */
+    width: 90%;
+    max-width: 750px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 30px rgba(241, 196, 15, 0.3);
 }
 
-/* ============================================================
-   HIỆU ỨNG ĐÚNG/SAI (QUAN TRỌNG CHO JS)
-   ============================================================ */
-.answer-btn.correct {
-    background: #2ed573 !important; /* Xanh lá */
-    color: white !important;
-    transform: scale(1.05); /* Phóng to nhẹ khi chọn đúng */
+/* Tiêu đề hướng dẫn */
+#toa-c .menu-content h1 {
+    font-size: 32px !important;
+    margin-bottom: 25px !important;
+    font-weight: bold;
+    /* Style inline trong HTML sẽ tự nhận màu vàng #f1c40f */
 }
 
-.answer-btn.wrong {
-    background: #ff4757 !important; /* Đỏ */
-    color: white !important;
+/* Hộp bọc nội dung hướng dẫn */
+#toa-c .menu-content > div {
+    text-align: left;
+    background: rgba(0, 0, 0, 0.5) !important;
+    padding: 30px !important;
+    border-radius: 15px !important;
+    border: 1px solid rgba(241, 196, 15, 0.3) !important; /* Viền nhẹ màu vàng */
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 30px;
 }
-#toa-c {
-    display: none; /* Mặc định ẩn */
+
+#toa-c .menu-content p {
+    color: #ffffff;
+    line-height: 1.8 !important;
+    margin-bottom: 15px;
+    font-size: 17px;
 }
-/* Ẩn game khi chưa bắt đầu (Dùng class hidden nếu nhóm bạn dùng) */
-.hidden {
-    display: none !important;
+#toa-c .menu-content p.warning-text {
+    color: #e74c3c !important; 
+    font-size: 14px !important;
+}
+/* Nút bấm ĐỎ nằm giữa */
+#toa-c #start-btn {
+    background: #e94560;
+    padding: 15px 60px;
+    border: none;
+    border-radius: 40px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+    box-shadow: 0 5px 15px rgba(233, 69, 96, 0.4);
+}
+
+#toa-c #start-btn:hover {
+    background: #ff2e63;
+    transform: scale(1.08);
+}
+
+/* 3. MÀN HÌNH KẾT THÚC */
+#toa-c #end-screen {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 52, 96, 0.95);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    z-index: 150;
+}
+
+#toa-c #end-screen h2 {
+    font-size: 40px;
+    color: #44ff62;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+#toa-c .score-value {
+    font-size: 70px;
+    color: #ffffff;
+    font-weight: 900;
+    text-shadow: 0 0 20px rgba(68, 255, 98, 0.5);
+}
+
+/* Thông báo hiệu ứng */
+#toa-c #overlay-text {
+    position: absolute;
+    top: 60%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 60px;
+    font-weight: bold;
+    z-index: 120;
+    pointer-events: none;
+    opacity: 0;
+}
+.shake { animation: shake 0.2s ease-in-out 2; }
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
 }

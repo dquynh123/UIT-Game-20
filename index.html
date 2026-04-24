@@ -109,27 +109,55 @@
         </div>
         
         <div id="toa-c" class="building-container" style="display: none;">
-            <div class="header-info">
-                <div class="info-box timer-box">⏳ <span id="timer-display">10</span>s</div>
-                <div class="info-box score-box">⭐ Điểm: <span id="score">0</span></div>
+            <div id="header">
+                <div id="score-board">Điểm: <span id="score">0</span></div>
+                <div id="quiz-area">
+                    <h2 id="question">Đang tải câu hỏi...</h2>
+                    <div id="timer-bar-container">
+                        <div id="timer-progress"></div>
+                    </div>
+                </div>
             </div>
 
-            <div class="quiz-container">
-                <div class="question-section">
-                    <h2 id="question-text">Đang tải câu hỏi...</h2>
-                </div>
-                <div id="answer-buttons" class="answers-grid">
+            <div id="start-menu">
+                <div class="menu-content">
+                    <h1 style="color: #f1c40f; text-transform: uppercase;">Hướng Dẫn Ký Ức</h1>
+    
+                        <div style="border: 1px solid #00d2ff; padding: 20px; border-radius: 15px; background: rgba(0,0,0,0.3); text-align: left;">
+                            <p><strong style="color: #00d2ff;">⚡ GHI NHỚ:</strong> Bạn có <b>5 GIÂY</b> để nhìn thấu vị trí các đáp án trước khi chúng ẩn mình!</p>
+        
+                            <p><strong style="color: #f1c40f;">🌀 TRUY VẾT:</strong> Các hộp sẽ <b>XÁO TRỘN</b> vị trí. Hãy dùng nhãn lực của một UIT-er để theo sát mục tiêu!</p>
+        
+                            <p><strong style="color: #2ecc71;">🏀 THU THẬP:</strong> Di chuyển chuột thật nhanh để <b>HỨNG</b> hộp đúng khi chúng bắt đầu rơi!</p>
+        
+                            <hr style="border: 0.5px solid rgba(255,255,255,0.1); margin: 15px 0;">
+        
+                            <p class="warning-text" style="color: #e74c3c; font-size: 14px;">
+                                <i class="fas fa-exclamation-triangle"></i> <b>LƯU Ý:</b> Hứng sai đáp án sẽ khiến hệ thống rung lắc và trừ điểm trực tiếp vào tài khoản ký ức của bạn! Số điểm phải đạt tối thiểu 50 mới qua màn vì thế hãy cẩn thận!
+                            </p>
+                        </div>
+
+                        <button id="start-btn">ĐÃ HIỂU! CHIẾN NGAY</button>
                     </div>
             </div>
+
+            <div id="end-screen">
+                <h2>TỔNG ĐIỂM:</h2>
+                <span class="score-value">--</span>
+            </div>
+
+            <canvas id="canvas"></canvas>
+
+            <div id="overlay-text"></div>
         </div>
         <div id="toa-d" class="building-container" style="display: none; position: relative; width: 100%; height: 100vh; overflow: hidden;">
             <div id="ui-toa-d">
                 <div>Điểm: <span id="score-toa-d">0</span></div>
-                <div>Thời gian: <span id="timer-toa-d">02:00</span></div>
+                <div>Thời gian: <span id="timer-toa-d">01:00</span></div>
             </div>
 
             <div id="start-screen-toa-d" class="overlay-screen">
-                <h1 class="game-title-green">Tòa D Typing Game</h1>
+                <h1 class="game-title-green">Typing Game</h1>
                 <p>Gõ các chữ cái trên lá để được cộng điểm rèn luyện!</p>
                 <button id="toa-d-start-btn" class="green-btn">BẮT ĐẦU CHƠI</button>
             </div>
@@ -156,6 +184,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <script src="js/quizData.js"></script>
     <script type="module" src="js/main.js"></script>
 </body>
 </html>

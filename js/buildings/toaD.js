@@ -20,7 +20,7 @@ const configToaD = {
     canvasHeight: window.innerHeight,
     initialSpawnRate: 1000, 
     minSpawnRate: 300,      
-    gameDuration: 120,
+    gameDuration: 60,
     alphabet: "abcdefghijklmnopqrstuvwxyz"
 };
 
@@ -38,8 +38,9 @@ canvasToaD.height = configToaD.canvasHeight;
 class Leaf {
     constructor() {
         this.char = configToaD.alphabet[Math.floor(Math.random() * configToaD.alphabet.length)];
-        this.x = Math.random() * (canvasToaD.width - 60) + 30;
-        this.y = -50;
+        // Chỉnh lại biên x để lá to không bị xuất hiện sát mép (60 -> 120)
+        this.x = Math.random() * (canvasToaD.width - 120) + 60;
+        this.y = -100; // Để lá bắt đầu rơi từ cao hơn do kích thước lớn
         
         let speedBonus = 0;
         if (scoreToaD > 10) {
@@ -59,14 +60,21 @@ class Leaf {
         ctxToaD.save();
         ctxToaD.translate(this.x, this.y);
         ctxToaD.rotate(Math.sin(this.y * 0.05));
+        
         ctxToaD.fillStyle = this.color;
         ctxToaD.beginPath();
-        ctxToaD.moveTo(0, -20);
-        ctxToaD.quadraticCurveTo(20, 0, 0, 25);
-        ctxToaD.quadraticCurveTo(-20, 0, 0, -20);
+        
+        // --- CHỈNH KÍCH THƯỚC ---
+        ctxToaD.moveTo(0, -40); 
+        ctxToaD.quadraticCurveTo(40, 0, 0, 50); 
+        ctxToaD.quadraticCurveTo(-40, 0, 0, -40); 
+        // ---------------------------------------
+        
         ctxToaD.fill();
+        
         ctxToaD.fillStyle = "white";
-        ctxToaD.font = "bold 22px Arial";
+        // Tăng font chữ lên một chút (22px -> 30px) để cân đối với lá to
+        ctxToaD.font = "bold 30px Arial"; 
         ctxToaD.textAlign = "center";
         ctxToaD.textBaseline = "middle";
         ctxToaD.fillText(this.char.toUpperCase(), 0, 0);
