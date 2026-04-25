@@ -78,3 +78,95 @@ body { margin: 0; padding: 0; overflow: hidden; }
     overflow-y: auto !important; /* Cho phép cuộn dọc */
     overflow-x: hidden; /* Vẫn khóa cuộn ngang cho an toàn */
 }
+
+/* ============================================================
+   GIAO DIỆN HƯỚNG DẪN (DÙNG CHUNG CẢ GAME)
+   ============================================================ */
+
+/* 1. Màn hình nền bao trùm */
+.overlay-screen {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    background-color: rgba(244, 247, 246, 0.98);
+    padding: 20px; box-sizing: border-box;
+    z-index: 105;
+}
+
+/* 2. Hộp nội dung (Form chung) */
+.instruction-box {
+    background: #ffffff;
+    width: 90%; 
+    max-width: 600px;
+    max-height: 60vh; /* Vừa đủ để hiện nút bấm ở dưới */
+    overflow-y: auto;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+/* Màu viền riêng cho từng Tòa */
+#toa-a .instruction-box { border: 2px solid #ff9800; } /* Cam */
+#toa-b .instruction-box { border: 2px solid #128287; } /* Xanh */
+
+/* Chữ bên trong hộp */
+.instruction-box p { font-size: 1.2rem; line-height: 1.6; margin-bottom: 15px; color: #2d3748; }
+.instruction-box hr { border: none; border-top: 1px dashed #cbd5e0; margin: 20px 0; }
+.text-danger { color: #e53e3e !important; font-weight: bold; }
+
+/* Màu chữ in đậm riêng cho từng Tòa */
+#toa-a .instruction-box b { color: #ff9800; }
+#toa-b .instruction-box b { color: #2b6cb0; }
+
+/* Thanh cuộn gọn gàng */
+.instruction-box::-webkit-scrollbar { width: 8px; }
+.instruction-box::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 4px; }
+
+
+/* ============================================================
+   NÚT BẤM TIÊU CHUẨN (ĐỒNG BỘ FORM DÁNG)
+   ============================================================ */
+
+.orange-btn, .blue-btn {
+    font-family: Arial, sans-serif;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 6px; /* Bo góc vuông vức giống Tòa A */
+    cursor: pointer;
+    text-transform: uppercase;
+    color: #fff;
+    transition: all 0.2s;
+}
+
+/* Tòa A: Nút Cam */
+.orange-btn { background-color: #ff9800; box-shadow: 0 4px 0 #e65100; }
+.orange-btn:hover { background-color: #ffa726; transform: translateY(-2px); box-shadow: 0 6px 0 #e65100; }
+.orange-btn:active { transform: translateY(4px); box-shadow: 0 0 0 #e65100; }
+
+/* Tòa B: Nút Xanh */
+.blue-btn { background-color: #2b6cb0; box-shadow: 0 4px 0 #1a365d; }
+.blue-btn:hover { background-color: #3182ce; transform: translateY(-2px); box-shadow: 0 6px 0 #1a365d; }
+.blue-btn:active { transform: translateY(4px); box-shadow: 0 0 0 #1a365d; }
+
+/* ============================================================
+   THIẾT LẬP FONT CHỮ TOÀN GAME
+   ============================================================ */
+/* 1. Mặc định toàn bộ chữ trong game sẽ dùng font Nunito cho dễ đọc */
+* {
+    font-family: 'Nunito', sans-serif;
+}
+
+/* 2. Ép riêng Tiêu đề, Bold, Strong, và Nút bấm dùng font Poppins cho bự và ngầu */
+h1, h2, h3, h4, h5, h6, 
+.orange-btn, .blue-btn, .green-btn,
+b, strong, .game-title-yellow, .game-title-blue, .game-title-green {
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0.5px; /* Giãn chữ ra một chút xíu cho sang */
+    font-weight: 600; /* Default bold weight for Poppins */
+}
