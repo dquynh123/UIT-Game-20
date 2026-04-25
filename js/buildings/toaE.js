@@ -179,15 +179,10 @@ function rollDice(diceType, cost) {
 
             let logMsg = `Đổ D${diceType} ra <strong>${rollResult}</strong>. Đi đến ô ${state.pos}.`;
 
-            if (state.pos >1) {
+            if (state.pos === 120) {
                 logArea.innerHTML = logMsg;
                 endGame("CHÚC MỪNG! Bạn đã vào được Hội trường tòa E để tham dự seminar!");
                 
-                // --- BƯỚC 2 NẰM Ở ĐÂY ---
-                // Sau khi báo thắng, đếm ngược 3 giây (3000ms) rồi tự động bay sang Tòa A
-                setTimeout(() => {
-                    transitionToToaA();
-                }, 3000);
                 
                 return;
             }
@@ -298,7 +293,7 @@ function updateUI() {
 
     function endGame(reason) {
         state.isGameOver = true;
-        let finalScore = state.pos; // Mặc định điểm bằng vị trí hiện tại
+        let finalScore = state.pos; 
         
         if (state.pos === 120) {
             finalScore = 120 + state.drl; // Về đích
@@ -308,8 +303,11 @@ function updateUI() {
         
         // Disable các nút xúc xắc
         diceButtons.forEach(btn => btn.disabled = true);
-        // Chuyển thử qua a
-        transitionToToaA();
+        
+        // 👇 GỌI CHUYỂN CẢNH Ở ĐÂY (Dù thắng hay thua đều được chuyển) 👇
+        setTimeout(() => {
+            transitionToToaA();
+        }, 3000); // 3000ms = 3 giây chờ để đọc kết quả
     }
 
     // Gắn sự kiện cho các nút xúc xắc
@@ -381,7 +379,7 @@ function updateUI() {
 
 
 });
-
+//CHUYỂN TỪ TÒA E SANG HỘI THOẠI TÒA A
 const storyToaA = [
     {
         id: "ht_01",
@@ -429,44 +427,61 @@ const storyToaA = [
 ];
 let hasTransitionedToToaA = false;
 function transitionToToaA() {
-    // 2. KHÓA CHỐNG SPAM: Nếu đã chuyển rồi thì tuyệt đối không chạy lại lần 2
     if (hasTransitionedToToaA) return;
     hasTransitionedToToaA = true;
 
-    // Tắt màn hình Tòa E đi
-    const toaE = document.getElementById('toa-e');
-    if (toaE) toaE.style.display = 'none';
+    // 1. TẠO TẤM RÈM ĐEN (FADE TO BLACK)
+    let overlay = document.getElementById('transition-overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'transition-overlay';
+        // Ép CSS trực tiếp bằng JS để bạn không phải đụng vào file CSS
+        overlay.style.cssText = `
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background-color: black; z-index: 9999; opacity: 0;
+            transition: opacity 0.8s ease-in-out; pointer-events: none;
+        `;
+        document.body.appendChild(overlay);
+    }
 
-    const vnScreen = document.getElementById('vn-screen');
-    if (!vnScreen) return;
+    // 2. KÉO RÈM XUỐNG (Màn hình từ từ tối đen trong 0.8s)
+    // Dùng setTimeout nhỏ để trình duyệt kịp nhận diện tấm rèm trước khi làm mờ
+    setTimeout(() => {
+        overlay.style.opacity = '1';
+    }, 50);
 
-    // 3. DỌN SẠCH TÀN DƯ QUYẾT LIỆT: Tìm mọi thẻ chứa chữ trong hộp thoại và xóa sạch
-    const textElements = vnScreen.querySelectorAll('p, span, h2, h3, div[id*="text"], div[id*="name"], div[class*="text"], div[class*="name"]');
-    textElements.forEach(el => el.innerHTML = "");
+    // 3. THAY ĐỒ TRONG BÓNG TỐI (Đợi 850ms cho rèm đen hẳn rồi mới xử lý giao diện)
+    setTimeout(() => {
+        // Tắt Tòa E
+        const toaE = document.getElementById('toa-e');
+        if (toaE) toaE.style.display = 'none';
 
-    // 4. ÉP TÀNG HÌNH: Đưa opacity về 0 (Trong suốt) trước khi bật display lên
-    vnScreen.style.opacity = '0';
-    vnScreen.style.display = 'block';
+        // Bật màn hình Hội thoại lên
+        const vnScreen = document.getElementById('vn-screen');
+        if (vnScreen) {
+            // Dọn sạch chữ cũ của hội thoại trước
+            const textElements = vnScreen.querySelectorAll('p, span, h2, h3, div[id*="text"], div[id*="name"], div[class*="text"], div[class*="name"]');
+            textElements.forEach(el => el.innerHTML = "");
+            
+            vnScreen.style.opacity = '1'; // Đảm bảo màn hình rõ nét
+            vnScreen.style.display = 'block';
+        }
 
-    // 5. Gọi playVN chạy ngầm trong bóng tối
-    if (typeof window.playVN === 'function') {
-        window.playVN(storyToaA, "ht_01", () => {
-            console.log("Xong hội thoại! Chuyển sang Minigame Tòa A...");
-            if (typeof window.switchBuilding === 'function') {
-                window.switchBuilding('toa-a');
-            }
-        });
+        // Kích hoạt hội thoại Tòa A
+        if (typeof window.playVN === 'function') {
+            window.playVN(storyToaA, "ht_01", () => {
+                // Khi đọc xong hội thoại Tòa A thì nhảy vào game
+                if (typeof window.switchBuilding === 'function') {
+                    window.switchBuilding('toa-a');
+                }
+            });
+        }
 
-        // 6. HIỆU ỨNG FADE-IN: Chờ 100 mili-giây cho VN thay đồ xong, rồi từ từ hiện lên
+        // 4. KÉO RÈM LÊN (Màn hình từ từ sáng lên, lộ ra hộp thoại Tòa A)
+        // Chờ thêm 100ms cho file playVN kịp render chữ và ảnh rồi mới kéo rèm
         setTimeout(() => {
-            vnScreen.style.transition = 'opacity 0.4s ease'; // Hiệu ứng mượt mà
-            vnScreen.style.opacity = '1'; // Hiện hình!
+            overlay.style.opacity = '0';
         }, 100);
 
-    } else {
-        // Fallback an toàn
-        if (typeof window.switchBuilding === 'function') {
-            window.switchBuilding('toa-a');
-        }
-    }
+    }, 850); // Khớp với thời gian 0.8s kéo rèm + 50ms delay
 }
