@@ -179,7 +179,7 @@ function rollDice(diceType, cost) {
 
             let logMsg = `Đổ D${diceType} ra <strong>${rollResult}</strong>. Đi đến ô ${state.pos}.`;
 
-            if (state.pos > 1) {
+            if (state.pos === 120) {
                 logArea.innerHTML = logMsg;
                 endGame("CHÚC MỪNG! Bạn đã vào được Hội trường tòa E để tham dự seminar!");
                 
@@ -382,26 +382,36 @@ function updateUI() {
 //CHUYỂN TỪ TÒA E SANG HỘI THOẠI TÒA A
 const storyToaA = [
     {
-        id: "ht_01",
+        id: "ht_00",
         name: "Anh chàng CTV Khoa X",
-        text: "Ơ... anh ơi! Anh thấy cô Thủ thư đâu không? Cô ấy giận em rồi, chạy nhanh như Naruto ấy, bỏ lại đống sách này bắt em phân loại... mà em baka quá, nhìn đống này là chóng mặt..",
+        text: "Ơ... anh ơi! Anh thấy cô Thủ thư đâu không? Cô ấy giận em rồi, chạy nhanh như Naruto ấy, bỏ lại đống sách này bắt em phân loại... mà sách thì cứ tuôn ra liên tục, nhìn đống này là em thấy chóng mặt..",
         bg: "",
         sprite: "assets/images/chibi.png",
-        nextId: "ht_02"
+        nextId: "ht_01"
     },
+
+    {
+        id: "ht_01",
+        name: "{PLAYER}",
+        text: "Không gian thư viện sau bao năm vẫn thật quen thuộc...  ",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "ht_02" 
+    },
+
     {
         id: "ht_02",
-        name: "Cô Thủ thư",
-        text: "Cậu lại lười biếng rồi đấy à? UIT không có chỗ cho sự chậm trễ đâu!",
+        name: "{PLAYER}",
+        text: "Nhưng tại sao ở không gian này lại có một cái băng chuyền công nghiệp chạy rầm rầm thế này? Này cậu CTV, cái băng chuyền này có từ lúc nào vậy",
         bg: "",
-        sprite: "assets/images/test_cothuthu.png",
+        sprite: "assets/images/test_main.png",
         nextId: "ht_03" 
     },
 
     {
         id: "ht_03",
         name: "Cô Thủ thư",
-        text: "Cả anh nữa. Anh muốn lấy mảnh ký ức tiếp theo? Thư viện đang quá tải vì đợt kỷ niệm 20 năm, sách và tài liệu cứ tuôn ra như thác đổ. Giúp tôi một tay đi, rồi tôi sẽ chỉ đường cho.",
+        text: "Không gian này định hình dựa trên chính tâm trí của cậu, cựu sinh viên ạ.",
         bg: "",
         sprite: "assets/images/test_cothuthu.png",
         nextId: "ht_04" 
@@ -410,7 +420,7 @@ const storyToaA = [
     {
         id: "ht_04",
         name: "{PLAYER}",
-        text: "Tôi chỉ cần đặt chúng đúng chỗ thôi đúng không?",
+        text: "Ý cô là sao??",
         bg: "",
         sprite: "assets/images/test_main.png",
         nextId: "ht_05" 
@@ -419,11 +429,75 @@ const storyToaA = [
     {
         id: "ht_05",
         name: "Cô Thủ thư",
-        text: "Không đơn giản như thế đâu!!",
+        text: "Cậu nhìn thời gian và ký ức giống như những công việc (task) chạy trên một dây chuyền sản xuất vô tận. Khô khan, máy móc, và đầy áp lực. Cậu đang sống như một cỗ máy lập trình sẵn, nên dòng chảy ký ức về sự tận tụy của anh ở Tòa A cũng hiện hình thành một cái băng chuyền lạnh lẽo như vậy.",
         bg: "",
         sprite: "assets/images/test_cothuthu.png",
-        nextId: null 
+        nextId: "ht_06" 
     },
+
+    {
+        id: "ht_06",
+        name: "{PLAYER}",
+        text: "Deadline...code...những đêm thức trắng...một dây chuyền sản xuất vô tận...",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "ht_07" 
+    },
+
+    {
+        id: "ht_07",
+        name: "Cô Thủ thư",
+        text: "Đúng vậy. Và muốn lấy được ĐRL để thoát khỏi đây , cậu phải xử lý cái băng chuyền này",
+        bg: "",
+        sprite: "assets/images/test_cothuthu.png",
+        nextId: "ht_08"
+    },
+
+    {
+        id: "ht_08",
+        name: "Cô Thủ thư",
+        text: "Hãy nhặt những cuốn sách giáo trình đang trôi tới kia và xếp chúng vào ĐÚNG 9 ngăn kệ kia. Đừng để 3 cuốn sách trôi vào cõi hư không nếu không cậu sẽ chẳng lấy tích đủ ĐRL để rời khỏi nơi này",
+        bg: "",
+        sprite: "assets/images/test_cothuthu.png",
+        nextId: "ht_09"
+    },
+
+    {
+        id: "ht_09",
+        name: "Anh chàng CTV Khoa X",
+        text: "Nhưng mà anh nhớ cẩn thận đấy ! Có những cuốn SÁCH DÀY bám đầy bụi. Nó giống như mấy môn học ngày xưa anh từng thức trắng đêm để cày cuốc vậy, nặng lắm!",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: "ht_10"
+    },
+
+    {
+        id: "ht_10",
+        name: "Cô Thủ thư",
+        text: "Hãy GÕ VÀO SÁCH DÀY 3 LẦN (click 3 lần) để phá vỡ lớp vỏ bọc, khi đó anh mới có thể thấy được lõi của chúng mà xếp",
+        bg: "",
+        sprite: "assets/images/test_cothuthu.png",
+        nextId: "ht_11"
+    },
+
+    {
+        id: "ht_11",
+        name: "Cô Thủ thư",
+        text: "Còn những cuốn SÁCH CŨ màu xám xịt kia, hãy để mặc nó trôi vào cõi hư không kia.",
+        bg: "",
+        sprite: "assets/images/test_cothuthu.png",
+        nextId: "ht_12"
+    },
+
+    {
+        id: "ht_12",
+        name: "Cô Thủ thư",
+        text: "Nếu anh cố chấp mang nó lên kệ, toàn bộ ma trận ký ức này sẽ sụp đổ.",
+        bg: "",
+        sprite: "assets/images/test_cothuthu.png",
+        nextId: null
+    },
+
 ];
 let hasTransitionedToToaA = false;
 function transitionToToaA() {

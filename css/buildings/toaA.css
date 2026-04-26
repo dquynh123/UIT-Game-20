@@ -182,7 +182,7 @@
 #toa-a .conveyor-book { position: absolute; top: 10px; width: 75px; height: 105px; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: bold; font-size: 0.8rem; color: white; cursor: grab; z-index: 5; animation: slideBook var(--speed) linear forwards; border-radius: 4px; box-shadow: 3px 3px 8px rgba(0,0,0,0.6); }
 #toa-a .conveyor-book:hover { animation-play-state: paused !important; transform: scale(1.15) translateY(-5px); z-index: 100; }
 
-#toa-a .book-heavy-image { background-image: url('../../assets/images/thick_book.png'); background-size: 140% 140%; background-position: center; background-repeat: no-repeat; background-color: transparent !important; border: none !important; box-shadow: none !important; display: flex; align-items: center; justify-content: center; }
+#toa-a .book-heavy-image { background-image: url('../../assets/images/thickbook.png'); background-size: 110% 110%; background-position: center; background-repeat: no-repeat; background-color: transparent !important; border: none !important; box-shadow: none !important; display: flex; align-items: center; justify-content: center; }
 #toa-a .book-heavy { cursor: pointer; color: white !important; font-weight: bold; text-align: center; line-height: 1.2; font-size: 0.65rem; padding: 0px; }
 #toa-a .book-heavy span.clicks-text { background-color: transparent; text-shadow: 1px 1px 2px black, -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black; display: block; width: 100%; padding: 0 5px; }
 #toa-a .book-old { background-color: #95a5a6; border: 3px solid #7f8c8d; }

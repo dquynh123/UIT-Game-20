@@ -262,37 +262,27 @@ class ToaBGame {
 document.addEventListener('DOMContentLoaded', () => {
     // Lấy các element của Tòa B
     const startScreenB = document.getElementById('start-screen-toa-b');
-    const instructionScreenB = document.getElementById('instruction-screen-toa-b');
     const gameScreenB = document.getElementById('game-screen-toa-b');
     
     const btnStartB = document.getElementById('toa-b-start-btn');
-    const btnPlayB = document.getElementById('toa-b-play-btn');
 
     let toaB_Instance = null;
 
-    // Khi bấm "BẮT ĐẦU" -> Chuyển sang màn hình Hướng dẫn
+    // Khi bấm "BẮT ĐẦU" -> Chuyển thẳng vào game (bỏ màn hình hướng dẫn)
     if (btnStartB) {
         btnStartB.addEventListener('click', () => {
             startScreenB.classList.add('hidden');
-            instructionScreenB.classList.remove('hidden');
-        });
-    }
-
-    // Khi bấm "ĐÃ RÕ" -> Tắt Hướng dẫn, Mở Game và Khởi tạo
-    if (btnPlayB) {
-        btnPlayB.addEventListener('click', () => {
-            instructionScreenB.classList.add('hidden');
             gameScreenB.classList.remove('hidden');
             
             // Chỉ khởi tạo game 1 lần duy nhất
             if (!toaB_Instance) {
                 toaB_Instance = new ToaBGame('game-container');
-                toaB_Instance.startGame(); // Start game NOW when user clicks play
+                toaB_Instance.startGame();
             } else {
                 // Nếu đã có instance rồi (chơi lại), thì gọi hàm reset
                 toaB_Instance.currentRound = 0;
                 toaB_Instance.drl = 0;
-                toaB_Instance.startGame(); // Start game NOW
+                toaB_Instance.startGame();
             }
         });
     }
