@@ -4,10 +4,10 @@ const scoreEl = document.getElementById("score");
 const questionEl = document.getElementById("question");
 const timerBar = document.getElementById("timer-progress");
 const overlay = document.getElementById("overlay-text");
-const startMenu = document.getElementById("start-menu");
-const endScreen = document.getElementById("end-screen");
-const scoreValueEnd = document.querySelector(".score-value");
-const startBtn = document.getElementById("start-btn");
+//const startMenu = document.getElementById("start-menu");
+//const endScreen = document.getElementById("end-screen");
+//const scoreValueEnd = document.querySelector(".score-value");
+//const startBtn = document.getElementById("start-btn");
 const header = document.getElementById("header");
 const toaCContainer = document.getElementById("toa-c");
 
@@ -46,12 +46,11 @@ function wrapText(context, text, x, y, maxWidth, lineHeight) {
 }
 
 // KHỞI TẠO GAME
-startBtn.addEventListener("click", () => {
+function startToaCGame() {
+    endGame.isLocked = false;
     score = 0; currentLevel = 0; wrongCount = 0;
-    scoreEl.innerText = score;
+    if(scoreEl) scoreEl.innerText = score;
     toaCContainer.classList.add("game-playing");
-    startMenu.style.display = "none";
-    endScreen.style.display = "none";
     header.style.display = "block";
     
     if (typeof uitQuizBank !== 'undefined') {
@@ -60,7 +59,19 @@ startBtn.addEventListener("click", () => {
         if (animationId) cancelAnimationFrame(animationId);
         animate();
     }
+}
+
+// Cảm biến: Theo dõi khi nào Tòa C được bật lên (từ Tòa D chuyển sang) thì gọi game chạy
+const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'style') {
+            if (toaCContainer.style.display === 'block' && gameState === "MENU") {
+                startToaCGame();
+            }
+        }
+    });
 });
+if (toaCContainer) observer.observe(toaCContainer, { attributes: true });
 
 function initLevel() {
     if (gameInterval) clearInterval(gameInterval);
@@ -103,20 +114,24 @@ function initLevel() {
 }
 
 function handleWrong() {
+    if (gameState === "END") return;
     score = Math.max(0, score - 5);
     wrongCount++;
     scoreEl.innerText = score;
     showOverlay(`SAI RỒI! (${wrongCount}/5)`, "#e74c3c");
     toaCContainer.classList.add("shake");
     setTimeout(() => toaCContainer.classList.remove("shake"), 200);
-    
     if (wrongCount >= 5) {
-        // Nếu sai 5 câu thì dừng ngay lập tức
-        backToMenu();
+        gameState = "END"; 
+        if (gameInterval) clearInterval(gameInterval);
+        // 2. Chờ 1.5 giây để người chơi nhìn chữ 5/5, sau đó mới gọi hội thoại
+        setTimeout(() => {
+            endGame(); 
+        }, 1500);
     }
 }
 
-function backToMenu() {
+/*function backToMenu() {
     if (gameInterval) clearInterval(gameInterval);
     if (animationId) cancelAnimationFrame(animationId);
     
@@ -134,15 +149,36 @@ function backToMenu() {
     
     alert("Ký ức quá tải! Bạn đã sai 5 lần.");
 }
-
+*/
 function endGame() {
+    if (endGame.isLocked) return; 
+    endGame.isLocked = true;
+
     gameState = "END";
     if (gameInterval) clearInterval(gameInterval);
-    questionEl.innerText = "HOÀN THÀNH XUẤT SẮC!";
-    if (timerBar) timerBar.style.width = "0%";
-    endScreen.style.display = "flex";
-    scoreValueEnd.innerText = score;
-    boxes = [];
+    boxes = []; // Dọn sạch hộp
+    
+    // 1. Kéo rèm tắt Tòa C NGAY LẬP TỨC (Không cần setTimeout chờ đợi nữa)
+    toaCContainer.style.display = "none";
+    toaCContainer.classList.remove("game-playing");
+    
+    // 2. KỊCH BẢN HỘI THOẠI
+    const storySauToaC = [
+        { id: "c_end_01", name: "Hệ thống", text: `Quá trình thu thập hoàn tất! Bạn có thêm ${score} Điểm Rèn Luyện.`, bg: "", sprite: "", nextId: "c_end_02" },
+        { id: "c_end_02", name: "{PLAYER}", text: "Phù, cũng kha khá điểm rồi. Mình phải đi tiếp thôi...", bg: "", sprite: "assets/images/test_main.png", nextId: null }
+    ];
+
+    // 3. GỌI HÀM ĐỌC THOẠI
+    if (typeof window.playVN === 'function') {
+        window.playVN(storySauToaC, "c_end_01", () => {
+            console.log("Đã đọc xong hội thoại Tòa C!");
+            // Muốn chuyển đi đâu tiếp thì viết code ở đây
+        });
+    } else if (typeof playVN === 'function') {
+        playVN(storySauToaC, "c_end_01", () => {
+            console.log("Đã đọc xong hội thoại Tòa C!");
+        });
+    }
 }
 
 function update() {
@@ -150,7 +186,7 @@ function update() {
     
     if (gameState === "FALLING") {
         boxes.forEach(b => {
-            if (b.hit) return; // Nếu ô này đã tính va chạm rồi thì bỏ qua
+                if (gameState !== "FALLING" || b.hit) return; // Nếu đã có kết quả trong lượt này thì bỏ qua các ô còn lại
 
             b.y += b.speed;
             
@@ -159,17 +195,16 @@ function update() {
                 b.x + b.w > player.x && b.x < player.x + player.w) {
                 
                 b.hit = true; // Khóa lại ngay lập tức
+                gameState = "SHOW_RESULT";
 
                 if (b.isCorrect) { 
                     score += 10; 
                     showOverlay("+10", "#2ecc71"); 
                     scoreEl.innerText = score;
-                    gameState = "SHOW_RESULT";
                     setTimeout(nextStep, 1500);
                 } else { 
                     handleWrong();
-                    if (wrongCount < 5) {
-                        gameState = "SHOW_RESULT";
+                    if(wrongCount < 5){
                         setTimeout(nextStep, 1500);
                     }
                 }
@@ -177,8 +212,8 @@ function update() {
         });
 
         // Nếu tất cả các ô rơi mất tiêu mà chưa hứng được
-        if (boxes.length > 0 && boxes.every(b => b.y > canvas.height && !b.hit)) {
-            gameState = "SHOW_RESULT";
+        if (gameState === "FALLING" && boxes.length > 0 && boxes.every(b => b.y > canvas.height && !b.hit)) {
+            gameState = "SHOW_RESULT"; // Khóa ngay lập tức
             handleWrong();
             if (wrongCount < 5) {
                 setTimeout(nextStep, 1500);

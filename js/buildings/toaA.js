@@ -1,3 +1,4 @@
+let glitchInterval; // Biến lưu bộ đếm rung lắc
 let gameInterval;
 let difficultyInterval;
 let timerInterval;
@@ -26,25 +27,13 @@ const bookImages = {
 const spineColors = ['#2980b9', '#27ae60', '#8e44ad', '#f39c12', '#16a085', '#d35400'];
 
 const belt = document.querySelector('#toa-a #conveyor-container');
-const btnStartToaA = document.querySelector('#toa-a #toa-a-start-btn');
-const btnPlayToaA = document.querySelector('#toa-a #toa-a-play-btn');
 
-// Nút ở Màn hình 1: Chuyển sang bảng hướng dẫn
+const btnStartToaA = document.querySelector('#toa-a #toa-a-start-btn');
+
+// Nút Bắt đầu Tòa A: Chuyển thẳng vào game luôn
 if (btnStartToaA) {
     btnStartToaA.addEventListener('click', () => {
-        document.querySelector('#toa-a #start-screen-toa-a').style.display = 'none';
-        
-        const instructionScreen = document.querySelector('#toa-a #instruction-screen-toa-a');
-        instructionScreen.classList.remove('hidden');
-        instructionScreen.style.display = 'flex';
-    });
-}
-
-// Nút ở Bảng hướng dẫn: Vào game thật sự
-if (btnPlayToaA) {
-    btnPlayToaA.addEventListener('click', () => {
-        document.querySelector('#toa-a #instruction-screen-toa-a').style.display = 'none';
-        startToaAGame(); // Gọi hàm chạy game
+        startToaAGame(); 
     });
 }
 
@@ -67,7 +56,7 @@ function startToaAGame() {
 }
 
 function startGameLoops() {
-    clearInterval(gameInterval); clearInterval(difficultyInterval); clearInterval(timerInterval);
+    clearInterval(gameInterval); clearInterval(difficultyInterval); clearInterval(timerInterval); clearInterval(glitchInterval);
 
     timerInterval = setInterval(() => {
         timeElapsed++;
@@ -83,6 +72,11 @@ function startGameLoops() {
         clearInterval(gameInterval);
         gameInterval = setInterval(spawnBook, spawnRate);
     }, 12000); 
+
+    // QUAN TRỌNG NHẤT: Cứ mỗi 15 giây (15000ms) là động đất!
+    glitchInterval = setInterval(() => {
+        triggerGlitchEvent();
+    }, 15000);
 }
 
 function spawnBook() {
@@ -168,12 +162,19 @@ function spawnBook() {
     }
 
     book.addEventListener('animationend', () => {
-        if (document.getElementById(book.id)) {
+        if (document.getElementById(uniqueId)) {
             book.remove();
-            loseLife("Sách đã rơi xuống vực!");
+            
+            // Nếu là Sách Cũ (Bug) rơi xuống vực -> An toàn, không bị phạt!
+            if (book.dataset.code === "OLD") {
+                console.log("Đã tiêu hủy một 'Bug' an toàn!");
+                // Bạn có thể cho score++ ở đây nếu muốn thưởng điểm vì tính kiên nhẫn
+            } 
+            // Nếu là sách xịn (Ký ức) mà để trôi mất -> Trừ 1 mạng!
+            else {
+                loseLife("Một mảnh ký ức cốt lõi đã rơi xuống Hư Không!");
+            }
         }
-        /*book.remove();
-        loseLife("Sách đã rơi xuống vực!");*/
     });
 
     book.addEventListener('dragstart', (e) => {
@@ -226,9 +227,9 @@ function setupDropZones() {
             const draggedBook = document.querySelector(`[id^="dragging-"]`);
 
             // LUẬT TỬ THẦN: Thả Sách Cũ lên các kệ Kỹ Năng -> GAME OVER
-            if (bookType === "OLD" && targetType !== "OLD") {
+            if (bookType === "OLD") {
                 if(draggedBook) draggedBook.remove();
-                gameOver("BẠN ĐÃ ĐẠP BẪY!\nThủ thư phát hiện bạn xếp sách cũ lên kệ mới!");
+                gameOver("HỆ THỐNG SỤP ĐỔ!\nBạn đã đưa 'Bug' (sách cũ) vào ma trận lưu trữ!");
                 return;
             }
 
@@ -276,49 +277,62 @@ function updateHUD() {
 }
 
 function gameOver(reason) {
+    clearInterval(glitchInterval);
     clearInterval(gameInterval); clearInterval(difficultyInterval); clearInterval(timerInterval);
     document.querySelectorAll('.conveyor-book').forEach(b => b.style.animationPlayState = 'paused');
     
     setTimeout(() => {
-        // 1. Đổi chữ thông báo cho tích cực hơn
-        alert(`KẾT THÚC CA LÀM!\nLý do: ${reason}\nSố sách hoàn thành: ${sortedBooks}\nThời gian: ${timeElapsed}s`);
-        
-        // 2. Dọn sạch sách cũ để game không bị nặng
+        // Dọn sạch sách cũ để game không bị nặng
         document.querySelectorAll('.conveyor-book').forEach(b => b.remove());
         document.querySelectorAll('.spines-container').forEach(c => c.innerHTML = '');
         
-        // 3. Ẩn Tòa A
-        document.querySelector('#toa-a').style.display = 'none';
-        
-        // 4. Mở Tòa C
-        const toaB = document.querySelector('#toa-b');
-        if (toaB) {
-            toaB.style.display = 'block'; 
-            new ToaBGame('game-container');
+        // Nhảy THẲNG sang Tòa B
+        if (typeof window.switchBuilding === 'function') {
+            window.switchBuilding('toa-b');
+            console.log("Game Over Tòa A: Đã chuyển sang Tòa B.");
+            
+            // Kích hoạt logic game của Tòa B (Dựa theo code cũ của bạn)
+            if (typeof ToaBGame !== 'undefined') {
+                new ToaBGame('game-container');
+            }
         }
-    }, 100);
+    }, 500); // Đợi 0.5 giây rồi mới chuyển cảnh
 }
 
 function winGameToaA() {
-    // 1. Dừng mọi hoạt động của game
-    clearInterval(gameInterval); 
-    clearInterval(difficultyInterval); 
-    clearInterval(timerInterval);
+    clearInterval(glitchInterval);
+    clearInterval(gameInterval); clearInterval(difficultyInterval); clearInterval(timerInterval); 
     document.querySelectorAll('.conveyor-book').forEach(b => b.style.animationPlayState = 'paused');
     
-    // 2. Chờ 0.5s rồi hiện thông báo chúc mừng
     setTimeout(() => {
-        alert(`🎉 XUẤT SẮC! 🎉\nBạn đã phân loại thành công 45 cuốn sách!\nTổng điểm: ${score}\nThời gian: ${timeElapsed}s`);
+        // Dọn sạch sách
+        document.querySelectorAll('.conveyor-book').forEach(b => b.remove());
+        document.querySelectorAll('.spines-container').forEach(c => c.innerHTML = '');
         
-        // 3. Tắt màn hình game Tòa A
-        document.querySelector('#toa-a').style.display = 'none';
-        
-        // CÁCH 1: Nếu muốn chuyển sang Tòa B luôn
-        document.querySelector('#toa-c').style.display = 'block'; 
-        
-        // CÁCH 2: Nếu muốn quay lại hộp thoại hội thoại để nhân vật nói chuyện tiếp
-        // document.querySelector('#vn-screen').classList.remove('hidden');
-        // playVN("kich_ban_sau_khi_thang_toa_A"); 
-        
+        // Thắng cũng nhảy sang Tòa B để tiếp tục cốt truyện
+        if (typeof window.switchBuilding === 'function') {
+            window.switchBuilding('toa-b');
+            console.log("Chiến thắng Tòa A: Đã chuyển sang Tòa B.");
+            
+            // Kích hoạt logic game của Tòa B
+            if (typeof ToaBGame !== 'undefined') {
+                new ToaBGame('game-container');
+            }
+        }
     }, 500);
+}
+
+function triggerGlitchEvent() {
+    const gameScreen = document.querySelector('#toa-a #game-screen-toa-a');
+    const shelfGrid = document.querySelector('#toa-a #complex-shelves-grid');
+    
+    // Bật hiệu ứng: Nháy đỏ + Rung tủ
+    if(gameScreen) gameScreen.classList.add('glitch-red-screen');
+    if(shelfGrid) shelfGrid.classList.add('shaking-shelf');
+    
+    // Hẹn giờ đúng 6 giây sau thì tắt hiệu ứng đi
+    setTimeout(() => {
+        if(gameScreen) gameScreen.classList.remove('glitch-red-screen');
+        if(shelfGrid) shelfGrid.classList.remove('shaking-shelf');
+    }, 6000);
 }

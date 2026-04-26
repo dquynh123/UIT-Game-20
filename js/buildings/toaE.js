@@ -179,7 +179,7 @@ function rollDice(diceType, cost) {
 
             let logMsg = `Đổ D${diceType} ra <strong>${rollResult}</strong>. Đi đến ô ${state.pos}.`;
 
-            if (state.pos === 120) {
+            if (state.pos > 1) {
                 logArea.innerHTML = logMsg;
                 endGame("CHÚC MỪNG! Bạn đã vào được Hội trường tòa E để tham dự seminar!");
                 

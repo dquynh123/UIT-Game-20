@@ -48,18 +48,7 @@
                 <button id="toa-a-start-btn" class="orange-btn">BẮT ĐẦU</button>
             </div>
 
-            <div id="instruction-screen-toa-a" class="overlay-screen hidden">
-                <h1 class="game-title-yellow">Hướng Dẫn Công Việc</h1>
-                <div class="instruction-box">
-                    <p><b>Người chơi cần phân loại những cuốn sách đó vào đúng ngăn kệ với tên tương ứng trên cuốn sách.</b></p>
-                    <p><b>Sách:</b> Kéo và thả vào đúng kệ có môn học tương ứng.</p>
-                    <p><b>Sách dày:</b> Hãy <b>CLICK 3 LẦN</b> để tháo gỡ nó, sau đó mới xếp vào kệ.</p>
-                    <p><b>Sách Cũ:</b> Xếp vào <b>THÙNG SÁCH CŨ</b>.</p>
-                    <hr>
-                    <p class="text-danger">⚠️ LƯU Ý: Xếp nhầm Sách Cũ lên kệ bạn sẽ lập tức bị cô thủ thư thu hồi kí ức (Game Over)!</p>
-                </div>
-                <button id="toa-a-play-btn" class="orange-btn">ĐÃ HIỂU! CHƠI NGAY</button>
-            </div>
+            
 
             <div id="game-screen-toa-a" class="screen-container hidden">
                 <div class="game-header">
@@ -69,37 +58,70 @@
                 </div>
 
                 <div class="play-area">
-                    <div class="top-row">
+                    <div class="top-row">\
+                        <!--
                         <div id="bin-sach-cu" class="drop-zone" data-accept="OLD">
-                            
-                        </div>
+                        </div> -->
                         
                         <div id="conveyor-container">
                             <div id="conveyor-belt"></div>
                         </div>
                         
                         <div id="cliff">
-                            <span class="vertical-text">Vực Thẳm</span>
+                            <span class="vertical-text">HƯ KHÔNG</span>
                         </div>
                     </div>
 
                     <div id="complex-shelves-grid">
                         <div class="shelf-column">
-                            <div class="compartment drop-zone" data-accept="HDH"><span class="comp-label">HỆ ĐIỀU HÀNH</span><div class="spines-container"></div></div>
-                            <div class="compartment drop-zone" data-accept="MMT"><span class="comp-label">MẠNG MÁY TÍNH</span><div class="spines-container"></div></div>
-                            <div class="compartment drop-zone" data-accept="DSTT"><span class="comp-label">ĐẠI SỐ TUYẾN TÍNH</span><div class="spines-container"></div></div>
+                            <div class="compartment drop-zone" data-accept="HDH">
+                                <div class="comp-label">Hệ Điều Hành</div><div class="spines-container"></div>
+                            </div>
+                            <div class="compartment drop-zone" data-accept="MMT">
+                                <div class="comp-label">Mạng Máy Tính</div><div class="spines-container"></div>
+                            </div>
+                            <div class="compartment drop-zone" data-accept="DSTT">
+                                <div class="comp-label">Đại Số Tuyến Tính</div><div class="spines-container"></div>
+                            </div>
                         </div>
+
                         <div class="shelf-column">
-                            <div class="compartment drop-zone" data-accept="CSDL"><span class="comp-label">CƠ SỞ DỮ LIỆU</span><div class="spines-container"></div></div>
-                            <div class="compartment drop-zone" data-accept="CNPM"><span class="comp-label">NHẬP MÔN CNPM</span><div class="spines-container"></div></div>
-                            <div class="compartment drop-zone" data-accept="NMPTGame"><span class="comp-label">NHẬP MÔN PHÁT TRIỂN GAME</span><div class="spines-container"></div></div>
+                            <div class="compartment drop-zone" data-accept="CSDL">
+                                <div class="comp-label">Cơ Sở Dữ Liệu</div><div class="spines-container"></div>
+                            </div>
+                            <div class="compartment drop-zone" data-accept="CNPM">
+                                <div class="comp-label">Nhập Môn CNPM</div><div class="spines-container"></div>
+                            </div>
+                            <div class="compartment drop-zone" data-accept="NMPTGame">
+                                <div class="comp-label">Phát Triển Game</div><div class="spines-container"></div>
+                            </div>
                         </div>
+
                         <div class="shelf-column">
-                            <div class="compartment drop-zone" data-accept="TTNT"><span class="comp-label">TRÍ TUỆ NHÂN TẠO</span><div class="spines-container"></div></div>
-                            <div class="compartment drop-zone" data-accept="DSA"><span class="comp-label">DSA</span><div class="spines-container"></div></div>
-                            <div class="compartment drop-zone" data-accept="VDK"><span class="comp-label">VI ĐIỀU KHIỂN</span><div class="spines-container"></div></div>
+                            <div class="compartment drop-zone" data-accept="TTNT">
+                                <div class="comp-label">Trí Tuệ Nhân Tạo</div><div class="spines-container"></div>
+                            </div>
+                            <div class="compartment drop-zone" data-accept="DSA">
+                                <div class="comp-label">DSA</div><div class="spines-container"></div>
+                            </div>
+                            <div class="compartment drop-zone" data-accept="VDK">
+                                <div class="comp-label">Vi Điều Khiển</div><div class="spines-container"></div>
+                            </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div id="end-screen-toa-a" class="overlay-screen" style="display: none;">
+                <div class="instruction-box" style="text-align: center;">
+                    <h1 class="game-title-yellow" id="end-title-toa-a">KẾT THÚC CA LÀM</h1>
+                    <p id="end-msg-toa-a" style="font-weight: bold; color: #2d3748;"></p>
+                    
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin: 20px 0; border: 2px solid #2b6cb0;">
+                        <p>📚 Sách hoàn thành: <span id="end-score-toa-a" style="color: #2b6cb0; font-size: 1.5rem; font-weight: bold;">0</span></p>
+                        <p>⏱️ Thời gian trụ lại: <span id="end-time-toa-a" style="color: #e53e3e; font-weight: bold;">0</span>s</p>
+                    </div>
+
+                    <button id="toa-a-next-btn" class="orange-btn">TIẾP TỤC HÀNH TRÌNH</button>
                 </div>
             </div>
         </div>
@@ -117,33 +139,6 @@
                         <div id="timer-progress"></div>
                     </div>
                 </div>
-            </div>
-
-            <div id="start-menu">
-                <div class="menu-content">
-                    <h1 style="color: #f1c40f; text-transform: uppercase;">Hướng Dẫn Ký Ức</h1>
-    
-                        <div style="border: 1px solid #00d2ff; padding: 20px; border-radius: 15px; background: rgba(0,0,0,0.3); text-align: left;">
-                            <p><strong style="color: #00d2ff;">⚡ GHI NHỚ:</strong> Bạn có <b>5 GIÂY</b> để nhìn thấu vị trí các đáp án trước khi chúng ẩn mình!</p>
-        
-                            <p><strong style="color: #f1c40f;">🌀 TRUY VẾT:</strong> Các hộp sẽ <b>XÁO TRỘN</b> vị trí. Hãy dùng nhãn lực của một UIT-er để theo sát mục tiêu!</p>
-        
-                            <p><strong style="color: #2ecc71;">🏀 THU THẬP:</strong> Di chuyển chuột thật nhanh để <b>HỨNG</b> hộp đúng khi chúng bắt đầu rơi!</p>
-        
-                            <hr style="border: 0.5px solid rgba(255,255,255,0.1); margin: 15px 0;">
-        
-                            <p class="warning-text" style="color: #e74c3c; font-size: 14px;">
-                                <i class="fas fa-exclamation-triangle"></i> <b>LƯU Ý:</b> Hứng sai đáp án sẽ khiến hệ thống rung lắc và trừ điểm trực tiếp vào tài khoản ký ức của bạn! Số điểm phải đạt tối thiểu 50 mới qua màn vì thế hãy cẩn thận!
-                            </p>
-                        </div>
-
-                        <button id="start-btn">ĐÃ HIỂU! CHIẾN NGAY</button>
-                    </div>
-            </div>
-
-            <div id="end-screen">
-                <h2>TỔNG ĐIỂM:</h2>
-                <span class="score-value">--</span>
             </div>
 
             <canvas id="canvas"></canvas>

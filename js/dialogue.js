@@ -13,12 +13,22 @@ let isTyping = false;
 let typeInterval;
 let onStoryComplete = null;
 let isWaitingForChoice = false;
+let startLineTimeout = null;
 
 export function playVN(storyArray, startId, callback) {
+    clearInterval(typeInterval);
+    if (startLineTimeout) {
+        clearTimeout(startLineTimeout);
+        startLineTimeout = null;
+    }
     storyMap = {};
     storyArray.forEach(line => { storyMap[line.id] = line; });
     currentLineId = startId;
     onStoryComplete = callback;
+
+    if (vnSprite) vnSprite.classList.add('hidden');
+    if (vnName) vnName.style.display = 'none';
+    if (vnText) vnText.innerHTML = '';
     
     // 1. ÉP BẬT MÀN HÌNH HỘI THOẠI LÊN NGAY
     const vnScreen = document.getElementById('vn-screen');
@@ -33,14 +43,25 @@ export function playVN(storyArray, startId, callback) {
         if(el) el.style.display = 'none';
     });
 
-    // 3. Hiện chữ
-    setTimeout(() => { showLine(currentLineId); }, 200); 
+    // 3. Hiện chữ (chặn race-condition khi người chơi click rất sớm)
+    const initialLineId = startId;
+    startLineTimeout = setTimeout(() => {
+        startLineTimeout = null;
+        if (currentLineId === initialLineId && !isTyping && vnText && vnText.innerHTML === '') {
+            showLine(initialLineId);
+        }
+    }, 200);
 }
 
 function showLine(lineId) {
+    clearInterval(typeInterval);
     const line = storyMap[lineId];
     if (!line) { 
-        if (onStoryComplete) onStoryComplete();
+        if (onStoryComplete) {
+            const tempCb = onStoryComplete;
+            onStoryComplete = null; // THÊM DÒNG NÀY (Xóa trí nhớ callback)
+            tempCb();
+        }
         return;
     }
 
@@ -99,19 +120,20 @@ function checkChoices(lineData) {
             const btn = document.createElement('button');
             btn.className = 'uit-choice-btn';
             btn.innerText = `> ${choice.text}`;
-            btn.addEventListener('click', (e) => {
+            btn.onclick = (e) => {       // SỬA THÀNH ONCLICK Ở ĐÂY
                 e.stopPropagation(); 
                 showLine(choice.nextId); 
-            });
+            };
             choiceContainer.appendChild(btn);
         });
     }
 }
 
-dialogueBox.addEventListener('click', () => {
+dialogueBox.onclick = () => {
     if (isWaitingForChoice) return; 
 
     const currentLine = storyMap[currentLineId];
+    if (!currentLine) return;
     if (isTyping) {
         clearInterval(typeInterval);
         vnText.innerHTML = currentLine.text.replace(/{PLAYER}/g, localStorage.getItem('currentPlayerName') || "Main");
@@ -120,4 +142,4 @@ dialogueBox.addEventListener('click', () => {
     } else {
         showLine(currentLine.nextId);
     }
-});
+};
