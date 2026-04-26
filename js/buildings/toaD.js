@@ -1,191 +1,239 @@
 /**
- * Tòa D - Typing Game Logic (Integrated Version)
+ * Tòa D - English Cleaning Game (Bản Fix Triệt Để)
  */
 
-// Lấy các Element dựa trên ID mới trong file Index tổng
 const canvasToaD = document.getElementById('gameCanvasToaD');
 const ctxToaD = canvasToaD.getContext('2d');
 const scoreElToaD = document.getElementById('score-toa-d');
 const timerElToaD = document.getElementById('timer-toa-d');
-
 const startScreenToaD = document.getElementById('start-screen-toa-d');
-const startBtnToaD = document.getElementById('toa-d-start-btn');
 const endScreenToaD = document.getElementById('end-screen-toa-d');
-const finalScoreElToaD = document.getElementById('final-score-toa-d');
-const finalMsgElToaD = document.getElementById('final-msg-toa-d');
-const toToaCBtn = document.getElementById('to-toa-c-btn');
 
 const configToaD = {
-    canvasWidth: window.innerWidth,
-    canvasHeight: window.innerHeight,
-    initialSpawnRate: 1000, 
-    minSpawnRate: 300,      
     gameDuration: 60,
-    alphabet: "abcdefghijklmnopqrstuvwxyz"
+    spawnInterval: 1500, // Tăng tốc độ ra lá một chút cho kịch tính
+    maxLeavesAllowed: 12, 
+    wordsEasy: ["dog", "cat", "sun", "fish", "bird", "tree", "home", "book", "pink", "blue"],
+    wordsHard: ["university", "technology", "information", "celebration", "computer", "vietnam"]
 };
 
 let scoreToaD = 0;
 let timeLeftToaD = configToaD.gameDuration;
 let leavesToaD = [];
-let currentSpawnRateToaD = configToaD.initialSpawnRate;
-let spawnTimeoutToaD;
-let gameIntervalToaD;
-let animationIdToaD;
+let gameIntervalToaD, spawnIntervalToaD, animationIdToaD;
+let currentInput = "";
+let isGameActive = false;
 
-canvasToaD.width = configToaD.canvasWidth;
-canvasToaD.height = configToaD.canvasHeight;
+// Khởi tạo kích thước canvas
+function resizeCanvasToaD() {
+    canvasToaD.width = window.innerWidth;
+    canvasToaD.height = window.innerHeight;
+}
+resizeCanvasToaD();
+window.addEventListener('resize', resizeCanvasToaD);
 
 class Leaf {
     constructor() {
-        this.char = configToaD.alphabet[Math.floor(Math.random() * configToaD.alphabet.length)];
-        // Chỉnh lại biên x để lá to không bị xuất hiện sát mép (60 -> 120)
-        this.x = Math.random() * (canvasToaD.width - 120) + 60;
-        this.y = -100; // Để lá bắt đầu rơi từ cao hơn do kích thước lớn
+        const isHard = Math.random() < 0.3; 
+        this.type = isHard ? "hard" : "easy";
+        this.word = isHard 
+            ? configToaD.wordsHard[Math.floor(Math.random() * configToaD.wordsHard.length)]
+            : configToaD.wordsEasy[Math.floor(Math.random() * configToaD.wordsEasy.length)];
         
-        let speedBonus = 0;
-        if (scoreToaD > 10) {
-            speedBonus = (scoreToaD - 10) * 0.2; 
-        }
-        
-        this.speed = (Math.random() * 2 + 1) + speedBonus;
-        this.color = this.speed > 5 ? "#d32f2f" : "#2e7d32"; 
+        const margin = 150;
+        this.x = Math.random() * (canvasToaD.width - 2 * margin) + margin;
+        this.y = -120;
+        this.stopY = Math.random() * (canvasToaD.height * 0.6) + (canvasToaD.height * 0.2);
+        this.leafHalfLength = Math.max(45, (this.word.length * 10)); 
+        this.leafWidth = 35 + (this.word.length * 2); 
+        this.speed = this.type === "hard" ? Math.random() * 0.5 + 1.2 : Math.random() * 1.2 + 2.2;
+        this.swingRange = this.type === "hard" ? 50 : 30;
+        this.swingSpeed = 0.015;
+        this.initialX = this.x;
+        this.color = isHard ? "#d32f2f" : "#2e7d32"; 
+        this.isGrounded = false;
+        this.rotation = (Math.random() - 0.5) * 1; 
     }
-
     update() {
-        this.y += this.speed;
-        this.x += Math.sin(this.y * 0.02) * 2;
+        if (!this.isGrounded) {
+            this.y += this.speed;
+            this.x = this.initialX + Math.sin(this.y * this.swingSpeed) * this.swingRange;
+            if (this.y >= this.stopY) { this.y = this.stopY; this.isGrounded = true; }
+        }
     }
-
     draw() {
         ctxToaD.save();
         ctxToaD.translate(this.x, this.y);
-        ctxToaD.rotate(Math.sin(this.y * 0.05));
+        ctxToaD.rotate(!this.isGrounded ? Math.sin(this.y * this.swingSpeed) * 0.5 : this.rotation);
         
+        // Vẽ lá
         ctxToaD.fillStyle = this.color;
         ctxToaD.beginPath();
-        
-        // --- CHỈNH KÍCH THƯỚC ---
-        ctxToaD.moveTo(0, -40); 
-        ctxToaD.quadraticCurveTo(40, 0, 0, 50); 
-        ctxToaD.quadraticCurveTo(-40, 0, 0, -40); 
-        // ---------------------------------------
-        
+        ctxToaD.moveTo(0, -this.leafHalfLength); 
+        ctxToaD.quadraticCurveTo(this.leafWidth, 0, 0, this.leafHalfLength);
+        ctxToaD.quadraticCurveTo(-this.leafWidth, 0, 0, -this.leafHalfLength);
         ctxToaD.fill();
         
+        // Vẽ chữ
+        ctxToaD.rotate(Math.PI / 2);
         ctxToaD.fillStyle = "white";
-        // Tăng font chữ lên một chút (22px -> 30px) để cân đối với lá to
-        ctxToaD.font = "bold 30px Arial"; 
+        ctxToaD.font = "bold 18px 'Segoe UI', Arial";
         ctxToaD.textAlign = "center";
         ctxToaD.textBaseline = "middle";
-        ctxToaD.fillText(this.char.toUpperCase(), 0, 0);
+        ctxToaD.fillText(this.word.toUpperCase(), 0, 0);
         ctxToaD.restore();
     }
 }
 
 function spawnLeaf() {
+    if (!isGameActive) return;
+    if (leavesToaD.length >= configToaD.maxLeavesAllowed) {
+        showResultToaD("THUA CUỘC! Sân đã đầy lá.", true);
+        return;
+    }
     leavesToaD.push(new Leaf());
-
-    if (scoreToaD > 10) {
-        currentSpawnRateToaD = Math.max(configToaD.minSpawnRate, configToaD.initialSpawnRate - ((scoreToaD - 10) * 50));
-    } else {
-        currentSpawnRateToaD = configToaD.initialSpawnRate;
-    }
-    
-    spawnTimeoutToaD = setTimeout(spawnLeaf, currentSpawnRateToaD);
-}
-
-function updateTimerToaD() {
-    timeLeftToaD--;
-    const mins = Math.floor(timeLeftToaD / 60).toString().padStart(2, '0');
-    const secs = (timeLeftToaD % 60).toString().padStart(2, '0');
-    timerElToaD.innerText = `${mins}:${secs}`;
-    
-    if (timeLeftToaD <= 0) {
-        showResultToaD("HẾT GIỜ! Thử thách đã kết thúc.");
-    }
-}
-
-// HÀM QUAN TRỌNG: Dọn dẹp mọi thứ của Tòa D trước khi sang tòa khác
-function cleanupToaD() {
-    clearTimeout(spawnTimeoutToaD);
-    clearInterval(gameIntervalToaD);
-    cancelAnimationFrame(animationIdToaD);
-    leavesToaD = [];
-    ctxToaD.clearRect(0, 0, canvasToaD.width, canvasToaD.height);
-}
-
-function showResultToaD(message) {
-    cleanupToaD(); // Gọi hàm dọn dẹp
-    
-    finalMsgElToaD.innerText = message;
-    finalScoreElToaD.innerText = scoreToaD;
-    endScreenToaD.style.display = 'block';
-
-    toToaCBtn.onclick = () => { 
-        endScreenToaD.style.display = 'none';
-        if (typeof window.switchBuilding === 'function') {
-            window.switchBuilding('toa-c'); 
-        }
-    };
-}
-
-function animateToaD() {
-    ctxToaD.clearRect(0, 0, canvasToaD.width, canvasToaD.height);
-    for (let i = leavesToaD.length - 1; i >= 0; i--) {
-        leavesToaD[i].update();
-        leavesToaD[i].draw();
-        if (leavesToaD[i].y > canvasToaD.height + 50) {
-            leavesToaD.splice(i, 1);
-        }
-    }
-    animationIdToaD = requestAnimationFrame(animateToaD);
 }
 
 window.addEventListener('keydown', (e) => {
-    // CHẶN: Chỉ xử lý nếu Tòa D đang hiển thị và bảng kết quả đang đóng
-    const toaD = document.getElementById('toa-d');
-    if (toaD.style.display === 'none' || endScreenToaD.style.display === 'block') return;
+    if (!isGameActive) return;
 
-    const key = e.key.toLowerCase();
-    let targetIndex = -1;
-    let maxY = -1;
-
-    for (let i = 0; i < leavesToaD.length; i++) {
-        if (leavesToaD[i].char === key && leavesToaD[i].y > maxY) {
-            maxY = leavesToaD[i].y;
-            targetIndex = i;
+    if (e.key === "Enter") {
+        let foundIndex = leavesToaD.findIndex(l => l.word.toLowerCase() === currentInput.toLowerCase());
+        if (foundIndex !== -1) {
+            let pts = (leavesToaD[foundIndex].type === "hard") ? 5 : 2;
+            scoreToaD = Math.min(100, scoreToaD + pts);
+            leavesToaD.splice(foundIndex, 1);
+            scoreElToaD.innerText = scoreToaD;
+            if (scoreToaD >= 100) showResultToaD("XUẤT SẮC! Đạt 100đ.", false);
+        } else if (currentInput.length > 0) {
+            scoreToaD = Math.max(0, scoreToaD - 1);
+            scoreElToaD.innerText = scoreToaD;
         }
-    }
-
-    if (targetIndex !== -1) {
-        leavesToaD.splice(targetIndex, 1);
-        scoreToaD = Math.min(40, scoreToaD + 1); 
-        scoreElToaD.innerText = scoreToaD;
-
-        if (scoreToaD >= 40) {
-            showResultToaD("CHÚC MỪNG! Bạn đã hoàn thành Tòa D.");
-        }
+        currentInput = "";
+    } else if (e.key === "Backspace") {
+        currentInput = currentInput.slice(0, -1);
+    } else if (e.key.length === 1 && /[a-z]/i.test(e.key)) {
+        currentInput += e.key;
     }
 });
 
+function updateTimerToaD() {
+    if (!isGameActive) return;
+    timeLeftToaD--;
+    let mins = Math.floor(timeLeftToaD / 60).toString().padStart(2, '0');
+    let secs = (timeLeftToaD % 60).toString().padStart(2, '0');
+    timerElToaD.innerText = `${mins}:${secs}`;
+    if (timeLeftToaD <= 0) showResultToaD("CHIẾN THẮNG!", false);
+}
+
+function animateToaD() {
+    if (!isGameActive) return; 
+    
+    ctxToaD.clearRect(0, 0, canvasToaD.width, canvasToaD.height);
+    leavesToaD.forEach(leaf => { leaf.update(); leaf.draw(); });
+
+    // Vẽ text input người dùng đang gõ
+    ctxToaD.save();
+    ctxToaD.fillStyle = "yellow";
+    ctxToaD.font = "bold 32px Arial";
+    ctxToaD.textAlign = "center";
+    ctxToaD.fillText("> " + currentInput.toUpperCase() + " <", canvasToaD.width / 2, canvasToaD.height - 60);
+    ctxToaD.restore();
+
+    animationIdToaD = requestAnimationFrame(animateToaD);
+}
+
+function showResultToaD(message, isGameOver) {
+    isGameActive = false; 
+    cleanupToaD(); 
+    
+    const finalMsg = document.getElementById('final-msg-toa-d');
+    const finalScore = document.getElementById('final-score-toa-d');
+    const actionBtn = document.getElementById('to-toa-c-btn');
+    const overlay = document.getElementById('fade-overlay');
+    const uiToaD = document.getElementById('ui-toa-d'); 
+
+    finalMsg.innerText = message;
+    finalScore.innerText = scoreToaD;
+    endScreenToaD.style.display = 'block';
+
+    if (isGameOver) {
+        actionBtn.innerText = "CHƠI LẠI";
+        actionBtn.onclick = () => {
+            initToaD(); // Gọi trực tiếp hàm init để reset game
+        };
+    } else {
+        actionBtn.innerText = "TIẾP TỤC";
+        actionBtn.onclick = () => {
+            actionBtn.disabled = true;
+
+            // 1. Phủ đen
+            if (overlay) {
+                overlay.style.opacity = "1";
+                overlay.style.pointerEvents = "all";
+            }
+
+            // 2. Dọn dẹp để tránh nháy ảnh mờ
+            setTimeout(() => {
+                ctxToaD.clearRect(0, 0, canvasToaD.width, canvasToaD.height);
+                if (uiToaD) uiToaD.style.display = 'none';
+                endScreenToaD.style.display = 'none';
+
+                // 3. Chuyển tòa
+                if (typeof window.switchBuilding === 'function') {
+                    window.switchBuilding('toa-c'); 
+                }
+
+                // 4. Mở mắt
+                setTimeout(() => {
+                    if (overlay) {
+                        overlay.style.opacity = "0";
+                        overlay.style.pointerEvents = "none";
+                    }
+                    actionBtn.disabled = false;
+                }, 800); 
+            }, 500); 
+        };
+    }
+}
+
+function cleanupToaD() {
+    clearInterval(spawnIntervalToaD);
+    clearInterval(gameIntervalToaD);
+    if (animationIdToaD) {
+        cancelAnimationFrame(animationIdToaD);
+        animationIdToaD = null;
+    }
+    leavesToaD = [];
+}
+
 function initToaD() {
-    cleanupToaD(); // Đảm bảo không có game nào đang chạy đè lên
+    cleanupToaD();
+    
+    // Đảm bảo các UI hiện hình
+    const mainToaD = document.getElementById('toa-d');
+    const uiToaD = document.getElementById('ui-toa-d');
+    if (mainToaD) mainToaD.style.display = 'block';
+    if (uiToaD) uiToaD.style.display = 'block';
+
+    resizeCanvasToaD(); // Quan trọng: Đặt lại kích thước canvas trước khi vẽ
+    isGameActive = true; 
+    scoreToaD = 0;
+    timeLeftToaD = configToaD.gameDuration;
+    currentInput = "";
+    scoreElToaD.innerText = "0";
+    timerElToaD.innerText = "01:00"; 
     
     startScreenToaD.style.display = 'none';
-    endScreenToaD.style.display = 'none'; // Ẩn màn hình kết thúc nếu chơi lại
-    scoreToaD = 0;
-    scoreElToaD.innerText = scoreToaD;
-    timeLeftToaD = configToaD.gameDuration;
-    timerElToaD.innerText = "01:00";
+    endScreenToaD.style.display = 'none';
     
-    spawnLeaf();
+    spawnIntervalToaD = setInterval(spawnLeaf, configToaD.spawnInterval);
     gameIntervalToaD = setInterval(updateTimerToaD, 1000);
     animateToaD();
 }
 
-startBtnToaD.addEventListener('click', initToaD);
-
-window.addEventListener('resize', () => {
-    canvasToaD.width = window.innerWidth;
-    canvasToaD.height = window.innerHeight;
-});
+// Gán sự kiện cho nút Start
+const startBtn = document.getElementById('toa-d-start-btn');
+if (startBtn) {
+    startBtn.onclick = initToaD;
+}

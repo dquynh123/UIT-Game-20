@@ -179,3 +179,69 @@
     margin-top: 15px;
     min-height: 25px;
 }
+
+/* --- BẢNG HƯỚNG DẪN TÒA B --- */
+/* Màn hình nền mờ bao trùm */
+#toa-b #instruction-screen-toa-b {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background-color: rgba(244, 247, 246, 0.98);
+    font-family: Arial, sans-serif;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;
+    color: #333; 
+    z-index: 105;
+}
+
+/* Hộp nội dung hướng dẫn */
+#toa-b .instruction-box {
+    background: #ffffff; /* Nền trắng sáng */
+    padding: 30px 40px;
+    border-radius: 12px;
+    border: 2px solid #2b6cb0; /* Viền xanh chuẩn Tòa B */
+    margin-bottom: 30px;
+    text-align: left;
+    width: 90%;
+    max-width: 600px;
+    max-height: 60vh; /* Giữ ở mức 60vh để chừa chỗ cho Nút bấm bên dưới */
+    overflow-y: auto; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Bóng đổ nhẹ nhàng */
+}
+
+/* Định dạng chữ bên trong hộp */
+#toa-b .instruction-box p { 
+    font-size: 1.2rem; 
+    line-height: 1.6; 
+    margin-bottom: 15px; 
+    color: #2d3748;
+}
+
+#toa-b .instruction-box b { 
+    color: #2b6cb0; /* Nhấn mạnh bằng màu Xanh dương */
+}
+
+#toa-b .instruction-box hr { 
+    border: none;
+    border-top: 1px dashed #cbd5e0; 
+    margin: 20px 0;
+}
+
+/* Dòng cảnh báo trừ điểm */
+#toa-b .instruction-box .text-danger { 
+    color: #e53e3e !important; 
+    font-weight: bold; 
+}
+
+/* Trang trí thêm thanh cuộn cho hợp tone Tòa B */
+#toa-b .instruction-box::-webkit-scrollbar {
+    width: 8px;
+}
+#toa-b .instruction-box::-webkit-scrollbar-thumb {
+    background: #2b6cb0; 
+    border-radius: 4px;
+}
