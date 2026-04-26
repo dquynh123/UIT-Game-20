@@ -429,7 +429,7 @@ const storyToaA = [
     {
         id: "ht_05",
         name: "Cô Thủ thư",
-        text: "Cậu nhìn thời gian và ký ức giống như những công việc (task) chạy trên một dây chuyền sản xuất vô tận. Khô khan, máy móc, và đầy áp lực. Cậu đang sống như một cỗ máy lập trình sẵn, nên dòng chảy ký ức về sự tận tụy của anh ở Tòa A cũng hiện hình thành một cái băng chuyền lạnh lẽo như vậy.",
+        text: "Cậu nhìn thời gian và ký ức giống như những công việc (task) chạy trên một dây chuyền sản xuất vô tận. Khô khan, máy móc, và đầy áp lực. Cậu đang sống như một cỗ máy lập trình sẵn, nên dòng chảy ký ức về sự tận tụy của cậu ở Tòa A cũng hiện hình thành một cái băng chuyền lạnh lẽo như vậy.",
         bg: "",
         sprite: "assets/images/test_cothuthu.png",
         nextId: "ht_06" 
@@ -474,7 +474,7 @@ const storyToaA = [
     {
         id: "ht_10",
         name: "Cô Thủ thư",
-        text: "Hãy GÕ VÀO SÁCH DÀY 3 LẦN (click 3 lần) để phá vỡ lớp vỏ bọc, khi đó anh mới có thể thấy được lõi của chúng mà xếp",
+        text: "Hãy GÕ VÀO SÁCH DÀY 3 LẦN (click 3 lần) để phá vỡ lớp vỏ bọc, khi đó cậu mới có thể thấy được lõi của chúng mà xếp",
         bg: "",
         sprite: "assets/images/test_cothuthu.png",
         nextId: "ht_11"
@@ -492,7 +492,7 @@ const storyToaA = [
     {
         id: "ht_12",
         name: "Cô Thủ thư",
-        text: "Nếu anh cố chấp mang nó lên kệ, toàn bộ ma trận ký ức này sẽ sụp đổ.",
+        text: "Nếu cậu cố chấp mang nó lên kệ, toàn bộ ma trận ký ức này sẽ sụp đổ.",
         bg: "",
         sprite: "assets/images/test_cothuthu.png",
         nextId: null

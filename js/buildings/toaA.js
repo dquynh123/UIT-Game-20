@@ -8,6 +8,19 @@ let timeElapsed = 0;
 let currentSpeed = 12; 
 let spawnRate = 3500; 
 let sortedBooks = 0;
+let isTransitioningToToaB = false;
+//kịch bản hội thoại tòa b
+const StoryToaB = [
+    {
+        id: "test_01",
+        name: "Bạn gái ngành truyền thông đa phương tiện",
+        text: "À... vâng. Đang tới giờ mở hệ thống mà mạng bên này lag quá, tôi đang định chạy đi tìm chỗ wifi mạnh hơn",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: null
+    },
+ 
+];
 
 const shelfCodes = ['HDH', 'MMT', 'DSTT', 'CSDL', 'CNPM', 'NMPTGame', 'TTNT', 'DSA', 'VDK']; 
 
@@ -40,6 +53,7 @@ if (btnStartToaA) {
 setupDropZones();
 
 function startToaAGame() {
+    isTransitioningToToaB = false;
     document.querySelector('#toa-a #start-screen-toa-a').style.display = 'none';
     document.querySelector('#toa-a #game-screen-toa-a').classList.remove('hidden');
 
@@ -281,22 +295,45 @@ function gameOver(reason) {
     clearInterval(gameInterval); clearInterval(difficultyInterval); clearInterval(timerInterval);
     document.querySelectorAll('.conveyor-book').forEach(b => b.style.animationPlayState = 'paused');
     
+    // Đảm bảo tắt rung lắc và nháy đỏ khi thua
+    const gameScreen = document.querySelector('#toa-a #game-screen-toa-a');
+    const shelfGrid = document.querySelector('#toa-a #complex-shelves-grid');
+    if(gameScreen) gameScreen.classList.remove('glitch-red-screen');
+    if(shelfGrid) shelfGrid.classList.remove('shaking-shelf');
+    
     setTimeout(() => {
         // Dọn sạch sách cũ để game không bị nặng
         document.querySelectorAll('.conveyor-book').forEach(b => b.remove());
         document.querySelectorAll('.spines-container').forEach(c => c.innerHTML = '');
         
-        // Nhảy THẲNG sang Tòa B
-        if (typeof window.switchBuilding === 'function') {
-            window.switchBuilding('toa-b');
-            console.log("Game Over Tòa A: Đã chuyển sang Tòa B.");
-            
-            // Kích hoạt logic game của Tòa B (Dựa theo code cũ của bạn)
-            if (typeof ToaBGame !== 'undefined') {
-                new ToaBGame('game-container');
-            }
-        }
+        console.log("Kết thúc Tòa A (Lý do: " + reason + "). Chuyển sang hội thoại Tòa B.");
+        
+        // GỌI HÀM CHUYỂN TIẾP (Giống hệt lúc Thắng)
+        transitionToToaB();
+        
+        /* SAU NÀY KHI CÓ BẢNG TỔNG KẾT:
+           Cả hàm winGameToaA và gameOver đều sẽ gọi chung một cái bảng, 
+           chỉ khác cái dòng chữ thông báo thôi. 
+           Ví dụ: 
+           - Thắng: showResultBoard("ĐỒNG BỘ HOÀN TẤT");
+           - Thua:  showResultBoard("HỆ THỐNG QUÁ TẢI - BUỘC ĐÓNG PHÂN VÙNG");
+        */
+        
     }, 500); // Đợi 0.5 giây rồi mới chuyển cảnh
+}
+// 1. HÀM CHUYỂN TIẾP (Sau này sẽ gọi khi bấm nút trên Bảng Tổng Kết)
+function transitionToToaB() {
+    if (isTransitioningToToaB) return;
+    isTransitioningToToaB = true;
+
+    // Chạy hội thoại Tòa B
+    if (typeof window.playVN === 'function') {
+        window.playVN(StoryToaB, "test_01", () => {
+            // Đọc xong thì vào game Tòa B
+            window.switchBuilding('toa-b');
+            if (typeof ToaBGame !== 'undefined') new ToaBGame('game-container');
+        });
+    }
 }
 
 function winGameToaA() {
@@ -304,24 +341,24 @@ function winGameToaA() {
     clearInterval(gameInterval); clearInterval(difficultyInterval); clearInterval(timerInterval); 
     document.querySelectorAll('.conveyor-book').forEach(b => b.style.animationPlayState = 'paused');
     
+    // Đảm bảo tắt rung lắc và nháy đỏ khi thắng
+    const gameScreen = document.querySelector('#toa-a #game-screen-toa-a');
+    const shelfGrid = document.querySelector('#toa-a #complex-shelves-grid');
+    if(gameScreen) gameScreen.classList.remove('glitch-red-screen');
+    if(shelfGrid) shelfGrid.classList.remove('shaking-shelf');
+
     setTimeout(() => {
-        // Dọn sạch sách
+        // Dọn sạch sách cũ
         document.querySelectorAll('.conveyor-book').forEach(b => b.remove());
         document.querySelectorAll('.spines-container').forEach(c => c.innerHTML = '');
         
-        // Thắng cũng nhảy sang Tòa B để tiếp tục cốt truyện
-        if (typeof window.switchBuilding === 'function') {
-            window.switchBuilding('toa-b');
-            console.log("Chiến thắng Tòa A: Đã chuyển sang Tòa B.");
-            
-            // Kích hoạt logic game của Tòa B
-            if (typeof ToaBGame !== 'undefined') {
-                new ToaBGame('game-container');
-            }
-        }
+        console.log("Chiến thắng Tòa A: Chuyển sang hội thoại Tòa B.");
+        
+        // GỌI HÀM CHUYỂN TIẾP Ở ĐÂY (Thay vì nhảy thẳng vào game Tòa B như cũ)
+        transitionToToaB();
+        
     }, 500);
 }
-
 function triggerGlitchEvent() {
     const gameScreen = document.querySelector('#toa-a #game-screen-toa-a');
     const shelfGrid = document.querySelector('#toa-a #complex-shelves-grid');
