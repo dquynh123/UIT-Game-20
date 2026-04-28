@@ -1,3 +1,55 @@
+const StoryToaD = [
+    {
+        id: "test_01",
+        name: "Bí thư đoàn",
+        text: "Xong Tòa B rồi. Tiếp theo là Tòa D phải không?",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: "test_02"
+    },
+
+    {
+        id: "test_02",
+        name: "Bí thư đoàn",
+        text: "Đúng vậy. Dữ liệu cốt lõi ở Tòa D đang phân mảnh rất nghiêm trọng. Hãy cẩn thận.",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: null
+    },
+ 
+];
+
+// ==========================================
+// 2. HÀM CHUYỂN CẢNH (THOẠI -> GAME TÒA D)
+// ==========================================
+function transitionToToaD() {
+    // Ẩn Tòa B đi
+    document.getElementById('toa-b').style.display = 'none';
+
+    // Chạy máy đọc kịch bản Tòa D
+    if (typeof window.playVN === 'function') {
+        window.playVN(StoryToaD, "test_01", () => {
+            console.log("Đã đọc xong thoại Tòa D. Mở giao diện Tòa D...");
+            
+            // Ẩn vn-screen, hiển thị toa-d trực tiếp
+            const vnScreen = document.getElementById('vn-screen');
+            const toaD = document.getElementById('toa-d');
+            
+            if (vnScreen) vnScreen.style.display = 'none';
+            if (toaD) toaD.style.display = 'block';
+            
+            // === ĐOẠN SỬA MỚI: CHỈ BẬT MÀN HÌNH START, KHÔNG TỰ CHẠY GAME ===
+            const startScreenD = document.getElementById('start-screen-toa-d');
+            const gameScreenD = document.getElementById('game-screen-toa-d');
+            
+            // Đảm bảo Màn hình Start hiện ra, và Màn hình Game bị ẩn đi
+            if (startScreenD) startScreenD.classList.remove('hidden');
+            if (gameScreenD) gameScreenD.classList.add('hidden');
+            
+        });
+    }
+}
+
 const COURSE_LIST = [
     "SS003 - Tư tưởng Hồ Chí Minh", "SS007 - Triết học Mác - Lênin", "SS008 - Kinh tế chính trị Mác - Lênin", 
     "SS009 - Chủ nghĩa xã hội khoa học", "SS010 - Lịch sử Đảng Cộng sản Việt Nam", "SS006 - Pháp luật đại cương", 
@@ -240,17 +292,7 @@ class ToaBGame {
             </div>
         `;
         setTimeout(() => {
-            // Ẩn Tòa B
-            document.getElementById('toa-b').style.display = 'none';
-            
-            // Mở Tòa D
-            const toaD = document.getElementById('toa-d');
-            if (toaD) {
-                toaD.style.display = 'block';
-                
-                // Kích hoạt game Tòa D (nếu team dùng hàm này)
-                // startToaDGame(); 
-            }
+            transitionToToaD();
         }, 3000);
     }
 }

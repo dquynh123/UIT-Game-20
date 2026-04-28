@@ -1,3 +1,51 @@
+// ==========================================
+// 1. KỊCH BẢN VÀ HÀM CHUYỂN SANG TÒA C
+// ==========================================
+const storyToaC = [
+    {
+        id: "c_01",
+        name: "Bí thư đoàn",
+        text: "Vậy là đã dọn dẹp xong Tòa D! Giờ chúng ta tiến sang Tòa C nhé.",
+        bg: "", // Đổi link ảnh nền cho phù hợp
+        sprite: "assets/images/chibi.png",
+        nextId: "c_02"
+    },
+    {
+        id: "c_02",
+        name: "Bí thư đoàn",
+        text: "Tòa C lưu trữ rất nhiều sách chuyên ngành phức tạp. Hãy tập trung cao độ nhé!",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: null
+    }
+];
+
+function transitionToToaC() {
+    // 1. Ẩn toàn bộ giao diện Tòa D đi
+    const toaD = document.getElementById('toa-d');
+    if (toaD) toaD.style.display = 'none';
+
+    // 2. Chạy máy đọc kịch bản Tòa C
+    if (typeof window.playVN === 'function') {
+        window.playVN(storyToaC, "c_01", () => {
+            console.log("Đã đọc xong thoại Tòa C. Mở giao diện Tòa C...");
+            
+            // 3. Đọc xong thì ẩn màn hình VN, hiển thị Tòa C trực tiếp
+            const vnScreen = document.getElementById('vn-screen');
+            const toaC = document.getElementById('toa-c');
+            
+            if (vnScreen) vnScreen.style.display = 'none';
+            if (toaC) toaC.style.display = 'block';
+            
+            // 4. Chỉ bật màn hình Start Tòa C, giấu màn hình Game đi chờ người chơi bấm Bắt đầu
+            const startScreenC = document.getElementById('start-screen-toa-c');
+            const gameScreenC = document.getElementById('game-screen-toa-c');
+            
+            if (startScreenC) startScreenC.classList.remove('hidden');
+            if (gameScreenC) gameScreenC.classList.add('hidden');
+        });
+    }
+}
 /**
  * Tòa D - English Cleaning Game (Bản Fix Triệt Để)
  */
@@ -178,11 +226,7 @@ function showResultToaD(message, isGameOver) {
                 ctxToaD.clearRect(0, 0, canvasToaD.width, canvasToaD.height);
                 if (uiToaD) uiToaD.style.display = 'none';
                 endScreenToaD.style.display = 'none';
-
-                // 3. Chuyển tòa
-                if (typeof window.switchBuilding === 'function') {
-                    window.switchBuilding('toa-c'); 
-                }
+                transitionToToaC();
 
                 // 4. Mở mắt
                 setTimeout(() => {
@@ -236,4 +280,9 @@ function initToaD() {
 const startBtn = document.getElementById('toa-d-start-btn');
 if (startBtn) {
     startBtn.onclick = initToaD;
+}
+
+// Expose initToaD to global scope for callback usage
+if (typeof window !== 'undefined') {
+    window.initToaD = initToaD;
 }
