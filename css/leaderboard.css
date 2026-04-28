@@ -1,0 +1,224 @@
+/* style.css */
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  overflow: hidden;
+  color: white;
+}
+
+/* 🌸 BACKGROUND */
+.background {
+  position: fixed;
+  inset: 0;
+  background: url("https://images.unsplash.com/photo-1522383225653-ed111181a951") center/cover no-repeat;
+  filter: brightness(0.75);
+  z-index: -2;
+}
+
+/* 🌫 OVERLAY */
+#overlay {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(0px);
+  background: rgba(0,0,0,0);
+  transition: 1s;
+  z-index: -1;
+}
+
+#overlay.show {
+  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.4);
+}
+
+/* 🏆 SCREEN */
+.screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  opacity: 0;
+  transform: translateY(80px);
+  transition: 1s ease;
+}
+
+.screen.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* BOARD — scrollable nếu nhiều người */
+.leaderboard {
+  width: 650px;
+  max-height: 80vh;
+  padding: 35px;
+  border-radius: 25px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 40px rgba(0,0,0,0.6);
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+  flex-shrink: 0;
+}
+
+/* Scroll container cho các rows */
+.rows-container {
+  overflow-y: auto;
+  flex: 1;
+  padding-right: 6px;
+}
+
+/* Custom scrollbar */
+.rows-container::-webkit-scrollbar {
+  width: 6px;
+}
+.rows-container::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+}
+.rows-container::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.3);
+  border-radius: 10px;
+}
+
+/* ROW */
+.row {
+  display: grid;
+  grid-template-columns: 60px 1fr 120px;
+  align-items: center;
+  padding: 14px 16px;
+  margin: 10px 0;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.18);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.row:hover {
+  background: rgba(255,255,255,0.28);
+}
+
+.row.show {
+  animation: rowShow 0.6s forwards;
+}
+
+@keyframes rowShow {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.col-rank { font-size: 18px; font-weight: bold; opacity: 0.8; }
+.col-name { font-size: 16px; display: flex; align-items: center; gap: 8px; }
+.col-score { text-align: right; font-size: 16px; font-weight: bold; }
+
+/* TOP 3 */
+.top1 { background: linear-gradient(90deg, gold, orange); color: black; }
+.top2 { background: linear-gradient(90deg, #c0c0c0, #e0e0e0); color: black; }
+.top3 { background: linear-gradient(90deg, #cd7f32, #e6a15c); color: black; }
+
+/* YOU ARE HERE */
+.row.you-are-here {
+  border: 2px solid #00ffcc;
+  box-shadow: 0 0 15px rgba(0,255,204,0.4);
+  background: rgba(0,255,204,0.15);
+  transform: scale(1.02);
+  z-index: 10;
+}
+
+.row.you-are-here.show {
+  animation: rowShowYou 0.6s forwards;
+}
+
+@keyframes rowShowYou {
+  to { opacity: 1; transform: translateY(0) scale(1.02); }
+}
+
+.you-badge {
+  font-size: 11px;
+  background: #00ffcc;
+  color: #000;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: bold;
+  box-shadow: 0 0 5px rgba(0,255,204,0.6);
+  flex-shrink: 0;
+}
+
+/* EMPTY */
+.empty-msg {
+  text-align: center;
+  opacity: 0.6;
+  padding: 30px;
+  font-size: 16px;
+}
+
+/* 👤 MODAL */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+}
+
+.modal.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.profile-card {
+  background: rgba(20,20,40,0.95);
+  padding: 30px 45px;
+  border-radius: 20px;
+  text-align: center;
+  transform: scale(0.8);
+  transition: 0.4s;
+}
+
+.modal.show .profile-card {
+  transform: scale(1);
+}
+
+.rank-badge {
+  display: inline-block;
+  background: gold;
+  color: black;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.info-line {
+  margin-top: 15px;
+  font-size: 18px;
+  line-height: 1.6;
+  opacity: 0.95;
+}
+
+/* 🌸 PETAL */
+.petal {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  animation: fallAndFade 1.2s linear forwards;
+}
+
+@keyframes fallAndFade {
+  0%   { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+  100% { opacity: 0; transform: translateY(120px) rotate(180deg) scale(0.5); }
+}

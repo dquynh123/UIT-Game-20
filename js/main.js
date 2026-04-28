@@ -8,6 +8,8 @@ const fadeOverlay = document.getElementById('fade-overlay'); // Lớp phủ đen
 const startBtn = document.getElementById('main-start-btn');
 const enterBtn = document.getElementById('enter-btn');
 const userInput = document.getElementById('user-name');
+const leaderboardScreen = document.getElementById('leaderboardScreen');
+const leaderboardOverlay = document.getElementById('overlay');
 // HỆ THỐNG ĐIỀU PHỐI CHUYỂN CẢNH (DÙNG CHUNG TOÀN GAME)
 /**
  * @param {Function} action - Hành động thực hiện khi màn hình đã tối đen
