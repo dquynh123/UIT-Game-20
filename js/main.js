@@ -85,6 +85,7 @@ function handleStartGame() {
         playerList.push(newSession);
         localStorage.setItem('allPlayers', JSON.stringify(playerList));
         localStorage.setItem('currentSessionId', newSession.timestamp);
+        window.UITGameStats.startGame(); // Kích hoạt tính giờ và điểm
 
         // 5. HIỆU ỨNG CHUYỂN CẢNH "CHA CON"
         sceneTransition(() => {
@@ -125,8 +126,29 @@ import './buildings/toaC.js';
 import './buildings/toaD.js';
 
 /**
- * Hiển thị một tòa nhà và ẩn tất cả các tòa khác (Kết hợp Fade cho mượt)
- */
+// --- HỆ THỐNG TỔNG ĐIỂM TOÀN CỤC ---  */
+window.UITGameStats = {
+    totalScore: 0,
+    startTime: 0,
+    stageResults: [], // MỚI: Mảng lưu điểm từng tòa
+
+    startGame() {
+        this.totalScore = 0;
+        this.startTime = Date.now();
+        this.stageResults = [];
+        console.log("Hệ thống: Bắt đầu tính điểm và thời gian.");
+    },
+    // Thêm tham số stageName để biết điểm của tòa nào
+    addScore(stageName, points) {
+        this.totalScore += (Number(points) || 0);
+        this.stageResults.push({ label: stageName, score: Number(points) || 0 });
+        console.log(`Hệ thống: [${stageName}] +${points} ĐRL. Tổng: ${this.totalScore}`);
+    },
+    getTimePlayedSeconds() {
+        return Math.floor((Date.now() - this.startTime) / 1000);
+    }
+};
+
 window.switchBuilding = (buildingId) => {
     sceneTransition(() => {
         const allBuildings = ['vn-screen','toa-a', 'toa-b', 'toa-c', 'toa-d', 'toa-e'];
@@ -211,3 +233,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 window.playVN = playVN;
+

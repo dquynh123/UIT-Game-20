@@ -4,12 +4,11 @@ const scoreEl = document.getElementById("score");
 const questionEl = document.getElementById("question");
 const timerBar = document.getElementById("timer-progress");
 const overlay = document.getElementById("overlay-text");
-//const startMenu = document.getElementById("start-menu");
-//const endScreen = document.getElementById("end-screen");
-//const scoreValueEnd = document.querySelector(".score-value");
-//const startBtn = document.getElementById("start-btn");
 const header = document.getElementById("header");
 const toaCContainer = document.getElementById("toa-c");
+
+// Giữ nguyên các import cần thiết cho việc lưu điểm
+import { saveScore } from '../firebase.js';
 
 let currentLevel = 0, score = 0, wrongCount = 0;
 let gameState = "MENU", boxes = [], playingQuestions = [];
@@ -45,7 +44,7 @@ function wrapText(context, text, x, y, maxWidth, lineHeight) {
     }
 }
 
-// KHỞI TẠO GAME
+// KHỞI TẠO GAME - GIỮ NGUYÊN
 function startToaCGame() {
     endGame.isLocked = false;
     score = 0; currentLevel = 0; wrongCount = 0;
@@ -61,7 +60,7 @@ function startToaCGame() {
     }
 }
 
-// Cảm biến: Theo dõi khi nào Tòa C được bật lên (từ Tòa D chuyển sang) thì gọi game chạy
+// Cảm biến - GIỮ NGUYÊN
 const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
         if (mutation.attributeName === 'style') {
@@ -90,7 +89,7 @@ function initLevel() {
             targetX: (canvas.width / (opts.length + 1)) * (i + 1) - 90,
             speed: 3.5 + Math.random() * 2,
             isCorrect: opt === data.correct,
-            hit: false // Biến khóa để fix lỗi 92/5
+            hit: false 
         });
     });
 
@@ -124,60 +123,70 @@ function handleWrong() {
     if (wrongCount >= 5) {
         gameState = "END"; 
         if (gameInterval) clearInterval(gameInterval);
-        // 2. Chờ 1.5 giây để người chơi nhìn chữ 5/5, sau đó mới gọi hội thoại
         setTimeout(() => {
             endGame(); 
         }, 1500);
     }
 }
 
-/*function backToMenu() {
-    if (gameInterval) clearInterval(gameInterval);
-    if (animationId) cancelAnimationFrame(animationId);
-    
-    gameState = "MENU";
-    header.style.display = "none";
-    endScreen.style.display = "none";
-    startMenu.style.display = "flex";
-    toaCContainer.classList.remove("game-playing");
-    
-    // Reset các biến hiển thị
-    score = 0;
-    wrongCount = 0;
-    scoreEl.innerText = "0";
-    if (timerBar) timerBar.style.width = "100%";
-    
-    alert("Ký ức quá tải! Bạn đã sai 5 lần.");
-}
-*/
+// HÀM ENDGAME - ĐÃ ĐƯỢC CHỈNH SỬA LỖI CHUYỂN MÀN HÌNH
 function endGame() {
     if (endGame.isLocked) return; 
     endGame.isLocked = true;
 
     gameState = "END";
     if (gameInterval) clearInterval(gameInterval);
-    boxes = []; // Dọn sạch hộp
+    if (animationId) cancelAnimationFrame(animationId);
+    boxes = []; 
     
-    // 1. Kéo rèm tắt Tòa C NGAY LẬP TỨC (Không cần setTimeout chờ đợi nữa)
+    // Tắt Tòa C để lộ màn hình thoại VN
     toaCContainer.style.display = "none";
     toaCContainer.classList.remove("game-playing");
     
-    // 2. KỊCH BẢN HỘI THOẠI
     const storySauToaC = [
         { id: "c_end_01", name: "Hệ thống", text: `Quá trình thu thập hoàn tất! Bạn có thêm ${score} Điểm Rèn Luyện.`, bg: "", sprite: "", nextId: "c_end_02" },
         { id: "c_end_02", name: "{PLAYER}", text: "Phù, cũng kha khá điểm rồi. Mình phải đi tiếp thôi...", bg: "", sprite: "assets/images/test_main.png", nextId: null }
     ];
 
-    // 3. GỌI HÀM ĐỌC THOẠI
+    // Hàm callback sau khi đọc xong hội thoại sẽ hiện bảng điểm
+    const showLeaderboardAfterDialogue = async () => {
+        const vnScreen = document.getElementById('vn-screen');
+        if (vnScreen) vnScreen.style.display = 'none';
+
+        if (window.UITGameStats) {
+            window.UITGameStats.addScore("Tòa C", score);
+        }
+
+        let results = window.UITGameStats ? window.UITGameStats.stageResults : [];
+        const totalTime = window.UITGameStats ? window.UITGameStats.getTimePlayedSeconds() : 0;
+        const finalTotalScore = results.reduce((sum, item) => sum + item.score, 0);
+        const playerName = localStorage.getItem('currentPlayerName') || "Sinh viên";
+
+        // 1. Thử lưu điểm vào Firebase
+        try {
+            await saveScore(playerName, finalTotalScore, totalTime, 1);
+        } catch (err) {
+            console.error("Lỗi khi lưu điểm vào Firebase:", err);
+            // Lỗi lưu điểm thì ghi nhận log, không làm gián đoạn game
+        }
+
+        // 2. LUÔN LUÔN gọi chuyển màn hình Summary
+        try {
+            const module = await import('../leaderboard.js');
+            if (module && typeof module.showSummary === 'function') {
+                module.showSummary(results, totalTime, finalTotalScore);
+            } else {
+                console.error("Không tìm thấy hàm showSummary trong file leaderboard.js");
+            }
+        } catch (importErr) {
+            console.error("Lỗi khi import file leaderboard.js:", importErr);
+        }
+    };
+
     if (typeof window.playVN === 'function') {
-        window.playVN(storySauToaC, "c_end_01", () => {
-            console.log("Đã đọc xong hội thoại Tòa C!");
-            // Muốn chuyển đi đâu tiếp thì viết code ở đây
-        });
-    } else if (typeof playVN === 'function') {
-        playVN(storySauToaC, "c_end_01", () => {
-            console.log("Đã đọc xong hội thoại Tòa C!");
-        });
+        window.playVN(storySauToaC, "c_end_01", showLeaderboardAfterDialogue);
+    } else {
+        showLeaderboardAfterDialogue();
     }
 }
 
@@ -186,15 +195,14 @@ function update() {
     
     if (gameState === "FALLING") {
         boxes.forEach(b => {
-                if (gameState !== "FALLING" || b.hit) return; // Nếu đã có kết quả trong lượt này thì bỏ qua các ô còn lại
+            if (gameState !== "FALLING" || b.hit) return; 
 
             b.y += b.speed;
             
-            // Va chạm với thanh player
             if (b.y + b.h > player.y && b.y < player.y + player.h && 
                 b.x + b.w > player.x && b.x < player.x + player.w) {
                 
-                b.hit = true; // Khóa lại ngay lập tức
+                b.hit = true; 
                 gameState = "SHOW_RESULT";
 
                 if (b.isCorrect) { 
@@ -211,9 +219,8 @@ function update() {
             }
         });
 
-        // Nếu tất cả các ô rơi mất tiêu mà chưa hứng được
         if (gameState === "FALLING" && boxes.length > 0 && boxes.every(b => b.y > canvas.height && !b.hit)) {
-            gameState = "SHOW_RESULT"; // Khóa ngay lập tức
+            gameState = "SHOW_RESULT"; 
             handleWrong();
             if (wrongCount < 5) {
                 setTimeout(nextStep, 1500);

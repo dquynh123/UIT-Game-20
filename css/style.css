@@ -1,4 +1,5 @@
 /* Nạp CSS của Tòa A và Tòa E vào đây */
+@import url('./leaderboard.css');
 @import url('./buildings/toaA.css');
 @import url('./buildings/toaE.css');
 @import url('./buildings/toaC.css');
@@ -169,4 +170,55 @@ b, strong, .game-title-yellow, .game-title-blue, .game-title-green {
     font-family: 'Poppins', sans-serif;
     letter-spacing: 0.5px; /* Giãn chữ ra một chút xíu cho sang */
     font-weight: 600; /* Default bold weight for Poppins */
+}
+
+#summaryScreen{
+    background: rgba(0,0,0,0.92);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.summary-box{
+    width:700px;
+    padding:40px;
+    border-radius:20px;
+    background:rgba(255,255,255,0.08);
+    color:white;
+    text-align:center;
+    animation:fadeUp 1s ease;
+}
+
+.title{
+    font-size:34px;
+    margin-bottom:25px;
+    color:#00ffcc;
+}
+
+#scoreLines div{
+    font-size:22px;
+    margin:10px 0;
+}
+
+.total-box h1{
+    font-size:64px;
+    color:#00ffcc;
+    text-shadow:0 0 15px #00ffcc;
+}
+
+#rankText{
+    margin-top:20px;
+    font-size:24px;
+    color:gold;
+}
+
+#quoteText{
+    margin-top:15px;
+    opacity:0.8;
+    font-style:italic;
+}
+
+@keyframes fadeUp{
+    from{opacity:0; transform:translateY(30px);}
+    to{opacity:1; transform:translateY(0);}
 }

@@ -12,24 +12,11 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/dialogue.css">
     <link rel="stylesheet" href="css/buildings/toaB.css">
+    <link rel="stylesheet" href="css/leaderboard.css">
 </head>
 <body>
-    <div id="overlay"></div>
-
-    <div id="leaderboardScreen" class="screen hidden"> <div class="leaderboard" id="leaderboard">
-        <div class="title">🏆 BẢNG XẾP HẠNG ĐRL</div>
-    </div>
-    </div>
-
-    <div id="playerModal" class="modal">
-    <div class="profile-card">
-        <div id="rankBadge" class="rank-badge"></div>
-        <h2 id="playerName"></h2>
-        <div class="info-line" id="playerInfo"></div>
-    </div>
-    </div>
-    
     <div id="fade-overlay"></div>
+    
     <div id="main-menu" class="screen">
         <img src="assets/images/anh2.png" alt="Guided by Memories" class="game-title-img">
     
@@ -59,7 +46,6 @@
                 <div id="choice-container" class="hidden"></div>
             </div>
         </div>
-        <!--======================================================-->
         <div id="toa-a" class="building-container" style="display: none;">
             <div id="start-screen-toa-a" class="overlay-screen">
                 <h1 class="game-title-yellow">Băng Chuyền Thư Viện</h1>
@@ -67,8 +53,6 @@
                 <p class="small-text">Liệu rằng có thể thoát ra khỏi đây hay vĩnh viện kẹt lại trong vòng lặp vô tận!</p>
                 <button id="toa-a-start-btn" class="orange-btn">BẮT ĐẦU</button>
             </div>
-
-            
 
             <div id="game-screen-toa-a" class="screen-container hidden">
                 <div class="game-header">
@@ -78,11 +62,7 @@
                 </div>
 
                 <div class="play-area">
-                    <div class="top-row">\
-                        <!--
-                        <div id="bin-sach-cu" class="drop-zone" data-accept="OLD">
-                        </div> -->
-                        
+                    <div class="top-row">
                         <div id="conveyor-container">
                             <div id="conveyor-belt"></div>
                         </div>
@@ -146,7 +126,7 @@
             </div>
         </div>
 
-         <div id="toa-b" class="building-container" style="display: none;">
+        <div id="toa-b" class="building-container" style="display: none;">
             <div id="start-screen-toa-b" class="overlay-screen">
                <h1 class="game-title-blue" style="color: #2b6cb0; font-size: 3rem; text-shadow: 2px 2px #fff;">Chiến Thần Đăng Ký</h1>
                <p>Hệ thống đăng ký học phần Tòa B đã mở. Lượng truy cập đang quá tải!</p>
@@ -154,9 +134,8 @@
                 <button id="toa-b-start-btn" class="blue-btn">BẮT ĐẦU</button>
             </div>
 
-
             <div id="game-screen-toa-b" class="screen-container hidden">
-            <div id="game-container"></div>
+                <div id="game-container"></div>
             </div>
         </div>
         
@@ -175,6 +154,7 @@
 
             <div id="overlay-text"></div>
         </div>
+
         <div id="toa-d" class="building-container" style="display: none; position: relative; width: 100%; height: 100vh; overflow: hidden;">
             <div id="ui-toa-d">
                 <div>Điểm: <span id="score-toa-d">0</span></div>
@@ -201,7 +181,8 @@
 
             <canvas id="gameCanvasToaD"></canvas>
         </div>
-        <div id="toa-e" class="building-container"style="display: none;">
+
+        <div id="toa-e" class="building-container" style="display: none;">
             <div class="screen-container" style="text-align: center; margin-top: 20vh;">
                 <h2>ĐÂY LÀ KHU VỰC TÒA E</h2>
                 <p>(Khu vực này team đang xây dựng...)</p>
@@ -213,29 +194,72 @@
         </div>
     </div>
 
-    <div id="summaryScreen" class="screen hidden" style="background: rgba(0,0,0,0.85); z-index: 9998; flex-direction: column;">
-  <div class="leaderboard" style="text-align: center;">
-    <div class="title">🎉 TỔNG KẾT HÀNH TRÌNH</div>
-    <div style="font-size: 20px; margin-bottom: 20px;">Chúc mừng bạn đã hoàn thành các thử thách!</div>
-    
-    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; margin: 20px 0;">
-      <p style="font-size: 18px; opacity: 0.8;">Tổng Điểm Rèn Luyện đạt được:</p>
-      <h1 id="summaryTotalScore" style="font-size: 48px; color: #00ffcc; text-shadow: 0 0 10px #00ffcc;">0</h1>
+    <div id="overlay" class="hidden"></div>
+
+    <div id="summaryScreen" class="screen hidden">
+      <div class="board-container">
+        <div class="title">🎉 TỔNG KẾT HÀNH TRÌNH</div>
+        
+        <div class="rows-container" id="summaryRows"></div>
+        
+        <div class="summary-extra">
+          <div id="summaryRank" class="badge-glow">🌟 Hoàn thành xuất sắc!</div>
+          <div class="time-box">⏱ Thời gian: <span id="summaryTime">0</span> giây</div>
+        </div>
+        
+        <button id="btnShowLeaderboard" class="btn-primary">🏆 XEM BẢNG XẾP HẠNG</button>
+      </div>
     </div>
 
-    <div style="font-size: 16px; opacity: 0.7; margin-bottom: 30px;">
-      Thời gian hoàn thành: <span id="summaryTotalTime">0</span> giây
+    <div id="leaderboardScreen" class="screen hidden">
+      <div class="board-container" id="leaderboard">
+        <div class="title">🏆 BẢNG XẾP HẠNG</div>
+        <div class="rows-container" id="leaderboardRows"></div>
+        <button id="btnBackToSummary" class="btn-secondary">🔙 QUAY LẠI TỔNG KẾT</button>
+      </div>
     </div>
 
-    <button id="btnShowLeaderboard" style="padding: 12px 30px; font-size: 18px; cursor: pointer; background: #00ffcc; border: none; border-radius: 10px; font-weight: bold; color: #000;">
-      XEM BẢNG XẾP HẠNG
-    </button>
+    <div id="playerModal" class="modal">
+      <div class="profile-card">
+        <div id="rankBadge" class="rank-badge"></div>
+        <h2 id="playerName"></h2>
+        <div id="playerInfo" class="info-line"></div>
+      </div>
     </div>
-    </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
     <script src="js/quizData.js"></script>
     <script type="module" src="js/main.js"></script>
     <script src="js/buildings/toaB.js"></script>
+    <div class="background"></div>
+    <div id="overlay" class="hidden"></div>
+
+    <div id="playerModal" class="modal">
+    <div class="profile-card">
+        <div id="rankBadge" class="rank-badge"></div>
+        <h2 id="playerName"></h2>
+        <div id="playerInfo" class="info-line"></div>
+    </div>
+    </div><div id="overlay" class="hidden"></div>
+
+<div id="summaryScreen" class="screen hidden">
+    <div class="board-container">
+        <div class="title">🎉 TỔNG KẾT HÀNH TRÌNH</div>
+        <div class="rows-container" id="summaryRows"></div>
+        <div class="summary-extra">
+            <div id="summaryRank" class="badge-glow">🌟 Hoàn thành xuất sắc!</div>
+        <div class="time-box">Thời gian: <span id="summaryTime">0</span></div>    
+        </div>
+        <button id="btnShowLeaderboard" class="btn-primary">🏆 XEM BẢNG XẾP HẠNG</button>
+    </div>
+</div>
+
+<div id="playerModal" class="modal">
+    <div class="profile-card">
+        <div id="rankBadge" class="rank-badge"></div>
+        <h2 id="playerName"></h2>
+        <div id="playerInfo" class="info-line"></div>
+    </div>
+</div>
 </body>
 </html>
