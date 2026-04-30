@@ -94,6 +94,7 @@ body {
 .rows-container::-webkit-scrollbar { display: none; }
 
 /* ROW - Layout chuẩn 3 cột */
+/* Tìm đoạn .row hiện tại và đảm bảo có transition */
 .row {
   display: grid;
   grid-template-columns: 100px 1fr 100px; 
@@ -105,9 +106,23 @@ body {
   cursor: pointer;
   opacity: 0;
   transform: translateX(-20px);
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s, opacity 0.4s;
+  /* 👇 THÊM HOẶC SỬA DÒNG NÀY ĐỂ MƯỢT MÀ 👇 */
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s, opacity 0.4s, box-shadow 0.3s;
 }
 
+/* 👇 THÊM ĐOẠN MỚI NÀY VÀO DƯỚI LỚP .row 👇 */
+.row:hover {
+  transform: scale(1.05); /* Phóng to thanh lên 5% */
+  background: rgba(255, 255, 255, 0.3); /* Làm nền sáng hơn */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Tạo bóng đổ cho thanh nổi lên */
+  z-index: 10; /* Đảm bảo thanh đang hover nằm trên các thanh khác */
+}
+
+/* Hiệu ứng riêng biệt hơn cho thanh TỔNG ĐIỂM khi di chuột */
+.total-row:hover {
+  transform: scale(1.07); /* Thanh tổng điểm phóng to hơn chút nữa */
+  background: rgba(0, 255, 204, 1) !important; /* Giữ màu xanh đặc trưng */
+}
 .row.show { opacity: 1; transform: translateX(0); }
 
 /* THỨ HẠNG & MÀU SẮC */

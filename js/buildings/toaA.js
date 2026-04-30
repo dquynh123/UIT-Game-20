@@ -300,7 +300,9 @@ function gameOver(reason) {
     const shelfGrid = document.querySelector('#toa-a #complex-shelves-grid');
     if(gameScreen) gameScreen.classList.remove('glitch-red-screen');
     if(shelfGrid) shelfGrid.classList.remove('shaking-shelf');
-    
+    if (window.UITGameStats) {
+        window.UITGameStats.addScore("Tòa A", score);
+    }
     setTimeout(() => {
         // Dọn sạch sách cũ để game không bị nặng
         document.querySelectorAll('.conveyor-book').forEach(b => b.remove());
@@ -346,7 +348,9 @@ function winGameToaA() {
     const shelfGrid = document.querySelector('#toa-a #complex-shelves-grid');
     if(gameScreen) gameScreen.classList.remove('glitch-red-screen');
     if(shelfGrid) shelfGrid.classList.remove('shaking-shelf');
-
+    if (window.UITGameStats) {
+        window.UITGameStats.addScore("Tòa A", score); 
+    }
     setTimeout(() => {
         // Dọn sạch sách cũ
         document.querySelectorAll('.conveyor-book').forEach(b => b.remove());

@@ -211,6 +211,9 @@ function showResultToaD(message, isGameOver) {
             initToaD(); // Gọi trực tiếp hàm init để reset game
         };
     } else {
+        if (window.UITGameStats) {
+            window.UITGameStats.addScore("Tòa D", scoreToaD);
+        }
         actionBtn.innerText = "TIẾP TỤC";
         actionBtn.onclick = () => {
             actionBtn.disabled = true;

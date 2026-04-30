@@ -284,7 +284,9 @@ class ToaBGame {
         // Đảm bảo overall không bị âm
         this.drl = Math.max(0, this.drl);
         this.updateUI();
-
+        if (window.UITGameStats) {
+        window.UITGameStats.addScore("Tòa B", this.drl);
+        }
         document.getElementById('board-section').innerHTML = `
             <div style="text-align: center; margin-top: 100px;">
                 <h1>KẾT THÚC HỌC PHẦN</h1>

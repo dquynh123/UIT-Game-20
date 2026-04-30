@@ -303,7 +303,9 @@ function updateUI() {
         
         // Disable các nút xúc xắc
         diceButtons.forEach(btn => btn.disabled = true);
-        
+        if (window.UITGameStats) {
+       window.UITGameStats.addScore("Tòa E", finalScore);
+}
         // 👇 GỌI CHUYỂN CẢNH Ở ĐÂY (Dù thắng hay thua đều được chuyển) 👇
         setTimeout(() => {
             transitionToToaA();
