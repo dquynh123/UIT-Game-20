@@ -28,16 +28,16 @@
     font-weight: bold;
 }
 
-.highlight {
-    color: #00529C;
-    font-size: 22px;
-}
-
 .dice-controls {
     display: flex;
     justify-content: center;
     gap: 15px;
     margin-bottom: 20px;
+}
+
+#toa-e .highlight {
+    color: #00529C;
+    font-size: 22px;
 }
 
 .btn-dice {
