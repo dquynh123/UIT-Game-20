@@ -1,0 +1,65 @@
+#summaryScreen{
+    background: rgba(0,0,0,0.92);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* Force all text in summary screen to be white */
+#summaryScreen * {
+    color: white !important;
+}
+
+.summary-box{
+    width:700px;
+    padding:40px;
+    border-radius:20px;
+    background:rgba(255,255,255,0.08);
+    color:white !important;
+    text-align:center;
+    animation:fadeUp 1s ease;
+}
+
+#summaryScreen .summary-box .title{
+    font-size:34px;
+    margin-bottom:25px;
+    color:#00ffcc !important;
+}
+
+#summaryScreen .title {
+    color: #00ffcc !important;
+}
+
+#summaryScreen #scoreLines div{
+    font-size:22px;
+    margin:10px 0;
+    color:white !important;
+}
+
+#summaryScreen .total-box h1{
+    font-size:64px;
+    color:#00ffcc !important;
+    text-shadow:0 0 15px #00ffcc;
+}
+
+#summaryScreen #rankText{
+    margin-top:20px;
+    font-size:24px;
+    color:gold !important;
+}
+
+#summaryScreen .badge-glow {
+    color: gold !important;
+}
+
+#summaryScreen #quoteText{
+    margin-top:15px;
+    opacity:0.8;
+    font-style:italic;
+    color:white !important;
+}
+
+@keyframes fadeUp{
+    from{opacity:0; transform:translateY(30px);}
+    to{opacity:1; transform:translateY(0);}
+}

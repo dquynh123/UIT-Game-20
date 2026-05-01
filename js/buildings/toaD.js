@@ -2,18 +2,64 @@
 // 1. KỊCH BẢN VÀ HÀM CHUYỂN SANG TÒA C
 // ==========================================
 const storyToaC = [
+    //story nối tiếp tòa d
     {
         id: "c_01",
         name: "Bí thư đoàn",
-        text: "Vậy là đã dọn dẹp xong Tòa D! Giờ chúng ta tiến sang Tòa C nhé.",
-        bg: "", // Đổi link ảnh nền cho phù hợp
+        text: "Wow anh siêu thế!",
+        bg: "", 
         sprite: "assets/images/chibi.png",
         nextId: "c_02"
     },
     {
         id: "c_02",
+        name: "{PLAYER}",
+        text: "Ờm... chuyện nhỏ he he. Giờ anh đi đâu tiếp được?",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "c_03"
+    },
+
+    {
+        id: "c_03",
         name: "Bí thư đoàn",
-        text: "Tòa C lưu trữ rất nhiều sách chuyên ngành phức tạp. Hãy tập trung cao độ nhé!",
+        text: "Anh qua Tòa C đi, bên đó Ban học tập Công nghệ phần mềm đang tổ chức đố vui có thưởng nghe đồn vui lắm!",
+        bg: "", 
+        sprite: "assets/images/chibi.png",
+        nextId: "c_04"
+    },
+
+    {
+        id: "c_04",
+        name: "CTV BHTCNPM",
+        text: "Anh trai ơi! Vô test nhân phẩm 100 câu hỏi lịch sử UIT lấy quà không? Gian hàng vắng lặng quá!",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: "c_05"
+    },
+
+    {
+        id: "c_05",
+        name: "{PLAYER}",
+        text: "Chỗ em có phần thưởng nào là cái cục phát sáng không?",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "c_06"
+    },
+
+    {
+        id: "c_06",
+        name: "CTV BHTCNPM",
+        text: "Có luôn! Cúp mica gắn LED bao chói mắt! Nhưng mà không dễ đâu nha. Anh tự tin nhớ hết thông tin trường mình không? Cảnh báo nhỏ cho anh là mấy đáp án sẽ bị xáo trộn đó nên anh phải thật tinh mắt nhé.",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: "c_07"
+    },
+
+    {
+        id: "c_07",
+        name: "{PLAYER}",
+        text: "Okay, triển luôn",
         bg: "",
         sprite: "assets/images/test_main.png",
         nextId: null

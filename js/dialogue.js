@@ -73,12 +73,18 @@ function showLine(lineId) {
     isWaitingForChoice = false;
 
     let speaker = line.name;
-    if (speaker === "{PLAYER}") speaker = localStorage.getItem('currentPlayerName') || "Main";
-    if (speaker) {
-        vnName.style.display = 'block';
-        vnName.innerText = speaker;
+    if (speaker === "") {
+        // TRƯỜNG HỢP: Lời dẫn truyện (Tên rỗng)
+        vnName.style.display = 'none'; // Ẩn luôn bảng tên
+        vnText.classList.add('narration-text');
     } else {
-        vnName.style.display = 'none';
+        // TRƯỜNG HỢP: Có nhân vật nói chuyện
+        if (speaker === "{PLAYER}") {
+            speaker = localStorage.getItem('currentPlayerName') || "Main";
+        }
+        vnName.style.display = 'block'; // Bật bảng tên lên
+        vnName.innerText = speaker;
+        vnText.classList.remove('narration-text');
     }
 
     if (line.bg) vnBg.style.backgroundImage = `url(${line.bg})`;

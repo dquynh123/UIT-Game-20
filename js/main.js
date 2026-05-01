@@ -210,75 +210,224 @@ window.showGlobalSummaryBoard = function(stageName, currentScore, timeSec, isWin
     // 5. Hiện bảng
     overlay.classList.remove('hidden');
 };
-//VISUAL NOVEL ==================
-window.startGame = function() {
-    console.log("Trò chơi bắt đầu! Đang tải kịch bản test...");
-    const StoryToaE = [
-        {
-            id: "test_01",
-            name: "Sinh viên ATTT Tài năng",
-            text: "Anh lên Tòa E dự seminar hả? Sao nhìn anh ngơ ngác vậy?",
-            bg: "",
-            sprite: "assets/images/chibi.png",
-            nextId: "test_02"
-        },
-        {
-            id: "test_02",
-            name: "{PLAYER}",
-            text: "Ờm... tự nhiên chớp mắt cái thấy đứng đây. Có người bảo anh phải đi tìm mấy cái mảnh ký ức gì đó để tìm đường về.",
-            bg: "",
-            sprite: "assets/images/test_main.png", 
-            nextId: "test_03"
-        },
-        {
-            id: "test_03",
-            name: "Sinh viên ATTT Tài năng",
-            text: "Mảnh ký ức à? Nãy em thấy có ông anh nào cũng đáng ngờ như anh bấm thang máy lên tầng 12 ấy.",
-            bg: "",
-            sprite: "assets/images/chibi.png",
-            nextId: "test_04" 
-        },
-        {
-            id: "test_04",
-            name: "Sinh viên ATTT Tài năng",
-            text: "Tầng 12 á? Đùa à, chờ cái thang máy tòa E này chắc tới sáng mai mất.",
-            bg: "",
-            sprite: "assets/images/chibi.png",
-            nextId: "test_05" 
-        },
-        {
-            id: "test_05",
-            name: "{PLAYER}",
-            text: "Thì đặc sản trường mình mà anh!",
-            bg: "",
-            sprite: "assets/images/test_main.png",
-            nextId: "test_06"
-        },
-        {
-            id: "test_06",
-            name: "Sinh viên ATTT Tài năng",
-            text: "Ờm ở không gian này, anh không bấm thang máy bằng tay đâu, mà xài điểm rèn luyện. Anh có 150 điểm rèn luyện để tiêu! Anh phải bỏ điểm rèn luyện ra để tung xúc xắc test nhân phẩm. Có 3 loại xúc xắc cho anh chọn, 4 mặt, 6 mặt và 20 mặt tương ứng với 3, 5, 20 điểm rèn luyện. Và nhớ là anh có tối đa 25 lượt dùng xúc xắc nhé. Hên thì một phát lên mây, xu thì... anh tự hiểu ha. Chơi không?",
-            bg: "",
-            sprite: "assets/images/chibi.png",
-            nextId: null
-        },
-    ];
 
-    playVN(StoryToaE, "test_01", () => {
-        console.log("Hết hội thoại! Chuyển sang Tòa E...");
-        window.switchBuilding('toa-e');
+// ==========================================
+// 1. KỊCH BẢN CẢNH 1 & 2 (Đã bỏ thẻ HTML rườm rà)
+// ==========================================
+const storyScene1 = [
+    {
+        id: "s1_01",
+        name: "",
+        text: "Thành phố về đêm hắt ánh đèn qua cửa sổ... Main ngồi gục trước màn hình máy tính, mặt bơ phờ. Giao diện chằng chịt code đỏ chót báo lỗi.",
+        bg: "", 
+        sprite: "",
+        nextId: "s1_02"
+    },
+    {
+        id: "s1_02",
+        name: "",
+        text: "*Ting!* *Ting!* *Ting!* Tiếng thông báo tin nhắn công việc, email kêu liên tục. Giữa một nùi thông báo, một email popup lên: 'UIT 20th – Thư mời...'",
+        bg: "",
+        sprite: "",
+        nextId: "s1_03"
+    },
+    {
+        id: "s1_03",
+        name: "{PLAYER}",
+        text: "(lẩm bẩm) UIT...?",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "s1_04"
+    },
+    {
+        id: "s1_04",
+        name: "",
+        text: "Cậu rê chuột click vào email. Màn hình máy tính đột ngột chớp tắt, rồi tối sầm lại.",
+        bg: "",
+        sprite: "",
+        nextId: "s1_05"
+    },
+    {
+        id: "s1_05",
+        name: "{PLAYER}",
+        text: "Ụa máy tính bị gì v…",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: null // Kích hoạt hiệu ứng Nổ
+    }
+];
+
+// Kịch bản Cảnh 2: Gặp Admin ở UIT
+const storyScene2_UIT = [
+    // --- PHẦN GẶP ADMIN Ở SÂN TRƯỜNG ---
+    {
+        id: "s2_01",
+        name: "",
+        text: "Main từ từ mở mắt. Cảnh vật quen thuộc hiện ra: Khuôn viên UIT. Nhưng trời đứng bóng, không gian im lìm không một tiếng động, không một bóng người.",
+        bg: "", // Ảnh sân trường
+        sprite: "",
+        nextId: "s2_02"
+    },
+    {
+        id: "s2_02",
+        name: "{PLAYER}",
+        text: "(Ngơ ngác xoa đầu) Ủa... đây là trường mình mà? Sao vắng hoe vậy?",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "s2_03"
+    },
+    {
+        id: "s2_03",
+        name: "Người Hướng Dẫn",
+        text: "Chào. Lạc đường hả?",
+        bg: "",
+        sprite: "assets/images/test_guide.png", 
+        nextId: "s2_04"
+    },
+    {
+        id: "s2_04",
+        name: "Người Hướng Dẫn",
+        text: "Bình tĩnh nào, cứ coi tôi là admin tạm thời của khu vực này đi. Anh đã vô tình đăng nhập vào một server được tạo nên từ ký ức của sinh viên trường mình...",
+        bg: "",
+        sprite: "assets/images/test_guide.png", 
+        nextId: "s2_05"
+    },
+    {
+        id: "s2_05",
+        name: "Người Hướng Dẫn",
+        text: "Anh phải đi nhặt lại mấy mảnh ký ức đang rơi tứ tung ở các tòa nhà. Gom đủ thì về nhà ngủ tiếp. Không thì... ở lại đây học lại từ năm nhất nha.",
+        bg: "",
+        sprite: "assets/images/test_guide.png", 
+        nextId: "s2_06"
+    },
+    {
+        id: "s2_06",
+        name: "Người Hướng Dẫn",
+        text: "Bắt đầu từ Tòa E nhé. Chúc may mắn.",
+        bg: "",
+        sprite: "assets/images/test_guide.png", 
+        nextId: "s2_07"
+    },
+
+    // --- PHẦN GẶP SINH VIÊN ATTT Ở TÒA E ---
+    {
+        id: "s2_07",
+        name: "",
+        text: "Main ngó nghiêng quanh sảnh thang máy Tòa E thì thấy một cậu Sinh viên An Toàn Thông Tin (ATTT) đang đứng bấm điện thoại.",
+        bg: "", 
+        sprite: "",
+        nextId: "s2_08"
+    },
+    {
+        id: "s2_08",
+        name: "Sinh viên ATTT",
+        text: "(Ngước lên nhìn) Anh lên Tòa E dự seminar hả? Sao nhìn anh ngơ ngác vậy?",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: "s2_09"
+    },
+    {
+        id: "s2_09",
+        name: "{PLAYER}",
+        text: "Ờm... tự nhiên chớp mắt cái thấy đứng đây. Có người bảo anh phải đi tìm mấy cái mảnh ký ức gì đó để tìm đường về.",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "s2_10"
+    },
+    {
+        id: "s2_10",
+        name: "Sinh viên ATTT",
+        text: "Mảnh ký ức à? Nãy em thấy có ông anh mặc áo hoodie bí ẩn cũng đáng ngờ như anh bấm thang máy lên tầng 12 ấy.",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: "s2_11"
+    },
+    {
+        id: "s2_11",
+        name: "{PLAYER}",
+        text: "Tầng 12 á? Đùa à, chờ cái thang máy tòa E này chắc tới sáng mai mất.",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "s2_12"
+    },
+    {
+        id: "s2_12",
+        name: "Sinh viên ATTT",
+        text: "Thì đặc sản trường mình mà anh! Ờm... ở không gian này, anh không bấm thang máy bằng tay đâu, mà xài Điểm rèn luyện.",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: "s2_13"
+    },
+    {
+        id: "s2_13",
+        name: "Sinh viên ATTT",
+        text: "Anh có 150 điểm rèn luyện để tiêu! Anh phải bỏ điểm rèn luyện ra để tung xúc xắc test nhân phẩm. Có 3 loại xúc xắc cho anh chọn, 4 mặt, 6 mặt và 20 mặt tương ứng với 3, 5, 25 điểm rèn luyện. Và nhớ là anh có tối đa 25 lượt dùng xúc xắc nhé. Hên thì một phát lên mây, xu thì... anh tự hiểu ha. Chơi không?",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: null
+    }
+];
+
+window.startGame = function() {
+    
+    // 1. Bơm cấu trúc HTML Glitch vào Web
+    if (!document.getElementById('cyber-glitch-overlay')) {
+        const glitchHTML = `
+            <div id="cyber-glitch-overlay">
+                <div class="glitch-tear tear-1"></div>
+                <div class="glitch-tear tear-2"></div>
+                <div class="glitch-tear tear-3"></div>
+            </div>
+            <div id="whiteout-overlay"></div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', glitchHTML);
+    }
+
+    const glitchLayer = document.getElementById('cyber-glitch-overlay');
+    const whiteoutLayer = document.getElementById('whiteout-overlay');
+    const vnScreen = document.getElementById('vn-screen'); // Lấy cả màn hình để làm rung lắc
+
+    // 2. CHẠY KỊCH BẢN CẢNH 1
+    playVN(storyScene1, "s1_01", () => {
+        let glitchSound = new Audio('assets/sound/glitch_canh1.mp3'); // SỬA TÊN FILE TẠI ĐÂY
+        glitchSound.volume = 1.0; // Chỉnh âm lượng (từ 0.0 đến 1.0)
+        glitchSound.play();       // Lệnh phát nhạc!
+        // --> BẠN PLAY SOUND GLITCH CỦA BẠN Ở ĐÂY <--
+        // let glitchSound = new Audio('assets/sounds/glitch_distort.mp3'); 
+        // glitchSound.play();
+
+        console.log("Kích hoạt Glitch!");
+        
+        // HIỆU ỨNG 1: Rung lắc nguyên cả màn hình game
+        vnScreen.classList.add('screen-shake');
+        
+        // HIỆU ỨNG 2: Bật các vệt rách màu RGB và chớp tắt âm bản
+        glitchLayer.classList.add('active');
+        
+        // ĐỂ NÓ GIẬT TRONG 1.5 GIÂY RỒI NỔ FLASHBANG
+        setTimeout(() => {
+            console.log("Nổ Flashbang chói lóa!");
+            whiteoutLayer.classList.add('trigger-flashbang');
+            
+            // Tắt hết Glitch và Rung lắc khi màn hình đã trắng xóa
+            glitchLayer.classList.remove('active');
+            vnScreen.classList.remove('screen-shake');
+
+            // TRONG LÚC MÀN HÌNH TRẮNG: Load Cảnh 2
+            setTimeout(() => {
+                
+                playVN(storyScene2_UIT, "s2_01", () => {
+                    window.switchBuilding('toa-e');
+                });
+
+                // Từ từ làm mờ Flashbang trong 3 giây, lộ ra cảnh sân trường tĩnh lặng
+                whiteoutLayer.style.transition = "opacity 3s ease-in-out"; 
+                whiteoutLayer.classList.remove('trigger-flashbang');
+                
+            }, 500); 
+            
+        }, 1500); // Khoảng thời gian giật lag
     });
 };
-
-// Khởi tạo mặc định khi load trang
-document.addEventListener('DOMContentLoaded', () => {
-    // Đảm bảo ban đầu các tòa nhà được setup đúng vị trí ẩn/hiện
-    const allBuildings = ['toa-a', 'toa-b', 'toa-c', 'toa-d', 'toa-e'];
-    allBuildings.forEach(id => {
-        const element = document.getElementById(id);
-        if (element) element.style.display = 'none';
-    });
-});
-
 window.playVN = playVN;
 

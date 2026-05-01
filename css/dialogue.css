@@ -59,3 +59,99 @@
     cursor: pointer; transition: all 0.2s; text-align: left; padding-left: 20px;
 }
 .uit-choice-btn:hover { background: #00d2ff; color: #0a192f; font-weight: bold; transform: translateX(10px); box-shadow: 0 0 10px rgba(0, 210, 255, 0.5); }
+
+/* =========================================
+   STYLE CHO CHỮ DẪN TRUYỆN / CHUYỂN CẢNH
+   (Thêm vào cuối file dialogue.css)
+========================================= */
+.narration-text {
+    font-style: italic;
+    color: #8892b0; /* Màu xám xanh nhạt nhìn rất "cinematic" */
+    font-size: 1.15rem; 
+    text-align: center; /* Căn giữa toàn bộ chữ */
+    display: block;
+    line-height: 1.6;
+    animation: fadeInNarration 1s ease-in-out;
+}
+
+@keyframes fadeInNarration {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   HIỆU ỨNG GLITCH RÁCH MÀN HÌNH (RGB SPLIT)
+========================================= */
+#cyber-glitch-overlay {
+    position: fixed; inset: 0;
+    z-index: 9998;
+    display: none;
+    /* Hiệu ứng sọc ngang của màn hình CRT hỏng */
+    background: repeating-linear-gradient(
+        0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15) 2px,
+        transparent 2px, transparent 4px
+    );
+    pointer-events: none;
+}
+
+#cyber-glitch-overlay.active {
+    display: block;
+    /* Chớp tắt màu âm bản liên tục */
+    animation: cyber-glitch-flash 0.15s infinite;
+}
+
+/* Các vệt xé màu RGB chạy loạn xạ */
+.glitch-tear {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    opacity: 0.8;
+    mix-blend-mode: exclusion; /* Tạo hiệu ứng trộn màu dị thường */
+}
+.tear-1 { background: cyan; animation: tear-move-1 0.1s infinite; }
+.tear-2 { background: red; animation: tear-move-2 0.15s infinite reverse; }
+.tear-3 { background: lime; animation: tear-move-3 0.08s infinite; }
+
+/* Các Animation tạo độ giật (Keyframes) */
+@keyframes cyber-glitch-flash {
+    0% { background-color: rgba(255,0,0,0.1); filter: invert(0); }
+    25% { background-color: rgba(0,255,255,0.1); filter: invert(1) hue-rotate(90deg); }
+    50% { background-color: rgba(0,255,0,0.1); filter: invert(0); }
+    75% { background-color: rgba(255,0,255,0.1); filter: invert(1) blur(2px); }
+    100% { background-color: rgba(10,25,47,0.1); filter: invert(0); }
+}
+@keyframes tear-move-1 {
+    0% { top: 10%; height: 5vh; transform: skewX(10deg) translateX(-10px); }
+    50% { top: 60%; height: 2vh; transform: skewX(-20deg) translateX(20px); }
+    100% { top: 30%; height: 8vh; transform: skewX(5deg) translateX(-5px); }
+}
+@keyframes tear-move-2 {
+    0% { top: 80%; height: 3vh; transform: translateX(-20px); }
+    50% { top: 20%; height: 10vh; transform: translateX(30px); }
+    100% { top: 50%; height: 4vh; transform: translateX(-10px); }
+}
+@keyframes tear-move-3 {
+    0% { top: 40%; height: 1vh; transform: scaleY(2); }
+    50% { top: 90%; height: 6vh; transform: scaleY(0.5); }
+    100% { top: 15%; height: 2vh; transform: scaleY(1.5); }
+}
+
+/* Rung lắc cả màn hình game */
+.screen-shake {
+    animation: extremeShake 0.1s infinite;
+}
+@keyframes extremeShake {
+    0% { transform: translate(8px, 8px) rotate(0deg); }
+    25% { transform: translate(-8px, -5px) rotate(1deg); }
+    50% { transform: translate(5px, -8px) rotate(-1deg); }
+    75% { transform: translate(-5px, 8px) rotate(0deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* Kế thừa cục Flashbang trắng xóa */
+#whiteout-overlay {
+    position: fixed; inset: 0; background-color: white;
+    z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.1s;
+}
+.trigger-flashbang { opacity: 1 !important; }
+

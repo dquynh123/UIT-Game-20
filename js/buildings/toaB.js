@@ -14,18 +14,54 @@ const StoryToaD = [
         text: "Chắc người giống người thôi em. Em có thấy cái gì sáng sáng rớt quanh đây không?",
         bg: "",
         sprite: "assets/images/test_main.png",
-        nextId: null
+        nextId: "test_03"
     },
 
     {
-        id: "test_01",
+        id: "test_03",
         name: "Bí thư đoàn",
-        text: "Anh ơi! Trông quen quen ta, đi Chủ Nhật Xanh chung bao giờ chưa ta?",
+        text: "Sáng sáng gì anh ơi. Anh lại đây tham gia Chủ Nhật Xanh đi anh! Em đang muốn nhanh nhanh quét sạch sân để về tham gia DEVO Challenge nè! Giúp em một tay với.",
         bg: "",
         sprite: "assets/images/chibi.png",
-        nextId: "test_02"
+        nextId: "test_04"
     },
- 
+
+    {
+        id: "test_04",
+        name: "{PLAYER}",
+        text: "Được luôn. Để anh thử phụ một tay. À mà bạn em gửi em tờ giấy nè.",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "test_05"
+    },
+
+    {
+        id: "test_05",
+        name: "Bí thư đoàn",
+        text: "Cái tờ này nó kêu anh là nếu anh muốn dọn lá ở tòa D thì anh phải gõ chữ càng nhanh càng tốt để dọn nhiều lá nhất có thể.",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: "test_06"
+    },
+
+    {
+        id: "test_06",
+        name: "Bí thư đoàn",
+        text: "Anh ơi em tin vào anh đó. Cố lên nhé!",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: "test_07"
+    },
+
+    {
+        id: "test_07",
+        name: "{PLAYER}",
+        text: "...",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: null
+    }
+
 ];
 
 // ==========================================

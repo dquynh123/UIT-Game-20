@@ -472,7 +472,7 @@ const storyToaA = [
         bg: "",
         sprite: "assets/images/test_main.png",
         nextId: null
-    },
+    }
 
 ];
 let hasTransitionedToToaA = false;

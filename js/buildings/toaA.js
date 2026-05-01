@@ -54,7 +54,7 @@ const StoryToaB = [
         bg: "",
         sprite: "assets/images/test_main.png",
         nextId: null
-    },
+    }
 ];
 
 const shelfCodes = ['HDH', 'MMT', 'DSTT', 'CSDL', 'CNPM', 'NMPTGame', 'TTNT', 'DSA', 'VDK']; 

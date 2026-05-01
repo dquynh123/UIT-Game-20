@@ -148,8 +148,42 @@ function endGame() {
         toaCContainer.classList.remove("game-playing");
         
         const storySauToaC = [
-            { id: "c_end_01", name: "Hệ thống", text: `Quá trình thu thập hoàn tất! Bạn có thêm ${score} Điểm Rèn Luyện.`, bg: "", sprite: "", nextId: "c_end_02" },
-            { id: "c_end_02", name: "{PLAYER}", text: "Phù, cũng kha khá điểm rồi. Mình phải đi tiếp thôi...", bg: "", sprite: "assets/images/test_main.png", nextId: null }
+            {
+                id: "c_01",
+                name: "CTV BHTCNPM",
+                text: "Dữ liệu đã khớp. Anh nhớ rất kỹ nơi này... dù đã rời đi từ lâu.",
+                bg: "",
+                sprite: "assets/images/chibi.png",
+                nextId: "c_02"
+            },
+
+            {
+                id: "c_02",
+                name: "{PLAYER}",
+                text: "Giọng điệu này... cậu là người tự xưng là admin lúc nãy? Thôi được rồi, trò chơi kết thúc. Tôi đã gom đủ 4 mảnh. Cho tôi thoát ra ngoài đi.",
+                bg: "",
+                sprite: "assets/images/test_main.png",
+                nextId: "c_03"
+            },
+
+            {
+                id: "c_03",
+                name: "CTV BHTCNPM",
+                text: "Anh cứ tưởng hệ thống bắt anh đi gom ký ức sao? Không đâu... Là tự tâm trí anh đang nhớ lại những gì nó không muốn quên đi thôi",
+                bg: "",
+                sprite: "assets/images/chibi.png",
+                nextId: "c_04"
+            },
+
+            {
+                id: "c_04",
+                name: "CTV BHTCNPM",
+                text: "Anh đã tìm lại được phần dữ liệu thanh xuân của mình rồi. Đến lúc phải tỉnh dậy để chạy deadline tiếp thôi, cựu sinh viên.",
+                bg: "",
+                sprite: "assets/images/chibi.png",
+                nextId: null
+            }
+
         ];
 
         // Hàm callback sau khi đọc xong hội thoại sẽ lưu điểm và hiện Bảng Xếp Hạng Cuối Cùng

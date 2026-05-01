@@ -1,7 +1,6 @@
 /* --- PHẦN CHUNG --- */
 body {
   margin: 0;
-  font-family: "Segoe UI", sans-serif;
   overflow: hidden;
 
 }
@@ -71,13 +70,15 @@ body {
   color: white
 }
 
-.title {
+.board-container .title {
   text-align: center;
   font-size: 32px;
   font-weight: 900;
   text-shadow: 0 0 15px rgba(255,255,255,0.4);
   margin-bottom: 10px;
   letter-spacing: 1px;
+  color: white;
+  font-family: "Segoe UI", sans-serif;
 }
 
 /* ROWS CONTAINER - Mask mờ 2 đầu */
@@ -107,8 +108,14 @@ body {
   cursor: pointer;
   opacity: 0;
   transform: translateX(-20px);
+  color: white;
   /* 👇 THÊM HOẶC SỬA DÒNG NÀY ĐỂ MƯỢT MÀ 👇 */
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s, opacity 0.4s, box-shadow 0.3s;
+}
+
+/* White text for regular rows (not top 3) */
+.row:not(.gold):not(.silver):not(.bronze) {
+  color: white;
 }
 
 /* 👇 THÊM ĐOẠN MỚI NÀY VÀO DƯỚI LỚP .row 👇 */
@@ -145,7 +152,8 @@ body {
 }
 .badge-glow { color: #00ffcc; font-weight: bold; }
 
-button {
+#summaryScreen button, 
+#leaderboardScreen button {
   margin-top: 10px;
   padding: 16px;
   border: none;
@@ -197,6 +205,11 @@ button {
   text-align: center;
   transform: translateY(20px);
   transition: 0.4s ease;
+  color: white;
+}
+
+.profile-card h2 {
+  color: white !important;
 }
 
 .modal.show .profile-card { transform: translateY(0); }
@@ -212,7 +225,7 @@ button {
   margin-bottom: 20px;
 }
 
-.info-line { line-height: 2.2; font-size: 18px; color: #e0e0e0; }
+.info-line { line-height: 2.2; font-size: 18px; color: white !important; }
 
 /* Giữ nguyên phần .background, .screen, .row đã gửi ở các lượt trước */
 

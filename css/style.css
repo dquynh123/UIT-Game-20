@@ -1,5 +1,4 @@
 /* Nạp CSS của Tòa A và Tòa E vào đây */
-@import url('./leaderboard.css');
 @import url('./buildings/toaA.css');
 @import url('./buildings/toaE.css');
 @import url('./buildings/toaC.css');
@@ -285,3 +284,4 @@ b, strong, .game-title-yellow, .game-title-blue, .game-title-green {
 }
 #summary-action-btn:hover { transform: translateY(-3px); }
 #summary-action-btn:active { transform: translateY(0); }
+
