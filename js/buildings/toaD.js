@@ -194,8 +194,30 @@ function animateToaD() {
 function showResultToaD(message, isGameOver) {
     isGameActive = false; 
     cleanupToaD(); 
+    // Tính thời gian đã chơi (60s trừ đi thời gian còn lại)
+    let timePlayed = configToaD.gameDuration - timeLeftToaD;
+
+    if (isGameOver) {
+        // TRƯỜNG HỢP THUA: Báo lỗi và truyền hàm initToaD để chơi lại
+        if (typeof window.showGlobalSummaryBoard === 'function') {
+            window.showGlobalSummaryBoard("Tòa D", scoreToaD, timePlayed, false, initToaD);
+        } else {
+            initToaD();
+        }
+    } else {
+        // TRƯỜNG HỢP THẮNG: Lưu điểm và truyền hàm transitionToToaC để đi tiếp
+        if (window.UITGameStats) {
+            window.UITGameStats.addScore("Tòa D", scoreToaD);
+        }
+        
+        if (typeof window.showGlobalSummaryBoard === 'function') {
+            window.showGlobalSummaryBoard("Tòa D", scoreToaD, timePlayed, true, transitionToToaC);
+        } else {
+            transitionToToaC();
+        }
+    }
     
-    const finalMsg = document.getElementById('final-msg-toa-d');
+    /*const finalMsg = document.getElementById('final-msg-toa-d');
     const finalScore = document.getElementById('final-score-toa-d');
     const actionBtn = document.getElementById('to-toa-c-btn');
     const overlay = document.getElementById('fade-overlay');
@@ -241,7 +263,7 @@ function showResultToaD(message, isGameOver) {
                 }, 800); 
             }, 500); 
         };
-    }
+    }*/
 }
 
 function cleanupToaD() {

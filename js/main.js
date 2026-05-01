@@ -162,6 +162,54 @@ window.switchBuilding = (buildingId) => {
     });
 };
 
+// ==========================================
+// HÀM GỌI BẢNG TỔNG KẾT DÙNG CHUNG (GLOBAL)
+// ==========================================
+window.showGlobalSummaryBoard = function(stageName, currentScore, timeSec, isWin, nextActionCallback) {
+    const overlay = document.getElementById('global-summary-overlay');
+    const title = document.getElementById('summary-title');
+    const stageEl = document.getElementById('summary-stage');
+    const scoreEl = document.getElementById('summary-score');
+    const totalScoreEl = document.getElementById('summary-total-score');
+    const statusEl = document.getElementById('summary-status');
+    const timeEl = document.getElementById('summary-time');
+    const btn = document.getElementById('summary-action-btn');
+
+    // 1. Điền dữ liệu
+    stageEl.innerText = stageName;
+    scoreEl.innerText = currentScore;
+    
+    // Xử lý thời gian (Nếu game không truyền timeSec vào thì hiện "--")
+    if (timeSec && timeSec > 0) {
+        timeEl.innerText = `${timeSec} giây`;
+    } else {
+        timeEl.innerText = `--`; // Dành cho Tòa C, E không có tổng thời gian cụ thể
+    }
+
+    // 2. Lấy tổng điểm từ UITGameStats
+    let total = currentScore; 
+    if (window.UITGameStats && typeof window.UITGameStats.totalScore !== 'undefined') {
+        total = window.UITGameStats.totalScore;
+    }
+    totalScoreEl.innerText = total;
+
+    // 3. DIỆN MẠO CHUNG (Bỏ điều kiện Thắng/Thua đi)
+    title.innerText = "TỔNG KẾT";
+    statusEl.innerText = "Thời gian";
+    statusEl.style.color = "#1de9b6"; // Màu xanh ngọc chuẩn của form
+    
+    // 4. Xử lý nút bấm (Chống click đúp)
+    btn.onclick = null; 
+    btn.onclick = () => {
+        overlay.classList.add('hidden'); // Ẩn bảng đi
+        if (typeof nextActionCallback === 'function') {
+            nextActionCallback(); // Gọi hàm đi tiếp
+        }
+    };
+
+    // 5. Hiện bảng
+    overlay.classList.remove('hidden');
+};
 //VISUAL NOVEL ==================
 window.startGame = function() {
     console.log("Trò chơi bắt đầu! Đang tải kịch bản test...");
@@ -169,7 +217,7 @@ window.startGame = function() {
         {
             id: "test_01",
             name: "Sinh viên ATTT Tài năng",
-            text: "Lại thêm một ông nữa lạc vào đây à? Nhìn bộ đồ với cái mặt này... chắc anh 'ra trường' mấy mùa quýt rồi nhỉ?",
+            text: "Anh lên Tòa E dự seminar hả? Sao nhìn anh ngơ ngác vậy?",
             bg: "",
             sprite: "assets/images/chibi.png",
             nextId: "test_02"
@@ -177,31 +225,31 @@ window.startGame = function() {
         {
             id: "test_02",
             name: "{PLAYER}",
-            text: "Ý là bảo tôi già chứ gì? Mà đúng thật, tôi đến đây không phải để học mà đang tìm đường về qua mấy cái mảnh ký ức quái ác này đây.",
+            text: "Ờm... tự nhiên chớp mắt cái thấy đứng đây. Có người bảo anh phải đi tìm mấy cái mảnh ký ức gì đó để tìm đường về.",
             bg: "",
-            sprite: "assets/images/test_main.png", // Bạn có thể xóa dòng này nếu không muốn hiện cái đầu
+            sprite: "assets/images/test_main.png", 
             nextId: "test_03"
         },
         {
             id: "test_03",
             name: "Sinh viên ATTT Tài năng",
-            text: "Ký ức à... Nếu là mấy thứ nặng nề ấy thì chắc nó vẫn nằm trên tầng 12 thôi. Nhưng nói trước, thang bộ tòa này 'ám' lắm, anh già rồi thì leo từ tốn thôi, coi chừng đứt hơi giữa chừng.",
+            text: "Mảnh ký ức à? Nãy em thấy có ông anh nào cũng đáng ngờ như anh bấm thang máy lên tầng 12 ấy.",
             bg: "",
             sprite: "assets/images/chibi.png",
-            nextId: "test_04" // 👉 KHÔNG DÙNG CHOICES NỮA, TRỎ THẲNG SANG CÂU TIẾP THEO
+            nextId: "test_04" 
         },
         {
             id: "test_04",
             name: "Sinh viên ATTT Tài năng",
-            text: "Mà cũng đúng thôi, cái tòa E này nó thế. Muốn biết mình là ai, muốn nhìn cho rõ cái tương lai mờ mịt phía trước thì cứ phải lết lên đến cái đỉnh cao nhất kia kìa. Đứng trên ấy gió lộng, nhìn xuống thấy người ta bé như kiến, lúc đấy mới thấy mấy cái rắc rối dưới này chả là gì.",
+            text: "Tầng 12 á? Đùa à, chờ cái thang máy tòa E này chắc tới sáng mai mất.",
             bg: "",
             sprite: "assets/images/chibi.png",
-            nextId: "test_05" // 👉 TRỎ THẲNG ĐẾN KẾT THÚC
+            nextId: "test_05" 
         },
         {
             id: "test_05",
             name: "{PLAYER}",
-            text: "Nói thì hay lắm, nhưng giờ đường xá trong đầu tôi nó cứ mờ mịt thế này, biết lối nào mà leo?",
+            text: "Thì đặc sản trường mình mà anh!",
             bg: "",
             sprite: "assets/images/test_main.png",
             nextId: "test_06"
@@ -209,7 +257,7 @@ window.startGame = function() {
         {
             id: "test_06",
             name: "Sinh viên ATTT Tài năng",
-            text: "Dùng 'Điểm rèn luyện' (ĐRL) của anh đi. Đó là loại vật phẩm trao đổi duy nhất có giá trị ở đây. Anh có thể chọn tung xúc xắc an toàn, hoặc đánh cược tất cả để tiến nhanh hơn. Nhưng cẩn thận... cái thang máy tòa này nó ảo lắm, lên nhanh được thì rơi tự do cũng nhanh lắm đấy. Cân nhắc cho kỹ.",
+            text: "Ờm ở không gian này, anh không bấm thang máy bằng tay đâu, mà xài điểm rèn luyện. Anh có 150 điểm rèn luyện để tiêu! Anh phải bỏ điểm rèn luyện ra để tung xúc xắc test nhân phẩm. Có 3 loại xúc xắc cho anh chọn, 4 mặt, 6 mặt và 20 mặt tương ứng với 3, 5, 20 điểm rèn luyện. Và nhớ là anh có tối đa 25 lượt dùng xúc xắc nhé. Hên thì một phát lên mây, xu thì... anh tự hiểu ha. Chơi không?",
             bg: "",
             sprite: "assets/images/chibi.png",
             nextId: null

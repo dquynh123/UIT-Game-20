@@ -304,12 +304,22 @@ function updateUI() {
         // Disable các nút xúc xắc
         diceButtons.forEach(btn => btn.disabled = true);
         if (window.UITGameStats) {
-       window.UITGameStats.addScore("Tòa E", finalScore);
-}
-        // 👇 GỌI CHUYỂN CẢNH Ở ĐÂY (Dù thắng hay thua đều được chuyển) 👇
+            window.UITGameStats.addScore("Tòa E", finalScore);
+        }
+        // GỌI BẢNG TỔNG KẾT DÙNG CHUNG
         setTimeout(() => {
-            transitionToToaA();
-        }, 3000); // 3000ms = 3 giây chờ để đọc kết quả
+            // Xác định thắng/thua dựa trên vị trí. (VD: Nếu đến đích 120 là thắng, ngược lại là thua)
+            const isWin = (state.pos === 120); 
+            // Tạm thời để thời gian là 0 nếu Tòa E không đếm ngược thời gian
+            const timePlayed = 0; 
+            
+            if (typeof window.showGlobalSummaryBoard === 'function') {
+                window.showGlobalSummaryBoard("Tòa E", finalScore, timePlayed, isWin, transitionToToaA);
+            } else {
+                 // Backup phòng hờ lỡ file main.js bị lỗi chưa load kịp
+                transitionToToaA();
+            }
+        }, 1500); // 1.5 giây chờ để đọc log trước khi hiện bảng
     }
 
     // Gắn sự kiện cho các nút xúc xắc
@@ -386,7 +396,7 @@ const storyToaA = [
     {
         id: "ht_00",
         name: "Anh chàng CTV Khoa X",
-        text: "Ơ... anh ơi! Anh thấy cô Thủ thư đâu không? Cô ấy giận em rồi, chạy nhanh như Naruto ấy, bỏ lại đống sách này bắt em phân loại... mà sách thì cứ tuôn ra liên tục, nhìn đống này là em thấy chóng mặt..",
+        text: "Trời đất ơi, sách đâu mà trôi ra như thác thế này, em xếp không kịp trời ơi!",
         bg: "",
         sprite: "assets/images/chibi.png",
         nextId: "ht_01"
@@ -404,7 +414,7 @@ const storyToaA = [
     {
         id: "ht_02",
         name: "{PLAYER}",
-        text: "Nhưng tại sao ở không gian này lại có một cái băng chuyền công nghiệp chạy rầm rầm thế này? Này cậu CTV, cái băng chuyền này có từ lúc nào vậy",
+        text: "Khoan... thư viện trường mình nay chơi nguyên cái băng chuyền công nghiệp này luôn hả? Từ bao giờ vậy?",
         bg: "",
         sprite: "assets/images/test_main.png",
         nextId: "ht_03" 
@@ -413,7 +423,7 @@ const storyToaA = [
     {
         id: "ht_03",
         name: "Cô Thủ thư",
-        text: "Không gian này định hình dựa trên chính tâm trí của cậu, cựu sinh viên ạ.",
+        text: "Từ lúc cậu cắm mặt vào chạy deadline sấp mặt đó, cựu sinh viên ạ.",
         bg: "",
         sprite: "assets/images/test_cothuthu.png",
         nextId: "ht_04" 
@@ -422,7 +432,7 @@ const storyToaA = [
     {
         id: "ht_04",
         name: "{PLAYER}",
-        text: "Ý cô là sao??",
+        text: "Dạ? Ý cô là sao??",
         bg: "",
         sprite: "assets/images/test_main.png",
         nextId: "ht_05" 
@@ -431,7 +441,7 @@ const storyToaA = [
     {
         id: "ht_05",
         name: "Cô Thủ thư",
-        text: "Cậu nhìn thời gian và ký ức giống như những công việc (task) chạy trên một dây chuyền sản xuất vô tận. Khô khan, máy móc, và đầy áp lực. Cậu đang sống như một cỗ máy lập trình sẵn, nên dòng chảy ký ức về sự tận tụy của cậu ở Tòa A cũng hiện hình thành một cái băng chuyền lạnh lẽo như vậy.",
+        text: "không gian này định hình dựa trên chính tâm trí của cậu. Đầu óc cậu lúc nào cũng coi công việc, thời gian như một cái dây chuyền sản xuất vô tận, nên vào đây thư viện nó mới biến dạng thành thế này. Muốn lấy ĐRL để đi tiếp thì xắn tay áo vào giúp đi.",
         bg: "",
         sprite: "assets/images/test_cothuthu.png",
         nextId: "ht_06" 
@@ -439,17 +449,17 @@ const storyToaA = [
 
     {
         id: "ht_06",
-        name: "{PLAYER}",
-        text: "Deadline...code...những đêm thức trắng...một dây chuyền sản xuất vô tận...",
+        name: "Anh chàng CTV Khoa X",
+        text: "Anh xếp sách vào đúng 9 cái kệ kia nha. Đừng để lọt mất cuốn nào không là toang đó! À, thấy mấy cuốn SÁCH DÀY đóng bụi không? Gõ 3 phát (click 3 lần) cho nó rơi bớt bụi ra rồi hẵng xếp!",
         bg: "",
-        sprite: "assets/images/test_main.png",
-        nextId: "ht_07" 
+        sprite: "assets/images/chibi.png",
+        nextId: "ht_07"
     },
 
     {
         id: "ht_07",
         name: "Cô Thủ thư",
-        text: "Đúng vậy. Và muốn lấy được ĐRL để thoát khỏi đây , cậu phải xử lý cái băng chuyền này",
+        text: "Còn sách cũ rách thì bơ đi, cho nó trôi luôn. Anh mà ráng nhét sách cũ lên kệ là hệ thống sập, anh kẹt lại đây luôn ráng chịu",
         bg: "",
         sprite: "assets/images/test_cothuthu.png",
         nextId: "ht_08"
@@ -457,46 +467,10 @@ const storyToaA = [
 
     {
         id: "ht_08",
-        name: "Cô Thủ thư",
-        text: "Hãy nhặt những cuốn sách giáo trình đang trôi tới kia và xếp chúng vào ĐÚNG 9 ngăn kệ kia. Đừng để 3 cuốn sách trôi vào cõi hư không nếu không cậu sẽ chẳng lấy tích đủ ĐRL để rời khỏi nơi này",
+        name: "{PLAYER}",
+        text: "Okay, chuyện nhỏ, tay em vẫn còn nhanh lắm.",
         bg: "",
-        sprite: "assets/images/test_cothuthu.png",
-        nextId: "ht_09"
-    },
-
-    {
-        id: "ht_09",
-        name: "Anh chàng CTV Khoa X",
-        text: "Nhưng mà anh nhớ cẩn thận đấy ! Có những cuốn SÁCH DÀY bám đầy bụi. Nó giống như mấy môn học ngày xưa anh từng thức trắng đêm để cày cuốc vậy, nặng lắm!",
-        bg: "",
-        sprite: "assets/images/chibi.png",
-        nextId: "ht_10"
-    },
-
-    {
-        id: "ht_10",
-        name: "Cô Thủ thư",
-        text: "Hãy GÕ VÀO SÁCH DÀY 3 LẦN (click 3 lần) để phá vỡ lớp vỏ bọc, khi đó cậu mới có thể thấy được lõi của chúng mà xếp",
-        bg: "",
-        sprite: "assets/images/test_cothuthu.png",
-        nextId: "ht_11"
-    },
-
-    {
-        id: "ht_11",
-        name: "Cô Thủ thư",
-        text: "Còn những cuốn SÁCH CŨ màu xám xịt kia, hãy để mặc nó trôi vào cõi hư không kia.",
-        bg: "",
-        sprite: "assets/images/test_cothuthu.png",
-        nextId: "ht_12"
-    },
-
-    {
-        id: "ht_12",
-        name: "Cô Thủ thư",
-        text: "Nếu cậu cố chấp mang nó lên kệ, toàn bộ ma trận ký ức này sẽ sụp đổ.",
-        bg: "",
-        sprite: "assets/images/test_cothuthu.png",
+        sprite: "assets/images/test_main.png",
         nextId: null
     },
 

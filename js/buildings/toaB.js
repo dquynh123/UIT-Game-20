@@ -2,7 +2,7 @@ const StoryToaD = [
     {
         id: "test_01",
         name: "Bí thư đoàn",
-        text: "Xong Tòa B rồi. Tiếp theo là Tòa D phải không?",
+        text: "Anh ơi! Trông quen quen ta, đi Chủ Nhật Xanh chung bao giờ chưa ta?",
         bg: "",
         sprite: "assets/images/chibi.png",
         nextId: "test_02"
@@ -10,11 +10,20 @@ const StoryToaD = [
 
     {
         id: "test_02",
-        name: "Bí thư đoàn",
-        text: "Đúng vậy. Dữ liệu cốt lõi ở Tòa D đang phân mảnh rất nghiêm trọng. Hãy cẩn thận.",
+        name: "{PLAYER}",
+        text: "Chắc người giống người thôi em. Em có thấy cái gì sáng sáng rớt quanh đây không?",
         bg: "",
         sprite: "assets/images/test_main.png",
         nextId: null
+    },
+
+    {
+        id: "test_01",
+        name: "Bí thư đoàn",
+        text: "Anh ơi! Trông quen quen ta, đi Chủ Nhật Xanh chung bao giờ chưa ta?",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: "test_02"
     },
  
 ];
@@ -285,17 +294,14 @@ class ToaBGame {
         this.drl = Math.max(0, this.drl);
         this.updateUI();
         if (window.UITGameStats) {
-        window.UITGameStats.addScore("Tòa B", this.drl);
+            window.UITGameStats.addScore("Tòa B", this.drl);
         }
-        document.getElementById('board-section').innerHTML = `
-            <div style="text-align: center; margin-top: 100px;">
-                <h1>KẾT THÚC HỌC PHẦN</h1>
-                <h2 style="font-size: 30px; color: #38a169;">Tổng ĐRL thu được: ${this.drl}</h2>
-            </div>
-        `;
-        setTimeout(() => {
-            transitionToToaD();
-        }, 3000);
+        console.log("Kết thúc Tòa B. Hiện bảng tổng kết...");
+        if (typeof window.showGlobalSummaryBoard === 'function') {
+            window.showGlobalSummaryBoard("Tòa B", this.drl, 0, true, transitionToToaD);
+        } else {
+            transitionToToaD(); // Backup lỡ lỗi
+        }
     }
 }
 

@@ -139,54 +139,66 @@ function endGame() {
     if (animationId) cancelAnimationFrame(animationId);
     boxes = []; 
     
-    // Tắt Tòa C để lộ màn hình thoại VN
-    toaCContainer.style.display = "none";
-    toaCContainer.classList.remove("game-playing");
-    
-    const storySauToaC = [
-        { id: "c_end_01", name: "Hệ thống", text: `Quá trình thu thập hoàn tất! Bạn có thêm ${score} Điểm Rèn Luyện.`, bg: "", sprite: "", nextId: "c_end_02" },
-        { id: "c_end_02", name: "{PLAYER}", text: "Phù, cũng kha khá điểm rồi. Mình phải đi tiếp thôi...", bg: "", sprite: "assets/images/test_main.png", nextId: null }
-    ];
+    if (window.UITGameStats) {
+        window.UITGameStats.addScore("Tòa C", score);
+    }
+    const proceedToNextPhase = () => {
+        // Lúc này mới tắt Tòa C đi để lộ màn hình thoại VN
+        toaCContainer.style.display = "none";
+        toaCContainer.classList.remove("game-playing");
+        
+        const storySauToaC = [
+            { id: "c_end_01", name: "Hệ thống", text: `Quá trình thu thập hoàn tất! Bạn có thêm ${score} Điểm Rèn Luyện.`, bg: "", sprite: "", nextId: "c_end_02" },
+            { id: "c_end_02", name: "{PLAYER}", text: "Phù, cũng kha khá điểm rồi. Mình phải đi tiếp thôi...", bg: "", sprite: "assets/images/test_main.png", nextId: null }
+        ];
 
-    // Hàm callback sau khi đọc xong hội thoại sẽ hiện bảng điểm
-    const showLeaderboardAfterDialogue = async () => {
-        const vnScreen = document.getElementById('vn-screen');
-        if (vnScreen) vnScreen.style.display = 'none';
+        // Hàm callback sau khi đọc xong hội thoại sẽ lưu điểm và hiện Bảng Xếp Hạng Cuối Cùng
+        const showLeaderboardAfterDialogue = async () => {
+            const vnScreen = document.getElementById('vn-screen');
+            if (vnScreen) vnScreen.style.display = 'none';
 
-        if (window.UITGameStats) {
-            window.UITGameStats.addScore("Tòa C", score);
-        }
+            let results = window.UITGameStats ? window.UITGameStats.stageResults : [];
+            const totalTime = window.UITGameStats ? window.UITGameStats.getTimePlayedSeconds() : 0;
+            const finalTotalScore = results.reduce((sum, item) => sum + item.score, 0);
+            const playerName = localStorage.getItem('currentPlayerName') || "Sinh viên";
 
-        let results = window.UITGameStats ? window.UITGameStats.stageResults : [];
-        const totalTime = window.UITGameStats ? window.UITGameStats.getTimePlayedSeconds() : 0;
-        const finalTotalScore = results.reduce((sum, item) => sum + item.score, 0);
-        const playerName = localStorage.getItem('currentPlayerName') || "Sinh viên";
-
-        // 1. Thử lưu điểm vào Firebase
-        try {
-            await saveScore(playerName, finalTotalScore, totalTime, 1);
-        } catch (err) {
-            console.error("Lỗi khi lưu điểm vào Firebase:", err);
-            // Lỗi lưu điểm thì ghi nhận log, không làm gián đoạn game
-        }
-
-        // 2. LUÔN LUÔN gọi chuyển màn hình Summary
-        try {
-            const module = await import('../leaderboard.js');
-            if (module && typeof module.showSummary === 'function') {
-                module.showSummary(results, totalTime, finalTotalScore);
-            } else {
-                console.error("Không tìm thấy hàm showSummary trong file leaderboard.js");
+            // Thử lưu điểm vào Firebase
+            try {
+                await saveScore(playerName, finalTotalScore, totalTime, 1);
+            } catch (err) {
+                console.error("Lỗi khi lưu điểm vào Firebase:", err);
             }
-        } catch (importErr) {
-            console.error("Lỗi khi import file leaderboard.js:", importErr);
+
+            // LUÔN LUÔN gọi chuyển màn hình Summary Cuối Game của team bạn
+            try {
+                const module = await import('../leaderboard.js');
+                if (module && typeof module.showSummary === 'function') {
+                    module.showSummary(results, totalTime, finalTotalScore);
+                } else {
+                    console.error("Không tìm thấy hàm showSummary trong file leaderboard.js");
+                }
+            } catch (importErr) {
+                console.error("Lỗi khi import file leaderboard.js:", importErr);
+            }
+        };
+
+        // Bắt đầu chạy hội thoại kết thúc
+        if (typeof window.playVN === 'function') {
+            window.playVN(storySauToaC, "c_end_01", showLeaderboardAfterDialogue);
+        } else {
+            showLeaderboardAfterDialogue();
         }
     };
 
-    if (typeof window.playVN === 'function') {
-        window.playVN(storySauToaC, "c_end_01", showLeaderboardAfterDialogue);
+    // 3. HIỆN BẢNG TỔNG KẾT TÒA C
+    // Xác định Thắng/Thua: Bị phạt dưới 5 lần = Thắng, từ 5 lần trở lên = Thua
+    const isWin = (wrongCount < 5); 
+    
+    if (typeof window.showGlobalSummaryBoard === 'function') {
+        // Truyền hàm proceedToNextPhase vào để nó chạy khi bấm nút
+        window.showGlobalSummaryBoard("Tòa C", score, 0, isWin, proceedToNextPhase);
     } else {
-        showLeaderboardAfterDialogue();
+        proceedToNextPhase(); // Backup lỡ JS không load kịp
     }
 }
 

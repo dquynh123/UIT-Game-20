@@ -13,13 +13,48 @@ let isTransitioningToToaB = false;
 const StoryToaB = [
     {
         id: "test_01",
-        name: "Bạn gái ngành truyền thông đa phương tiện",
-        text: "À... vâng. Đang tới giờ mở hệ thống mà mạng bên này lag quá, tôi đang định chạy đi tìm chỗ wifi mạnh hơn",
+        name: "{PLAYER}",
+        text: "Ây da, anh xin lỗi, để anh nhặt phụ. Ủa... tờ này là danh sách môn học em muốn đăng ký kỳ này hả?",
         bg: "",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/test_main.png",
+        nextId: "test_02"
+    },
+
+    {
+        id: "test_02",
+        name: "Bạn gái Truyền thông",
+        text: "Dạ vâng wishlist của em đó anh... Tới giờ mở form đăng ký rồi mà wifi bên này rớt hoài, em đang tính chạy đi kiếm chỗ mạng mạnh hơn.",
+        bg: "",
+        sprite: "assets/images/test_cothuthu.png",
+        nextId: "test_03"
+    },
+
+    {
+        id: "test_03",
+        name: "{PLAYER}",
+        text: "Khổ sở y chang hồi xưa. Bấm F5 gãy cả nút F5 vẫn đăng ký không kịp. Đưa đây anh thao tác thử xem tay nghề còn bén không.",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "test_04"
+    },
+
+    {
+        id: "test_04",
+        name: "Bạn gái Truyền thông",
+        text: "Anh canh kỹ nha, lật sai ô môn học là bị trừ điểm rèn luyện đó. Cứu em nha anh, học kỳ này em đang thiếu ĐRL trầm trọng luôn á!",
+        bg: "",
+        sprite: "assets/images/test_cothuthu.png",
+        nextId: "test_05"
+    },
+
+    {
+        id: "test_05",
+        name: "{PLAYER}",
+        text: "Ụa? Hả? Cái gì? Từ t…",
+        bg: "",
+        sprite: "assets/images/test_main.png",
         nextId: null
     },
- 
 ];
 
 const shelfCodes = ['HDH', 'MMT', 'DSTT', 'CSDL', 'CNPM', 'NMPTGame', 'TTNT', 'DSA', 'VDK']; 
@@ -300,28 +335,28 @@ function gameOver(reason) {
     const shelfGrid = document.querySelector('#toa-a #complex-shelves-grid');
     if(gameScreen) gameScreen.classList.remove('glitch-red-screen');
     if(shelfGrid) shelfGrid.classList.remove('shaking-shelf');
+    
     if (window.UITGameStats) {
         window.UITGameStats.addScore("Tòa A", score);
     }
+    
     setTimeout(() => {
         // Dọn sạch sách cũ để game không bị nặng
         document.querySelectorAll('.conveyor-book').forEach(b => b.remove());
         document.querySelectorAll('.spines-container').forEach(c => c.innerHTML = '');
         
-        console.log("Kết thúc Tòa A (Lý do: " + reason + "). Chuyển sang hội thoại Tòa B.");
+        console.log("Kết thúc Tòa A (Lý do: " + reason + "). Hiện bảng tổng kết...");
         
-        // GỌI HÀM CHUYỂN TIẾP (Giống hệt lúc Thắng)
-        transitionToToaB();
+        // SỬA Ở ĐÂY: Gọi Bảng Tổng Kết thay vì chuyển thẳng
+        // Tham số: Tên Tòa, Điểm, Thời gian, Thắng/Thua (false = thua), Hàm đi tiếp
+        if (typeof window.showGlobalSummaryBoard === 'function') {
+            window.showGlobalSummaryBoard("Tòa A", score, timeElapsed, false, transitionToToaB);
+        } else {
+            // Backup phòng hờ lỡ file main.js bị lỗi chưa load kịp
+            transitionToToaB();
+        }
         
-        /* SAU NÀY KHI CÓ BẢNG TỔNG KẾT:
-           Cả hàm winGameToaA và gameOver đều sẽ gọi chung một cái bảng, 
-           chỉ khác cái dòng chữ thông báo thôi. 
-           Ví dụ: 
-           - Thắng: showResultBoard("ĐỒNG BỘ HOÀN TẤT");
-           - Thua:  showResultBoard("HỆ THỐNG QUÁ TẢI - BUỘC ĐÓNG PHÂN VÙNG");
-        */
-        
-    }, 500); // Đợi 0.5 giây rồi mới chuyển cảnh
+    }, 500); // Đợi 0.5 giây rồi mới hiện bảng
 }
 // 1. HÀM CHUYỂN TIẾP (Sau này sẽ gọi khi bấm nút trên Bảng Tổng Kết)
 function transitionToToaB() {
@@ -348,18 +383,24 @@ function winGameToaA() {
     const shelfGrid = document.querySelector('#toa-a #complex-shelves-grid');
     if(gameScreen) gameScreen.classList.remove('glitch-red-screen');
     if(shelfGrid) shelfGrid.classList.remove('shaking-shelf');
+    
     if (window.UITGameStats) {
         window.UITGameStats.addScore("Tòa A", score); 
     }
+    
     setTimeout(() => {
         // Dọn sạch sách cũ
         document.querySelectorAll('.conveyor-book').forEach(b => b.remove());
         document.querySelectorAll('.spines-container').forEach(c => c.innerHTML = '');
         
-        console.log("Chiến thắng Tòa A: Chuyển sang hội thoại Tòa B.");
+        console.log("Chiến thắng Tòa A. Hiện bảng tổng kết...");
         
-        // GỌI HÀM CHUYỂN TIẾP Ở ĐÂY (Thay vì nhảy thẳng vào game Tòa B như cũ)
-        transitionToToaB();
+        // SỬA Ở ĐÂY: Tham số isWin truyền vào là 'true'
+        if (typeof window.showGlobalSummaryBoard === 'function') {
+            window.showGlobalSummaryBoard("Tòa A", score, timeElapsed, true, transitionToToaB);
+        } else {
+            transitionToToaB();
+        }
         
     }, 500);
 }
@@ -377,3 +418,29 @@ function triggerGlitchEvent() {
         if(shelfGrid) shelfGrid.classList.remove('shaking-shelf');
     }, 6000);
 }
+
+/*
+// ==========================================
+// TỰ ĐỘNG PAUSE/RESUME GAME KHI CHUYỂN TAB (TÒA A)
+// ==========================================
+document.addEventListener("visibilitychange", () => {
+    const gameScreenA = document.querySelector('#toa-a #game-screen-toa-a');
+    // Chỉ can thiệp nếu người chơi đang ở trong màn hình chơi game Tòa A
+    if (gameScreenA && !gameScreenA.classList.contains('hidden') && lives > 0) {
+        
+        if (document.hidden) {
+            // KHI SANG TAB KHÁC: Dừng đồng hồ, dừng sinh sách, tạm dừng băng chuyền
+            clearInterval(gameInterval);
+            clearInterval(difficultyInterval);
+            clearInterval(timerInterval);
+            clearInterval(glitchInterval);
+            document.querySelectorAll('.conveyor-book').forEach(b => b.style.animationPlayState = 'paused');
+            console.log("Tòa A: Đã tạm dừng game vì chuyển tab.");
+        } else {
+            // KHI QUAY LẠI: Chạy tiếp đồng hồ và băng chuyền
+            startGameLoops(); 
+            document.querySelectorAll('.conveyor-book').forEach(b => b.style.animationPlayState = 'running');
+            console.log("Tòa A: Đã tiếp tục game.");
+        }
+    }
+}); */
