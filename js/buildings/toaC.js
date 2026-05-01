@@ -218,7 +218,7 @@ function endGame() {
 
         // Bắt đầu chạy hội thoại kết thúc
         if (typeof window.playVN === 'function') {
-            window.playVN(storySauToaC, "c_end_01", showLeaderboardAfterDialogue);
+            window.playVN(storySauToaC, "c_01", showLeaderboardAfterDialogue);
         } else {
             showLeaderboardAfterDialogue();
         }
