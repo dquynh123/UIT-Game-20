@@ -285,3 +285,204 @@ b, strong, .game-title-yellow, .game-title-blue, .game-title-green {
 #summary-action-btn:hover { transform: translateY(-3px); }
 #summary-action-btn:active { transform: translateY(0); }
 
+/* =========================================
+   MÀN HÌNH BAD ENDING (ERROR SCREEN)
+========================================= */
+#bad-ending-screen {
+    position: fixed;
+    inset: 0;
+    background-color: #050505; /* Đen nhám */
+    color: white;
+    z-index: 9999; /* Nằm ngay dưới Leaderboard (10000) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Courier New', Courier, monospace; /* Font code */
+}
+
+/* Nền code mờ ảo phía sau */
+.error-bg-code {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    color: #4a6da7; /* Màu xanh biển xám giống trong ảnh của bạn */
+    opacity: 0.3;
+    font-size: 14px;
+    line-height: 1.2;
+    word-wrap: break-word;
+    pointer-events: none;
+}
+
+/* Khung căn giữa */
+.error-content {
+    position: relative;
+    text-align: center;
+    z-index: 10;
+}
+
+/* Icon tam giác đỏ */
+.error-icon {
+    font-size: 100px;
+    color: transparent;
+    text-shadow: 0 0 0 #ff2a2a, 3px 0 10px rgba(255,0,0,0.6);
+    margin-bottom: -20px;
+    animation: glitch-blink 0.3s infinite alternate;
+}
+
+/* HIỆU ỨNG CHỮ GLITCH */
+.error-text {
+    font-size: 120px;
+    font-weight: bold;
+    margin: 0;
+    position: relative;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+}
+
+/* Tạo ra 2 bản sao của chữ ERROR để làm bóng ma */
+.error-text::before, .error-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #050505;
+}
+
+/* Bóng ma màu Đỏ (Giật sang trái) */
+.error-text::before {
+    left: 4px;
+    text-shadow: -3px 0 red;
+    animation: glitch-anim-1 2s infinite linear alternate-reverse;
+}
+
+/* Bóng ma màu Xanh (Giật sang phải) */
+.error-text::after {
+    left: -4px;
+    text-shadow: -3px 0 cyan;
+    animation: glitch-anim-2 2.5s infinite linear alternate-reverse;
+}
+
+/* Dòng chữ nhỏ nhấp nháy */
+.error-subtext {
+    font-size: 24px;
+    color: #ff2a2a;
+    margin-top: 10px;
+    animation: blink 1s infinite step-end;
+}
+
+/* Các Animation Keyframes */
+@keyframes glitch-anim-1 {
+    0% { clip: rect(20px, 9999px, 44px, 0); }
+    20% { clip: rect(80px, 9999px, 90px, 0); }
+    40% { clip: rect(30px, 9999px, 55px, 0); }
+    60% { clip: rect(95px, 9999px, 120px, 0); }
+    80% { clip: rect(20px, 9999px, 70px, 0); }
+    100% { clip: rect(60px, 9999px, 85px, 0); }
+}
+@keyframes glitch-anim-2 {
+    0% { clip: rect(10px, 9999px, 30px, 0); }
+    20% { clip: rect(60px, 9999px, 70px, 0); }
+    40% { clip: rect(10px, 9999px, 40px, 0); }
+    60% { clip: rect(110px, 9999px, 130px, 0); }
+    80% { clip: rect(40px, 9999px, 60px, 0); }
+    100% { clip: rect(80px, 9999px, 100px, 0); }
+}
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+@keyframes glitch-blink {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); opacity: 0.8;}
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); opacity: 0.9;}
+    100% { transform: translate(0); }
+}
+
+/* =========================================
+   HIỆU ỨNG BAD ENDING (LỜI NGUYỀN 3.0 - ĐÃ FIX TARGET)
+========================================= */
+
+/* 1. Nhòe màu ở màn hình Hội thoại */
+.light-glitch-effect {
+    animation: chromatic-shift 0.15s infinite;
+}
+@keyframes chromatic-shift {
+    0% { filter: drop-shadow(3px 0 0 rgba(255,0,0,0.8)) drop-shadow(-3px 0 0 rgba(0,255,255,0.5)); }
+    50% { filter: drop-shadow(-3px 0 0 rgba(255,0,0,0.8)) drop-shadow(3px 0 0 rgba(0,255,255,0.5)); }
+    100% { filter: drop-shadow(1px 0 0 rgba(255,0,0,0.8)) drop-shadow(-1px 0 0 rgba(0,255,255,0.5)); }
+}
+
+/* ==============================================
+   2. HÓA QUỶ BẢNG TỔNG KẾT HOA LÁ (#summaryScreen)
+============================================== */
+
+/* Diệt tận gốc background hoa lá, thay bằng nền đen thui */
+body.cursed-mode #summaryScreen {
+    background: #000000 !important; 
+    background-image: none !important; /* Xóa ảnh hoa */
+}
+
+/* Lớp sọc nhiễu TV phủ lên toàn màn hình đen */
+body.cursed-mode #summaryScreen::after {
+    content: ""; position: absolute; inset: 0;
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3) 2px, transparent 2px, transparent 4px);
+    pointer-events: none; z-index: 10001;
+}
+
+/* Biến cái khung Bảng thành màu đen, viền đỏ, nhấp nháy */
+body.cursed-mode #summaryScreen .board-container {
+    background: #050000 !important;
+    border: 2px solid #ff0000 !important;
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.8) !important;
+    animation: tv-flicker 0.1s infinite alternate;
+}
+
+/* LỘT SẠCH màu xanh lá/xanh dương của các dòng điểm bên trong */
+body.cursed-mode #summaryScreen .board-container * {
+    background-color: transparent !important; 
+    background-image: none !important; 
+    color: #ff0000 !important; /* Ép chữ đỏ */
+    text-shadow: 2px 0px 1px rgba(255,0,0,0.9), -2px 0px 1px rgba(0,255,255,0.5) !important;
+    font-family: 'Courier New', Courier, monospace !important;
+    border-color: #ff0000 !important; 
+}
+
+/* Biến cái nút bấm màu xanh dương thành màu đen viền đỏ */
+body.cursed-mode #btnShowLeaderboard {
+    background-color: #1a0000 !important;
+    border: 1px solid #ff0000 !important;
+    box-shadow: none !important;
+    z-index: 10002; /* Đảm bảo bấm được */
+}
+
+@keyframes tv-flicker {
+    0% { transform: translateX(2px) translateY(1px); opacity: 0.9; filter: contrast(1.2); }
+    100% { transform: translateX(-2px) translateY(-1px); opacity: 1; filter: contrast(1); }
+}
+
+/* ==============================================
+   3. BINARY CODE & ERROR SCREEN (Fix Z-index)
+============================================== */
+#error-bg-code {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    overflow: hidden; pointer-events: none; display: block;
+    z-index: 0 !important;
+}
+.binary-row {
+    white-space: nowrap; font-size: 22px; line-height: 1.2;
+    color: #ff2a2a; opacity: 0.6; font-family: 'Courier New', monospace;
+    font-weight: bold;
+}
+@keyframes scrollBinary {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Bật Glitch cảnh 1 xuyên thấu mọi thứ */
+#cyber-glitch-overlay.active-max {
+    display: block !important;
+    z-index: 10005 !important; 
+    opacity: 1 !important;
+}

@@ -142,98 +142,239 @@ function endGame() {
     if (window.UITGameStats) {
         window.UITGameStats.addScore("Tòa C", score);
     }
+
     const proceedToNextPhase = () => {
-        // Lúc này mới tắt Tòa C đi để lộ màn hình thoại VN
+        // Tắt Tòa C, mở màn hình VN
         toaCContainer.style.display = "none";
         toaCContainer.classList.remove("game-playing");
-        
-        const storySauToaC = [
-            {
-                id: "c_01",
-                name: "CTV BHTCNPM",
-                text: "Dữ liệu đã khớp. Anh nhớ rất kỹ nơi này... dù đã rời đi từ lâu.",
-                bg: "",
-                sprite: "assets/images/chibi.png",
-                nextId: "c_02"
+
+        const vnScreen = document.getElementById('vn-screen');
+        if (vnScreen) vnScreen.style.display = 'block';
+
+        let results = window.UITGameStats ? window.UITGameStats.stageResults : [];
+        const totalTime = window.UITGameStats ? window.UITGameStats.getTimePlayedSeconds() : 0;
+        const finalTotalScore = results.reduce((sum, item) => sum + item.score, 0);
+        const playerName = localStorage.getItem('currentPlayerName') || "Sinh viên";
+
+        // 1. CÁC KỊCH BẢN RẼ NHÁNH
+        const storyNormalToaC = [
+            { 
+                id: "c_01", 
+                name: "CTV BHTCNPM", 
+                text: "Dữ liệu đã khớp. Anh nhớ rất kỹ nơi này... dù đã rời đi từ lâu.", 
+                bg: "", 
+                sprite: "assets/images/chibi.png", 
+                nextId: "c_02" 
             },
 
-            {
-                id: "c_02",
-                name: "{PLAYER}",
-                text: "Giọng điệu này... cậu là người tự xưng là admin lúc nãy? Thôi được rồi, trò chơi kết thúc. Tôi đã gom đủ 4 mảnh. Cho tôi thoát ra ngoài đi.",
-                bg: "",
-                sprite: "assets/images/test_main.png",
-                nextId: "c_03"
+            { 
+                id: "c_02", 
+                name: "{PLAYER}", 
+                text: "Giọng điệu này... cậu là người tự xưng là admin lúc nãy? Cho tôi thoát ra ngoài đi.", 
+                bg: "", 
+                sprite: "assets/images/test_main.png", 
+                nextId: "c_03" 
             },
 
-            {
-                id: "c_03",
-                name: "CTV BHTCNPM",
-                text: "Anh cứ tưởng hệ thống bắt anh đi gom ký ức sao? Không đâu... Là tự tâm trí anh đang nhớ lại những gì nó không muốn quên đi thôi",
-                bg: "",
-                sprite: "assets/images/chibi.png",
-                nextId: "c_04"
-            },
-
-            {
-                id: "c_04",
-                name: "CTV BHTCNPM",
-                text: "Anh đã tìm lại được phần dữ liệu thanh xuân của mình rồi. Đến lúc phải tỉnh dậy để chạy deadline tiếp thôi, cựu sinh viên.",
-                bg: "",
-                sprite: "assets/images/chibi.png",
-                nextId: null
+            { 
+                id: "c_03", 
+                name: "CTV BHTCNPM", 
+                text: "Anh đã tìm lại được phần dữ liệu thanh xuân của mình rồi. Đến lúc phải tỉnh dậy để chạy deadline tiếp thôi, cựu sinh viên.", 
+                bg: "", 
+                sprite: "assets/images/chibi.png", 
+                nextId: null 
             }
-
         ];
 
-        // Hàm callback sau khi đọc xong hội thoại sẽ lưu điểm và hiện Bảng Xếp Hạng Cuối Cùng
-        const showLeaderboardAfterDialogue = async () => {
-            const vnScreen = document.getElementById('vn-screen');
-            if (vnScreen) vnScreen.style.display = 'none';
+        const storyBadToaC = [
+            { 
+                id: "bad_01", 
+                name: "", 
+                text: "Âm thanh ồn ào náo nhiệt của sảnh Tòa C đột ngột tắt lịm đi. Không gian xung quanh dường như bị đóng băng, mọi sinh viên đứng im bất động.", 
+                bg: "", 
+                sprite: "", 
+                nextId: "bad_02"
+            },
 
-            let results = window.UITGameStats ? window.UITGameStats.stageResults : [];
-            const totalTime = window.UITGameStats ? window.UITGameStats.getTimePlayedSeconds() : 0;
-            const finalTotalScore = results.reduce((sum, item) => sum + item.score, 0);
-            const playerName = localStorage.getItem('currentPlayerName') || "Sinh viên";
+            { 
+                id: "bad_02", 
+                name: "", 
+                text: "Sảnh Tòa C bỗng trở nên rộng lớn và vắng lặng đến nghẹt thở. Dường như chỉ còn bạn và cậu CTV đối diện với nhau.",
+                bg: "", 
+                sprite: "", 
+                nextId: "bad_03" 
+            },
 
-            // Thử lưu điểm vào Firebase
-            try {
-                await saveScore(playerName, finalTotalScore, totalTime, 1);
-            } catch (err) {
-                console.error("Lỗi khi lưu điểm vào Firebase:", err);
+            { 
+                id: "bad_03", 
+                name: "", 
+                text: "Cậu ta từ từ hạ poster xuống, đứng thẳng người. Nụ cười sự kiện tắt đi. Ánh mắt bỗng trở nên sâu thẳm, tĩnh lặng và lạnh lẽo — hệt như ánh mắt của Người Hướng Dẫn ở sảnh Tòa E.", 
+                bg: "", 
+                sprite: "assets/images/chibi.png", 
+                nextId: "bad_04" 
+            },
+
+            { 
+                id: "bad_04", 
+                name: "CTV BHTCNPM", 
+                text: "Dữ liệu không khớp. Anh đã quên hết những ký ức trước đây. Anh sẽ kẹt ở đây mãi mãi.", 
+                bg: "", 
+                sprite: "assets/images/test_guide.png", 
+                nextId: "bad_05"
+            },
+
+            {
+                id: "bad_05",
+                name: "{PLAYER}",
+                text: "Giọng điệu này... cậu là người tự xưng là admin lúc nãy? Đủ rồi, đừng có đùa. Tôi đã gom đủ 4 mảnh. Cho tôi thoát ra ngoài đi.",
+                bg: "",
+                sprite: "assets/images/test_main.png",
+                nextId: "bad_06"
+            },
+
+            { 
+                id: "bad_06", 
+                name: "CTV BHTCNPM", 
+                text: "Hahaha, đâu phải cứ có đủ 4 mảnh là được thả ra, haha..", 
+                bg: "", 
+                sprite: "assets/images/test_guide.png", 
+                nextId: "bad_07"
+            },
+
+            {
+                id: "bad_07",
+                name: "{PLAYER}",
+                text: "Cái gì",
+                bg: "",
+                sprite: "assets/images/test_main.png",
+                nextId: null
+            }
+        ];
+
+        // 2. XỬ LÝ LƯU ĐIỂM & BẢNG XẾP HẠNG
+        const processEndingUI = async (isBadEnding) => {
+            if (vnScreen) {
+                vnScreen.style.display = 'none';
+                vnScreen.classList.remove('light-glitch-effect'); 
             }
 
-            // LUÔN LUÔN gọi chuyển màn hình Summary Cuối Game của team bạn
+            try { await saveScore(playerName, finalTotalScore, totalTime, 1); } 
+            catch (err) { console.error("Lỗi lưu điểm:", err); }
+
             try {
                 const module = await import('../leaderboard.js');
                 if (module && typeof module.showSummary === 'function') {
+                    // Hiện bảng bình thường trước
                     module.showSummary(results, totalTime, finalTotalScore);
-                } else {
-                    console.error("Không tìm thấy hàm showSummary trong file leaderboard.js");
+
+                    // Lời nguyền 1.5s
+                    if (isBadEnding) {
+                        setTimeout(() => {
+                            //Âm thanh cho cái bxh của bad ending
+                            try {
+                                // Bạn đổi 'jumpscare.mp3' thành tên file âm thanh của bạn nhé
+                                let cursedSound = new Audio('assets/sound/glitch_errorbxh.mp3'); 
+                                cursedSound.volume = 1.0; // Âm lượng max
+                                cursedSound.play();
+                            } catch (e) {
+                                console.log("Chưa tải được âm thanh hóa quỷ", e);
+                            }
+                            document.body.classList.add('cursed-mode');
+                            const titles = document.querySelectorAll('.title, #summary-title');
+                            titles.forEach(t => t.innerText = "⚠ LỖI: DỮ LIỆU BỊ GIAM GIỮ ⚠");
+
+                            const btn = document.getElementById('btnShowLeaderboard') || document.getElementById('summary-action-btn');
+                            if (btn) {
+                                btn.innerText = "XÁC NHẬN KẸT LẠI (HOÀN THÀNH)";
+                                const newBtn = btn.cloneNode(true);
+                                btn.parentNode.replaceChild(newBtn, btn);
+                                
+                                newBtn.addEventListener('click', () => {
+                                    document.getElementById('summaryScreen').classList.add('hidden');
+                                    const globalOverlay = document.getElementById('global-summary-overlay');
+                                    if(globalOverlay) globalOverlay.classList.add('hidden');
+                                    document.body.classList.remove('cursed-mode');
+                                    
+                                    triggerBadEndingEffect();
+                                });
+                            }
+                        }, 1500); 
+                    }
                 }
-            } catch (importErr) {
-                console.error("Lỗi khi import file leaderboard.js:", importErr);
-            }
+            } catch (e) { console.error(e); }
         };
 
-        // Bắt đầu chạy hội thoại kết thúc
+        // 3. THỰC THI KIỂM TRA ĐIỂM
         if (typeof window.playVN === 'function') {
-            window.playVN(storySauToaC, "c_01", showLeaderboardAfterDialogue);
-        } else {
-            showLeaderboardAfterDialogue();
+            if (finalTotalScore < 250) {
+                if (vnScreen) vnScreen.classList.add('light-glitch-effect');
+                window.playVN(storyBadToaC, "bad_01", () => processEndingUI(true));
+            } else {
+                window.playVN(storyNormalToaC, "c_01", () => processEndingUI(false));
+            }
         }
-    };
+    }; // <-- Đóng hàm proceedToNextPhase
 
-    // 3. HIỆN BẢNG TỔNG KẾT TÒA C
-    // Xác định Thắng/Thua: Bị phạt dưới 5 lần = Thắng, từ 5 lần trở lên = Thua
+    // 4. GỌI BẢNG TỔNG KẾT TÒA C ĐẦU TIÊN
     const isWin = (wrongCount < 5); 
-    
     if (typeof window.showGlobalSummaryBoard === 'function') {
-        // Truyền hàm proceedToNextPhase vào để nó chạy khi bấm nút
         window.showGlobalSummaryBoard("Tòa C", score, 0, isWin, proceedToNextPhase);
     } else {
-        proceedToNextPhase(); // Backup lỡ JS không load kịp
+        proceedToNextPhase();
     }
+} // <-- Đóng hàm endGame
+
+// ==============================================================
+// HÀM HIỆU ỨNG BINARY CHẠY NGANG & GLITCH CẢNH 1 (CHỐT HẠ)
+// ==============================================================
+function triggerBadEndingEffect() {
+    const errorScreen = document.getElementById('bad-ending-screen');
+    const bgCodeLayer = document.getElementById('error-bg-code');
+    const glitchLayer = document.getElementById('cyber-glitch-overlay'); 
+    
+    if (!errorScreen || !bgCodeLayer) return;
+
+    // Hiển thị màn hình báo lỗi
+    errorScreen.classList.remove('hidden');
+    bgCodeLayer.innerHTML = ""; 
+
+    try {
+        let systemErrorSound = new Audio('assets/sound/glitch_badending.mp3'); // Sửa đường dẫn file ở đây
+        systemErrorSound.volume = 0.8;
+        systemErrorSound.play();
+    } catch (e) {
+        console.log("Chưa tải được âm thanh lỗi hệ thống", e);
+    }
+
+    // 1. TẠO BINARY CODE CHẠY NGANG
+    const binBase = "01010011 01011001 01010011 01010100 01000101 01001101 00100000 01000101 01010010 01010010 01001111 01010010 "; 
+    const longBin = binBase.repeat(40); // Độ dài chống cụt đuôi
+
+    for (let i = 0; i < 40; i++) {
+        const row = document.createElement('div');
+        row.className = 'binary-row';
+        row.innerText = longBin + longBin; 
+        
+        const speed = 3 + Math.random() * 3; // Tốc độ chạy random
+        const direction = Math.random() > 0.5 ? 'normal' : 'reverse';
+        
+        row.style.animation = `scrollBinary ${speed}s linear infinite ${direction}`;
+        bgCodeLayer.appendChild(row);
+    }
+
+    // 2. TIMING FLOW: Chờ 1.5 giây thì gọi Glitch Cảnh 1 đè lên
+    setTimeout(() => {
+        if (glitchLayer) {
+            glitchLayer.classList.add('active'); // Bật css gốc của cảnh 1
+            glitchLayer.classList.add('active-max'); // Đẩy z-index lên thủng nóc
+        }
+        
+        // Chờ thêm 1.5 giây giật lag màn hình rách thì sút về Menu
+        setTimeout(() => {
+            window.location.reload(); 
+        }, 1500);
+
+    }, 1500); 
 }
 
 function update() {
