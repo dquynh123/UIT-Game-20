@@ -486,3 +486,153 @@ body.cursed-mode #btnShowLeaderboard {
     z-index: 10005 !important; 
     opacity: 1 !important;
 }
+
+/* =========================================
+   HIỆU ỨNG DUNG HỢP KÝ ỨC (CINEMATIC)
+========================================= */
+#memory-merge-screen {
+    position: fixed; inset: 0;
+    background: transparent; /* SỬA Ở ĐÂY: Xóa nền đen để nhìn xuyên thấu thấy CTV ở dưới */
+    z-index: 10000;
+    display: flex; justify-content: center; align-items: center;
+    overflow: hidden;
+    pointer-events: none; /* Bắt buộc có để click xuyên qua được hộp thoại */
+    transition: background 1.5s ease; /* Chuyển màu nền mượt mà */
+}
+
+/* Thêm class này để lúc 5 mảnh đâm vào nhau thì không gian mới tối sầm lại */
+#memory-merge-screen.is-merging-bg {
+    background: radial-gradient(circle, #020813 0%, #000000 100%);
+}
+
+.merge-container {
+    position: relative;
+    width: 300px; height: 300px;
+}
+
+/* Base của mảnh ký ức (Sau này bạn có thể thay bằng thẻ <img> nếu Artist vẽ xong) */
+.memory-fragment {
+    position: absolute;
+    width: 40px; height: 40px;
+    background: #fff;
+    border-radius: 10px;
+    display: flex; justify-content: center; align-items: center;
+    font-weight: bold; font-family: 'Poppins', sans-serif; color: #000;
+    box-shadow: 0 0 20px #00d2ff, 0 0 40px #00d2ff;
+    opacity: 0;
+}
+
+/* Vị trí ban đầu của 5 mảnh (bay từ ngoài vào) */
+.frag-e { top: -100px; left: 130px; animation-delay: 0s !important; }
+.frag-a { top: 60px; right: -100px; animation-delay: 0.2s !important; }
+.frag-b { bottom: -100px; right: 20px; animation-delay: 0.4s !important; }
+.frag-d { bottom: -100px; left: 20px; animation-delay: 0.6s !important; }
+.frag-c { top: 60px; left: -100px; animation-delay: 0.8s !important; }
+
+/* Animation: Xuất hiện và bay vòng vòng thu hẹp dần vào tâm */
+.is-merging .memory-fragment {
+    animation: fly-to-center 5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fly-to-center {
+    0% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+    20% { opacity: 1; transform: scale(1) rotate(90deg); filter: brightness(1); }
+    80% { opacity: 1; top: 130px; left: 130px; transform: scale(0.8) rotate(720deg); filter: brightness(2); }
+    100% { opacity: 0; top: 130px; left: 130px; transform: scale(0) rotate(1080deg); }
+}
+
+/* Lõi sáng trung tâm (phình to ra nuốt chửng mọi thứ) */
+.merge-core {
+    position: absolute;
+    top: 130px; left: 130px;
+    width: 40px; height: 40px;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 50px #fff, 0 0 100px #00d2ff, 0 0 200px #00d2ff;
+    opacity: 0;
+    transform: scale(0);
+}
+
+.is-merging .merge-core {
+    animation: core-explode 4s forwards;
+    animation-delay: 4.5s; /* Chờ các mảnh bay vào tâm xong mới nổ */
+}
+
+@keyframes core-explode {
+    0% { opacity: 0; transform: scale(0); }
+    20% { opacity: 1; transform: scale(1); }
+    80% { opacity: 1; transform: scale(1.5); }
+    100% { opacity: 1; transform: scale(100); } /* Bùng nổ phủ kín màn hình */
+}
+
+/* Flashbang trắng xóa để mượt mà chuyển sang màn hình Văn phòng đời thực */
+#merge-flashbang {
+    position: absolute; inset: 0; background: white;
+    opacity: 0; pointer-events: none; transition: opacity 0.5s;
+    z-index: 99;
+}
+.trigger-flash { opacity: 1 !important; }
+
+/* =========================================
+   HIỆU ỨNG TRẠNG THÁI LƠ LỬNG VÀ PHÂN RÃ
+========================================= */
+
+/* Xuyên thấu để người chơi vẫn bấm được chuột lúc hội thoại */
+#memory-merge-screen {
+    pointer-events: none; 
+}
+
+/* 1. Trạng thái bay lơ lửng chờ đợi */
+.is-floating .memory-fragment {
+    opacity: 1; /* Hiện rõ 5 mảnh */
+    animation: float-gently 2.5s ease-in-out infinite alternate;
+}
+.is-floating .frag-e { animation-delay: 0s; }
+.is-floating .frag-a { animation-delay: 0.3s; }
+.is-floating .frag-b { animation-delay: 0.6s; }
+.is-floating .frag-d { animation-delay: 0.9s; }
+.is-floating .frag-c { animation-delay: 1.2s; }
+
+@keyframes float-gently {
+    0% { transform: translateY(0px) scale(1); filter: brightness(1); }
+    100% { transform: translateY(-15px) scale(1.1); filter: brightness(1.5); box-shadow: 0 0 30px #00d2ff, 0 0 50px #00d2ff;}
+}
+
+/* 2. Hiệu ứng CTV phân rã thành các dòng code xanh */
+/* 1. Hình ảnh nhân vật chuyển xanh và bị xóa dần từ dưới lên */
+.sprite-disintegrate {
+    animation: digital-fade 3s forwards linear;
+}
+
+@keyframes digital-fade {
+    0% { opacity: 1; filter: brightness(1) sepia(0); clip-path: inset(0 0 0 0); }
+    20% { filter: brightness(1.5) sepia(1) hue-rotate(90deg) contrast(2); clip-path: inset(0 0 0 0); } /* Chuyển màu code xanh lá */
+    100% { opacity: 0; filter: brightness(2) sepia(1) hue-rotate(90deg) contrast(2); clip-path: inset(100% 0 0 0); } /* Xóa dần từ dưới lên */
+}
+
+/* 2. Style cho các hạt nhị phân (0 và 1) bay ra từ cơ thể */
+.binary-particle {
+    position: absolute;
+    color: #00ff00; /* Màu xanh hacker */
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 16px;
+    pointer-events: none; /* Không cản trở click chuột */
+    z-index: 9999;
+    text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; /* Phát sáng nhẹ */
+    animation: particle-float forwards linear;
+}
+
+/* Hiệu ứng bay lơ lửng và mờ dần */
+@keyframes particle-float {
+    0% { opacity: 1; transform: translateY(0) translateX(0) scale(1.2); }
+    100% { opacity: 0; transform: translateY(-80px) translateX(var(--drift)) scale(0.5); }
+}
+
+@keyframes digital-dust {
+    0% { filter: brightness(1) sepia(0); opacity: 1; transform: scale(1); clip-path: inset(0 0 0 0); }
+    20% { filter: brightness(2) sepia(1) hue-rotate(90deg); opacity: 0.9; transform: skewX(5deg); }
+    40% { filter: blur(2px) contrast(3); opacity: 0.6; transform: skewX(-5deg) translateY(-10px); clip-path: inset(10% 0 0 0); }
+    60% { filter: blur(4px) drop-shadow(0 -20px 0 #0f0); opacity: 0.3; transform: translateY(-20px); clip-path: inset(40% 0 0 0); }
+    100% { filter: blur(10px) drop-shadow(0 -50px 0 #0f0); opacity: 0; transform: translateY(-50px); clip-path: inset(100% 0 0 0); }
+}

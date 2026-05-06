@@ -232,6 +232,7 @@
     <script src="js/quizData.js"></script>
     <script type="module" src="js/main.js"></script>
     <script src="js/buildings/toaB.js"></script>
+    <script type="module" src="js/buildings/toaC.js"></script>
     <div class="background"></div>
     <div id="overlay" class="hidden"></div>
 
@@ -292,6 +293,22 @@
 
         <button id="summary-action-btn">TIẾP TỤC HÀNH TRÌNH</button>
     </div>
+</div>
+<!--Kết hợp 5 mảnh ký ức -->
+<div id="memory-merge-screen" class="hidden">
+    <div class="merge-container">
+        <!-- 5 mảnh ký ức (Nếu chưa có ảnh, tạm dùng CSS tạo hình viên đá phát sáng) -->
+        <div class="memory-fragment frag-e">E</div>
+        <div class="memory-fragment frag-a">A</div>
+        <div class="memory-fragment frag-b">B</div>
+        <div class="memory-fragment frag-d">D</div>
+        <div class="memory-fragment frag-c">C</div>
+        
+        <!-- Điểm sáng trung tâm lúc gộp lại -->
+        <div class="merge-core"></div>
+    </div>
+    <!-- Lớp chớp trắng lóa mắt khi dung hợp xong -->
+    <div id="merge-flashbang"></div>
 </div>
 
 <!-- MÀN HÌNH BAD ENDING (LỖI HỆ THỐNG) -->
