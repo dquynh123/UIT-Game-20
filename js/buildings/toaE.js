@@ -65,18 +65,25 @@ container.innerHTML = `
 
     // 4. LOGIC XÁC ĐỊNH TẦNG THEO VỊ TRÍ
     function getFloorName(pos) {
-        if (pos <= 10) return "Tầng 1: Sảnh chính tòa E";
-        if (pos <= 15) return "Tầng 2: Các phòng học";
-        if (pos <= 20) return "Tầng 2: Thư viện tòa E"; // Qua nửa tầng 2
+        if (pos <= 5) return "Tầng 1: Sảnh chính tòa E";
+        if (pos <= 7) return "Tầng 1: Phòng họp";
+        if (pos <= 8) return "Tầng 1: Phòng Không gian Anh Ngữ";
+        if (pos <= 10) return "Tầng 1: Trung tâm Ngoại ngữ";
+        if (pos <= 15) return "Tầng 2: Văn phòng các chương trình đặc biệt";
+        if (pos <= 17) return "Tầng 2: Ban Quản lý cơ sở";
+        if (pos <= 20) return "Tầng 2: Các phòng học"; // Qua nửa tầng 2
         if (pos <= 40) return `Tầng ${Math.ceil(pos/10)}: Các phòng học`;
         if (pos <= 45) return "Tầng 5: Khoa Khoa học máy tính";
         if (pos <= 50) return "Tầng 5: MMLab UIT";
         if (pos <= 60) return "Tầng 6: Khoa Kỹ thuật máy tính";
         if (pos <= 70) return "Tầng 7: Khoa Công nghệ phần mềm";
         if (pos <= 80) return "Tầng 8: Khoa Mạng máy tính và truyền thông";
+        if (pos <= 85) return "Tầng 8: Phòng Thí nghiệm An toàn Thông tin";
         if (pos <= 90) return "Tầng 9: Khoa Hệ thống thông tin";
+        if (pos <= 95) return "Tầng 9: Phòng Thí nghiệm Hệ thống thông tin";
         if (pos <= 100) return "Tầng 10: Khoa Khoa học và Kỹ thuật thông tin";
         if (pos <= 110) return "Tầng 11: Khu vực doanh nghiệp nghiên cứu";
+        if (pos <= 119) return "Tầng 12: Phòng quay phim";
         return "Tầng 12: Hội trường tòa E";
     }
 
