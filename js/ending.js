@@ -374,17 +374,10 @@ export const handleGameEnding = async (finalTotalScore, isWin, playerName, total
                             window.playVN(storyVanPhong, "vp_01", () => {
                                 if (vn) vn.style.display = 'none';
                                 
-                                const theEndScreen = document.createElement('div');
-                                theEndScreen.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;background:black;color:white;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999999;opacity:0;transition:opacity 2s ease-in-out;';
-                                
-                                theEndScreen.innerHTML = `
-                                    <h1 style="font-size: 3rem; margin-bottom: 20px; text-shadow: 0 0 10px #fff;">TRUE ENDING</h1>
-                                    <p style="font-size: 1.2rem; color: #aaa;">Cảm ơn bạn đã tham gia chuyến hành trình ký ức UIT.</p>
-                                `;
-                                document.body.appendChild(theEndScreen);
-
-                                setTimeout(() => { theEndScreen.style.opacity = '1'; }, 100);
-                                setTimeout(() => { window.location.reload(); }, 6000);
+                                // TOÀN BỘ KÝ ỨC ĐÃ XONG. BÂY GIỜ LÀ LÚC CHẠY CREDIT! 🚀
+                                if (typeof showEndCredits === 'function') {
+                                    showEndCredits();
+                                }
                             });
                         }
                     }, 800); // <-- Trái tim của sự mượt mà nằm ở 800ms này!
@@ -496,3 +489,35 @@ export const handleGameEnding = async (finalTotalScore, isWin, playerName, total
         }
     }
 };
+
+// Hàm kích hoạt màn hình Credit
+function showEndCredits() {
+    const creditScreen = document.getElementById('credit-screen');
+    const thankYou = document.getElementById('thank-you-screen');
+    
+    if (creditScreen) {
+        creditScreen.classList.remove('hidden');
+        console.log("Đang chạy Credit...");
+    }
+
+    // Phát nhạc Credit
+    try {
+        const creditMusic = new Audio('assets/sound/credit.mp3');
+        creditMusic.volume = 0.8;
+        creditMusic.play().catch(e => console.warn("Không tìm thấy file nhạc: assets/sound/credit.mp3"));
+    } catch (e) {
+        console.error("Lỗi âm thanh:", e);
+    }
+
+    // Đợi đúng 28 giây (khớp với animation CSS)
+    setTimeout(() => {
+        if (thankYou) {
+            thankYou.classList.remove('hidden');
+            // Dùng setTimeout nhỏ để trigger hiệu ứng transition mờ dần
+            setTimeout(() => {
+                thankYou.classList.add('show');
+                console.log("Đã hiện màn hình Cảm ơn!");
+            }, 100);
+        }
+    }, 28000); 
+}
