@@ -20,7 +20,7 @@ const storyBadToaC = [
     { 
         id: "bad_01", 
         name: "", 
-        text: "Âm thanh ồn ào náo nhiệt của sảnh Tòa C đột ngột tắt lịm đi. Không gian xung quanh dường như bị đóng băng, mọi sinh viên đứng im bất động.", 
+        text: "Âm thanh ồn ào náo nhiệt của sảnh Tòa C đột ngột tắt lịm đi như ai đó vừa rút phích cắm điện. ", 
         bg: "", 
         sprite: "", 
         nextId: "bad_02" 
@@ -36,42 +36,27 @@ const storyBadToaC = [
     { 
         id: "bad_03", 
         name: "", 
-        text: "Cậu ta từ từ hạ poster xuống, đứng thẳng người. Nụ cười sự kiện tắt đi. Ánh mắt bỗng trở nên sâu thẳm, tĩnh lặng và lạnh lẽo — hệt như ánh mắt của Người Hướng Dẫn ở sảnh Tòa E.", 
+        text: "Cậu CTV BHT CNPM không còn dáng vẻ lăng xăng, nhiệt tình ban nãy. Cậu ta từ từ hạ chiếc micro xuống, đứng thẳng người.", 
         bg: "", 
-        sprite: "assets/images/chibi.png", 
+        sprite: "", 
         nextId: "bad_04" 
     },
     { 
         id: "bad_04", 
-        name: "CTV BHTCNPM", 
-        text: "Dữ liệu không khớp. Anh đã quên hết những ký ức trước đây. Anh sẽ kẹt ở đây mãi mãi.", 
+        name: "", 
+        text: "Khi cậu ta ngẩng lên, ánh mắt bỗng trở nên sâu thẳm, tĩnh lặng và lạnh lẽo — hệt như ánh mắt của Người Hướng Dẫn trong thang máy Tòa E lúc đầu.", 
         bg: "", 
-        sprite: "assets/images/test_guide.png", 
+        sprite: "", 
         nextId: "bad_05" 
     },
     { 
         id: "bad_05", 
-        name: "{PLAYER}", 
-        text: "Giọng điệu này... cậu là người tự xưng là admin lúc nãy? Đủ rồi, đừng có đùa. Tôi đã gom đủ 4 mảnh. Cho tôi thoát ra ngoài đi.", 
-        bg: "", 
-        sprite: "assets/images/test_main.png", 
-        nextId: "bad_06" 
-    },
-    { 
-        id: "bad_06", 
         name: "CTV BHTCNPM", 
-        text: "Hahaha, đâu phải cứ có đủ 4 mảnh là được thả ra, haha..", 
+        text: "Dữ liệu không khớp. Anh đã quên hết những ký ức trước đây. Anh sẽ kẹt ở đây mãi mãi.", 
         bg: "", 
         sprite: "assets/images/test_guide.png", 
-        nextId: "bad_07" 
-    },
-    { 
-        id: "bad_07", 
-        name: "{PLAYER}", 
-        text: "Cái gì!?", 
-        bg: "", 
-        sprite: "assets/images/test_main.png", 
-        nextId: null 
+        noSkip: true,
+        nextId: null
     }
 ];
 
@@ -79,9 +64,10 @@ const storyTrueToaC_Part1 = [
     { 
         id: "true_01", 
         name: "", 
-        text: "Âm thanh ồn ào náo nhiệt của sảnh Tòa C đột ngột tắt lịm đi. Không gian xung quanh dường như bị đóng băng... Sảnh Tòa C bỗng trở nên rộng lớn và vắng lặng đến nghẹt thở.", 
+        text: "Âm thanh ồn ào náo nhiệt của sảnh Tòa C đột ngột tắt lịm đi như ai đó vừa rút phích cắm điện. Không gian xung quanh đóng băng hoàn toàn", 
         bg: "", 
         sprite: "", 
+        noSkip: true,
         nextId: "true_02" 
     },
     { 
@@ -90,6 +76,7 @@ const storyTrueToaC_Part1 = [
         text: "Cậu CTV BHTCNPM không còn dáng vẻ lăng xăng ban nãy. Cậu ta đứng thẳng người. Ánh mắt bỗng trở nên sâu thẳm hệt như Người Hướng Dẫn ở sảnh Tòa E.", 
         bg: "", 
         sprite: "assets/images/chibi.png", 
+        noSkip: true,
         nextId: "true_03" 
     },
     { 
@@ -98,14 +85,16 @@ const storyTrueToaC_Part1 = [
         text: "Dữ liệu đã khớp. Anh nhớ rất kỹ nơi này... dù đã rời đi từ lâu.", 
         bg: "", 
         sprite: "assets/images/chibi.png", 
+        noSkip: true,
         nextId: "true_04" 
     },
     { 
         id: "true_04", 
         name: "{PLAYER}", 
-        text: "Giọng điệu này... cậu là admin lúc nãy? Trò chơi kết thúc. Tôi đã gom đủ 4 mảnh. Cho tôi thoát ra ngoài đi.", 
+        text: "Cái giọng điệu này... Cậu là cái hệ thống admin lúc nãy? Thôi được rồi, trò chơi kết thúc. Tôi đã gom đủ 4 mảnh. Mở cửa cho tôi thoát ra khỏi đây", 
         bg: "", 
         sprite: "assets/images/test_main.png", 
+        noSkip: true,
         nextId: "true_05" 
     },
     { 
@@ -114,6 +103,7 @@ const storyTrueToaC_Part1 = [
         text: "Anh cứ tưởng hệ thống bắt anh đi gom ký ức sao? Không đâu... Là tự tâm trí anh đang nhớ lại những gì nó không muốn quên đi thôi.", 
         bg: "", 
         sprite: "assets/images/chibi.png", 
+        noSkip: true,
         nextId: null
     }
 ];
@@ -122,9 +112,10 @@ const storyTrueToaC_Part2 = [
     { 
         id: "true_07", 
         name: "CTV BHTCNPM", 
-        text: "Anh đã tìm lại được phần dữ liệu thanh xuân của mình rồi. Đến lúc phải tỉnh dậy để chạy deadline tiếp thôi, cựu sinh viên.", 
+        text: "Anh đã khôi phục xong toàn bộ dữ liệu thanh xuân của mình rồi. Đến lúc phải tỉnh dậy để chạy deadline tiếp thôi, cựu sinh viên.", 
         bg: "", 
         sprite: "assets/images/chibi.png", 
+        noSkip: true,
         nextId: null 
     }
 ];
@@ -165,7 +156,7 @@ const storyVanPhong = [
     {
         id: "vp_05",
         name: "",
-        text: "Đó là email có tiêu đề: 'Thư ngỏ: Mời anh/chị Cựu sinh viên về thăm trường và làm diễn giả Lễ Kỷ niệm 20 năm UIT '. Thời gian là từ tháng 5.",
+        text: "Đó là email có tiêu đề: 'Thư ngỏ: Mời anh/chị Cựu sinh viên về thăm trường và làm diễn giả Lễ Kỷ niệm 20 năm UIT'. Thời gian là từ tháng 5",
         bg: "",
         sprite: "",
         nextId: "vp_06",
@@ -174,6 +165,14 @@ const storyVanPhong = [
         id: "vp_06",
         name: "",
         text: "Sáng sớm hôm sau. Một chiếc taxi đỗ xịch trước cổng trường UIT.",
+        bg: "",
+        sprite: "",
+        nextId: "vp_07"
+    },
+    {
+        id: "vp_07",
+        name: "",
+        text: "Không còn là chiều không gian ảo mộng nữa, mà là thực tại ngập tràn sức sống.",
         bg: "",
         sprite: "",
         nextId: null
@@ -336,19 +335,11 @@ export const handleGameEnding = async (finalTotalScore, isWin, playerName, total
                         }
 
                         // Bơm CSS ép chữ hiện lên xuyên rào cản
-                       const forceStyle = document.createElement('style');
+                        const forceStyle = document.createElement('style');
                         forceStyle.id = 'force-vn-style';
+                        // Bơm CSS để tạo bối cảnh thế giới thực
                         forceStyle.innerHTML = `
-                            /* Ép khung thoại nổi lên */
-                            .uit-dialogue-box, #uit-dialogue-box, .dialogue-box {
-                                display: flex !important; opacity: 1 !important; visibility: visible !important; 
-                                z-index: 99999 !important; background: rgba(15, 15, 25, 0.95) !important;
-                                border: 2px solid #fff !important; box-shadow: 0 0 20px rgba(255, 255, 255, 0.2) !important;
-                            }
-                            .dialogue-name { color: #00ff88 !important; text-shadow: 1px 1px 0 #000 !important; }
-                            .dialogue-text { color: #ffffff !important; text-shadow: 1px 1px 0 #000 !important; }
-
-                            /* 🛑 LỆNH CẤM CỬA TUYỆT ĐỐI: Ẩn ảnh nhân vật và mọi thứ không cần thiết */
+                            /* 🛑 ẨN TẤT CẢ ẢNH NHÂN VẬT & HIỆU ỨNG THẾ GIỚI ẢO */
                             #vn-sprite, .vn-sprite, img[id*="sprite"], .petal, #overlay {
                                 display: none !important;
                                 opacity: 0 !important;
@@ -357,8 +348,11 @@ export const handleGameEnding = async (finalTotalScore, isWin, playerName, total
                                 height: 0 !important;
                             }
                             
-                            /* Đảm bảo màn hình đen xì */
-                            #vn-screen { background-color: #05050a !important; background-image: none !important; }
+                            /* ĐỔI MÀU NỀN CỦA GIAO DIỆN VN SANG MÀU ĐEN (thay vì nền hồng f0cbcb mặc định) */
+                            #vn-screen { 
+                                background-color: #05050a !important; 
+                                background-image: none !important; 
+                            }
                         `;
                         document.head.appendChild(forceStyle);
 
@@ -395,7 +389,7 @@ export const handleGameEnding = async (finalTotalScore, isWin, playerName, total
     };
 
     // ======= KỊCH BẢN 1: BAD ENDING =======
-    if (finalTotalScore < 180) { 
+    if (finalTotalScore < 0) { 
         if (vnScreen) vnScreen.classList.add('light-glitch-effect');
         if (typeof window.playVN === 'function') {
             window.playVN(storyBadToaC, "bad_01", async () => {
@@ -419,14 +413,27 @@ export const handleGameEnding = async (finalTotalScore, isWin, playerName, total
                             const style = document.createElement('style');
                             style.id = 'cursed-override-css';
                             style.innerHTML = `
+                                /* 🛑 GIAO DIỆN BAD ENDING GỐC CỦA BẠN 🛑 */
                                 #summaryScreen, #leaderboardScreen, .leaderboard-container, .summary-board {
                                     background: #110000 !important; background-image: none !important; box-shadow: 0 0 30px #ff0000, inset 0 0 50px #ff0000 !important; color: #ff3333 !important; border: 2px solid #ff0000 !important;
                                 }
-                                #summaryScreen *, #leaderboardScreen * { color: #ff3333 !important; border-color: #550000 !important; font-family: monospace !important; text-shadow: 2px 2px 0px #000 !important; }
+                                #summaryScreen *, #leaderboardScreen * { 
+                                    color: #ff3333 !important; border-color: #550000 !important; font-family: monospace !important; text-shadow: 2px 2px 0px #000 !important; 
+                                }
                                 .leaderboard-row { background: #220000 !important; }
+
+                                /* 🔥 NGOẠI LỆ: ÉP TÊN CỦA BẠN SÁNG LÊN GIỮA BIỂN MÁU 🔥 */
+                                #leaderboardScreen .you, .leaderboard-row.you, .row.you {
+                                    background: #550000 !important; /* Đỏ đậm hơn để tách biệt */
+                                    border: 1px dashed #ff3333 !important;
+                                }
+                                #leaderboardScreen .you *, .leaderboard-row.you *, .row.you * {
+                                    color: #ffffff !important; /* Chữ màu trắng bóc */
+                                    text-shadow: 0 0 8px #ff0000 !important; /* Tỏa sáng viền đỏ */
+                                    font-weight: bold !important;
+                                }
                             `;
                             document.head.appendChild(style);
-
                             document.body.classList.add('cursed-mode');
                             document.querySelectorAll('.title, #summary-title').forEach(t => t.innerText = "⚠ LỖI: DỮ LIỆU BỊ GIAM GIỮ ⚠");
                         }, 1500);
@@ -472,6 +479,7 @@ export const handleGameEnding = async (finalTotalScore, isWin, playerName, total
                         setTimeout(async () => {
                             cleanUpOverlays();
                             if (vnScreen) vnScreen.style.display = 'none';
+                            try { await saveScore(playerName, finalTotalScore, totalTime, 1); } catch (err) {}
 
                             try {
                                 const module = await import('./leaderboard.js');

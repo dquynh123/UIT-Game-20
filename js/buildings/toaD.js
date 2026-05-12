@@ -5,8 +5,8 @@ const storyToaC = [
     //story nối tiếp tòa d
     {
         id: "c_01",
-        name: "Bí thư đoàn",
-        text: "Wow anh siêu thế!",
+        name: "Bí thư Vũ",
+        text: "Em cảm ơn anh nhiều lắm!",
         bg: "", 
         sprite: "assets/images/chibi.png",
         nextId: "c_02"
@@ -14,56 +14,77 @@ const storyToaC = [
     {
         id: "c_02",
         name: "{PLAYER}",
-        text: "Ờm... chuyện nhỏ he he. Giờ anh đi đâu tiếp được?",
+        text: "Em làm tốt lắm rồi. Chỉ cần nhớ: làm bí thư mà một mình quét sân cũng không sao, nhưng nhớ gọi điện kêu đồng đội phụ. Còn anh đi đây nhé.",
         bg: "",
         sprite: "assets/images/test_main.png",
         nextId: "c_03"
     },
-
     {
         id: "c_03",
-        name: "Bí thư đoàn",
-        text: "Anh qua Tòa C đi, bên đó Ban học tập Công nghệ phần mềm đang tổ chức đố vui có thưởng nghe đồn vui lắm!",
+        name: "Bí thư Vũ",
+        text: "Anh về dự kỷ niệm 20 năm nha! Lúc đó em sẽ khoe thành tích Đoàn của nhiệm kỳ em.",
         bg: "", 
         sprite: "assets/images/chibi.png",
         nextId: "c_04"
     },
-
     {
         id: "c_04",
-        name: "CTV BHTCNPM",
-        text: "Anh trai ơi! Vô test nhân phẩm 100 câu hỏi lịch sử UIT lấy quà không? Gian hàng vắng lặng quá!",
-        bg: "",
-        sprite: "assets/images/chibi.png",
-        nextId: "c_05"
-    },
-
-    {
-        id: "c_05",
         name: "{PLAYER}",
-        text: "Chỗ em có phần thưởng nào là cái cục phát sáng không?",
+        text: "Tòa C cuối cùng - chắc là nơi mình lưu giữ những thứ quan trọng nhất.",
         bg: "",
         sprite: "assets/images/test_main.png",
-        nextId: "c_06"
+        nextId: "c_05"
     },
-
     {
-        id: "c_06",
-        name: "CTV BHTCNPM",
-        text: "Có luôn! Cúp mica gắn LED bao chói mắt! Nhưng mà không dễ đâu nha. Anh tự tin nhớ hết thông tin trường mình không? Cảnh báo nhỏ cho anh là mấy đáp án sẽ bị xáo trộn đó nên anh phải thật tinh mắt nhé.",
+        id: "c_05",
+        name: "CTV BHT CNPM",
+        text: "Anh trai ơi! Đi đâu mà vội mà vàng, ghé ngang gian hàng Ban Học Tập làm bài test kiến thức lấy quà không? Đang vắng khách quá nè!",
         bg: "",
         sprite: "assets/images/chibi.png",
+        nextId: "c_06"
+    },
+    {
+        id: "c_06",
+        name: "{PLAYER}",
+        text: "Anh đang kiếm đồ. Ở chỗ em có cái cục gì lấp lánh, phát sáng không?",
+        bg: "",
+        sprite: "assets/images/test_main.png",
         nextId: "c_07"
+    },
+    {
+        id: "c_07",
+        name: "CTV BHT CNPM",
+        text: "Có luôn! Tụi em có cái cúp mica gắn LED chớp tắt bao chói mắt! Nhưng mà muốn lấy thì khoai lắm nha.",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: "c_08"
     },
 
     {
-        id: "c_07",
+        id: "c_08",
+        name: "CTV BHT CNPM",
+        text: "Anh phải vượt qua thử thách 100 câu hỏi về lịch sử trường mình. Cảnh báo trước là đáp án bị hệ thống xáo trộn liên tục đó, anh phải thật tinh mắt mới chọn kịp.",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        noSkip: true,
+        nextId: "c_09"
+    },
+    {
+        id: "c_09",
         name: "{PLAYER}",
-        text: "Okay, triển luôn",
+        text: "100 câu à? Được. Anh sẵn sàng rồi.",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "c_10"
+    },
+    {
+        id: "c_10",
+        name: "CTV BHT CNPM",
+        text: "Chà, tự tin gớm ta! Để xem cựu sinh viên nhớ trường được bao nhiêu phần trăm nhé.",
         bg: "",
         sprite: "assets/images/test_main.png",
         nextId: null
-    }
+    },
 ];
 
 function transitionToToaC() {
@@ -262,54 +283,6 @@ function showResultToaD(message, isGameOver) {
             transitionToToaC();
         }
     }
-    
-    /*const finalMsg = document.getElementById('final-msg-toa-d');
-    const finalScore = document.getElementById('final-score-toa-d');
-    const actionBtn = document.getElementById('to-toa-c-btn');
-    const overlay = document.getElementById('fade-overlay');
-    const uiToaD = document.getElementById('ui-toa-d'); 
-
-    finalMsg.innerText = message;
-    finalScore.innerText = scoreToaD;
-    endScreenToaD.style.display = 'block';
-
-    if (isGameOver) {
-        actionBtn.innerText = "CHƠI LẠI";
-        actionBtn.onclick = () => {
-            initToaD(); // Gọi trực tiếp hàm init để reset game
-        };
-    } else {
-        if (window.UITGameStats) {
-            window.UITGameStats.addScore("Tòa D", scoreToaD);
-        }
-        actionBtn.innerText = "TIẾP TỤC";
-        actionBtn.onclick = () => {
-            actionBtn.disabled = true;
-
-            // 1. Phủ đen
-            if (overlay) {
-                overlay.style.opacity = "1";
-                overlay.style.pointerEvents = "all";
-            }
-
-            // 2. Dọn dẹp để tránh nháy ảnh mờ
-            setTimeout(() => {
-                ctxToaD.clearRect(0, 0, canvasToaD.width, canvasToaD.height);
-                if (uiToaD) uiToaD.style.display = 'none';
-                endScreenToaD.style.display = 'none';
-                transitionToToaC();
-
-                // 4. Mở mắt
-                setTimeout(() => {
-                    if (overlay) {
-                        overlay.style.opacity = "0";
-                        overlay.style.pointerEvents = "none";
-                    }
-                    actionBtn.disabled = false;
-                }, 800); 
-            }, 500); 
-        };
-    }*/
 }
 
 function cleanupToaD() {

@@ -7,7 +7,7 @@
     left: 0;
     width: 100vw; 
     height: 100vh; 
-    background-color: #0a192f; 
+    background-color: #f0cbcb; 
     overflow: hidden; 
     z-index: 999; /* Ép nổi lên trên cùng */
 }
@@ -23,62 +23,110 @@
     filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.2)); 
 }
 
-/* Hộp thoại công nghệ / Xuyên không */
-.uit-dialogue-box {
-    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
-    width: 85%; min-height: 160px;
-    background: rgba(10, 25, 47, 0.9); 
-    border: 2px solid #00d2ff; 
-    box-shadow: 0 0 15px rgba(0, 210, 255, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.8);
-    border-radius: 8px;
-    padding: 35px 25px 25px 25px;
-    color: #e6f1ff; 
-    font-size: 1.2rem; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6; cursor: pointer; z-index: 100;
+/* ============================================================
+   HỘP THOẠI CĂN TRÁI TUYỆT ĐỐI - CHUẨN ẢNH GỐC BÊN PHẢI
+   ============================================================ */
+
+/* 1. Khung thoại chính: Box rõ nét, đen sâu, ranh giới rành mạch */
+.uit-dialogue-box, #uit-dialogue-box, .dialogue-box {
+    position: absolute !important; 
+    bottom: 0 !important; 
+    left: 0 !important;
+    width: 100vw !important; 
+    height: 24vh !important; /* Chiều cao cố định */
+    
+    background: rgba(0, 0, 0, 0.2) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important; 
+    border-radius: 0 !important; 
+    transform: none !important; 
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 100 !important;
+    display: block !important; /* Xóa flexbox gây lỗi đè chữ */
+
+    transition: opacity 0.3s ease !important; /* Thêm hiệu ứng mờ dần */
 }
 
-/* Thẻ tên nhân vật */
 .uit-name-tag {
-    position: absolute; top: -20px; left: 20px;
-    background: #004080; color: #ffffff;
-    padding: 5px 25px; 
-    border: 2px solid #00d2ff; border-radius: 4px;
-    font-weight: bold; font-size: 1.1rem; letter-spacing: 1px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    position: absolute !important;
+    top: 0 !important; /* Chốt ở mép viền trên cùng */
+    transform: translateY(-79%) !important; /* BÍ KÍP: Đẩy lên đúng 50% để đường viền cắt ngang giữa chữ */
+    left: 15vw !important; 
+    
+    background: transparent !important; 
+    color: #e2e8f0 !important; 
+    padding: 0 !important; 
+    border: none !important; 
+    font-size: 1.5rem !important; 
+    font-weight: bold !important; 
+    letter-spacing: 1px !important;
+    box-shadow: none !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,1) !important;
+    text-align: left !important;
+    margin: 0 !important;
 }
 
-.uit-blink { position: absolute; bottom: 10px; right: 20px; color: #00d2ff; animation: fadePulse 1s infinite; }
-@keyframes fadePulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
-
-/* Nút Lựa Chọn (Choices) */
-#choice-container { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; pointer-events: auto; }
-.uit-choice-btn {
-    background: rgba(0, 64, 128, 0.6); color: #ffffff;
-    border: 1px solid #00d2ff; border-radius: 4px;
-    padding: 12px; font-size: 1.1rem; font-family: inherit; 
-    cursor: pointer; transition: all 0.2s; text-align: left; padding-left: 20px;
-}
-.uit-choice-btn:hover { background: #00d2ff; color: #0a192f; font-weight: bold; transform: translateX(10px); box-shadow: 0 0 10px rgba(0, 210, 255, 0.5); }
-
-/* =========================================
-   STYLE CHO CHỮ DẪN TRUYỆN / CHUYỂN CẢNH
-   (Thêm vào cuối file dialogue.css)
-========================================= */
-.narration-text {
-    font-style: italic;
-    color: #8892b0; /* Màu xám xanh nhạt nhìn rất "cinematic" */
-    font-size: 1.15rem; 
-    text-align: center; /* Căn giữa toàn bộ chữ */
-    display: block;
-    line-height: 1.6;
-    animation: fadeInNarration 1s ease-in-out;
+/* 3. Chữ thoại chính: Nằm gọn gàng bên trong hộp đen */
+#dialogue-text, .dialogue-text, .narration-text {
+    position: absolute !important;
+    top: 40px !important; /* Đẩy xuống một xíu để chừa chỗ cho nửa dưới của Tên */
+    left: 15vw !important; 
+    width: 70vw !important; 
+    
+    text-align: left !important; 
+    color: #ffffff !important; 
+    font-size: 1.35rem !important; 
+    line-height: 1.6 !important; 
+    text-shadow: 2px 2px 4px rgba(0,0,0,1) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-style: normal !important; 
+    transform: none !important; 
 }
 
-@keyframes fadeInNarration {
-    from { opacity: 0; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
+/* 4. Mũi tên nháy (Góc phải dưới cùng) */
+.uit-blink { 
+    position: absolute !important; 
+    bottom: 20px !important; 
+    right: 5vw !important; 
+    transform: none !important;
+    color: #ffffff !important; 
+    font-size: 1.2rem !important;
 }
 
+/* 5. Nhân vật (Sprite) - Giữ nguyên lề phải */
+#vn-sprite {
+    position: absolute !important;
+    bottom: 0 !important;
+    top: auto !important;
+    right: 5vw !important; 
+    left: auto !important; 
+    height: 85vh !important; 
+    object-fit: contain !important;
+    filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+    
+    /* BÍ KÍP CHUYỂN ĐỘNG: Thêm transition để mượt mà mọi thay đổi */
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out !important;
+    transform: translateX(0) scale(1) !important; /* Vị trí gốc */
+    opacity: 1; 
+}
+
+/* Class dùng để tạo hiệu ứng "bước ra ngoài" khi đổi nhân vật */
+.sprite-changing {
+    opacity: 0 !important;
+    transform: translateX(30px) scale(0.98) !important; /* Lùi nhẹ về bên phải và nhỏ đi một xíu */
+}
+
+/* Class ẩn hoàn toàn (lúc không có nhân vật) */
+.hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
 /* =========================================
    HIỆU ỨNG GLITCH RÁCH MÀN HÌNH (RGB SPLIT)
 ========================================= */
@@ -155,3 +203,174 @@
 }
 .trigger-flashbang { opacity: 1 !important; }
 
+/* ============================================================
+   MENU ĐIỀU KHIỂN NHANH (NẰM SÁT ĐÁY DƯỚI CÙNG)
+   ============================================================ */
+
+/* Khung chứa các nút */
+.vn-quick-menu {
+    position: absolute !important;
+    bottom: 15px !important; /* Ghim sát xuống đáy hộp đen, cách mép 15px */
+    left: 5vw !important; /* Dạt sang lề phải */
+    
+    /* Gỡ bỏ các lệnh gắn trên mép cũ */
+    top: auto !important; 
+    transform: none !important; 
+    
+    display: flex !important; 
+    gap: 20px !important; /* Khoảng cách giữa các nút */
+    z-index: 110 !important;
+}
+
+/* Style cho từng nút (Thanh mảnh, mộc mạc giống ảnh gốc) */
+.vn-btn {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    
+    color: rgba(255, 255, 255, 0.6) !important; /* Chữ mờ đi một chút */
+    font-size: 0.9rem !important; /* Cỡ chữ nhỏ lại cho tinh tế */
+    font-weight: 400 !important; /* Bỏ in đậm, giữ nét chữ thanh mảnh */
+    letter-spacing: 0.5px !important;
+    text-transform: none !important; /* Bỏ viết hoa toàn bộ, giữ nguyên gốc (Ví dụ: Log, Skip) */
+    
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+}
+
+/* Hiệu ứng khi rê chuột vào */
+.vn-btn:hover {
+    color: #ffffff !important; /* Sáng trắng lên */
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5) !important; /* Tỏa sáng nhẹ nhàng */
+    transform: scale(1.05) !important; /* Hơi nhích to lên một tẹo */
+}
+
+/* Khi bấm chuột xuống */
+.vn-btn:active {
+    transform: scale(0.95) !important;
+}
+
+/* ============================================================
+   MÀN HÌNH LỊCH SỬ (LOG) - STYLE TỐI GIẢN, SẮC NÉT
+   ============================================================ */
+#vn-log-screen {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.4); /* Lớp nền mờ mờ sau lưng bảng */
+    z-index: 9999; 
+    display: flex; justify-content: center; align-items: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+#vn-log-screen.active {
+    opacity: 1; pointer-events: auto;
+}
+
+/* KHUNG CHỨA LOG (Giống ảnh gốc + Viền sắc nét) */
+.log-container {
+    width: 85%; height: 85%; /* To gần hết màn hình */
+    background: rgba(15, 15, 15, 0.85); /* Đen mờ, nhìn thấu cảnh game phía sau */
+    
+    /* BÍ KÍP Ở ĐÂY: Viền mảnh 1px, màu trắng mờ, cực kỳ sắc nét và gọn */
+    border: 1px solid rgba(255, 255, 255, 0.3); 
+    border-radius: 4px; /* Hơi bo góc nhẹ xíu cho tinh tế */
+    
+    display: flex; flex-direction: column;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8); /* Bóng đổ cho bảng nổi bật lên */
+}
+
+/* ẨN TIÊU ĐỀ, CHỈ GIỮ LẠI NÚT TẮT NHỎ GÓC PHẢI */
+.log-header {
+    display: flex; 
+    justify-content: space-between; /* Đẩy tiêu đề sang trái, nút tắt sang phải */
+    align-items: center;
+    padding: 20px 60px; /* Căn lề cho bằng với đoạn text bên dưới */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Đường kẻ phân cách siêu mảnh, mờ mờ */
+}
+
+.log-header h2 { 
+    display: block !important; /* Lệnh ép hiện lại chữ */
+    margin: 0;
+    color: rgba(255, 255, 255, 0.7); /* Màu trắng ngà mờ nhẹ */
+    font-size: 1rem;
+    font-weight: 400; /* Nét chữ thanh mảnh, không in đậm */
+    letter-spacing: 3px; /* Giãn chữ ra nhìn cho "điện ảnh" */
+    text-transform: uppercase;
+}
+
+#close-log-btn {
+    background: none; border: none; color: rgba(255, 255, 255, 0.4); 
+    font-size: 1.5rem; cursor: pointer; transition: 0.2s; padding: 5px;
+}
+
+#close-log-btn:hover { 
+    color: #fff; 
+    transform: scale(1.2); 
+}
+
+/* KHU VỰC CHỨA CHỮ (Rộng rãi, thoáng đãng giống ảnh) */
+#log-content-area {
+    flex: 1; 
+    padding: 40px 60px; /* Căn lề trái phải rộng ra */
+    overflow-y: auto;
+    display: flex; flex-direction: column; gap: 25px; /* Khoảng cách giữa các đoạn thoại */
+}
+
+/* Thanh cuộn (Scrollbar) làm thanh mảnh lại cho hợp style */
+#log-content-area::-webkit-scrollbar { width: 6px; }
+#log-content-area::-webkit-scrollbar-track { background: transparent; }
+#log-content-area::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 10px; }
+#log-content-area::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.4); }
+
+/* STYLE CHO CHỮ TRONG LOG */
+.log-item { display: flex; flex-direction: column; }
+
+.log-name { 
+    color: rgba(255, 255, 255, 0.4); /* Tên nhân vật mờ nhẹ */
+    font-size: 0.95rem; margin-bottom: 4px; 
+    text-transform: uppercase; letter-spacing: 1px;
+}
+
+.log-text, .log-narration { 
+    color: #f0f0f0; /* Trắng ngà, không chói mắt */
+    font-size: 1.25rem; 
+    line-height: 1.8; /* Khoảng cách dòng rộng y chang ảnh */
+    font-weight: 300; /* Nét chữ thanh mảnh */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+/* ============================================================
+   MÀN HÌNH MENU CÀI ĐẶT
+   ============================================================ */
+#vn-menu-screen {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px);
+    z-index: 9999; 
+    display: flex; justify-content: center; align-items: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+}
+
+#vn-menu-screen.active { opacity: 1; pointer-events: auto; }
+
+.menu-container {
+    width: 50%; height: auto; /* Menu không cần to như Log */
+    min-height: 300px;
+}
+
+#menu-content-area {
+    padding: 40px 60px;
+    display: flex; flex-direction: column; gap: 30px;
+}
+
+.setting-row {
+    display: flex; justify-content: space-between; align-items: center;
+    color: #f0f0f0; font-size: 1.2rem;
+}
+
+.vn-slider {
+    width: 55%; 
+    cursor: pointer;
+    accent-color: #00d2ff; /* Màu xanh công nghệ */
+}

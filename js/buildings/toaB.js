@@ -1,17 +1,17 @@
 const StoryToaD = [
     {
         id: "test_01",
-        name: "Bí thư đoàn",
-        text: "Anh ơi! Trông quen quen ta, đi Chủ Nhật Xanh chung bao giờ chưa ta?",
+        name: "",
+        text: "Main bước ra từ hành lang Tòa B, tay cầm chìa khóa Tòa D vừa nhận được.",
         bg: "",
-        sprite: "assets/images/chibi.png",
+        sprite: "",
         nextId: "test_02"
     },
 
     {
         id: "test_02",
         name: "{PLAYER}",
-        text: "Chắc người giống người thôi em. Em có thấy cái gì sáng sáng rớt quanh đây không?",
+        text: "Tòa D… hồi xưa toàn lên đây họp Đoàn, làm báo cáo, phát động phong trào. Mà sao giờ vắng lặng thế này?",
         bg: "",
         sprite: "assets/images/test_main.png",
         nextId: "test_03"
@@ -20,7 +20,7 @@ const StoryToaD = [
     {
         id: "test_03",
         name: "Bí thư đoàn",
-        text: "Sáng sáng gì anh ơi. Anh lại đây tham gia Chủ Nhật Xanh đi anh! Em đang muốn nhanh nhanh quét sạch sân để về tham gia DEVO Challenge nè! Giúp em một tay với.",
+        text: "Anh… anh có phải là anh {PLAYER} không ạ? Hồi trước làm Bí thư Đoàn khoa CNPM ấy?",
         bg: "",
         sprite: "assets/images/chibi.png",
         nextId: "test_04"
@@ -29,7 +29,7 @@ const StoryToaD = [
     {
         id: "test_04",
         name: "{PLAYER}",
-        text: "Được luôn. Để anh thử phụ một tay. À mà bạn em gửi em tờ giấy nè.",
+        text: "Ủa, em biết anh? Anh nhìn em… cũng quen mắt nhưng mà chưa nhớ ra.",
         bg: "",
         sprite: "assets/images/test_main.png",
         nextId: "test_05"
@@ -38,7 +38,7 @@ const StoryToaD = [
     {
         id: "test_05",
         name: "Bí thư đoàn",
-        text: "Cái tờ này nó kêu anh là nếu anh muốn dọn lá ở tòa D thì anh phải gõ chữ càng nhanh càng tốt để dọn nhiều lá nhất có thể.",
+        text: "Trời ạ, đúng anh thật rồi! Em tên Vũ, khoá… 2022 ạ! Hồi em năm nhất, anh đang năm bốn. Hôm đó anh ngầu lắm. Anh không nhớ em, nhưng em nhớ anh rõ lắm ý",
         bg: "",
         sprite: "assets/images/chibi.png",
         nextId: "test_06"
@@ -46,8 +46,8 @@ const StoryToaD = [
 
     {
         id: "test_06",
-        name: "Bí thư đoàn",
-        text: "Anh ơi em tin vào anh đó. Cố lên nhé!",
+        name: "{PLAYER}",
+        text: "À Vũ à, anh nhớ ra rồi.",
         bg: "",
         sprite: "assets/images/chibi.png",
         nextId: "test_07"
@@ -55,13 +55,69 @@ const StoryToaD = [
 
     {
         id: "test_07",
-        name: "{PLAYER}",
-        text: "...",
+        name: "Bí thư Vũ",
+        text: "Dạ, hôm nay là ngày Chủ Nhật Xanh của trường, lẽ ra có mười mấy đứa tình nguyện viên. Mà tự nhiên sáng nay tụi nó kêu mưa, kêu nắng, rồi đứa thì ngủ quên… cuối cùng chỉ còn một mình em.",
         bg: "",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/chibi.png",
+        nextId: "test_08"
+    },
+    {
+        id: "test_08",
+        name: "Bí thư Vũ",
+        text: "Cái sân này, em quét từ 7h sáng, quét mãi không hết, vì gió cứ thổi lá từ khắp nơi sang.",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: "test_09"
+    },
+    {
+        id: "test_09",
+        name: "Bí thư Vũ",
+        text: "Mới nãy em còn tự nhủ: “Giá mà hồi xưa anh {PLAYER} còn làm Bí thư, chắc ảnh kéo cả đội đến giúp”.",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: "test_10"
+    },
+    {
+        id: "test_10",
+        name: "{PLAYER}",
+        text: "Em nịnh đấy à? Mà em có thấy cái gì lấp lánh ở đây không?",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: "test_11"
+    },
+    {
+        id: "test_11",
+        name: "Bí thư Vũ",
+        text: "Dạ không ạ. Anh giúp em một tay với, em còn deadline DEVO Challenge nữa huhu",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: "test_12"
+    },
+    {
+        id: "test_12",
+        name: "",
+        text: "Bỗng nhiên, những chiếc lá khô trên sân bắt đầu phát sáng nhè nhẹ",
+        bg: "",
+        sprite: "",
+        nextId: "test_13"
+    },
+    {
+        id: "test_13",
+        name: "{PLAYER}",
+        text: "Ủa khoan...",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: "test_14"
+    },
+    {
+        id: "test_14",
+        name: "Người hướng dẫn",
+        text: "Chào mừng cựu sinh viên đã đến với Tòa D. ^ ^ lại một mini game nhỏ nữa đây một bàn phím ảo xuất hiện, và anh phải gõ nhanh những từ ngữ xuất hiện trên màn hình. Mỗi từ đúng, một chiếc lá thật ngoài sân biến mất. Anh có 2 phút, chơi không?",
+        bg: "",
+        sprite: "",
+        noSkip: true,
         nextId: null
     }
-
 ];
 
 // ==========================================
