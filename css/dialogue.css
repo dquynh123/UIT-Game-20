@@ -10,6 +10,10 @@
     background-color: #f0cbcb; 
     overflow: hidden; 
     z-index: 999; /* Ép nổi lên trên cùng */
+    /*CHỐNG BÔI ĐEN:*/
+    -webkit-user-select: none; /* Chặn trên Safari/Chrome */
+    -ms-user-select: none;     /* Chặn trên Edge/IE */
+    user-select: none;         /* Lệnh chuẩn chung */
 }
 .vn-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; transition: background-image 0.5s ease; }
 #vn-sprite { 
@@ -373,4 +377,22 @@
     width: 55%; 
     cursor: pointer;
     accent-color: #00d2ff; /* Màu xanh công nghệ */
+}
+
+/* =========================================
+   CHỐNG BÔI ĐEN CHO TOÀN BỘ GAME (TẤT CẢ CÁC TÒA)
+   ========================================= */
+#game-scene {
+    -webkit-user-select: none; /* Chặn trên Safari/Chrome */
+    -moz-user-select: none;    /* Chặn trên Firefox */
+    -ms-user-select: none;     /* Chặn trên Edge/IE */
+    user-select: none;         /* Lệnh chuẩn chung */
+}
+
+/* Đảm bảo các nút bấm cũng không bao giờ bị bôi đen lỗi */
+button, .btn, .uit-btn, .action-btn {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }

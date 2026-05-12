@@ -521,7 +521,7 @@ const storyScene2_UIT = [
 ];
 
 window.startGame = function() {
-    
+    window.currentCheckpoint = "scene1";
     // 1. Bơm cấu trúc HTML Glitch vào Web
     if (!document.getElementById('cyber-glitch-overlay')) {
         const glitchHTML = `
@@ -569,6 +569,7 @@ window.startGame = function() {
             setTimeout(() => {
                 
                 playVN(storyScene2_UIT, "s2_01", () => {
+                    window.currentCheckpoint = "toa-e";
                     window.switchBuilding('toa-e');
                 });
 
@@ -583,3 +584,108 @@ window.startGame = function() {
 };
 window.playVN = playVN;
 
+// ==========================================
+// HỆ THỐNG LƯU / TẢI GAME (CHECKPOINT SYSTEM)
+// ==========================================
+const SAVE_KEY = "UIT_VN_SAVEDATA";
+
+// Biến này sẽ nhớ xem người chơi đang ở giai đoạn nào của game
+window.currentCheckpoint = "scene1"; 
+
+// 1. HÀM LƯU GAME
+window.saveGameProgress = () => {
+    // Thu thập dữ liệu hiện tại
+    const gameData = {
+        playerName: localStorage.getItem('currentPlayerName') || "Bạn",
+        stats: window.UITGameStats, // Lưu toàn bộ điểm rèn luyện và lịch sử
+        checkpoint: window.currentCheckpoint // Lưu mốc cốt truyện
+    };
+
+    // Nén thành chuỗi và cất vào LocalStorage
+    localStorage.setItem(SAVE_KEY, JSON.stringify(gameData));
+    alert("💾 Đã lưu tiến trình game thành công!");
+};
+
+// 2. HÀM TẢI GAME
+window.loadGameProgress = () => {
+    const savedString = localStorage.getItem(SAVE_KEY);
+    
+    if (!savedString) {
+        alert("❌ Không tìm thấy dữ liệu lưu nào!");
+        return;
+    }
+
+    // Giải nén dữ liệu
+    const gameData = JSON.parse(savedString);
+
+    // Bơm dữ liệu ngược lại vào game
+    localStorage.setItem('currentPlayerName', gameData.playerName);
+    if (gameData.stats) {
+        window.UITGameStats.totalScore = gameData.stats.totalScore || 0;
+        window.UITGameStats.stageResults = gameData.stats.stageResults || [];
+    }
+    window.currentCheckpoint = gameData.checkpoint;
+
+    // Đóng bảng Menu Cài đặt
+    const menuScreen = document.getElementById('vn-menu-screen');
+    if (menuScreen) menuScreen.classList.remove('active');
+
+    // Tắt Menu ngoài cùng, ép bật vào Game Scene
+    document.getElementById('main-menu').style.display = 'none';
+    document.getElementById('name-screen').classList.add('hidden');
+    document.getElementById('game-scene').classList.remove('hidden');
+
+    alert(`📂 Đã tải lại game! Bắt đầu từ mốc: ${window.currentCheckpoint}\nĐiểm Rèn Luyện hiện tại: ${window.UITGameStats.totalScore}`);
+
+    // DỌN SẠCH CÁC MÀN HÌNH CŨ
+    const allScreens = ['vn-screen', 'toa-a', 'toa-b', 'toa-c', 'toa-d', 'toa-e'];
+    allScreens.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+    });
+
+    // KHỞI ĐỘNG LẠI TỪ MỐC ĐÃ LƯU
+    resumeFromCheckpoint(window.currentCheckpoint);
+};
+
+// 3. HÀM ĐIỀU PHỐI ĐỂ MỞ ĐÚNG CHỖ ĐANG CHƠI DỞ
+function resumeFromCheckpoint(checkpoint) {
+    if (checkpoint === "scene1") {
+        // Trở lại ngay đầu game
+        if (typeof window.startGame === 'function') window.startGame();
+    } 
+    else if (checkpoint === "toa-e") {
+        // Đang chơi dở mini-game Tòa E
+        window.switchBuilding('toa-e');
+    }
+    else if (checkpoint === "toa-a") {
+        // Đang ở Tòa A
+        window.switchBuilding('toa-a');
+    }
+    // Bạn có thể thêm các if-else khác cho Tòa B, C, D ở đây
+}
+
+// 4. GẮN LỆNH VÀO 2 NÚT BẤM BẠN ĐÃ TẠO SẴN Ở HTML
+document.addEventListener('DOMContentLoaded', () => {
+    const btnSave = document.getElementById('btn-save-game');
+    const btnLoad = document.getElementById('btn-load-game');
+    const btnContinue = document.getElementById('main-continue-btn'); // Nút Tiếp tục ở Main Menu
+
+    // --- ĐOẠN KIỂM TRA DỮ LIỆU CŨ (BƯỚC 2) ---
+    const savedData = localStorage.getItem(SAVE_KEY);
+    if (savedData && btnContinue) {
+        // Nếu có dữ liệu cũ, hiện nút Tiếp tục lên
+        btnContinue.classList.remove('hidden');
+        btnContinue.style.display = 'block';
+        
+        // Khi bấm nút Tiếp tục ở màn hình chính, gọi hàm Load
+        btnContinue.onclick = () => {
+            window.loadGameProgress();
+        };
+    }
+    // ----------------------------------------
+
+    // Gắn lệnh cho nút Lưu/Tải bên trong Menu Cài đặt
+    if (btnSave) btnSave.addEventListener('click', window.saveGameProgress);
+    if (btnLoad) btnLoad.addEventListener('click', window.loadGameProgress);
+});
