@@ -84,6 +84,7 @@ const storyToaC = [
         text: "Chà, tự tin gớm ta! Để xem cựu sinh viên nhớ trường được bao nhiêu phần trăm nhé.",
         bg: "",
         sprite: "assets/images/test_main.png",
+        noSkip: true,
         nextId: null
     },
 ];

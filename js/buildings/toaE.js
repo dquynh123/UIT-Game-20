@@ -425,6 +425,7 @@ const storyToaA = [
         text: "Cái quái gì thế này? Hồi xưa thư viện tòa A yên tĩnh lắm mà ?",
         bg: "",
         sprite: "assets/images/test_main.png",
+        voice: "assets/voice/toaA/1_toaA.ogg",
         noSkip: true,
         nextId: "ht_03" 
     },
@@ -433,6 +434,7 @@ const storyToaA = [
         name: "CTV CNPM",
         text: "Anh ơi, anh i! Rảnh không anh, qua cứu em với! Tự nhiên hôm nay thư viện nhập sách nhiều quá em xếp không kịp, sắp bị đè bẹp tới nơi rồi!",
         bg: "",
+        voice: "assets/voice/toaA/2_toaA.ogg",
         sprite: "assets/images/chibi.png",
         nextId: "ht_04" 
     },
@@ -441,6 +443,7 @@ const storyToaA = [
         name: "{PLAYER}",
         text: "Từ từ đã nhóc. Thư viện gì mà chơi nguyên cái băng chuyền công nghiệp thế này? Giải thích cho anh với.",
         bg: "",
+        voice: "assets/voice/toaA/3_toaA.ogg",
         sprite: "assets/images/test_main.png",
         nextId: "ht_05" 
     },
@@ -449,6 +452,7 @@ const storyToaA = [
         name: "CTV CNPM",
         text: "Dạ chuyện là em đăng ký làm cộng tác viên thư viện. Sáng nay trường về lô sách mới, sách cần xếp lên kệ nhiều như núi ý!",
         bg: "",
+        voice: "assets/voice/toaA/4_toaA.ogg",
         sprite: "assets/images/chibi.png",
         nextId: "ht_06" 
     },
@@ -458,6 +462,7 @@ const storyToaA = [
         name: "{PLAYER}",
         text: "Àaaaaaaa. Mà nãy giờ em có thấy cái gì phát sáng rớt quanh đây không?",
         bg: "",
+        voice: "assets/voice/toaA/5_toaA.ogg",
         sprite: "assets/images/test_main.png",
         nextId: "ht_07"
     },
@@ -467,6 +472,7 @@ const storyToaA = [
         name: "CTV CNPM",
         text: "Dạ? Em nãy giờ chỉ thấy toàn là sách thôi. Mà hình như thỉnh thoảng em cũng thấy mấy đốm sáng bay bay. Chắc tại phân loại sách nhiều quá mờ cả mắt rồi.",
         bg: "",
+        voice: "assets/voice/toaA/6_toaA.ogg",
         sprite: "assets/images/chibi.png",
         nextId: "ht_08"
     },
@@ -476,6 +482,7 @@ const storyToaA = [
         name: "Người hướng dẫn",
         text: "Cậu sinh viên kia mắt không có vấn đề đâu. Cũng chẳng có băng chuyền nào ở đây cả. Thư viện hoàn toàn bình thường.",
         bg: "",
+        voice: "assets/voice/toaA/7_toaA.ogg",
         sprite: "",
         nextId: "ht_09"
     },
@@ -484,6 +491,7 @@ const storyToaA = [
         name: "{PLAYER}",
         text: "Thế cái đống máy móc đang chạy rầm rầm này là do tôi tự tưởng tượng ra hả?",
         bg: "",
+        voice: "assets/voice/toaA/8_toaA.ogg",
         sprite: "assets/images/test_main.png",
         nextId: "ht_10"
     },
@@ -492,6 +500,7 @@ const storyToaA = [
         name: "Người hướng dẫn",
         text: "Đúng rồi đấy. Không gian này đang phản chiếu tâm lý của anh.",
         bg: "",
+        voice: "assets/voice/toaA/9_toaA.ogg",
         sprite: "",
         nextId: "ht_11"
     },
@@ -500,6 +509,7 @@ const storyToaA = [
         name: "Người hướng dẫn",
         text: "Mấy năm nay đi làm, anh lúc nào cũng thấy công việc chạy liên tục như một dây chuyền không có điểm dừng.",
         bg: "",
+        voice: "assets/voice/toaA/9_toaA.ogg",
         sprite: "",
         nextId: "ht_12"
     },
@@ -508,6 +518,7 @@ const storyToaA = [
         name: "Người hướng dẫn",
         text: "Anh quen sống khô khan như một cỗ máy rồi, nên khi bộ não load dữ liệu khu vực này, nó tự động biến thư viện thành một cái xưởng luôn.",
         bg: "",
+        voice: "assets/voice/toaA/9_toaA.ogg",
         sprite: "",
         nextId: "ht_13"
     },
@@ -516,6 +527,7 @@ const storyToaA = [
         name: "Người hướng dẫn",
         text: "Muốn lấy được Mảnh ký ức thì xắn tay áo lên giúp cậu sinh viên kia xếp sách đi.",
         bg: "",
+        voice: "assets/voice/toaA/9_toaA.ogg",
         sprite: "",
         nextId: "ht_14"
     },
@@ -524,6 +536,7 @@ const storyToaA = [
         name: "{PLAYER}",
         text: "...Bệnh nghề nghiệp nặng tới mức mang cả dây chuyền vào trong tưởng tượng. Chịu luôn rồi.",
         bg: "",
+        voice: "assets/voice/toaA/10_toaA.ogg",
         sprite: "assets/images/test_main.png",
         nextId: "ht_15"
     },
@@ -532,6 +545,7 @@ const storyToaA = [
         name: "CTV CNPM",
         text: "Ôi anh ơi một xe tải sách tới nữa rồi kìa huhu.",
         bg: "",
+        voice: "assets/voice/toaA/11_toaA.ogg",
         sprite: "assets/images/chibi.png",
         nextId: "ht_16"
     },
@@ -540,6 +554,7 @@ const storyToaA = [
         name: "CTV CNPM",
         text: "Anh ráng nhặt sách rồi xếp vào đúng 9 cái kệ đằng kia nha. Đừng để rớt cuốn nào đấy, rớt là em bị thủ thư la mất!",
         bg: "",
+        voice: "assets/voice/toaA/11_toaA.ogg",
         sprite: "assets/images/chibi.png",
         noSkip: true,
         nextId: "ht_17"
@@ -549,6 +564,7 @@ const storyToaA = [
         name: "{PLAYER}",
         text: "Chuyện nhỏ. Phân loại 9 kệ đúng không? Tới đây... Ủa khoan, sao mấy cuốn sách bám đầy bụi này nặng thế? Anh nhấc không lên!",
         bg: "",
+        voice: "assets/voice/toaA/12_toaA.ogg",
         sprite: "assets/images/test_main.png",
         noSkip: true,
         nextId: "ht_18"
@@ -558,6 +574,7 @@ const storyToaA = [
         name: "CTV CNPM",
         text: "Sao em biết được???",
         bg: "",
+        voice: "assets/voice/toaA/13_toaA.ogg",
         sprite: "assets/images/chibi.png",
         nextId: "ht_19"
     },
@@ -566,6 +583,7 @@ const storyToaA = [
         name: "Người hướng dẫn",
         text: "À quên nhắc! Mấy cuốn Sách Dày đó là chồng sách bị buộc vào nhau đó. Anh phải gỡ nó ra (click 3 lần) thì mới đưa lên kệ được! Và nhớ là đừng chạm vào Sách cũ nhé!",
         bg: "",
+        voice: "assets/voice/toaA/14_toaA.ogg",
         sprite: "",
         noSkip: true,
         nextId: "ht_20"
@@ -575,6 +593,7 @@ const storyToaA = [
         name: "{PLAYER}",
         text: "Gỡ nó ra. Rõ rồi. Và không động vào sách cũ. Okay luôn!",
         bg: "",
+        voice: "assets/voice/toaA/15_toaA.ogg",
         sprite: "assets/images/test_main.png",
         nextId: "ht_21"
     },
@@ -583,6 +602,7 @@ const storyToaA = [
         name: "CTV CNPM",
         text: "Anh sẵn sàng chưa? Thêm xe tải sách thứ ba rồi kìaaa!!",
         bg: "",
+        voice: "assets/voice/toaA/16_toaA.ogg",
         sprite: "assets/images/chibi.png",
         nextId: "ht_22"
     },
@@ -591,6 +611,7 @@ const storyToaA = [
         name: "{PLAYER}",
         text: "Được rồi. Bắt đầu thôi!",
         bg: "",
+        voice: "assets/voice/toaA/17_toaA.ogg",
         sprite: "assets/images/test_main.png",
         noskip: true,
         nextId: null

@@ -108,24 +108,24 @@
     position: absolute !important;
     bottom: 0 !important;
     top: auto !important;
-    right: 5vw !important; 
-    left: auto !important; 
+    left: 50% !important; /* Căn giữa từ lề trái */
+    right: auto !important; /* Bỏ ép lề phải */
     height: 85vh !important; 
     object-fit: contain !important;
     filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
     
     /* BÍ KÍP CHUYỂN ĐỘNG: Thêm transition để mượt mà mọi thay đổi */
     transition: opacity 0.2s ease-out, transform 0.2s ease-out !important;
-    transform: translateX(0) scale(1) !important; /* Vị trí gốc */
+    transform: translateX(-50%) scale(1) !important; /* Kéo nhân vật lùi lại đúng tâm */
     opacity: 1; 
 }
 
 /* Class dùng để tạo hiệu ứng "bước ra ngoài" khi đổi nhân vật */
 .sprite-changing {
     opacity: 0 !important;
-    transform: translateX(30px) scale(0.98) !important; /* Lùi nhẹ về bên phải và nhỏ đi một xíu */
+    /* Dùng calc để giữ nguyên vị trí căn giữa (-50%) rồi mới lùi 30px tạo hiệu ứng */
+    transform: translateX(calc(-50% + 30px)) scale(0.98) !important; 
 }
-
 /* Class ẩn hoàn toàn (lúc không có nhân vật) */
 .hidden {
     opacity: 0 !important;
@@ -213,16 +213,17 @@
 
 /* Khung chứa các nút */
 .vn-quick-menu {
-    position: absolute !important;
-    bottom: 15px !important; /* Ghim sát xuống đáy hộp đen, cách mép 15px */
-    left: 5vw !important; /* Dạt sang lề phải */
+    position: absolute !important; /* Neo vị trí bám theo khung hộp thoại */
+    top: 12px !important;          /* Cách đường line ngang phía trên hộp thoại 12px */
+    right: 3vw !important;         /* Căn lề lùi về góc phải */
     
-    /* Gỡ bỏ các lệnh gắn trên mép cũ */
-    top: auto !important; 
+    /* Gỡ bỏ các lệnh ghim góc dưới/trái cũ */
+    bottom: auto !important; 
+    left: auto !important; 
     transform: none !important; 
     
     display: flex !important; 
-    gap: 20px !important; /* Khoảng cách giữa các nút */
+    gap: 20px !important;          /* Khoảng cách giữa các nút */
     z-index: 110 !important;
 }
 
@@ -234,7 +235,7 @@
     margin: 0 !important;
     
     color: rgba(255, 255, 255, 0.6) !important; /* Chữ mờ đi một chút */
-    font-size: 0.9rem !important; /* Cỡ chữ nhỏ lại cho tinh tế */
+    font-size: 1.0rem !important; /* Cỡ chữ nhỏ lại cho tinh tế */
     font-weight: 400 !important; /* Bỏ in đậm, giữ nét chữ thanh mảnh */
     letter-spacing: 0.5px !important;
     text-transform: none !important; /* Bỏ viết hoa toàn bộ, giữ nguyên gốc (Ví dụ: Log, Skip) */
