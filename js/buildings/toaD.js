@@ -115,7 +115,7 @@ function transitionToToaC() {
     }
 }
 /**
- * Tòa D - English Cleaning Game (Bản Fix Triệt Để)
+ * Tòa D - Typing game
  */
 
 const canvasToaD = document.getElementById('gameCanvasToaD');
@@ -127,10 +127,10 @@ const endScreenToaD = document.getElementById('end-screen-toa-d');
 
 const configToaD = {
     gameDuration: 60,
-    spawnInterval: 1500, // Tăng tốc độ ra lá một chút cho kịch tính
+    spawnInterval: 1500, // Tăng tốc độ ra lá 
     maxLeavesAllowed: 12, 
-    wordsEasy: ["dog", "cat", "sun", "fish", "bird", "tree", "home", "book", "pink", "blue"],
-    wordsHard: ["university", "technology", "information", "celebration", "computer", "vietnam"]
+    wordsEasy: ["dog", "cat", "sun", "fish", "bird", "tree", "home", "book", "pink", "blue", "red", "cloud", "phone", "chair", "table", "house", "river", "flower", "moon", "star", "start", "game"],
+    wordsHard: ["university", "technology", "information", "celebration", "computer", "vietnam", "diversity", "education"]
 };
 
 let scoreToaD = 0;
@@ -204,7 +204,7 @@ class Leaf {
 function spawnLeaf() {
     if (!isGameActive) return;
     if (leavesToaD.length >= configToaD.maxLeavesAllowed) {
-        showResultToaD("THUA CUỘC! Sân đã đầy lá.", true);
+        showResultToaD("SÂN ĐÃ ĐẦY LÁ! Bạn đã không hoàn thành nhiệm vụ được giao.", false); 
         return;
     }
     leavesToaD.push(new Leaf());
@@ -262,16 +262,21 @@ function animateToaD() {
 function showResultToaD(message, isGameOver) {
     isGameActive = false; 
     cleanupToaD(); 
-    // Tính thời gian đã chơi (60s trừ đi thời gian còn lại)
+    
     let timePlayed = configToaD.gameDuration - timeLeftToaD;
 
-    if (isGameOver) {
-        // TRƯỜNG HỢP THUA: Báo lỗi và truyền hàm initToaD để chơi lại
-        if (typeof window.showGlobalSummaryBoard === 'function') {
-            window.showGlobalSummaryBoard("Tòa D", scoreToaD, timePlayed, false, initToaD);
-        } else {
-            initToaD();
-        }
+    if (window.UITGameStats) {
+        window.UITGameStats.addScore("Tòa D", scoreToaD);
+    }
+    
+    if (typeof window.showGlobalSummaryBoard === 'function') {
+        window.showGlobalSummaryBoard(
+            "Tòa D", 
+            scoreToaD, 
+            timePlayed, 
+            true, 
+            transitionToToaC 
+        );
     } else {
         // TRƯỜNG HỢP THẮNG: Lưu điểm và truyền hàm transitionToToaC để đi tiếp
         if (window.UITGameStats) {
