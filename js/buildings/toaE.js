@@ -398,89 +398,198 @@ function updateUI() {
 
 
 });
-//CHUYỂN TỪ TÒA E SANG HỘI THOẠI TÒA A
+// KỊCH BẢN CHUYỂN TỪ TÒA E SANG HỘI THOẠI TÒA A
 const storyToaA = [
     {
         id: "ht_00",
-        name: "Anh chàng CTV Khoa X",
-        text: "Trời đất ơi, sách đâu mà trôi ra như thác thế này, em xếp không kịp trời ơi!",
+        name: "{PLAYER}",
+        text: "Ra đây là mảnh ký ức. Nhìn nó cứ như viên kẹo ngậm hồi bé, thèm quá... à không, chắc mình không nên thử.",
         bg: "",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/test_main.png",
         nextId: "ht_01"
     },
-
     {
         id: "ht_01",
         name: "{PLAYER}",
-        text: "Không gian thư viện sau bao năm vẫn thật quen thuộc...  ",
+        text: "Chìa khóa Tòa A? Vậy giờ phải đi qua thư viện tòa A thôi nhỉ?",
         bg: "",
         sprite: "assets/images/test_main.png",
         nextId: "ht_02" 
     },
-
     {
         id: "ht_02",
         name: "{PLAYER}",
-        text: "Khoan... thư viện trường mình nay chơi nguyên cái băng chuyền công nghiệp này luôn hả? Từ bao giờ vậy?",
+        text: "Cái quái gì thế này? Hồi xưa thư viện tòa A yên tĩnh lắm mà ?",
         bg: "",
         sprite: "assets/images/test_main.png",
         nextId: "ht_03" 
     },
-
     {
         id: "ht_03",
-        name: "Cô Thủ thư",
-        text: "Từ lúc cậu cắm mặt vào chạy deadline sấp mặt đó, cựu sinh viên ạ.",
+        name: "CTV CNPM",
+        text: "Anh ơi, anh i! Rảnh không anh, qua cứu em với! Tự nhiên hôm nay thư viện nhập sách nhiều quá em xếp không kịp, sắp bị đè bẹp tới nơi rồi!",
         bg: "",
-        sprite: "assets/images/test_cothuthu.png",
+        sprite: "assets/images/chibi.png",
         nextId: "ht_04" 
     },
-
     {
         id: "ht_04",
         name: "{PLAYER}",
-        text: "Dạ? Ý cô là sao??",
+        text: "Từ từ đã nhóc. Thư viện gì mà chơi nguyên cái băng chuyền công nghiệp thế này? Giải thích cho anh với.",
         bg: "",
         sprite: "assets/images/test_main.png",
         nextId: "ht_05" 
     },
-
     {
         id: "ht_05",
-        name: "Cô Thủ thư",
-        text: "không gian này định hình dựa trên chính tâm trí của cậu. Đầu óc cậu lúc nào cũng coi công việc, thời gian như một cái dây chuyền sản xuất vô tận, nên vào đây thư viện nó mới biến dạng thành thế này. Muốn lấy ĐRL để đi tiếp thì xắn tay áo vào giúp đi.",
+        name: "CTV CNPM",
+        text: "Dạ chuyện là em đăng ký làm cộng tác viên thư viện. Sáng nay trường về lô sách mới, sách cần xếp lên kệ nhiều như núi ý!",
         bg: "",
-        sprite: "assets/images/test_cothuthu.png",
+        sprite: "assets/images/chibi.png",
         nextId: "ht_06" 
     },
 
     {
         id: "ht_06",
-        name: "Anh chàng CTV Khoa X",
-        text: "Anh xếp sách vào đúng 9 cái kệ kia nha. Đừng để lọt mất cuốn nào không là toang đó! À, thấy mấy cuốn SÁCH DÀY đóng bụi không? Gõ 3 phát (click 3 lần) cho nó rơi bớt bụi ra rồi hẵng xếp!",
+        name: "{PLAYER}",
+        text: "Àaaaaaaa. Mà nãy giờ em có thấy cái gì phát sáng rớt quanh đây không?",
         bg: "",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/test_main.png",
         nextId: "ht_07"
     },
 
     {
         id: "ht_07",
-        name: "Cô Thủ thư",
-        text: "Còn sách cũ rách thì bơ đi, cho nó trôi luôn. Anh mà ráng nhét sách cũ lên kệ là hệ thống sập, anh kẹt lại đây luôn ráng chịu",
+        name: "CTV CNPM",
+        text: "Dạ? Em nãy giờ chỉ thấy toàn là sách thôi. Mà hình như thỉnh thoảng em cũng thấy mấy đốm sáng bay bay. Chắc tại phân loại sách nhiều quá mờ cả mắt rồi.",
         bg: "",
-        sprite: "assets/images/test_cothuthu.png",
+        sprite: "assets/images/chibi.png",
         nextId: "ht_08"
     },
 
     {
         id: "ht_08",
+        name: "Người hướng dẫn",
+        text: "Cậu sinh viên kia mắt không có vấn đề đâu. Cũng chẳng có băng chuyền nào ở đây cả. Thư viện hoàn toàn bình thường.",
+        bg: "",
+        sprite: "",
+        nextId: "ht_09"
+    },
+    {
+        id: "ht_09",
         name: "{PLAYER}",
-        text: "Okay, chuyện nhỏ, tay em vẫn còn nhanh lắm.",
+        text: "Thế cái đống máy móc đang chạy rầm rầm này là do tôi tự tưởng tượng ra hả?",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "ht_10"
+    },
+    {
+        id: "ht_10",
+        name: "Người hướng dẫn",
+        text: "Đúng rồi đấy. Không gian này đang phản chiếu tâm lý của anh.",
+        bg: "",
+        sprite: "",
+        nextId: "ht_11"
+    },
+    {
+        id: "ht_11",
+        name: "Người hướng dẫn",
+        text: "Mấy năm nay đi làm, anh lúc nào cũng thấy công việc chạy liên tục như một dây chuyền không có điểm dừng.",
+        bg: "",
+        sprite: "",
+        nextId: "ht_12"
+    },
+    {
+        id: "ht_12",
+        name: "Người hướng dẫn",
+        text: "Anh quen sống khô khan như một cỗ máy rồi, nên khi bộ não load dữ liệu khu vực này, nó tự động biến thư viện thành một cái xưởng luôn.",
+        bg: "",
+        sprite: "",
+        nextId: "ht_13"
+    },
+    {
+        id: "ht_13",
+        name: "Người hướng dẫn",
+        text: "Muốn lấy được Mảnh ký ức thì xắn tay áo lên giúp cậu sinh viên kia xếp sách đi.",
+        bg: "",
+        sprite: "",
+        nextId: "ht_14"
+    },
+    {
+        id: "ht_14",
+        name: "{PLAYER}",
+        text: "...Bệnh nghề nghiệp nặng tới mức mang cả dây chuyền vào trong tưởng tượng. Chịu luôn rồi.",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "ht_15"
+    },
+    {
+        id: "ht_15",
+        name: "CTV CNPM",
+        text: "Ôi anh ơi một xe tải sách tới nữa rồi kìa huhu.",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: "ht_16"
+    },
+    {
+        id: "ht_16",
+        name: "CTV CNPM",
+        text: "Anh ráng nhặt sách rồi xếp vào đúng 9 cái kệ đằng kia nha. Đừng để rớt cuốn nào đấy, rớt là em bị thủ thư la mất!",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        noSkip: true,
+        nextId: "ht_17"
+    },
+    {
+        id: "ht_17",
+        name: "{PLAYER}",
+        text: "Chuyện nhỏ. Phân loại 9 kệ đúng không? Tới đây... Ủa khoan, sao mấy cuốn sách bám đầy bụi này nặng thế? Anh nhấc không lên!",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        noSkip: true,
+        nextId: "ht_18"
+    },
+    {
+        id: "ht_18",
+        name: "CTV CNPM",
+        text: "Sao em biết được???",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: "ht_19"
+    },
+    {
+        id: "ht_19",
+        name: "Người hướng dẫn",
+        text: "À quên nhắc! Mấy cuốn Sách Dày đó là chồng sách bị buộc vào nhau đó. Anh phải gỡ nó ra (click 3 lần) thì mới đưa lên kệ được! Và nhớ là đừng chạm vào Sách cũ nhé!",
+        bg: "",
+        sprite: "",
+        noSkip: true,
+        nextId: "ht_20"
+    },
+    {
+        id: "ht_20",
+        name: "{PLAYER}",
+        text: "Gỡ nó ra. Rõ rồi. Và không động vào sách cũ. Okay luôn!",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "ht_21"
+    },
+    {
+        id: "ht_21",
+        name: "CTV CNPM",
+        text: "Anh sẵn sàng chưa? Thêm xe tải sách thứ ba rồi kìaaa!!",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: "ht_22"
+    },
+    {
+        id: "ht_22",
+        name: "{PLAYER}",
+        text: "Được rồi. Bắt đầu thôi!",
         bg: "",
         sprite: "assets/images/test_main.png",
         nextId: null
     }
-
 ];
 let hasTransitionedToToaA = false;
 function transitionToToaA() {
@@ -526,7 +635,7 @@ function transitionToToaA() {
 
         // Kích hoạt hội thoại Tòa A
         if (typeof window.playVN === 'function') {
-            window.playVN(storyToaA, "ht_01", () => {
+            window.playVN(storyToaA, "ht_00", () => {
                 // Khi đọc xong hội thoại Tòa A thì nhảy vào game
                 if (typeof window.switchBuilding === 'function') {
                     window.switchBuilding('toa-a');

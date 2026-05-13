@@ -212,7 +212,7 @@ window.showGlobalSummaryBoard = function(stageName, currentScore, timeSec, isWin
 };
 
 // ==========================================
-// 1. KỊCH BẢN CẢNH 1 & 2 (Đã bỏ thẻ HTML rườm rà)
+// 1. KỊCH BẢN CẢNH 1 & 2 
 // ==========================================
 const storyScene1 = [
     {
@@ -226,7 +226,7 @@ const storyScene1 = [
     {
         id: "s1_02",
         name: "",
-        text: "*Ting!* *Ting!* *Ting!* Tiếng thông báo tin nhắn công việc, email kêu liên tục. Giữa một nùi thông báo, một email popup lên: 'UIT 20th – Thư mời...'",
+        text: "Tiếng thông báo tin nhắn công việc, email kêu liên tục. Giữa một nùi thông báo, một email popup lên: 'UIT 20th - Thư mời...'",
         bg: "",
         sprite: "",
         nextId: "s1_03"
@@ -234,7 +234,8 @@ const storyScene1 = [
     {
         id: "s1_03",
         name: "{PLAYER}",
-        text: "(lẩm bẩm) UIT...?",
+        text: " UIT...?",
+        voice: "assets/voice/voice1_scene1.ogg",
         bg: "",
         sprite: "assets/images/test_main.png",
         nextId: "s1_04"
@@ -251,6 +252,7 @@ const storyScene1 = [
         id: "s1_05",
         name: "{PLAYER}",
         text: "Ụa máy tính bị gì v…",
+        voice: "assets/voice/voice2_scene1.ogg",
         bg: "",
         sprite: "assets/images/test_main.png",
         nextId: null // Kích hoạt hiệu ứng Nổ
@@ -271,7 +273,7 @@ const storyScene2_UIT = [
     {
         id: "s2_02",
         name: "{PLAYER}",
-        text: "(Ngơ ngác xoa đầu) Ủa... đây là trường mình mà? Sao vắng hoe vậy?",
+        text: "Ủa... đây là trường mình mà? Sao vắng hoe vậy?",
         bg: "",
         sprite: "assets/images/test_main.png",
         nextId: "s2_03"
@@ -279,23 +281,23 @@ const storyScene2_UIT = [
     {
         id: "s2_03",
         name: "Người Hướng Dẫn",
-        text: "Chào. Lạc đường hả?",
+        text: "Chào bạn. Lạc đường hả?",
         bg: "",
         sprite: "assets/images/test_guide.png", 
         nextId: "s2_04"
     },
     {
         id: "s2_04",
-        name: "Người Hướng Dẫn",
-        text: "Bình tĩnh nào, cứ coi tôi là admin tạm thời của khu vực này đi. Anh đã vô tình đăng nhập vào một server được tạo nên từ ký ức của sinh viên trường mình...",
+        name: "{PLAYER}",
+        text: "Ai, Ai vậy?",
         bg: "",
-        sprite: "assets/images/test_guide.png", 
+        sprite: "assets/images/test_main.png",
         nextId: "s2_05"
     },
     {
         id: "s2_05",
         name: "Người Hướng Dẫn",
-        text: "Anh phải đi nhặt lại mấy mảnh ký ức đang rơi tứ tung ở các tòa nhà. Gom đủ thì về nhà ngủ tiếp. Không thì... ở lại đây học lại từ năm nhất nha.",
+        text: "Bình tĩnh nào, cứ coi tôi là admin tạm thời của khu vực này đi. ",
         bg: "",
         sprite: "assets/images/test_guide.png", 
         nextId: "s2_06"
@@ -303,73 +305,223 @@ const storyScene2_UIT = [
     {
         id: "s2_06",
         name: "Người Hướng Dẫn",
-        text: "Bắt đầu từ Tòa E nhé. Chúc may mắn.",
+        text: "Lúc anh click vào cái mail đó, anh đã vô tình đăng nhập vào một không gian đặc biệt... ",
         bg: "",
         sprite: "assets/images/test_guide.png", 
         nextId: "s2_07"
     },
-
-    // --- PHẦN GẶP SINH VIÊN ATTT Ở TÒA E ---
     {
         id: "s2_07",
-        name: "",
-        text: "Main ngó nghiêng quanh sảnh thang máy Tòa E thì thấy một cậu Sinh viên An Toàn Thông Tin (ATTT) đang đứng bấm điện thoại.",
-        bg: "", 
-        sprite: "",
+        name: "Người Hướng Dẫn",
+        text: "Nơi này giống như một cái server được tạo nên từ chính những ký ức của hàng ngàn sinh viên trường mình suốt 20 năm qua vậy. Và hiện tại, anh đang kẹt trong server đó",
+        bg: "",
+        sprite: "assets/images/test_guide.png", 
         nextId: "s2_08"
     },
+
     {
         id: "s2_08",
-        name: "Sinh viên ATTT",
-        text: "(Ngước lên nhìn) Anh lên Tòa E dự seminar hả? Sao nhìn anh ngơ ngác vậy?",
+        name: "{PLAYER}",
+        text: "Hả? Cái gì cơ? Server ? Ký ức ? Tôi có đang nằm mơ không vậy?",
         bg: "",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/test_main.png",
         nextId: "s2_09"
     },
+
     {
         id: "s2_09",
         name: "{PLAYER}",
-        text: "Ờm... tự nhiên chớp mắt cái thấy đứng đây. Có người bảo anh phải đi tìm mấy cái mảnh ký ức gì đó để tìm đường về.",
+        text: "Ui đau thật",
         bg: "",
         sprite: "assets/images/test_main.png",
         nextId: "s2_10"
     },
+
     {
         id: "s2_10",
-        name: "Sinh viên ATTT",
-        text: "Mảnh ký ức à? Nãy em thấy có ông anh mặc áo hoodie bí ẩn cũng đáng ngờ như anh bấm thang máy lên tầng 12 ấy.",
+        name: "Người Hướng Dẫn",
+        text: "Cứ cho là anh đang mơ đi. Ở đây logic đời thực không xài được đâu. Mấy tòa nhà này không chỉ là cục bê tông, mà nó chứa cả bộ nhớ kỷ niệm của bao nhiêu khóa sinh viên đấy. Giờ thì... anh cũng kẹt lại trong mớ dữ liệu đó rồi.",
         bg: "",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/test_guide.png", 
         nextId: "s2_11"
     },
+
     {
         id: "s2_11",
         name: "{PLAYER}",
-        text: "Tầng 12 á? Đùa à, chờ cái thang máy tòa E này chắc tới sáng mai mất.",
+        text: "Vậy rốt cuộc làm sao để thoát ra?",
         bg: "",
         sprite: "assets/images/test_main.png",
         nextId: "s2_12"
     },
+
     {
         id: "s2_12",
-        name: "Sinh viên ATTT",
-        text: "Thì đặc sản trường mình mà anh! Ờm... ở không gian này, anh không bấm thang máy bằng tay đâu, mà xài Điểm rèn luyện.",
+        name: "Người Hướng Dẫn",
+        text: "Anh phải đi nhặt lại mấy mảnh ký ức đang rơi tứ tung ở các tòa nhà. Gom đủ thì về nhà ngủ tiếp. Không thì...",
         bg: "",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/test_guide.png", 
         nextId: "s2_13"
     },
+
     {
         id: "s2_13",
-        name: "Sinh viên ATTT",
-        text: "Anh có 200 điểm rèn luyện để tiêu! Anh phải bỏ điểm rèn luyện ra để tung xúc xắc test nhân phẩm. Có 3 loại xúc xắc cho anh chọn, 4 mặt, 6 mặt và 20 mặt tương ứng với 3, 5, 25 điểm rèn luyện. Và nhớ là anh có tối đa 25 lượt dùng xúc xắc nhé. Hên thì một phát lên mây, xu thì... anh tự hiểu ha. Chơi không?",
+        name: "{PLAYER}",
+        text: "Thì thì sao cơ???",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "s2_14"
+    },
+
+    {
+        id: "s2_14",
+        name: "Người Hướng Dẫn",
+        text: "Thì reset tài khoản, ở lại đây học lại từ năm nhất tới già chứ sao .",
+        bg: "",
+        sprite: "assets/images/test_guide.png", 
+        nextId: "s2_15"
+    },
+
+     {
+        id: "s2_15",
+        name: "{PLAYER}",
+        text: "Đi làm chạy deadline chưa đủ khổ hay sao trời, tới giờ đi ngủ rồi mà còn...",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "s2_16"
+    },
+
+    {
+        id: "s2_16",
+        name: "Người Hướng Dẫn",
+        text: "Bắt đầu từ Tòa E nhé. Lên hội trường, có người đang đợi anh đấy. Chúc may mắn .",
+        bg: "",
+        sprite: "assets/images/test_guide.png", 
+        nextId: "s2_17"
+    },
+
+    // --- PHẦN GẶP SINH VIÊN TTDPT Ở TÒA E ---
+    {
+        id: "s2_17",
+        name: "",
+        text: "Main bước vào thang máy tòa E",
+        bg: "", 
+        sprite: "",
+        nextId: "s2_18"
+    },
+    {
+        id: "s2_18",
+        name: "Sinh viên TTĐPT",
+        text: "Anh lên tầng mấy ạ? Để em bấm cho.",
         bg: "",
         sprite: "assets/images/chibi.png",
+        nextId: "s2_19"
+    },
+    {
+        id: "s2_19",
+        name: "{PLAYER}",
+        text: "Bấm giùm anh tầng 12 với.",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "s2_20"
+    },
+    {
+        id: "s2_20",
+        name: "Sinh viên TTĐPT",
+        text: "Lạ thật, chẳng có đèn nào sáng. Em thử tầng 5, tầng 8 cũng không được. Chắc thang máy hỏng rồi anh ạ.",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: "s2_21"
+    },
+
+    {
+        id: "s2_21",
+        name: "Sinh viên TTĐPT",
+        text: "Trời ạ, thang máy Tòa E nổi tiếng chậm, nhưng hôm nay nó ngủ luôn à? Em còn phải lên nghe seminar, trễ là mất điểm danh.",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: "s2_22"
+    },
+
+    {
+        id: "s2_22",
+        name: "{PLAYER}",
+        text: "Hồi anh học cỡ sáu bảy năm trước, thang này đã chậm rồi. Mà em học khoa gì?",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "s2_23"
+    },
+    {
+        id: "s2_23",
+        name: "Sinh viên TTĐPT",
+        text: "Dạ em học Truyền thông đa phương tiện, năm nhất. Còn anh? Nhìn anh… không giống sinh viên lắm.",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: "s2_24"
+    },
+    {
+        id: "s2_24",
+        name: "{PLAYER}",
+        text: "Anh học Kỹ thuật phần mềm. Cựu sinh viên khóa 2018. Ra trường cũng ngót nghét năm năm rồi, tự nhiên lạc vào đây.",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "s2_25"
+    },
+    {
+        id: "s2_25",
+        name: "Sinh viên TTĐPT",
+        text: "Ối, senpai khóa 2018 cơ à? Trông anh trẻ thật đấy!",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: "s2_25"
+    },
+    {
+        id: "s2_25",
+        name: "Người hướng dẫn",
+        text: "Chào mừng cựu sinh viên khoa Công nghệ phần mềm. Tôi là hệ thống hướng dẫn. Ở không gian này, muốn lên tầng thì không bấm bằng tay đâu - phải xài Điểm Rèn Luyện. Anh có 200 ĐRL để tiêu đấy",
+        bg: "",
+        sprite: "",
+        noSkip: true,
+        nextId: "s2_26"
+    },
+    {
+        id: "s2_26",
+        name: "Sinh viên TTĐPT",
+        text: "Ai nói thế? Loa tự nhiên phát ra giọng lạ. Anh có nghe thấy không ạ? Hay em bị ảo giác?",
+        bg: "",
+        sprite: "assets/images/chibi.png",
+        nextId: "s2_27"
+    },
+    {
+        id: "s2_27",
+        name: "{PLAYER}",
+        text: "Có. Là cái hệ thống hướng dẫn đấy. Hồi nãy anh gặp rồi. Có vẻ chỉ mình anh mới tương tác được.",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "s2_28"
+    },
+    {
+        id: "s2_28",
+        name: "Người hướng dẫn",
+        text: "Chính xác. Chỉ cựu sinh viên đang kẹt mới được tôi hướng dẫn. Nào, anh hãy dùng ĐRL để tung xúc xắc test nhân phẩm. ",
+        bg: "",
+        sprite: "",
+        noSkip: true,
+        nextId: "s2_39"
+    },
+    {
+        id: "s2_39",
+        name: "Người hướng dẫn",
+        text: "Ba loại: 4 mặt (tốn 3 ĐRL), 6 mặt (tốn 5 ĐRL) và 20 mặt (tốn 25 ĐRL). Nhớ là anh có tối đa 25 lượt. Hên thì một phát lên luôn, xu thì… anh tự hiểu. Chọn đi.",
+        bg: "",
+        sprite: "",
+        noSkip: true,
         nextId: null
     }
 ];
 
 window.startGame = function() {
-    
+    window.currentCheckpoint = "scene1";
     // 1. Bơm cấu trúc HTML Glitch vào Web
     if (!document.getElementById('cyber-glitch-overlay')) {
         const glitchHTML = `
@@ -417,6 +569,7 @@ window.startGame = function() {
             setTimeout(() => {
                 
                 playVN(storyScene2_UIT, "s2_01", () => {
+                    window.currentCheckpoint = "toa-e";
                     window.switchBuilding('toa-e');
                 });
 
@@ -431,3 +584,108 @@ window.startGame = function() {
 };
 window.playVN = playVN;
 
+// ==========================================
+// HỆ THỐNG LƯU / TẢI GAME (CHECKPOINT SYSTEM)
+// ==========================================
+const SAVE_KEY = "UIT_VN_SAVEDATA";
+
+// Biến này sẽ nhớ xem người chơi đang ở giai đoạn nào của game
+window.currentCheckpoint = "scene1"; 
+
+// 1. HÀM LƯU GAME
+window.saveGameProgress = () => {
+    // Thu thập dữ liệu hiện tại
+    const gameData = {
+        playerName: localStorage.getItem('currentPlayerName') || "Bạn",
+        stats: window.UITGameStats, // Lưu toàn bộ điểm rèn luyện và lịch sử
+        checkpoint: window.currentCheckpoint // Lưu mốc cốt truyện
+    };
+
+    // Nén thành chuỗi và cất vào LocalStorage
+    localStorage.setItem(SAVE_KEY, JSON.stringify(gameData));
+    alert("💾 Đã lưu tiến trình game thành công!");
+};
+
+// 2. HÀM TẢI GAME
+window.loadGameProgress = () => {
+    const savedString = localStorage.getItem(SAVE_KEY);
+    
+    if (!savedString) {
+        alert("❌ Không tìm thấy dữ liệu lưu nào!");
+        return;
+    }
+
+    // Giải nén dữ liệu
+    const gameData = JSON.parse(savedString);
+
+    // Bơm dữ liệu ngược lại vào game
+    localStorage.setItem('currentPlayerName', gameData.playerName);
+    if (gameData.stats) {
+        window.UITGameStats.totalScore = gameData.stats.totalScore || 0;
+        window.UITGameStats.stageResults = gameData.stats.stageResults || [];
+    }
+    window.currentCheckpoint = gameData.checkpoint;
+
+    // Đóng bảng Menu Cài đặt
+    const menuScreen = document.getElementById('vn-menu-screen');
+    if (menuScreen) menuScreen.classList.remove('active');
+
+    // Tắt Menu ngoài cùng, ép bật vào Game Scene
+    document.getElementById('main-menu').style.display = 'none';
+    document.getElementById('name-screen').classList.add('hidden');
+    document.getElementById('game-scene').classList.remove('hidden');
+
+    alert(`📂 Đã tải lại game! Bắt đầu từ mốc: ${window.currentCheckpoint}\nĐiểm Rèn Luyện hiện tại: ${window.UITGameStats.totalScore}`);
+
+    // DỌN SẠCH CÁC MÀN HÌNH CŨ
+    const allScreens = ['vn-screen', 'toa-a', 'toa-b', 'toa-c', 'toa-d', 'toa-e'];
+    allScreens.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+    });
+
+    // KHỞI ĐỘNG LẠI TỪ MỐC ĐÃ LƯU
+    resumeFromCheckpoint(window.currentCheckpoint);
+};
+
+// 3. HÀM ĐIỀU PHỐI ĐỂ MỞ ĐÚNG CHỖ ĐANG CHƠI DỞ
+function resumeFromCheckpoint(checkpoint) {
+    if (checkpoint === "scene1") {
+        // Trở lại ngay đầu game
+        if (typeof window.startGame === 'function') window.startGame();
+    } 
+    else if (checkpoint === "toa-e") {
+        // Đang chơi dở mini-game Tòa E
+        window.switchBuilding('toa-e');
+    }
+    else if (checkpoint === "toa-a") {
+        // Đang ở Tòa A
+        window.switchBuilding('toa-a');
+    }
+    // Bạn có thể thêm các if-else khác cho Tòa B, C, D ở đây
+}
+
+// 4. GẮN LỆNH VÀO 2 NÚT BẤM BẠN ĐÃ TẠO SẴN Ở HTML
+document.addEventListener('DOMContentLoaded', () => {
+    const btnSave = document.getElementById('btn-save-game');
+    const btnLoad = document.getElementById('btn-load-game');
+    const btnContinue = document.getElementById('main-continue-btn'); // Nút Tiếp tục ở Main Menu
+
+    // --- ĐOẠN KIỂM TRA DỮ LIỆU CŨ (BƯỚC 2) ---
+    const savedData = localStorage.getItem(SAVE_KEY);
+    if (savedData && btnContinue) {
+        // Nếu có dữ liệu cũ, hiện nút Tiếp tục lên
+        btnContinue.classList.remove('hidden');
+        btnContinue.style.display = 'block';
+        
+        // Khi bấm nút Tiếp tục ở màn hình chính, gọi hàm Load
+        btnContinue.onclick = () => {
+            window.loadGameProgress();
+        };
+    }
+    // ----------------------------------------
+
+    // Gắn lệnh cho nút Lưu/Tải bên trong Menu Cài đặt
+    if (btnSave) btnSave.addEventListener('click', window.saveGameProgress);
+    if (btnLoad) btnLoad.addEventListener('click', window.loadGameProgress);
+});

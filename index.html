@@ -24,6 +24,9 @@
         <button id="main-start-btn" class="img-btn">
             <img src="assets/images/anh3.webp" alt="PRESS ANY BUTTON TO START">
         </button>
+        <button id="main-continue-btn" class="img-btn hidden" style="margin-top: 20px;">
+             <span style="color: white; font-size: 1.5rem; font-weight: bold; cursor: pointer;">▶ TIẾP TỤC HÀNH TRÌNH</span>
+        </button>
     </div>
 
     <div id="name-screen" class="screen hidden">
@@ -45,6 +48,49 @@
                 <div id="dialogue-text">...</div>
                 <div id="next-indicator" class="uit-blink">▼</div>
                 <div id="choice-container" class="hidden"></div>
+                <!-- CỤM NÚT ĐIỀU KHIỂN NHANH (Thêm vào đây) -->
+                <div class="vn-quick-menu">
+                    <button class="vn-btn" id="btn-log">Log</button>
+                    <button class="vn-btn" id="btn-auto">Auto</button>
+                    <button class="vn-btn" id="btn-skip">Skip</button>
+                    <button class="vn-btn" id="btn-hide">Hide</button>
+                    <button class="vn-btn" id="btn-menu">Menu</button>
+                </div>
+                <!-- =========================================
+                MÀN HÌNH MENU CÀI ĐẶT (SETTINGS)
+                ========================================= -->
+                <div id="vn-menu-screen">
+                    <div class="log-container menu-container"> <!-- Xài chung form của Log cho đồng bộ -->
+                        <div class="log-header">
+                            <h2>⚙️ CÀI ĐẶT HỆ THỐNG</h2>
+                            <button id="close-menu-btn">✖</button>
+                        </div>
+                        
+                        <div id="menu-content-area">
+                            <!-- Chỉnh tốc độ chữ -->
+                            <div class="setting-row">
+                                <label>Tốc độ chữ:</label>
+                                <input type="range" class="vn-slider" id="text-speed-slider" min="10" max="100" value="30">
+                            </div>
+                            
+                            <!-- Chỉnh âm lượng Nhạc (Sound/BGM) -->
+                            <div class="setting-row">
+                                <label>Âm nhạc:</label>
+                                <input type="range" class="vn-slider" id="bgm-volume-slider" min="0" max="100" value="100">
+                            </div>
+
+                            <!-- Chỉnh âm lượng Giọng nói (Voice) -->
+                            <div class="setting-row">
+                                <label>Giọng nói:</label>
+                                <input type="range" class="vn-slider" id="voice-volume-slider" min="0" max="100" value="100">
+                            </div>
+                            <div class="save-load-container">
+                                <button id="btn-save-game" class="uit-btn">💾 LƯU GAME</button>
+                                <button id="btn-load-game" class="uit-btn">📂 TẢI GAME</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div id="toa-a" class="building-container" style="display: none;">
@@ -325,8 +371,18 @@
         <p class="error-subtext">SYSTEM FAILURE... DUMPING MEMORY LOGS...</p>
     </div>
 </div>
-
-<div id="credit-screen" class="hidden">
+<!-- =========================================
+     MÀN HÌNH LỊCH SỬ HỘI THOẠI (LOG SCREEN)
+========================================= -->
+<div id="vn-log-screen">
+    <div class="log-container">
+        <div class="log-header">
+            <h2>LỊCH SỬ HỘI THOẠI</h2>
+            <button id="close-log-btn">✖</button>
+        </div>
+        <div id="log-content-area">
+        </div>
+    </div> </div> <div id="credit-screen" class="hidden">
     <div class="credit-content">
         <h1 class="credit-title">DỰ ÁN KỶ NIÊM 20 NĂM THÀNH LẬP TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THÔNG TIN</h1>
         <h2 class="credit-subtitle">DEVO CHALLENGE</h2>
@@ -337,7 +393,7 @@
             <p><strong>Trần Diễm Quỳnh</strong></p>
             <p><strong>Cao Thị Thanh Trúc</strong></p>
             <p><strong>Đỗ Thụy Bảo Trâm</strong></p>
-            </div>
+        </div>
 
         <div class="credit-section">
             <h3>ĐỘI NGŨ LỒNG TIẾNG</h3>
@@ -350,6 +406,7 @@
                 <p><strong>Trung Kiên</strong><br><span>Vai Bí thư đoàn Tòa D</span></p>
             </div>
         </div>
+    </div>
 </div>
 
 <div id="thank-you-screen" class="hidden">

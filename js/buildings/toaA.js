@@ -13,44 +13,199 @@ let isTransitioningToToaB = false;
 const StoryToaB = [
     {
         id: "test_01",
-        name: "{PLAYER}",
-        text: "Ây da, anh xin lỗi, để anh nhặt phụ. Ủa... tờ này là danh sách môn học em muốn đăng ký kỳ này hả?",
+        name: "",
+        text: "Main đang thong thả bước, tay sờ vào túi áo nơi có hai mảnh ký ức (E và A). Anh ngước nhìn lên tấm bảng chỉ dẫn “B1.20”,  “B5.02” Một cảm giác hoài niệm ùa về.",
         bg: "",
-        sprite: "assets/images/test_main.png",
+        sprite: "",
         nextId: "test_02"
     },
 
     {
         id: "test_02",
-        name: "Bạn gái Truyền thông",
-        text: "Dạ vâng wishlist của em đó anh... Tới giờ mở form đăng ký rồi mà wifi bên này rớt hoài, em đang tính chạy đi kiếm chỗ mạng mạnh hơn.",
+        name: "{PLAYER}",
+        text: "Tòa B này… hồi đó toàn lên đây học mấy môn đại cương. Rồi đợt đăng ký môn, cả lũ túm năm tụm bảy ngồi hành lang… ủa, khoan đã?",
         bg: "",
-        sprite: "assets/images/test_cothuthu.png",
+        sprite: "assets/images/test_main.png",
         nextId: "test_03"
     },
 
     {
         id: "test_03",
-        name: "{PLAYER}",
-        text: "Khổ sở y chang hồi xưa. Bấm F5 gãy cả nút F5 vẫn đăng ký không kịp. Đưa đây anh thao tác thử xem tay nghề còn bén không.",
+        name: "",
+        text: "Bỗng một bạn nữ từ phía cầu thang chạy xuống, tay ôm một xấp giấy tờ to hơn cả người, mắt nhìn chằm chằm vào điện thoại, vừa chạy vừa lẩm bẩm.",
         bg: "",
-        sprite: "assets/images/test_main.png",
+        sprite: "",
         nextId: "test_04"
     },
 
     {
         id: "test_04",
-        name: "Bạn gái Truyền thông",
-        text: "Anh canh kỹ nha, lật sai ô môn học là bị trừ điểm rèn luyện đó. Cứu em nha anh, học kỳ này em đang thiếu ĐRL trầm trọng luôn á!",
+        name: "",
+        text: "Giấy tờ bay tứ tung, điện thoại rơi “bịch” xuống sàn",
         bg: "",
-        sprite: "assets/images/test_cothuthu.png",
+        sprite: "",
         nextId: "test_05"
     },
 
     {
         id: "test_05",
         name: "{PLAYER}",
-        text: "Ụa? Hả? Cái gì? Từ t…",
+        text: "Úi! Em có sao không?",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "test_06"
+    },
+    {
+        id: "test_06",
+        name: "Bạn nữ",
+        text: "Dạ em xin lỗi anh! Em xin lỗi! Em mải nhìn điện thoại, không để ý. Trời ạ, giấy tờ bay hết rồi!",
+        bg: "",
+        sprite: "assets/images/test_cothuthu.png",
+        nextId: "test_07"
+    },
+    {
+        id: "test_07",
+        name: "",
+        text: "Main nhặt được một tờ giấy A4 ghi đầy chữ: “WISHLIST HỌC KỲ 2 - NĂM 1 - NGÀNH KỸ THUẬT PHẦN MỀM”. Bên cạnh có những dòng note nhỏ: 'Nhất định thứ 2 quyết tâm nghỉ!'",
+        bg: "",
+        sprite: "",
+        nextId: "test_08"
+    },
+    {
+        id: "test_08",
+        name: "{PLAYER}",
+        text: "Ủa, đây là… danh sách đăng ký môn học? Sao trông nhiều tín chỉ vậy.",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "test_09"
+    },
+    {
+        id: "test_09",
+        name: "Bạn nữ",
+        text: "Dạ, đấy là wishlist của em đó anh. Học kỳ này tụi em lần đầu được đăng ký học phần bỡ ngỡ quá. Anh xem, em đổ mồ hôi hột rồi đây này.",
+        bg: "",
+        sprite: "assets/images/test_cothuthu.png",
+        nextId: "test_10"
+    },
+    {
+        id: "test_10",
+        name: "{PLAYER}",
+        text: "Khổ thân. Mà em biết cách đăng ký chưa, hay là để anh hướng dẫn nhé. Xưa chưa có môn nào là anh mày không đăng ký được đâu.",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "test_11"
+    },
+    {
+        id: "test_11",
+        name: "Bạn nữ",
+        text: "Oaaa, tiền bối, tiền bối",
+        bg: "",
+        sprite: "assets/images/test_cothuthu.png",
+        nextId: "test_12"
+    },
+    {
+        id: "test_12",
+        name: "{PLAYER}",
+        text: "Để xem… em cho anh mượn cái laptop một tí, anh thử đăng ký giúp em xem còn tay nghề không.",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "test_13"
+    },
+    {
+        id: "test_13",
+        name: "",
+        text: "Cô bạn nữ đưa laptop - một chiếc máy cũ kỹ, dán đầy sticker “I love Code”, “Debug your life”, “Trễ deadline nhưng vẫn xinh”.",
+        bg: "",
+        sprite: "",
+        nextId: "test_14"
+    },
+    {
+        id: "test_14",
+        name: "{PLAYER}",
+        text: "Bây giờ em muốn ưu tiên môn nào trước?",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "test_15"
+    },
+    {
+        id: "test_15",
+        name: "",
+        text: "Màn hình laptop nháy đỏ, một thông báo lên: “LỖI HỆ THỐNG - KHÔNG THỂ ĐĂNG KÝ TRONG KHÔNG GIAN KÝ ỨC”. ",
+        bg: "",
+        sprite: "",
+        nextId: "test_16"
+    },
+    {
+        id: "test_16",
+        name: "{PLAYER}",
+        text: "Ủa sao kỳ vậy? Máy em bị sao vậy. Anh có làm gì đâu nhỉ?",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "test_17"
+    },
+    {
+        id: "test_17",
+        name: "Bạn nữ",
+        text: "Dạ?",
+        bg: "",
+        sprite: "assets/images/test_cothuthu.png",
+        nextId: "test_18"
+    },
+    {
+        id: "test_18",
+        name: "Người hướng dẫn",
+        text: "Chào mừng cựu sinh viên đến với khu vực tòa B. Anh thấy lỗi, đó là do anh - người đang bị kẹt - đang cố đăng ký môn trong server ký ức. Còn em ấy, em ấy đang ở thực tại chẳng thấy lỗi gì hết.",
+        bg: "",
+        sprite: "assets/images/test_guide.png",
+        nextId: "test_19"
+    },
+    {
+        id: "test_19",
+        name: "{PLAYER}",
+        text: "Rồi rồi, lại cái trò chỉ mình tôi thấy này nữa à? Thư viện biến thành băng chuyền, giờ đăng ký môn cũng báo lỗi?",
+        bg: "",
+        sprite: "assets/images/test_main.png",
+        nextId: "test_20"
+    },
+    {
+        id: "test_20",
+        name: "Người hướng dẫn",
+        text: "Chính xác. Em sinh viên này chỉ nhìn thấy một màn hình đăng ký bình thường và nó đang tải chậm. Còn anh giờ sẽ thấy một mini game. ",
+        bg: "",
+        sprite: "assets/images/test_guide.png",
+        noSkip: true,
+        nextId: "test_21"
+    },
+    {
+        id: "test_21",
+        name: "Người hướng dẫn",
+        text: "Trong game đó, anh phải click vào đúng các ô môn học còn chỉ tiêu, tránh các ô môn đã đủ, môn trùng lịch, và môn tiên quyết chưa học. ",
+        bg: "",
+        sprite: "assets/images/test_guide.png",
+        noSkip: true,
+        nextId: "test_22"
+    },
+    {
+        id: "test_22",
+        name: "Người hướng dẫn",
+        text: " Mỗi lần click sai, anh mất 1 lượt. Có 10 lượt tối đa. Chơi xong, anh nhận mảnh ký ức. Còn em kia… em sẽ thấy máy em tự động chạy và đăng ký xong 4 môn. Có vấn đề gì không?",
+        bg: "",
+        sprite: "assets/images/test_guide.png",
+        noSkip: true,
+        nextId: "test_23"
+    },
+    {
+        id: "test_23",
+        name: "Bạn nữ",
+        text: "Anh ơi… ai nói chuyện với ai mà em nghe không hiểu. Mà em có cần làm gì không ạ? Hay để em ra ngoài đợi?",
+        bg: "",
+        sprite: "assets/images/test_cothuthu.png",
+        nextId: "test_24"
+    },
+    {
+        id: "test_24",
+        name: "{PLAYER}",
+        text: "Em cứ đứng đó còn lại để anh lo!",
         bg: "",
         sprite: "assets/images/test_main.png",
         nextId: null
