@@ -78,7 +78,7 @@
 /* 3. Chữ thoại chính: Nằm gọn gàng bên trong hộp đen */
 #dialogue-text, .dialogue-text, .narration-text {
     position: absolute !important;
-    top: 40px !important; /* Đẩy xuống một xíu để chừa chỗ cho nửa dưới của Tên */
+    top: 30px !important; /* Đẩy xuống một xíu để chừa chỗ cho nửa dưới của Tên */
     left: 15vw !important; 
     width: 70vw !important; 
     

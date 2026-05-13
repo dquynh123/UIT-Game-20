@@ -8,6 +8,7 @@ const storyToaC = [
         name: "Bí thư Vũ",
         text: "Em cảm ơn anh nhiều lắm!",
         bg: "", 
+        voice: "assets/voice/toaD/11.ogg",
         sprite: "assets/images/chibi.png",
         noSkip: true,
         nextId: "c_02"
@@ -17,6 +18,7 @@ const storyToaC = [
         name: "{PLAYER}",
         text: "Em làm tốt lắm rồi. Chỉ cần nhớ: làm bí thư mà một mình quét sân cũng không sao, nhưng nhớ gọi điện kêu đồng đội phụ. Còn anh đi đây nhé.",
         bg: "",
+        voice: "assets/voice/toaD/12.ogg",
         sprite: "assets/images/test_main.png",
         nextId: "c_03"
     },
@@ -25,6 +27,7 @@ const storyToaC = [
         name: "Bí thư Vũ",
         text: "Anh về dự kỷ niệm 20 năm nha! Lúc đó em sẽ khoe thành tích Đoàn của nhiệm kỳ em.",
         bg: "", 
+        voice: "assets/voice/toaD/13.ogg",
         sprite: "assets/images/chibi.png",
         nextId: "c_04"
     },
@@ -33,6 +36,7 @@ const storyToaC = [
         name: "{PLAYER}",
         text: "Tòa C cuối cùng - chắc là nơi mình lưu giữ những thứ quan trọng nhất.",
         bg: "",
+        voice: "assets/voice/toaD/14.ogg",
         sprite: "assets/images/test_main.png",
         nextId: "c_05"
     },
@@ -41,6 +45,7 @@ const storyToaC = [
         name: "CTV BHT CNPM",
         text: "Anh trai ơi! Đi đâu mà vội mà vàng, ghé ngang gian hàng Ban Học Tập làm bài test kiến thức lấy quà không? Đang vắng khách quá nè!",
         bg: "",
+        voice: "assets/voice/toaC/1.ogg",
         sprite: "assets/images/chibi.png",
         nextId: "c_06"
     },
@@ -49,6 +54,7 @@ const storyToaC = [
         name: "{PLAYER}",
         text: "Anh đang kiếm đồ. Ở chỗ em có cái cục gì lấp lánh, phát sáng không?",
         bg: "",
+        voice: "assets/voice/toaC/2.ogg",
         sprite: "assets/images/test_main.png",
         nextId: "c_07"
     },
@@ -57,6 +63,7 @@ const storyToaC = [
         name: "CTV BHT CNPM",
         text: "Có luôn! Tụi em có cái cúp mica gắn LED chớp tắt bao chói mắt! Nhưng mà muốn lấy thì khoai lắm nha.",
         bg: "",
+        voice: "assets/voice/toaC/3.1.ogg",
         sprite: "assets/images/chibi.png",
         nextId: "c_08"
     },
@@ -66,6 +73,7 @@ const storyToaC = [
         name: "CTV BHT CNPM",
         text: "Anh phải vượt qua thử thách 100 câu hỏi về lịch sử trường mình. Cảnh báo trước là đáp án bị hệ thống xáo trộn liên tục đó, anh phải thật tinh mắt mới chọn kịp.",
         bg: "",
+        voice: "assets/voice/toaC/3.2.ogg",
         sprite: "assets/images/test_main.png",
         noSkip: true,
         nextId: "c_09"
@@ -75,6 +83,7 @@ const storyToaC = [
         name: "{PLAYER}",
         text: "100 câu à? Được. Anh sẵn sàng rồi.",
         bg: "",
+        voice: "assets/voice/toaC/4.ogg",
         sprite: "assets/images/test_main.png",
         nextId: "c_10"
     },
@@ -83,6 +92,7 @@ const storyToaC = [
         name: "CTV BHT CNPM",
         text: "Chà, tự tin gớm ta! Để xem cựu sinh viên nhớ trường được bao nhiêu phần trăm nhé.",
         bg: "",
+        voice: "assets/voice/toaC/5.ogg",
         sprite: "assets/images/test_main.png",
         noSkip: true,
         nextId: null

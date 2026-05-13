@@ -14,6 +14,7 @@ const StoryToaD = [
         name: "{PLAYER}",
         text: "Tòa D… hồi xưa toàn lên đây họp Đoàn, làm báo cáo, phát động phong trào. Mà sao giờ vắng lặng thế này?",
         bg: "",
+        voice: "assets/voice/toaD/1.ogg",
         sprite: "assets/images/test_main.png",
         nextId: "test_03"
     },
@@ -23,6 +24,7 @@ const StoryToaD = [
         name: "Bí thư đoàn",
         text: "Anh… anh có phải là anh {PLAYER} không ạ? Hồi trước làm Bí thư Đoàn khoa CNPM ấy?",
         bg: "",
+        voice: "assets/voice/toaD/2.ogg",
         sprite: "assets/images/chibi.png",
         nextId: "test_04"
     },
@@ -32,6 +34,7 @@ const StoryToaD = [
         name: "{PLAYER}",
         text: "Ủa, em biết anh? Anh nhìn em… cũng quen mắt nhưng mà chưa nhớ ra.",
         bg: "",
+        voice: "assets/voice/toaD/3.ogg",
         sprite: "assets/images/test_main.png",
         nextId: "test_05"
     },
@@ -41,6 +44,7 @@ const StoryToaD = [
         name: "Bí thư đoàn",
         text: "Trời ạ, đúng anh thật rồi! Em tên Vũ, khoá… 2022 ạ! Hồi em năm nhất, anh đang năm bốn. Hôm đó anh ngầu lắm. Anh không nhớ em, nhưng em nhớ anh rõ lắm ý",
         bg: "",
+        voice: "assets/voice/toaD/4.ogg",
         sprite: "assets/images/chibi.png",
         nextId: "test_06"
     },
@@ -50,6 +54,7 @@ const StoryToaD = [
         name: "{PLAYER}",
         text: "À Vũ à, anh nhớ ra rồi.",
         bg: "",
+        voice: "assets/voice/toaD/5.ogg",
         sprite: "assets/images/chibi.png",
         nextId: "test_07"
     },
@@ -59,6 +64,7 @@ const StoryToaD = [
         name: "Bí thư Vũ",
         text: "Dạ, hôm nay là ngày Chủ Nhật Xanh của trường, lẽ ra có mười mấy đứa tình nguyện viên. Mà tự nhiên sáng nay tụi nó kêu mưa, kêu nắng, rồi đứa thì ngủ quên… cuối cùng chỉ còn một mình em.",
         bg: "",
+        voice: "assets/voice/toaD/6.1.ogg",
         sprite: "assets/images/chibi.png",
         nextId: "test_08"
     },
@@ -67,6 +73,7 @@ const StoryToaD = [
         name: "Bí thư Vũ",
         text: "Cái sân này, em quét từ 7h sáng, quét mãi không hết, vì gió cứ thổi lá từ khắp nơi sang.",
         bg: "",
+        voice: "assets/voice/toaD/6.2.ogg",
         sprite: "assets/images/chibi.png",
         nextId: "test_09"
     },
@@ -75,6 +82,7 @@ const StoryToaD = [
         name: "Bí thư Vũ",
         text: "Mới nãy em còn tự nhủ: “Giá mà hồi xưa anh {PLAYER} còn làm Bí thư, chắc ảnh kéo cả đội đến giúp”.",
         bg: "",
+        voice: "assets/voice/toaD/6.3.ogg",
         sprite: "assets/images/chibi.png",
         nextId: "test_10"
     },
@@ -83,6 +91,7 @@ const StoryToaD = [
         name: "{PLAYER}",
         text: "Em nịnh đấy à? Mà em có thấy cái gì lấp lánh ở đây không?",
         bg: "",
+        voice: "assets/voice/toaD/7.ogg",
         sprite: "assets/images/chibi.png",
         nextId: "test_11"
     },
@@ -91,6 +100,7 @@ const StoryToaD = [
         name: "Bí thư Vũ",
         text: "Dạ không ạ. Anh giúp em một tay với, em còn deadline DEVO Challenge nữa huhu",
         bg: "",
+        voice: "assets/voice/toaD/8.ogg",
         sprite: "assets/images/chibi.png",
         nextId: "test_12"
     },
@@ -107,6 +117,7 @@ const StoryToaD = [
         name: "{PLAYER}",
         text: "Ủa khoan...",
         bg: "",
+        voice: "assets/voice/toaD/9.ogg",
         sprite: "assets/images/chibi.png",
         nextId: "test_14"
     },
@@ -115,6 +126,7 @@ const StoryToaD = [
         name: "Người hướng dẫn",
         text: "Chào mừng cựu sinh viên đã đến với Tòa D. ^ ^ lại một mini game nhỏ nữa đây một bàn phím ảo xuất hiện, và anh phải gõ nhanh những từ ngữ xuất hiện trên màn hình. Mỗi từ đúng, một chiếc lá thật ngoài sân biến mất. Anh có 2 phút, chơi không?",
         bg: "",
+        voice: "assets/voice/toaD/10.ogg",
         sprite: "",
         noSkip: true,
         nextId: null

@@ -500,7 +500,7 @@ const storyToaA = [
         name: "Người hướng dẫn",
         text: "Đúng rồi đấy. Không gian này đang phản chiếu tâm lý của anh.",
         bg: "",
-        voice: "assets/voice/toaA/9_toaA.ogg",
+        voice: "assets/voice/toaA/9.1_toaA.ogg",
         sprite: "",
         nextId: "ht_11"
     },
@@ -509,7 +509,7 @@ const storyToaA = [
         name: "Người hướng dẫn",
         text: "Mấy năm nay đi làm, anh lúc nào cũng thấy công việc chạy liên tục như một dây chuyền không có điểm dừng.",
         bg: "",
-        voice: "assets/voice/toaA/9_toaA.ogg",
+        voice: "assets/voice/toaA/9.2_toaA.ogg",
         sprite: "",
         nextId: "ht_12"
     },
@@ -518,7 +518,7 @@ const storyToaA = [
         name: "Người hướng dẫn",
         text: "Anh quen sống khô khan như một cỗ máy rồi, nên khi bộ não load dữ liệu khu vực này, nó tự động biến thư viện thành một cái xưởng luôn.",
         bg: "",
-        voice: "assets/voice/toaA/9_toaA.ogg",
+        voice: "assets/voice/toaA/9.3_toaA.ogg",
         sprite: "",
         nextId: "ht_13"
     },
@@ -527,7 +527,7 @@ const storyToaA = [
         name: "Người hướng dẫn",
         text: "Muốn lấy được Mảnh ký ức thì xắn tay áo lên giúp cậu sinh viên kia xếp sách đi.",
         bg: "",
-        voice: "assets/voice/toaA/9_toaA.ogg",
+        voice: "assets/voice/toaA/9.4_toaA.ogg",
         sprite: "",
         nextId: "ht_14"
     },
@@ -545,7 +545,7 @@ const storyToaA = [
         name: "CTV CNPM",
         text: "Ôi anh ơi một xe tải sách tới nữa rồi kìa huhu.",
         bg: "",
-        voice: "assets/voice/toaA/11_toaA.ogg",
+        voice: "assets/voice/toaA/11.1_toaA.ogg",
         sprite: "assets/images/chibi.png",
         nextId: "ht_16"
     },
@@ -554,7 +554,7 @@ const storyToaA = [
         name: "CTV CNPM",
         text: "Anh ráng nhặt sách rồi xếp vào đúng 9 cái kệ đằng kia nha. Đừng để rớt cuốn nào đấy, rớt là em bị thủ thư la mất!",
         bg: "",
-        voice: "assets/voice/toaA/11_toaA.ogg",
+        voice: "assets/voice/toaA/11.2_toaA.ogg",
         sprite: "assets/images/chibi.png",
         noSkip: true,
         nextId: "ht_17"

@@ -55,6 +55,7 @@ const storyBadToaC = [
         name: "CTV BHTCNPM", 
         text: "Dữ liệu không khớp. Anh đã quên hết những ký ức trước đây. Anh sẽ kẹt ở đây mãi mãi.", 
         bg: "", 
+        voice: "assets/voice/ending/5_bad.ogg",
         sprite: "assets/images/test_guide.png", 
         noSkip: true,
         nextId: null
@@ -85,6 +86,7 @@ const storyTrueToaC_Part1 = [
         name: "CTV BHTCNPM", 
         text: "Dữ liệu đã khớp. Anh nhớ rất kỹ nơi này... dù đã rời đi từ lâu.", 
         bg: "", 
+        voice: "assets/voice/ending/1.ogg",
         sprite: "assets/images/chibi.png", 
         noSkip: true,
         nextId: "true_04" 
@@ -94,6 +96,7 @@ const storyTrueToaC_Part1 = [
         name: "{PLAYER}", 
         text: "Cái giọng điệu này... Cậu là cái hệ thống admin lúc nãy? Thôi được rồi, trò chơi kết thúc. Tôi đã gom đủ 4 mảnh. Mở cửa cho tôi thoát ra khỏi đây", 
         bg: "", 
+        voice: "assets/voice/ending/2.ogg",
         sprite: "assets/images/test_main.png", 
         noSkip: true,
         nextId: "true_05" 
@@ -103,6 +106,7 @@ const storyTrueToaC_Part1 = [
         name: "CTV BHTCNPM", 
         text: "Anh cứ tưởng hệ thống bắt anh đi gom ký ức sao? Không đâu... Là tự tâm trí anh đang nhớ lại những gì nó không muốn quên đi thôi.", 
         bg: "", 
+        voice: "assets/voice/ending/3.ogg",
         sprite: "assets/images/chibi.png", 
         noSkip: true,
         nextId: null
