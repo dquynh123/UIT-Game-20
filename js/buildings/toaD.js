@@ -9,6 +9,7 @@ const storyToaC = [
         text: "Em cảm ơn anh nhiều lắm!",
         bg: "", 
         sprite: "assets/images/chibi.png",
+        noSkip: true,
         nextId: "c_02"
     },
     {

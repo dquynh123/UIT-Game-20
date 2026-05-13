@@ -5,6 +5,7 @@ const StoryToaD = [
         text: "Main bước ra từ hành lang Tòa B, tay cầm chìa khóa Tòa D vừa nhận được.",
         bg: "",
         sprite: "",
+        noSkip: true,
         nextId: "test_02"
     },
 

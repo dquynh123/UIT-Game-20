@@ -405,7 +405,9 @@ const storyToaA = [
         name: "{PLAYER}",
         text: "Ra đây là mảnh ký ức. Nhìn nó cứ như viên kẹo ngậm hồi bé, thèm quá... à không, chắc mình không nên thử.",
         bg: "",
+        voice: "assets/voice/toaE/1_sautoaE.ogg",
         sprite: "assets/images/test_main.png",
+        noSkip: true,
         nextId: "ht_01"
     },
     {
@@ -413,6 +415,7 @@ const storyToaA = [
         name: "{PLAYER}",
         text: "Chìa khóa Tòa A? Vậy giờ phải đi qua thư viện tòa A thôi nhỉ?",
         bg: "",
+        voice: "assets/voice/toaE/2_sautoaE.ogg",
         sprite: "assets/images/test_main.png",
         nextId: "ht_02" 
     },
@@ -422,6 +425,7 @@ const storyToaA = [
         text: "Cái quái gì thế này? Hồi xưa thư viện tòa A yên tĩnh lắm mà ?",
         bg: "",
         sprite: "assets/images/test_main.png",
+        noSkip: true,
         nextId: "ht_03" 
     },
     {
@@ -588,6 +592,7 @@ const storyToaA = [
         text: "Được rồi. Bắt đầu thôi!",
         bg: "",
         sprite: "assets/images/test_main.png",
+        noskip: true,
         nextId: null
     }
 ];

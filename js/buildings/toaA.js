@@ -17,6 +17,7 @@ const StoryToaB = [
         text: "Main đang thong thả bước, tay sờ vào túi áo nơi có hai mảnh ký ức (E và A). Anh ngước nhìn lên tấm bảng chỉ dẫn “B1.20”,  “B5.02” Một cảm giác hoài niệm ùa về.",
         bg: "",
         sprite: "",
+        noSkip: true,
         nextId: "test_02"
     },
 
@@ -208,6 +209,7 @@ const StoryToaB = [
         text: "Em cứ đứng đó còn lại để anh lo!",
         bg: "",
         sprite: "assets/images/test_main.png",
+        noSkip: true,
         nextId: null
     }
 ];

@@ -23,6 +23,7 @@ const storyBadToaC = [
         text: "Âm thanh ồn ào náo nhiệt của sảnh Tòa C đột ngột tắt lịm đi như ai đó vừa rút phích cắm điện. ", 
         bg: "", 
         sprite: "", 
+        noSkip: true,
         nextId: "bad_02" 
     },
     { 
@@ -127,6 +128,7 @@ const storyVanPhong = [
         text: "Tiếng điện thoại iPhone 17 reng inh ỏi. ", 
         bg: "", 
         sprite: "", 
+        noSkip: true,
         nextId: "vp_02" 
     },
     { 
@@ -175,6 +177,7 @@ const storyVanPhong = [
         text: "Không còn là chiều không gian ảo mộng nữa, mà là thực tại ngập tràn sức sống.",
         bg: "",
         sprite: "",
+        noSkip: true,
         nextId: null
     }
 ];

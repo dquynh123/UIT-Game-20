@@ -23,7 +23,7 @@ let dialogueHistory = []; // Cuốn sổ ghi chép lịch sử
 let typingSpeed = 30;
 let bgmVolume = 1.0; 
 let voiceVolume = 1.0;
-let currentVoice = null;
+
 
 export function playVN(storyArray, startId, callback) {
     clearInterval(typeInterval);
@@ -139,16 +139,21 @@ function showLine(lineId) {
     let rawText = line.text.replace(/{PLAYER}/g, localStorage.getItem('currentPlayerName') || "Main");
     dialogueHistory.push({ name: speaker, text: rawText });
     // 1. TẮT giọng nói của câu thoại ngay trước đó 
-    if (currentVoice) {
-        currentVoice.pause();       // Dừng phát
-        currentVoice.currentTime = 0; // Tua về số 0
+    if (window.currentVoice) {
+        window.currentVoice.pause();       // Dừng phát
+        window.currentVoice.currentTime = 0; // Tua về số 0
     }
 
     // 2. PHÁT giọng nói của câu mới này (nếu kịch bản có file voice)
     if (line.voice) {
-        currentVoice = new Audio(line.voice);
-        currentVoice.volume = voiceVolume; // Áp mức âm lượng từ Menu Cài đặt
-        currentVoice.play().catch(e => console.log("Chưa thể phát giọng nói: ", e));
+        window.currentVoice = new Audio(line.voice);
+        window.currentVoice.volume = voiceVolume; // Áp mức âm lượng từ Menu Cài đặt
+        window.currentVoice.play().catch(e => console.log("Chưa thể phát giọng nói: ", e));
+    }
+    if (line.sfx) {
+        let sfxAudio = new Audio(line.sfx);
+        sfxAudio.volume = 1.0; // Âm lượng hiệu ứng (từ 0.0 đến 1.0)
+        sfxAudio.play().catch(e => console.log("Chưa thể phát SFX: ", e));
     }
     typeWriter(rawText, line);
 }
@@ -488,8 +493,8 @@ if (btnMenu && menuScreen) {
             voiceVolume = parseInt(e.target.value) / 100;
             
             // Cập nhật âm lượng ngay lập tức nếu nhân vật đang nói dở
-            if (currentVoice) {
-                currentVoice.volume = voiceVolume;
+            if (window.currentVoice) {
+                window.currentVoice.volume = voiceVolume;
             }
         };
     }
