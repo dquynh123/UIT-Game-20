@@ -62,7 +62,7 @@ function handleStartGame() {
             playerList = [];
         }
 
-        // 3. KIỂM TRA TRÙNG TÊN (Chốt chặn quan trọng)
+        // 3. KIỂM TRA TRÙNG TÊN 
         const isDuplicate = playerList.some(player => player.name.toLowerCase() === userName.toLowerCase());
 
         if (isDuplicate) {
@@ -87,7 +87,7 @@ function handleStartGame() {
         localStorage.setItem('currentSessionId', newSession.timestamp);
         window.UITGameStats.startGame(); // Kích hoạt tính giờ và điểm
 
-        // 5. HIỆU ỨNG CHUYỂN CẢNH "CHA CON"
+        // 5. HIỆU ỨNG CHUYỂN CẢNH 
         sceneTransition(() => {
             nameScreen.classList.add('hidden');
             gameScene.classList.remove('hidden');

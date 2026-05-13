@@ -93,7 +93,7 @@ function transitionToToaC() {
     }
 }
 /**
- * Tòa D - English Cleaning Game (Bản Fix Triệt Để)
+ * Tòa D - Typing game
  */
 
 const canvasToaD = document.getElementById('gameCanvasToaD');
@@ -105,10 +105,10 @@ const endScreenToaD = document.getElementById('end-screen-toa-d');
 
 const configToaD = {
     gameDuration: 60,
-    spawnInterval: 1500, // Tăng tốc độ ra lá một chút cho kịch tính
+    spawnInterval: 1500, // Tăng tốc độ ra lá 
     maxLeavesAllowed: 12, 
-    wordsEasy: ["dog", "cat", "sun", "fish", "bird", "tree", "home", "book", "pink", "blue"],
-    wordsHard: ["university", "technology", "information", "celebration", "computer", "vietnam"]
+    wordsEasy: ["dog", "cat", "sun", "fish", "bird", "tree", "home", "book", "pink", "blue", "red", "cloud", "phone", "chair", "table", "house", "river", "flower", "moon", "star", "start", "game"],
+    wordsHard: ["university", "technology", "information", "celebration", "computer", "vietnam", "diversity", "education"]
 };
 
 let scoreToaD = 0;
@@ -182,7 +182,7 @@ class Leaf {
 function spawnLeaf() {
     if (!isGameActive) return;
     if (leavesToaD.length >= configToaD.maxLeavesAllowed) {
-        showResultToaD("THUA CUỘC! Sân đã đầy lá.", true);
+        showResultToaD("SÂN ĐÃ ĐẦY LÁ! Bạn đã không hoàn thành nhiệm vụ được giao.", false); 
         return;
     }
     leavesToaD.push(new Leaf());
@@ -240,16 +240,21 @@ function animateToaD() {
 function showResultToaD(message, isGameOver) {
     isGameActive = false; 
     cleanupToaD(); 
-    // Tính thời gian đã chơi (60s trừ đi thời gian còn lại)
+    
     let timePlayed = configToaD.gameDuration - timeLeftToaD;
 
-    if (isGameOver) {
-        // TRƯỜNG HỢP THUA: Báo lỗi và truyền hàm initToaD để chơi lại
-        if (typeof window.showGlobalSummaryBoard === 'function') {
-            window.showGlobalSummaryBoard("Tòa D", scoreToaD, timePlayed, false, initToaD);
-        } else {
-            initToaD();
-        }
+    if (window.UITGameStats) {
+        window.UITGameStats.addScore("Tòa D", scoreToaD);
+    }
+    
+    if (typeof window.showGlobalSummaryBoard === 'function') {
+        window.showGlobalSummaryBoard(
+            "Tòa D", 
+            scoreToaD, 
+            timePlayed, 
+            true, 
+            transitionToToaC 
+        );
     } else {
         // TRƯỜNG HỢP THẮNG: Lưu điểm và truyền hàm transitionToToaC để đi tiếp
         if (window.UITGameStats) {
@@ -262,54 +267,6 @@ function showResultToaD(message, isGameOver) {
             transitionToToaC();
         }
     }
-    
-    /*const finalMsg = document.getElementById('final-msg-toa-d');
-    const finalScore = document.getElementById('final-score-toa-d');
-    const actionBtn = document.getElementById('to-toa-c-btn');
-    const overlay = document.getElementById('fade-overlay');
-    const uiToaD = document.getElementById('ui-toa-d'); 
-
-    finalMsg.innerText = message;
-    finalScore.innerText = scoreToaD;
-    endScreenToaD.style.display = 'block';
-
-    if (isGameOver) {
-        actionBtn.innerText = "CHƠI LẠI";
-        actionBtn.onclick = () => {
-            initToaD(); // Gọi trực tiếp hàm init để reset game
-        };
-    } else {
-        if (window.UITGameStats) {
-            window.UITGameStats.addScore("Tòa D", scoreToaD);
-        }
-        actionBtn.innerText = "TIẾP TỤC";
-        actionBtn.onclick = () => {
-            actionBtn.disabled = true;
-
-            // 1. Phủ đen
-            if (overlay) {
-                overlay.style.opacity = "1";
-                overlay.style.pointerEvents = "all";
-            }
-
-            // 2. Dọn dẹp để tránh nháy ảnh mờ
-            setTimeout(() => {
-                ctxToaD.clearRect(0, 0, canvasToaD.width, canvasToaD.height);
-                if (uiToaD) uiToaD.style.display = 'none';
-                endScreenToaD.style.display = 'none';
-                transitionToToaC();
-
-                // 4. Mở mắt
-                setTimeout(() => {
-                    if (overlay) {
-                        overlay.style.opacity = "0";
-                        overlay.style.pointerEvents = "none";
-                    }
-                    actionBtn.disabled = false;
-                }, 800); 
-            }, 500); 
-        };
-    }*/
 }
 
 function cleanupToaD() {
