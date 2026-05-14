@@ -14,7 +14,7 @@ const StoryToaB = [
     {
         id: "test_01",
         name: "",
-        text: "Main đang thong thả bước, tay sờ vào túi áo nơi có hai mảnh ký ức (E và A). Anh ngước nhìn lên tấm bảng chỉ dẫn “B1.20”,  “B5.02” Một cảm giác hoài niệm ùa về.",
+        text: "{PLAYER} đang thong thả bước, tay sờ vào túi áo nơi có hai mảnh ký ức (E và A). Anh ngước nhìn lên tấm bảng chỉ dẫn “B1.20”,  “B5.02” Một cảm giác hoài niệm ùa về.",
         bg: "",
         sprite: "",
         noSkip: true,
@@ -26,7 +26,7 @@ const StoryToaB = [
         name: "{PLAYER}",
         text: "Tòa B này… hồi đó toàn lên đây học mấy môn đại cương. Rồi đợt đăng ký môn, cả lũ túm năm tụm bảy ngồi hành lang… ủa, khoan đã?",
         bg: "",
-        voice: "assets/voice/toaA/1.ogg",
+        voice: "assets/voice/toaB/1.ogg",
         sprite: "assets/images/test_main.png",
         nextId: "test_03"
     },
@@ -54,7 +54,7 @@ const StoryToaB = [
         name: "{PLAYER}",
         text: "Úi! Em có sao không?",
         bg: "",
-        voice: "assets/voice/toaA/2.ogg",
+        voice: "assets/voice/toaB/2.ogg",
         sprite: "assets/images/test_main.png",
         nextId: "test_06"
     },
@@ -63,14 +63,14 @@ const StoryToaB = [
         name: "Bạn nữ",
         text: "Dạ em xin lỗi anh! Em xin lỗi! Em mải nhìn điện thoại, không để ý. Trời ạ, giấy tờ bay hết rồi!",
         bg: "",
-        voice: "assets/voice/toaA/3.ogg",
+        voice: "assets/voice/toaB/3.ogg",
         sprite: "assets/images/test_cothuthu.png",
         nextId: "test_07"
     },
     {
         id: "test_07",
         name: "",
-        text: "Main nhặt được một tờ giấy A4 ghi đầy chữ: “WISHLIST HỌC KỲ 2 - NĂM 1 - NGÀNH KỸ THUẬT PHẦN MỀM”. Bên cạnh có những dòng note nhỏ: 'Nhất định thứ 2 quyết tâm nghỉ!'",
+        text: "{PLAYER} nhặt được một tờ giấy A4 ghi đầy chữ: “WISHLIST HỌC KỲ 2 - NĂM 1 - NGÀNH KỸ THUẬT PHẦN MỀM”. Bên cạnh có những dòng note nhỏ: 'Nhất định thứ 2 quyết tâm nghỉ!'",
         bg: "",
         sprite: "",
         nextId: "test_08"
@@ -80,7 +80,7 @@ const StoryToaB = [
         name: "{PLAYER}",
         text: "Ủa, đây là… danh sách đăng ký môn học? Sao trông nhiều tín chỉ vậy.",
         bg: "",
-        voice: "assets/voice/toaA/4.ogg",
+        voice: "assets/voice/toaB/4.ogg",
         sprite: "assets/images/test_main.png",
         nextId: "test_09"
     },
@@ -89,7 +89,7 @@ const StoryToaB = [
         name: "Bạn nữ",
         text: "Dạ, đấy là wishlist của em đó anh. Học kỳ này tụi em lần đầu được đăng ký học phần bỡ ngỡ quá. Anh xem, em đổ mồ hôi hột rồi đây này.",
         bg: "",
-        voice: "assets/voice/toaA/5.ogg",
+        voice: "assets/voice/toaB/5.ogg",
         sprite: "assets/images/test_cothuthu.png",
         nextId: "test_10"
     },
@@ -98,7 +98,7 @@ const StoryToaB = [
         name: "{PLAYER}",
         text: "Khổ thân. Mà em biết cách đăng ký chưa, hay là để anh hướng dẫn nhé. Xưa chưa có môn nào là anh mày không đăng ký được đâu.",
         bg: "",
-        voice: "assets/voice/toaA/6.ogg",
+        voice: "assets/voice/toaB/6.ogg",
         sprite: "assets/images/test_main.png",
         nextId: "test_11"
     },
@@ -107,7 +107,7 @@ const StoryToaB = [
         name: "Bạn nữ",
         text: "Oaaa, tiền bối, tiền bối",
         bg: "",
-        voice: "assets/voice/toaA/7.ogg",
+        voice: "assets/voice/toaB/7.ogg",
         sprite: "assets/images/test_cothuthu.png",
         nextId: "test_12"
     },
@@ -116,7 +116,7 @@ const StoryToaB = [
         name: "{PLAYER}",
         text: "Để xem… em cho anh mượn cái laptop một tí, anh thử đăng ký giúp em xem còn tay nghề không.",
         bg: "",
-        voice: "assets/voice/toaA/8.ogg",
+        voice: "assets/voice/toaB/8.ogg",
         sprite: "assets/images/test_main.png",
         nextId: "test_13"
     },
@@ -133,7 +133,7 @@ const StoryToaB = [
         name: "{PLAYER}",
         text: "Bây giờ em muốn ưu tiên môn nào trước?",
         bg: "",
-        voice: "assets/voice/toaA/9.ogg",
+        voice: "assets/voice/toaB/9.ogg",
         sprite: "assets/images/test_main.png",
         nextId: "test_15"
     },
@@ -150,7 +150,7 @@ const StoryToaB = [
         name: "{PLAYER}",
         text: "Ủa sao kỳ vậy? Máy em bị sao vậy. Anh có làm gì đâu nhỉ?",
         bg: "",
-        voice: "assets/voice/toaA/10.ogg",
+        voice: "assets/voice/toaB/10.ogg",
         sprite: "assets/images/test_main.png",
         nextId: "test_17"
     },
@@ -159,7 +159,7 @@ const StoryToaB = [
         name: "Bạn nữ",
         text: "Dạ?",
         bg: "",
-        voice: "assets/voice/toaA/11.ogg",
+        voice: "assets/voice/toaB/11.ogg",
         sprite: "assets/images/test_cothuthu.png",
         nextId: "test_18"
     },
@@ -168,7 +168,7 @@ const StoryToaB = [
         name: "Người hướng dẫn",
         text: "Chào mừng cựu sinh viên đến với khu vực tòa B. Anh thấy lỗi, đó là do anh - người đang bị kẹt - đang cố đăng ký môn trong server ký ức. Còn em ấy, em ấy đang ở thực tại chẳng thấy lỗi gì hết.",
         bg: "",
-        voice: "assets/voice/toaA/12.ogg",
+        voice: "assets/voice/toaB/12.ogg",
         sprite: "assets/images/test_guide.png",
         nextId: "test_19"
     },
@@ -177,7 +177,7 @@ const StoryToaB = [
         name: "{PLAYER}",
         text: "Rồi rồi, lại cái trò chỉ mình tôi thấy này nữa à? Thư viện biến thành băng chuyền, giờ đăng ký môn cũng báo lỗi?",
         bg: "",
-        voice: "assets/voice/toaA/13.ogg",
+        voice: "assets/voice/toaB/13.ogg",
         sprite: "assets/images/test_main.png",
         nextId: "test_20"
     },
@@ -186,7 +186,7 @@ const StoryToaB = [
         name: "Người hướng dẫn",
         text: "Chính xác. Em sinh viên này chỉ nhìn thấy một màn hình đăng ký bình thường và nó đang tải chậm. Còn anh giờ sẽ thấy một mini game. ",
         bg: "",
-        voice: "assets/voice/toaA/14.1.ogg",
+        voice: "assets/voice/toaB/14.1.ogg",
         sprite: "assets/images/test_guide.png",
         noSkip: true,
         nextId: "test_21"
@@ -196,7 +196,7 @@ const StoryToaB = [
         name: "Người hướng dẫn",
         text: "Trong game đó, anh phải click vào đúng các ô môn học còn chỉ tiêu, tránh các ô môn đã đủ, môn trùng lịch, và môn tiên quyết chưa học. ",
         bg: "",
-        voice: "assets/voice/toaA/14.2.ogg",
+        voice: "assets/voice/toaB/14.2.ogg",
         sprite: "assets/images/test_guide.png",
         noSkip: true,
         nextId: "test_22"
@@ -206,7 +206,7 @@ const StoryToaB = [
         name: "Người hướng dẫn",
         text: " Mỗi lần click sai, anh mất 1 lượt. Có 10 lượt tối đa. Chơi xong, anh nhận mảnh ký ức. Còn em kia… em sẽ thấy máy em tự động chạy và đăng ký xong 4 môn. Có vấn đề gì không?",
         bg: "",
-        voice: "assets/voice/toaA/14.3.ogg",
+        voice: "assets/voice/toaB/14.3.ogg",
         sprite: "assets/images/test_guide.png",
         noSkip: true,
         nextId: "test_23"
@@ -216,7 +216,7 @@ const StoryToaB = [
         name: "Bạn nữ",
         text: "Anh ơi… ai nói chuyện với ai mà em nghe không hiểu. Mà em có cần làm gì không ạ? Hay để em ra ngoài đợi?",
         bg: "",
-        voice: "assets/voice/toaA/15.ogg",
+        voice: "assets/voice/toaB/15.ogg",
         sprite: "assets/images/test_cothuthu.png",
         nextId: "test_24"
     },
@@ -225,7 +225,7 @@ const StoryToaB = [
         name: "{PLAYER}",
         text: "Em cứ đứng đó còn lại để anh lo!",
         bg: "",
-        voice: "assets/voice/toaA/16.ogg",
+        voice: "assets/voice/toaB/16.ogg",
         sprite: "assets/images/test_main.png",
         noSkip: true,
         nextId: null
@@ -535,6 +535,12 @@ function gameOver(reason) {
 }
 // 1. HÀM CHUYỂN TIẾP (Sau này sẽ gọi khi bấm nút trên Bảng Tổng Kết)
 function transitionToToaB() {
+    // loại bỏ tiếng tòa trước
+    if (window.currentSFX) {
+        window.currentSFX.pause();       // Dừng phát
+        window.currentSFX.currentTime = 0; // Tua về đầu
+        window.currentSFX = null;        // Xóa sổ hoàn toàn
+    }
     if (isTransitioningToToaB) return;
     isTransitioningToToaB = true;
 

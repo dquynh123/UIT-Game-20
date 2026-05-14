@@ -131,7 +131,9 @@ function rollDice(diceType, cost) {
         // 2. KHỞI ĐỘNG XÚC XẮC
         state.drl -= cost;
         state.turns += 1;
-        
+        // THÊM CODE PHÁT ÂM THANH XÚC XẮC VÀO ĐÂY
+        let diceSound = new Audio('assets/sound/dice.mp3');
+        diceSound.play().catch(e => console.log("Lỗi âm thanh: ", e));
         // Kiểm tra nếu đạt 10 lượt để kích hoạt chu kỳ ngày/đêm
         const isNightCycleTriggered = state.turns % 10 === 0;
         if (isNightCycleTriggered) {
@@ -417,6 +419,21 @@ const storyToaA = [
         bg: "",
         voice: "assets/voice/toaE/2_sautoaE.ogg",
         sprite: "assets/images/test_main.png",
+        noSkip: true,
+        nextId: "a_00" 
+    },
+    {
+        // CÂU 0: CẢNH INTRO ẢO (Không có người nói, chỉ có tiếng máy móc)
+        id: "a_00",
+        name: "",
+        text: "{PLAYER} bước qua cánh cửa kính của thư viện Tòa A. Băng chuyền công nghiệp khổng lồ chạy rầm rầm, sách rơi như nước lũ.",
+        bg: "",
+        sfx: "assets/sound/conveyor.ogg", 
+        sfxLoop: true,          // Bật lặp lại liên tục
+        sfxVolume: 0.8,         // Bắt đầu ồn ào ở mức 80% (0.8)
+        sfxFadeTo: 0.2,
+        sfxLoop: true,
+        sprite: "",
         nextId: "ht_02" 
     },
     {

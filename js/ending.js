@@ -120,6 +120,7 @@ const storyTrueToaC_Part2 = [
         text: "Anh đã khôi phục xong toàn bộ dữ liệu thanh xuân của mình rồi. Đến lúc phải tỉnh dậy để chạy deadline tiếp thôi, cựu sinh viên.", 
         bg: "", 
         sprite: "assets/images/chibi.png", 
+        voice: "assets/voice/ending/4.ogg",
         noSkip: true,
         nextId: null 
     }

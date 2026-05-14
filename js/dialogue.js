@@ -150,10 +150,36 @@ function showLine(lineId) {
         window.currentVoice.volume = voiceVolume; // Áp mức âm lượng từ Menu Cài đặt
         window.currentVoice.play().catch(e => console.log("Chưa thể phát giọng nói: ", e));
     }
+    // 3. PHÁT HIỆU ỨNG ÂM THANH (SFX)
     if (line.sfx) {
         let sfxAudio = new Audio(line.sfx);
-        sfxAudio.volume = 1.0; // Âm lượng hiệu ứng (từ 0.0 đến 1.0)
+        
+        // Mức âm lượng bắt đầu (mặc định là 100%, nếu kịch bản có yêu cầu thì chỉnh theo kịch bản)
+        sfxAudio.volume = line.sfxVolume !== undefined ? line.sfxVolume : 1.0; 
+        
+        if (line.sfxLoop) {
+            sfxAudio.loop = true;
+        }
+
+        // Lưu lại để lát nữa chuyển sang Minigame có thể gọi ra để tắt
+        window.currentSFX = sfxAudio; 
+        
         sfxAudio.play().catch(e => console.log("Chưa thể phát SFX: ", e));
+
+        // 🌟 TÍNH NĂNG MỚI: TỰ ĐỘNG HẠ ÂM LƯỢNG (FADE) 🌟
+        if (line.sfxFadeTo !== undefined) {
+            // Chờ 2.5 giây (2500ms) để người chơi cảm nhận độ ồn
+            setTimeout(() => {
+                // Sau đó bắt đầu hạ nhỏ dần mỗi 150 mili-giây
+                let fadeInterval = setInterval(() => {
+                    if (sfxAudio.volume > line.sfxFadeTo) {
+                        sfxAudio.volume = Math.max(line.sfxFadeTo, sfxAudio.volume - 0.05); // Giảm dần
+                    } else {
+                        clearInterval(fadeInterval); // Khi chạm mốc 15% thì giữ nguyên luôn
+                    }
+                }, 150); 
+            }, 2500); 
+        }
     }
     typeWriter(rawText, line);
 }

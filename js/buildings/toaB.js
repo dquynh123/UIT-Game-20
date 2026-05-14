@@ -2,7 +2,7 @@ const StoryToaD = [
     {
         id: "test_01",
         name: "",
-        text: "Main bước ra từ hành lang Tòa B, tay cầm chìa khóa Tòa D vừa nhận được.",
+        text: "{PLAYER} bước ra từ hành lang Tòa B, tay cầm chìa khóa Tòa D vừa nhận được.",
         bg: "",
         sprite: "",
         noSkip: true,
@@ -55,7 +55,7 @@ const StoryToaD = [
         text: "À Vũ à, anh nhớ ra rồi.",
         bg: "",
         voice: "assets/voice/toaD/5.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/test_main.png",
         nextId: "test_07"
     },
 
@@ -92,7 +92,7 @@ const StoryToaD = [
         text: "Em nịnh đấy à? Mà em có thấy cái gì lấp lánh ở đây không?",
         bg: "",
         voice: "assets/voice/toaD/7.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/test_main.png",
         nextId: "test_11"
     },
     {
@@ -118,7 +118,7 @@ const StoryToaD = [
         text: "Ủa khoan...",
         bg: "",
         voice: "assets/voice/toaD/9.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/test_main.png",
         nextId: "test_14"
     },
     {

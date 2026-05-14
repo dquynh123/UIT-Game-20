@@ -224,23 +224,55 @@ function spawnLeaf() {
 window.addEventListener('keydown', (e) => {
     if (!isGameActive) return;
 
-    if (e.key === "Enter") {
-        let foundIndex = leavesToaD.findIndex(l => l.word.toLowerCase() === currentInput.toLowerCase());
-        if (foundIndex !== -1) {
-            let pts = (leavesToaD[foundIndex].type === "hard") ? 5 : 2;
-            scoreToaD = Math.min(100, scoreToaD + pts);
-            leavesToaD.splice(foundIndex, 1);
-            scoreElToaD.innerText = scoreToaD;
-            if (scoreToaD >= 100) showResultToaD("XUẤT SẮC! Đạt 100đ.", false);
-        } else if (currentInput.length > 0) {
-            scoreToaD = Math.max(0, scoreToaD - 1);
-            scoreElToaD.innerText = scoreToaD;
-        }
-        currentInput = "";
-    } else if (e.key === "Backspace") {
-        currentInput = currentInput.slice(0, -1);
-    } else if (e.key.length === 1 && /[a-z]/i.test(e.key)) {
-        currentInput += e.key;
+        // 1. CÁI LOA ĐỂ PHÁT TIẾNG
+    const typeSoundToaD = new Audio('assets/sound/typing.mp3');
+    typeSoundToaD.volume = 0.6; 
+
+    // 2. BẮT SỰ KIỆN GÕ PHÍM (CHỐNG NHÂN BẢN 100%)
+    if (!window.hasToaDKeyboardListener) {
+        window.addEventListener('keydown', (e) => {
+            // Nếu game chưa bắt đầu thì không làm gì cả
+            if (!isGameActive) return;
+
+            // Khắc tinh của việc nhấn đè phím
+            if (e.repeat) return; 
+
+            // --- PHÁT ÂM THANH KHI GÕ ---
+            if (e.key === "Backspace" || (e.key.length === 1 && /[a-z]/i.test(e.key))) {
+                typeSoundToaD.currentTime = 0; 
+                typeSoundToaD.play().catch(err => {
+                    console.log("Lỗi âm thanh: ", err);
+                });
+            }
+
+            // --- LOGIC XỬ LÝ KHI NHẤP ENTER ---
+            if (e.key === "Enter") {
+                let foundIndex = leavesToaD.findIndex(l => l.word.toLowerCase() === currentInput.toLowerCase());
+                
+                if (foundIndex !== -1) {
+                    let pts = (leavesToaD[foundIndex].type === "hard") ? 5 : 2;
+                    scoreToaD = Math.min(100, scoreToaD + pts);
+                    leavesToaD.splice(foundIndex, 1);
+                    scoreElToaD.innerText = scoreToaD;
+                    if (scoreToaD >= 100) showResultToaD("XUẤT SẮC! Đạt 100đ.", false);
+                } else if (currentInput.length > 0) {
+                    scoreToaD = Math.max(0, scoreToaD - 1);
+                    scoreElToaD.innerText = scoreToaD;
+                }
+                currentInput = ""; 
+                
+            // --- LOGIC KHI XÓA CHỮ ---
+            } else if (e.key === "Backspace") {
+                currentInput = currentInput.slice(0, -1);
+                
+            // --- LOGIC KHI GÕ CHỮ A-Z ---
+            } else if (e.key.length === 1 && /[a-z]/i.test(e.key)) {
+                currentInput += e.key;
+            }
+        });
+
+        // Cắm biển báo: Đã gán sự kiện bắt phím thành công, cấm gán đè thêm!
+        window.hasToaDKeyboardListener = true;
     }
 });
 

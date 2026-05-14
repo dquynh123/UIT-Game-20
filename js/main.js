@@ -219,7 +219,7 @@ const storyScene1 = [
     {
         id: "s1_01",
         name: "",
-        text: "Thành phố về đêm hắt ánh đèn qua cửa sổ... Main ngồi gục trước màn hình máy tính, mặt bơ phờ. Giao diện chằng chịt code đỏ chót báo lỗi.",
+        text: "Thành phố về đêm hắt ánh đèn qua cửa sổ... {PLAYER} ngồi gục trước màn hình máy tính, mặt bơ phờ. Giao diện chằng chịt code đỏ chót báo lỗi.",
         bg: "", 
         sprite: "",
         nextId: "s1_02"
@@ -267,7 +267,7 @@ const storyScene2_UIT = [
     {
         id: "s2_01",
         name: "",
-        text: "Main từ từ mở mắt. Cảnh vật quen thuộc hiện ra: Khuôn viên UIT. Nhưng trời đứng bóng, không gian im lìm không một tiếng động, không một bóng người.",
+        text: "{PLAYER} từ từ mở mắt. Cảnh vật quen thuộc hiện ra: Khuôn viên UIT. Nhưng trời đứng bóng, không gian im lìm không một tiếng động, không một bóng người.",
         bg: "", // Ảnh sân trường
         sprite: "",
         noSkip: true,
@@ -340,216 +340,207 @@ const storyScene2_UIT = [
 
     {
         id: "s2_09",
-        name: "{PLAYER}",
-        text: "Ui đau thật",
-        bg: "",
-        voice: "assets/voice/scene2/6_scene2.ogg",
-        sprite: "assets/images/test_main.png",
-        nextId: "s2_10"
-    },
-
-    {
-        id: "s2_10",
         name: "Người Hướng Dẫn",
         text: "Cứ cho là anh đang mơ đi. Ở đây logic đời thực không xài được đâu. Mấy tòa nhà này không chỉ là cục bê tông, mà nó chứa cả bộ nhớ kỷ niệm của bao nhiêu khóa sinh viên đấy. Giờ thì... anh cũng kẹt lại trong mớ dữ liệu đó rồi.",
         bg: "",
         voice: "assets/voice/scene2/7_scene2.ogg",
         sprite: "assets/images/test_guide.png", 
-        nextId: "s2_11"
+        nextId: "s2_10"
     },
 
     {
-        id: "s2_11",
+        id: "s2_10",
         name: "{PLAYER}",
         text: "Vậy rốt cuộc làm sao để thoát ra?",
         bg: "",
         voice: "assets/voice/scene2/8_scene2.ogg",
         sprite: "assets/images/test_main.png",
-        nextId: "s2_12"
+        nextId: "s2_11"
     },
 
     {
-        id: "s2_12",
+        id: "s2_11",
         name: "Người Hướng Dẫn",
         text: "Anh phải đi nhặt lại mấy mảnh ký ức đang rơi tứ tung ở các tòa nhà. Gom đủ thì về nhà ngủ tiếp. Không thì...",
         bg: "",
         voice: "assets/voice/scene2/9_scene2.ogg",
         sprite: "assets/images/test_guide.png", 
-        nextId: "s2_13"
+        nextId: "s2_12"
     },
 
     {
-        id: "s2_13",
+        id: "s2_12",
         name: "{PLAYER}",
         text: "Thì thì sao cơ???",
         bg: "",
         voice: "assets/voice/scene2/10_scene2.ogg",
         sprite: "assets/images/test_main.png",
-        nextId: "s2_14"
+        nextId: "s2_13"
     },
 
     {
-        id: "s2_14",
+        id: "s2_13",
         name: "Người Hướng Dẫn",
         text: "Thì reset tài khoản, ở lại đây học lại từ năm nhất tới già chứ sao .",
         bg: "",
         voice: "assets/voice/scene2/11_scene2.ogg",
         sprite: "assets/images/test_guide.png", 
-        nextId: "s2_15"
+        nextId: "s2_14"
     },
 
      {
-        id: "s2_15",
+        id: "s2_14",
         name: "{PLAYER}",
         text: "Đi làm chạy deadline chưa đủ khổ hay sao trời, tới giờ đi ngủ rồi mà còn...",
         bg: "",
         voice: "assets/voice/scene2/12_scene2.ogg",
         sprite: "assets/images/test_main.png",
-        nextId: "s2_16"
+        nextId: "s2_15"
     },
 
     {
-        id: "s2_16",
+        id: "s2_15",
         name: "Người Hướng Dẫn",
         text: "Bắt đầu từ Tòa E nhé. Lên hội trường, có người đang đợi anh đấy. Chúc may mắn .",
         bg: "",
         voice: "assets/voice/scene2/13_scene2.ogg",
         sprite: "assets/images/test_guide.png", 
-        nextId: "s2_17"
+        nextId: "s2_16"
     },
 
     // --- PHẦN GẶP SINH VIÊN TTDPT Ở TÒA E ---
     {
-        id: "s2_17",
+        id: "s2_16",
         name: "",
-        text: "Main bước vào thang máy tòa E",
+        text: "{PLAYER} bước vào thang máy tòa E",
         bg: "", 
         sprite: "",
         noSkip: true,
-        nextId: "s2_18"
+        nextId: "s2_17"
     },
     {
-        id: "s2_18",
+        id: "s2_17",
         name: "Sinh viên TTĐPT",
         text: "Anh lên tầng mấy ạ? Để em bấm cho.",
         bg: "",
         voice: "assets/voice/toaE/1_toaE.ogg",
         sprite: "assets/images/chibi.png",
-        nextId: "s2_19"
+        nextId: "s2_18"
     },
     {
-        id: "s2_19",
+        id: "s2_18",
         name: "{PLAYER}",
         text: "Bấm giùm anh tầng 12 với.",
         bg: "",
         voice: "assets/voice/toaE/2_toaE.ogg",
         sprite: "assets/images/test_main.png",
-        nextId: "s2_20"
+        nextId: "s2_19"
     },
     {
-        id: "s2_20",
+        id: "s2_19",
         name: "Sinh viên TTĐPT",
         text: "Lạ thật, chẳng có đèn nào sáng. Em thử tầng 5, tầng 8 cũng không được. Chắc thang máy hỏng rồi anh ạ.",
         bg: "",
         voice: "assets/voice/toaE/3_toaE.ogg",
+        sprite: "assets/images/chibi.png",
+        nextId: "s2_20"
+    },
+
+    {
+        id: "s2_20",
+        name: "Sinh viên TTĐPT",
+        text: "Trời ạ, thang máy Tòa E nổi tiếng chậm, nhưng hôm nay nó ngủ luôn à? Em còn phải lên nghe seminar, trễ là mất điểm danh.",
+        bg: "",
+        voice: "assets/voice/toaE/4_toaE.ogg",
         sprite: "assets/images/chibi.png",
         nextId: "s2_21"
     },
 
     {
         id: "s2_21",
-        name: "Sinh viên TTĐPT",
-        text: "Trời ạ, thang máy Tòa E nổi tiếng chậm, nhưng hôm nay nó ngủ luôn à? Em còn phải lên nghe seminar, trễ là mất điểm danh.",
-        bg: "",
-        voice: "assets/voice/toaE/4_toaE.ogg",
-        sprite: "assets/images/chibi.png",
-        nextId: "s2_22"
-    },
-
-    {
-        id: "s2_22",
         name: "{PLAYER}",
         text: "Hồi anh học cỡ sáu bảy năm trước, thang này đã chậm rồi. Mà em học khoa gì?",
         bg: "",
         voice: "assets/voice/toaE/5_toaE.ogg",
         sprite: "assets/images/test_main.png",
-        nextId: "s2_23"
+        nextId: "s2_22"
     },
     {
-        id: "s2_23",
+        id: "s2_22",
         name: "Sinh viên TTĐPT",
         text: "Dạ em học Truyền thông đa phương tiện, năm nhất. Còn anh? Nhìn anh… không giống sinh viên lắm.",
         bg: "",
         voice: "assets/voice/toaE/6_toaE.ogg",
         sprite: "assets/images/chibi.png",
-        nextId: "s2_24"
+        nextId: "s2_23"
     },
     {
-        id: "s2_24",
+        id: "s2_23",
         name: "{PLAYER}",
         text: "Anh học Kỹ thuật phần mềm. Cựu sinh viên khóa 2018. Ra trường cũng ngót nghét năm năm rồi, tự nhiên lạc vào đây.",
         bg: "",
         voice: "assets/voice/toaE/7_toaE.ogg",
         sprite: "assets/images/test_main.png",
-        nextId: "s2_25"
+        nextId: "s2_24"
     },
     {
-        id: "s2_25",
+        id: "s2_24",
         name: "Sinh viên TTĐPT",
         text: "Ối, senpai khóa 2018 cơ à? Trông anh trẻ thật đấy!",
         bg: "",
         voice: "assets/voice/toaE/8_toaE.ogg",
         sprite: "assets/images/chibi.png",
+        nextId: "s2_25"
+    },
+    {
+        id: "s2_25",
+        name: "",
+        text: "Cả hai lại thử ấn vài nút, thang máy vẫn im re. Đèn nhấp nháy yếu ớt.Bỗng từ loa thang máy phát ra giọng nói rõ ràng.",
+        bg: "",
+        sfx: "assets/sound/press_elevator.ogg",
+        sprite: "",
         nextId: "s2_26"
     },
     {
         id: "s2_26",
-        name: "",
-        text: "Cả hai lại thử ấn vài nút, thang máy vẫn im re. Đèn nhấp nháy yếu ớt.Bỗng từ loa thang máy phát ra giọng nói rõ ràng.",
-        bg: "",
-        sprite: "",
-        nextId: "s2_27"
-    },
-    {
-        id: "s2_27",
         name: "Người hướng dẫn",
         text: "Chào mừng cựu sinh viên khoa Công nghệ phần mềm. Tôi là hệ thống hướng dẫn. Ở không gian này, muốn lên tầng thì không bấm bằng tay đâu - phải xài Điểm Rèn Luyện. Anh có 200 ĐRL để tiêu đấy",
         bg: "",
         voice: "assets/voice/toaE/9_toaE.ogg",
         sprite: "",
         noSkip: true,
-        nextId: "s2_28"
+        nextId: "s2_27"
     },
     {
-        id: "s2_28",
+        id: "s2_27",
         name: "Sinh viên TTĐPT",
         text: "Ai nói thế? Loa tự nhiên phát ra giọng lạ. Anh có nghe thấy không ạ? Hay em bị ảo giác?",
         bg: "",
         voice: "assets/voice/toaE/10_toaE.ogg",
         sprite: "assets/images/chibi.png",
-        nextId: "s2_29"
+        nextId: "s2_28"
     },
     {
-        id: "s2_29",
+        id: "s2_28",
         name: "{PLAYER}",
         text: "Có. Là cái hệ thống hướng dẫn đấy. Hồi nãy anh gặp rồi. Có vẻ chỉ mình anh mới tương tác được.",
         bg: "",
         voice: "assets/voice/toaE/11_toaE.ogg",
         sprite: "assets/images/test_main.png",
-        nextId: "s2_30"
+        nextId: "s2_29"
     },
     {
-        id: "s2_30",
+        id: "s2_29",
         name: "Người hướng dẫn",
         text: "Chính xác. Chỉ cựu sinh viên đang kẹt mới được tôi hướng dẫn. Nào, anh hãy dùng ĐRL để tung xúc xắc test nhân phẩm. ",
         bg: "",
         voice: "assets/voice/toaE/12.1_toaE.ogg",
         sprite: "",
         noSkip: true,
-        nextId: "s2_31"
+        nextId: "s2_30"
     },
     {
-        id: "s2_31",
+        id: "s2_30",
         name: "Người hướng dẫn",
         text: "Ba loại: 4 mặt (tốn 3 ĐRL), 6 mặt (tốn 5 ĐRL) và 20 mặt (tốn 25 ĐRL). Nhớ là anh có tối đa 25 lượt. Hên thì một phát lên luôn, xu thì… anh tự hiểu. Chọn đi.",
         bg: "",
