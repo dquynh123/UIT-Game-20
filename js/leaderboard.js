@@ -103,31 +103,62 @@ export function showSummary(stageResults, totalTimeSeconds, totalScore) {
   switchScreen(summaryScreen);
 }
 
-/* 🏆 SỰ KIỆN NÚT BẤM (Gán ngay khi file được load) */
-setTimeout(() => {
-    const btnShow = document.getElementById("btnShowLeaderboard");
-    const btnBack = document.getElementById("btnBackToSummary");
+/* 🏆 SỰ KIỆN NÚT BẤM (BẮT CLICK TOÀN TRANG MÀ KHÔNG CẦN CHỜ LOAD DOM) */
+document.addEventListener("click", async (e) => {
+    // Tìm xem người chơi có click trúng 1 trong 3 nút này không
+    const btnShow = e.target.closest("#btnShowLeaderboard");
+    const btnTopLeft = e.target.closest("#top-left-leaderboard-btn");
+    const btnBack = e.target.closest("#btnBackToSummary");
 
-    if(btnShow) {
-        btnShow.onclick = async (e) => {
-            const btn = e.target;
-            const originalText = btn.textContent;
-            btn.textContent = "⏳ Đang tải...";
-            btn.disabled = true;
+    // --- Hàm xử lý tải bảng xếp hạng chung ---
+    async function openLeaderboardAction(btn) {
+        const originalText = btn.innerHTML;
+        btn.innerHTML = "⏳ Đang tải...";
+        btn.disabled = true;
 
-            const data = await fetchLeaderboard();
-            displayLeaderboard(data, localStorage.getItem("currentPlayerName"));
+        const data = await fetchLeaderboard();
+        displayLeaderboard(data, localStorage.getItem("currentPlayerName"));
 
-            switchScreen(leaderboardScreen);
-            btn.textContent = originalText;
-            btn.disabled = false;
-        };
+        switchScreen(document.getElementById("leaderboardScreen"));
+        btn.innerHTML = originalText;
+        btn.disabled = false;
     }
 
-    if(btnBack) {
-        btnBack.onclick = () => switchScreen(summaryScreen);
+    // 1. Nếu bấm từ màn hình Tổng kết
+    if (btnShow) {
+        await openLeaderboardAction(btnShow);
+        const backBtn = document.getElementById("btnBackToSummary");
+        if (backBtn) {
+            backBtn.dataset.source = "summary";
+            backBtn.textContent = "🔙 QUAY LẠI TỔNG KẾT";
+        }
     }
-}, 500);
+
+    // 2. Nếu bấm từ Menu chính (Góc trái trên)
+    if (btnTopLeft) {
+        await openLeaderboardAction(btnTopLeft);
+        const backBtn = document.getElementById("btnBackToSummary");
+        if (backBtn) {
+            backBtn.dataset.source = "main";
+            backBtn.textContent = "🔙 QUAY LẠI MENU";
+        }
+    }
+
+    // 3. Xử lý logic Nút Quay Lại
+    if (btnBack) {
+        if (btnBack.dataset.source === "main") {
+            switchScreen(document.getElementById("main-menu"));
+            
+            // THÊM THÔNG BÁO Ở ĐÂY (Dùng setTimeout để đợi màn hình chuyển xong mới báo)
+            setTimeout(() => {
+                alert("🌸 Con chuột của bạn đã bị dính hoa anh đào!");
+            }, 500); 
+
+        } else {
+            switchScreen(document.getElementById("summaryScreen"));
+        }
+    }
+});
 
 /* 📊 RENDER LEADERBOARD */
 export function displayLeaderboard(data, currentPlayerName) {

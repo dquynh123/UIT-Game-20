@@ -21,11 +21,16 @@
     <div id="main-menu" class="screen">
         <img src="assets/images/anh2.png" alt="Guided by Memories" class="game-title-img">
     
-        <button id="main-start-btn" class="img-btn">
-            <img src="assets/images/anh3.webp" alt="PRESS ANY BUTTON TO START">
+        <button id="top-left-leaderboard-btn" class="top-left-btn">
+            🏆 Bảng Xếp Hạng
         </button>
-        <button id="main-continue-btn" class="img-btn hidden" style="margin-top: 20px;">
-             <span style="color: white; font-size: 1.5rem; font-weight: bold; cursor: pointer;">▶ TIẾP TỤC HÀNH TRÌNH</span>
+
+        <button id="main-start-btn" class="start-text-btn">
+            BẮT ĐẦU
+        </button>
+
+        <button id="main-continue-btn" class="img-btn hidden" style="margin-top: 20px; position: relative; z-index: 100;">
+            <span style="color: white; font-size: 1.5rem; font-weight: bold; cursor: pointer;">▶ TIẾP TỤC HÀNH TRÌNH</span>
         </button>
     </div>
 
@@ -262,7 +267,7 @@
       <div class="board-container" id="leaderboard">
         <div class="title">🏆 BẢNG XẾP HẠNG</div>
         <div class="rows-container" id="leaderboardRows"></div>
-        <button id="btnBackToSummary" class="btn-secondary">🔙 QUAY LẠI TỔNG KẾT</button>
+        <button id="btnBackToSummary" class="btn-secondary">QUAY LẠI TỔNG KẾT</button>
       </div>
     </div>
 
@@ -273,149 +278,115 @@
         <div id="playerInfo" class="info-line"></div>
       </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
     <script src="js/quizData.js"></script>
     <script type="module" src="js/main.js"></script>
     <script src="js/buildings/toaB.js"></script>
     <script type="module" src="js/buildings/toaC.js"></script>
-    <div class="background"></div>
-    <div id="overlay" class="hidden"></div>
-
-    <div id="playerModal" class="modal">
-    <div class="profile-card">
-        <div id="rankBadge" class="rank-badge"></div>
-        <h2 id="playerName"></h2>
-        <div id="playerInfo" class="info-line"></div>
-    </div>
-    </div><div id="overlay" class="hidden"></div>
-
-<div id="summaryScreen" class="screen hidden">
-    <div class="board-container">
-        <div class="title">🎉 TỔNG KẾT HÀNH TRÌNH</div>
-        <div class="rows-container" id="summaryRows"></div>
-        <div class="summary-extra">
-            <div id="summaryRank" class="badge-glow">🌟 Hoàn thành xuất sắc!</div>
-        <div class="time-box">Thời gian: <span id="summaryTime">0</span></div>    
-        </div>
-        <button id="btnShowLeaderboard" class="btn-primary">🏆 XEM BẢNG XẾP HẠNG</button>
-    </div>
-</div>
-
-<div id="playerModal" class="modal">
-    <div class="profile-card">
-        <div id="rankBadge" class="rank-badge"></div>
-        <h2 id="playerName"></h2>
-        <div id="playerInfo" class="info-line"></div>
-    </div>
-</div>
-
-<!-- =========================================
-     BẢNG TỔNG KẾT GAME DÙNG CHUNG (GLASSMORPHISM)
-========================================= -->
-<div id="global-summary-overlay" class="hidden">
-    <div class="summary-glass-box">
-        <h2 id="summary-title">🎉 TỔNG KẾT CHẶNG</h2>
-
-        <div class="summary-row">
-            <span>Chặng</span>
-            <span id="summary-stage" style="font-weight: bold;">Tòa A</span>
-        </div>
-
-        <div class="summary-row">
-            <span>Điểm chặng này</span>
-            <span id="summary-score" style="font-weight: bold;">0</span>
-        </div>
-
-        <div class="summary-row total-row">
-            <span>★ TỔNG ĐIỂM TÍCH LŨY</span>
-            <span id="summary-total-score">0</span>
-        </div>
-
-        <div class="summary-footer">
-            <span id="summary-status">🌟 Hoàn thành xuất sắc!</span>
-            <span id="summary-time">⏱ Thời gian: 0s</span>
-        </div>
-
-        <button id="summary-action-btn">TIẾP TỤC HÀNH TRÌNH</button>
-    </div>
-</div>
-<!--Kết hợp 5 mảnh ký ức -->
-<div id="memory-merge-screen" class="hidden">
-    <div class="merge-container">
-        <!-- 5 mảnh ký ức (Nếu chưa có ảnh, tạm dùng CSS tạo hình viên đá phát sáng) -->
-        <div class="memory-fragment frag-e">E</div>
-        <div class="memory-fragment frag-a">A</div>
-        <div class="memory-fragment frag-b">B</div>
-        <div class="memory-fragment frag-d">D</div>
-        <div class="memory-fragment frag-c">C</div>
-        
-        <!-- Điểm sáng trung tâm lúc gộp lại -->
-        <div class="merge-core"></div>
-    </div>
-    <!-- Lớp chớp trắng lóa mắt khi dung hợp xong -->
-    <div id="merge-flashbang"></div>
-</div>
-
-<!-- MÀN HÌNH BAD ENDING (LỖI HỆ THỐNG) -->
-<div id="bad-ending-screen" class="hidden">
-    <!-- Lớp nền rải code ma trận -->
-    <div class="error-bg-code" id="error-bg-code"></div>
     
-    <!-- Nội dung chính -->
-    <div class="error-content">
-        <!-- Icon tam giác cảnh báo -->
-        <div class="error-icon">⚠️</div>
-        <!-- Chữ ERROR có thuộc tính data-text để CSS làm hiệu ứng bóng ma -->
-        <h1 class="error-text" data-text="ERROR">ERROR</h1>
-        <p class="error-subtext">SYSTEM FAILURE... DUMPING MEMORY LOGS...</p>
+    <script type="module" src="js/leaderboard.js"></script>
+
+    <div class="background"></div>
+    
+    <div id="global-summary-overlay" class="hidden">
+        <div class="summary-glass-box">
+            <h2 id="summary-title">🎉 TỔNG KẾT CHẶNG</h2>
+
+            <div class="summary-row">
+                <span>Chặng</span>
+                <span id="summary-stage" style="font-weight: bold;">Tòa A</span>
+            </div>
+
+            <div class="summary-row">
+                <span>Điểm chặng này</span>
+                <span id="summary-score" style="font-weight: bold;">0</span>
+            </div>
+
+            <div class="summary-row total-row">
+                <span>★ TỔNG ĐIỂM TÍCH LŨY</span>
+                <span id="summary-total-score">0</span>
+            </div>
+
+            <div class="summary-footer">
+                <span id="summary-status">🌟 Hoàn thành xuất sắc!</span>
+                <span id="summary-time">⏱ Thời gian: 0s</span>
+            </div>
+
+            <button id="summary-action-btn">TIẾP TỤC HÀNH TRÌNH</button>
+        </div>
     </div>
-</div>
-<!-- =========================================
-     MÀN HÌNH LỊCH SỬ HỘI THOẠI (LOG SCREEN)
-========================================= -->
-<div id="vn-log-screen">
-    <div class="log-container">
-        <div class="log-header">
-            <h2>LỊCH SỬ HỘI THOẠI</h2>
-            <button id="close-log-btn">✖</button>
+    
+    <div id="memory-merge-screen" class="hidden">
+        <div class="merge-container">
+            <div class="memory-fragment frag-e">E</div>
+            <div class="memory-fragment frag-a">A</div>
+            <div class="memory-fragment frag-b">B</div>
+            <div class="memory-fragment frag-d">D</div>
+            <div class="memory-fragment frag-c">C</div>
+            <div class="merge-core"></div>
         </div>
-        <div id="log-content-area">
-        </div>
-    </div> </div> <div id="credit-screen" class="hidden">
-    <div class="credit-content">
-        <h1 class="credit-title">DỰ ÁN KỶ NIỆM 20 NĂM THÀNH LẬP TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THÔNG TIN</h1>
-        <h2 class="credit-subtitle">DEVO CHALLENGE</h2>
+        <div id="merge-flashbang"></div>
+    </div>
 
-        <div class="credit-section">
-            <h3>ĐỘI NGŨ PHÁT TRIỂN</h3>
-            <p><strong>Lê Trần Thảo My</strong></p>
-            <p><strong>Trần Diễm Quỳnh</strong></p>
-            <p><strong>Cao Thị Thanh Trúc</strong></p>
-            <p><strong>Đỗ Thụy Bảo Trâm</strong></p>
+    <div id="bad-ending-screen" class="hidden">
+        <div class="error-bg-code" id="error-bg-code"></div>
+        <div class="error-content">
+            <div class="error-icon">⚠️</div>
+            <h1 class="error-text" data-text="ERROR">ERROR</h1>
+            <p class="error-subtext">SYSTEM FAILURE... DUMPING MEMORY LOGS...</p>
         </div>
+    </div>
 
-        <div class="credit-section">
-            <h3>ĐỘI NGŨ LỒNG TIẾNG</h3>
-            <div class="voice-cast">
-                <p><strong>Nguyệt Quang</strong><br><span>Vai Nhân vật chính</span></p>
-                <p><strong>Phi Hùng</strong><br><span>Vai Người hướng dẫn & CTV BHTCNPM Tòa C</span></p>
-                <p><strong>Quang Đạo</strong><br><span>Vai Sinh viên TTĐPT Tòa E</span></p>
-                <p><strong>Đăng Khoa</strong><br><span>Vai CTV CNPM Tòa A</span></p>
-                <p><strong>Lúa</strong><br><span>Vai Bạn nữ KTPM Tòa B</span></p>
-                <p><strong>Trung Kiên</strong><br><span>Vai Bí thư đoàn Tòa D</span></p>
+    <div id="vn-log-screen">
+        <div class="log-container">
+            <div class="log-header">
+                <h2>LỊCH SỬ HỘI THOẠI</h2>
+                <button id="close-log-btn">✖</button>
+            </div>
+            <div id="log-content-area">
+            </div>
+        </div> 
+    </div> 
+
+    <div id="credit-screen" class="hidden">
+        <div class="credit-content">
+            <h1 class="credit-title">DỰ ÁN KỶ NIỆM 20 NĂM THÀNH LẬP TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THÔNG TIN</h1>
+            <h3 class="credit-subtitle">NHÓM XIN CHÂN THÀNH CẢM ƠN NHÀ TRƯỜNG VÀ DEVO CHALLENGE ĐÃ TẠO RA MỘT SÂN CHƠI VÔ CÙNG Ý NGHĨA</h3>
+
+            <div class="credit-section">
+                <h3>ĐỘI NGŨ PHÁT TRIỂN</h3>
+                <p><strong>Trần Diễm Quỳnh</strong></p>
+                <p><strong>Lê Trần Thảo My</strong></p>
+                <p><strong>Cao Thị Thanh Trúc</strong></p>
+                <p><strong>Đỗ Thụy Bảo Trâm</strong></p>
+            </div>
+
+            <div class="credit-section">
+                <h3>LỜI CẢM ƠN SÂU SẮC ĐẾN ĐỘI NGŨ LỒNG TIẾNG</h3>
+                <div class="voice-cast">
+                    <p><strong>Nguyệt Quang</strong><br><span>Vai Nhân vật chính</span></p>
+                    <p><strong>Phi Hùng</strong><br><span>Vai Người hướng dẫn & CTV BHTCNPM Tòa C</span></p>
+                    <p><strong>Quang Đạo</strong><br><span>Vai Sinh viên TTĐPT Tòa E</span></p>
+                    <p><strong>Đăng Khoa</strong><br><span>Vai CTV CNPM Tòa A</span></p>
+                    <p><strong>Lúa</strong><br><span>Vai Bạn nữ KTPM Tòa B</span></p>
+                    <p><strong>Trung Kiên</strong><br><span>Vai Bí thư đoàn Tòa D</span></p>
+                </div>
+            </div>
+
+            <div class="credit-section">
+                <h2>CHÂN THÀNH CẢM ƠN BẠN ĐÃ TRẢI NGHIỆM GAME CỦA NHÓM MÌNH!</h2>
             </div>
         </div>
     </div>
-</div>
 
-<div id="thank-you-screen" class="hidden">
-    <div class="firework" style="left: 20%; top: 30%; animation-delay: 0s;"></div>
-    <div class="firework" style="left: 80%; top: 20%; animation-delay: 0.4s;"></div>
-    <div class="firework" style="left: 50%; top: 15%; animation-delay: 0.8s;"></div>
-    <div class="credit-footer">
-        <h2>CHÂN THÀNH CẢM ƠN BẠN ĐÃ TRẢI NGHIỆM!</h2>
+    <div id="thank-you-screen" class="hidden">
+        <div class="firework" style="left: 20%; top: 30%; animation-delay: 0s;"></div>
+        <div class="firework" style="left: 80%; top: 20%; animation-delay: 0.4s;"></div>
+        <div class="firework" style="left: 50%; top: 15%; animation-delay: 0.8s;"></div>
+        <div class="credit-footer">
+            <h2>CẢM ƠN BẠN NHIỀU LẮM LUÔN :3</h2>
+            <h3>EM YÊU UIT! EM YÊU UIT! EM YÊU UIT!</h3>
+        </div>
     </div>
-</div>
 </body>
 </html>

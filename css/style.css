@@ -716,3 +716,34 @@ body.cursed-mode #btnShowLeaderboard {
         opacity: 0; 
     }
 }
+
+/* 1. Giãn cách dưới tiêu đề chính (h1) */
+.credit-title {
+    margin-bottom: 20px; 
+}
+
+/* 2. Giãn cách dưới lời cảm ơn (h2) đẩy các nhóm xuống xa hơn */
+.credit-subtitle {
+    margin-bottom: 50px; 
+    line-height: 1.5; /* Giúp bản thân nhiều dòng chữ trong h2 không bị dính vào nhau */
+}
+
+/* 3. Giãn cách giữa các khối lớn (Đội ngũ PT, Lồng tiếng...) */
+.credit-section {
+    margin-bottom: 40px; 
+}
+
+/* 4. Giãn cách giữa chữ "ĐỘI NGŨ..." (h3) và danh sách tên ở dưới */
+.credit-section h3 {
+    margin-bottom: 15px; 
+}
+
+/* 5. Giãn cách giữa các dòng tên của Đội ngũ phát triển */
+.credit-section p {
+    margin-bottom: 10px;
+}
+
+/* 6. Giãn cách riêng cho xịn xò phần Lồng tiếng (vì có 2 dòng/người) */
+.voice-cast p {
+    margin-bottom: 20px; 
+}

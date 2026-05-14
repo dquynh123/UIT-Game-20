@@ -54,11 +54,11 @@ body {
     padding: 0;
 }
 
-#main-start-btn img {
+/*#main-start-btn img {
     width: 280px;
     height: auto;
     transition: transform 0.3s ease;
-}
+}*/
 
 #main-start-btn:hover img {
     transform: scale(1.1);
@@ -140,4 +140,56 @@ body {
 #fade-overlay.active {
     opacity: 1;
     pointer-events: all;
+}
+
+/* ============================================================
+   NÚT BẢNG XẾP HẠNG (GÓC TRÁI TRÊN)
+   ============================================================ */
+.top-left-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #ffd700;
+    border: 2px solid #ffd700;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 999;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    font-family: 'Nunito', sans-serif;
+}
+
+.top-left-btn:hover {
+    background-color: #ffd700;
+    color: #000;
+    transform: scale(1.05);
+}
+
+/* ============================================================
+   NÚT BẮT ĐẦU (CHỮ)
+   ============================================================ */
+.start-text-btn {
+    background: rgba(0, 0, 0, 0.8);
+    color: #ffffff;
+    border: 3px solid #ffffff;
+    border-radius: 12px;
+    font-size: 2.5rem;
+    font-weight: 800;
+    padding: 15px 60px;
+    cursor: pointer;
+    z-index: 100;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    font-family: 'Nunito', sans-serif;
+}
+
+.start-text-btn:hover {
+    background: #ffffff;
+    color: #000000;
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
 }

@@ -266,11 +266,6 @@ const uitQuizBank = [
     correct: "1 cơ sở"
     },
     {
-    q: "Khu vực tầng hầm của tòa nhà nào được sử dụng làm bãi giữ xe?",
-    options: ["Tòa A", "Tòa B", "Tòa C", "Tòa E"],
-    correct: "Tòa B"
-    },
-    {
     q: "Tại tòa E, văn phòng các Khoa thường nằm ở tầng mấy?",
     options: ["Tầng trệt", "Tầng 2 đến tầng 7", "Tầng 8 đến tầng 12", "Tầng thượng"],
     correct: "Tầng 8 đến tầng 12"
