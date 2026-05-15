@@ -16,7 +16,7 @@ const storyToaC = [
     {
         id: "c_02",
         name: "{PLAYER}",
-        text: "Em làm tốt lắm rồi. Chỉ cần nhớ: làm bí thư mà một mình quét sân cũng không sao, nhưng nhớ gọi điện kêu đồng đội phụ. Còn anh đi đây nhé.",
+        text: "Em làm tốt lắm rồi. Chỉ cần nhớ làm bí thư mà một mình quét sân cũng không sao, nhưng nhớ gọi điện kêu đồng đội phụ. Còn anh đi đây nhé.",
         bg: "",
         voice: "assets/voice/toaD/12.ogg",
         sprite: "assets/images/Main.png",
@@ -34,7 +34,7 @@ const storyToaC = [
     {
         id: "c_04",
         name: "{PLAYER}",
-        text: "Tòa C cuối cùng - chắc là nơi mình lưu giữ những thứ quan trọng nhất.",
+        text: "Tòa C cuối cùng! Chắc là nơi mình lưu giữ những thứ quan trọng nhất.",
         bg: "",
         voice: "assets/voice/toaD/14.ogg",
         sprite: "assets/images/Main.png",

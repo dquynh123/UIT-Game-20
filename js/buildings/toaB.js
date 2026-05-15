@@ -42,7 +42,7 @@ const StoryToaD = [
     {
         id: "d_05",
         name: "Bí thư đoàn",
-        text: "Trời ạ, đúng anh thật rồi! Em tên Vũ, khoá… 2022 ạ! Hồi em năm nhất, anh đang năm bốn. Hôm đó anh ngầu lắm. Anh không nhớ em, nhưng em nhớ anh rõ lắm ý",
+        text: "Trời ạ, đúng anh thật rồi! Em tên Vũ, khoá… 2022 ạ! Hồi em năm nhất, anh đang năm bốn. Hôm đó anh ngầu lắm. Anh không nhớ em, nhưng em nhớ anh rõ lắm ý.",
         bg: "",
         voice: "assets/voice/toaD/4.ogg",
         sprite: "assets/images/chibi.png",
@@ -98,7 +98,7 @@ const StoryToaD = [
     {
         id: "d_11",
         name: "Bí thư Vũ",
-        text: "Dạ không ạ. Anh giúp em một tay với, em còn deadline DEVO Challenge nữa huhu",
+        text: "Dạ không ạ. Anh giúp em một tay với, em còn deadline DEVO Challenge nữa huhu.",
         bg: "",
         voice: "assets/voice/toaD/8.ogg",
         sprite: "assets/images/chibi.png",
@@ -107,7 +107,7 @@ const StoryToaD = [
     {
         id: "d_12",
         name: "",
-        text: "Bỗng nhiên, những chiếc lá khô trên sân bắt đầu phát sáng nhè nhẹ",
+        text: "Bỗng nhiên, những chiếc lá khô trên sân bắt đầu phát sáng nhè nhẹ.",
         bg: "",
         sprite: "",
         nextId: "d_13"

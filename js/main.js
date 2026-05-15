@@ -248,7 +248,7 @@ const storyScene1 = [
     {
         id: "s1_05",
         name: "{PLAYER}",
-        text: "Ụa máy tính bị gì v…",
+        text: "Ụa máy tính bị gì v--",
         voice: "assets/voice/scene1/voice2_scene1.ogg",
         bg: "",
         sprite: "assets/images/Main.png",
@@ -299,7 +299,7 @@ const storyScene2_UIT = [
     {
         id: "s2_05",
         name: "Người Hướng Dẫn",
-        text: "Bình tĩnh nào, cứ coi tôi là admin tạm thời của khu vực này đi. ",
+        text: "Bình tĩnh nào, cứ coi tôi là admin tạm thời của khu vực này đi.",
         bg: "",
         voice: "assets/voice/scene2/4.1_scene2.ogg",
         sprite: "assets/images/Đậu đậu.png", 
@@ -317,7 +317,7 @@ const storyScene2_UIT = [
     {
         id: "s2_07",
         name: "Người Hướng Dẫn",
-        text: "Nơi này giống như một cái server được tạo nên từ chính những ký ức của hàng ngàn sinh viên trường mình suốt 20 năm qua vậy. Và hiện tại, anh đang kẹt trong server đó",
+        text: "Nơi này giống như một cái server được tạo nên từ chính những ký ức của hàng ngàn sinh viên trường mình suốt 20 năm qua vậy. Và hiện tại, anh đang kẹt trong chính server đó.",
         bg: "",
         voice: "assets/voice/scene2/4.3_scene2.ogg",
         sprite: "assets/images/Đậu đậu.png", 
@@ -327,7 +327,7 @@ const storyScene2_UIT = [
     {
         id: "s2_08",
         name: "{PLAYER}",
-        text: "Hả? Cái gì cơ? Server ? Ký ức ? Tôi có đang nằm mơ không vậy?",
+        text: "Hả? Cái gì cơ? Server? Ký ức? Tôi có đang nằm mơ không vậy?",
         bg: "",
         voice: "assets/voice/scene2/5_scene2.ogg",
         sprite: "assets/images/Main.png",
@@ -377,7 +377,7 @@ const storyScene2_UIT = [
     {
         id: "s2_13",
         name: "Người Hướng Dẫn",
-        text: "Thì reset tài khoản, ở lại đây học lại từ năm nhất tới già chứ sao .",
+        text: "Thì reset tài khoản, ở lại đây học lại từ năm nhất tới già chứ sao.",
         bg: "",
         voice: "assets/voice/scene2/11_scene2.ogg",
         sprite: "assets/images/Đậu đậu.png", 
@@ -397,7 +397,7 @@ const storyScene2_UIT = [
     {
         id: "s2_15",
         name: "Người Hướng Dẫn",
-        text: "Bắt đầu từ Tòa E nhé. Lên hội trường, có người đang đợi anh đấy. Chúc may mắn .",
+        text: "Bắt đầu từ Tòa E nhé. Lên hội trường, có người đang đợi anh đấy. Chúc may mắn.",
         bg: "",
         voice: "assets/voice/scene2/13_scene2.ogg",
         sprite: "assets/images/Đậu đậu.png", 
@@ -408,7 +408,7 @@ const storyScene2_UIT = [
     {
         id: "s2_16",
         name: "",
-        text: "{PLAYER} bước vào thang máy tòa E",
+        text: "{PLAYER} bước vào thang máy tòa E.",
         bg: "", 
         sprite: "",
         noSkip: true,
