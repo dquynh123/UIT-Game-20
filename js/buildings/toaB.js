@@ -137,43 +137,65 @@ window.StoryToaD = StoryToaD;
 // 2. HÀM CHUYỂN CẢNH (THOẠI -> GAME TÒA D)
 // ==========================================
 function transitionToToaD() {
-    // 1. Ẩn Tòa B đi
-    const toaB = document.getElementById('toa-b');
-    if (toaB) toaB.style.display = 'none';
+    let overlay = document.getElementById('fade-overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'fade-overlay';
+        Object.assign(overlay.style, {
+            position: 'fixed', top: '0', left: '0', width: '100%', height: '100%',
+            backgroundColor: 'black', zIndex: '10000', opacity: '0',
+            transition: 'opacity 0.6s ease-in-out', pointerEvents: 'none'
+        });
+        document.body.appendChild(overlay);
+    }
 
-    // 2. Chạy máy đọc kịch bản Tòa D (Chỉ gọi 1 lần duy nhất)
+    const vnScreen = document.getElementById('vn-screen');
+    const toaB = document.getElementById('toa-b');
+
     if (typeof window.playVN === 'function') {
-        // Xóa sạch trạng thái hội thoại cũ nếu có để tránh bị kẹt
-        const vnScreen = document.getElementById('vn-screen');
-        if (vnScreen) vnScreen.style.display = 'flex'; 
+        if (vnScreen) vnScreen.style.display = 'flex';
 
         window.playVN(StoryToaD, "d_01", () => {
-            // Callback này CHỈ chạy khi đã đọc đến câu cuối cùng (d_14)
-            console.log("Đã đọc xong kịch bản Tòa D, chuẩn bị vào game...");
+            overlay.style.opacity = '1';
+            overlay.style.pointerEvents = 'all';
 
-            // Chuyển bản đồ sang tòa D
-            if (typeof window.switchBuilding === 'function') {
-                window.switchBuilding('toa-d');
-            }
-            
-            // Tắt giao diện Hội thoại
-            if (vnScreen) vnScreen.style.display = 'none';
+            setTimeout(() => {
+                
+                document.body.style.backgroundColor = 'black'; 
+                
+                const startScreenD = document.getElementById('start-screen-toa-d');
+                if (startScreenD) {
+                    startScreenD.style.backgroundColor = 'black'; // Ép nền đen cho màn Start
+                    startScreenD.classList.remove('hidden');
+                }
 
-            // Bật màn hình Start của Tòa D
-            const startScreenD = document.getElementById('start-screen-toa-d');
-            const gameScreenD = document.getElementById('game-screen-toa-d');
-            
-            if (startScreenD) startScreenD.classList.remove('hidden');
-            if (gameScreenD) gameScreenD.classList.add('hidden');
+                if (toaB) toaB.style.display = 'none';
+                if (typeof window.switchBuilding === 'function') {
+                    window.switchBuilding('toa-d');
+                }
+                if (vnScreen) vnScreen.style.display = 'none';
+                if (document.getElementById('game-screen-toa-d')) {
+                    document.getElementById('game-screen-toa-d').classList.add('hidden');
+                }
 
-            // --- QUAN TRỌNG CHO AUTO-SAVE ---
-            // Cập nhật trạng thái game là đã đến Tòa D để F5 không bị quay lại Tòa B
-            if (window.saveGameData) {
-                window.saveGameData({
-                    currentBuilding: 'toa-d',
-                    currentStep: 'START_GAME_D'
-                });
-            }
+                // --- SAVE GAME ---
+                if (window.saveGameData) {
+                    window.saveGameData({
+                        currentBuilding: 'toa-d',
+                        currentStep: 'START_GAME_D'
+                    });
+                }
+
+                setTimeout(() => {
+                    overlay.style.opacity = '0';
+                    overlay.style.pointerEvents = 'none';
+                    
+                    setTimeout(() => {
+                        document.body.style.backgroundColor = ''; 
+                    }, 1000);
+                }, 500); 
+
+            }, 600); 
         });
     }
 }
