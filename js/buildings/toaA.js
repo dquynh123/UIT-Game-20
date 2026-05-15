@@ -44,7 +44,7 @@ const StoryToaB = [
     {
         id: "test_04",
         name: "",
-        text: "Giấy tờ bay tứ tung, điện thoại rơi “bịch” xuống sàn",
+        text: "Giấy tờ bay tứ tung, điện thoại rơi “bịch” xuống sàn.",
         bg: "",
         sprite: "",
         stopSfx: true,
@@ -107,7 +107,7 @@ const StoryToaB = [
     {
         id: "test_11",
         name: "Bạn nữ",
-        text: "Oaaa, tiền bối, tiền bối",
+        text: "Oaaa, tiền bối, tiền bối.",
         bg: "",
         voice: "assets/voice/toaB/7.ogg",
         sprite: "assets/images/Nữ KTPM.png",

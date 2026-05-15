@@ -101,7 +101,7 @@ container.innerHTML = `
     function toggleDayNightCycle() {
         const cycleNum = state.dayNightCycle;
         const timeOfDay = state.isNight ? 'ỐI! CHUYỆN GÌ ĐÃ XẢY RA?' : 'SÁNG LẠI RỒI!';
-        const message = state.isNight ? '"Hệ thống đã cúp điện toàn bộ đèn tòa E!"' : '"Cảm ơn phòng kỹ thuật đã bật lại đèn cho tòa E!"';
+        const message = state.isNight ? '"Người hướng dẫn đã cúp điện toàn bộ đèn tòa E!"' : '"Cảm ơn phòng kỹ thuật đã bật lại đèn cho tòa E!"';
         const prompt = '<br><strong style="color: #00529C; font-size: 16px;">👉 Hãy chọn xúc xắc để tiếp tục!</strong>';
         
         if (visualBoard) {
@@ -448,7 +448,7 @@ const storyToaA = [
     {
         id: "ht_02",
         name: "{PLAYER}",
-        text: "Cái quái gì thế này? Hồi xưa thư viện tòa A yên tĩnh lắm mà ?",
+        text: "Cái quái gì thế này? Hồi xưa thư viện tòa A yên tĩnh lắm mà?",
         bg: "",
         sprite: "assets/images/Main.png",
         voice: "assets/voice/toaA/1_toaA.ogg",

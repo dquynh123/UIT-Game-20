@@ -20,7 +20,7 @@ const storyBadToaC = [
     { 
         id: "bad_01", 
         name: "", 
-        text: "Âm thanh ồn ào náo nhiệt của sảnh Tòa C đột ngột tắt lịm đi như ai đó vừa rút phích cắm điện. ", 
+        text: "Âm thanh ồn ào náo nhiệt của sảnh Tòa C đột ngột tắt lịm đi như ai đó vừa rút phích cắm điện.", 
         bg: "", 
         sprite: "", 
         noSkip: true,
@@ -66,7 +66,7 @@ const storyTrueToaC_Part1 = [
     { 
         id: "true_01", 
         name: "", 
-        text: "Âm thanh ồn ào náo nhiệt của sảnh Tòa C đột ngột tắt lịm đi như ai đó vừa rút phích cắm điện. Không gian xung quanh đóng băng hoàn toàn", 
+        text: "Âm thanh ồn ào náo nhiệt của sảnh Tòa C đột ngột tắt lịm đi như ai đó vừa rút phích cắm điện. Không gian xung quanh đóng băng hoàn toàn.", 
         bg: "", 
         sprite: "", 
         noSkip: true,
@@ -94,7 +94,7 @@ const storyTrueToaC_Part1 = [
     { 
         id: "true_04", 
         name: "{PLAYER}", 
-        text: "Cái giọng điệu này... Cậu là cái hệ thống admin lúc nãy? Thôi được rồi, trò chơi kết thúc. Tôi đã gom đủ 4 mảnh. Mở cửa cho tôi thoát ra khỏi đây", 
+        text: "Cái giọng điệu này... Cậu là cái hệ thống admin lúc nãy? Thôi được rồi, trò chơi kết thúc. Tôi đã gom đủ 4 mảnh. Mở cửa cho tôi thoát ra khỏi đây.", 
         bg: "", 
         voice: "assets/voice/ending/2.ogg",
         sprite: "assets/images/Main.png", 
@@ -163,7 +163,7 @@ const storyVanPhong = [
     {
         id: "vp_05",
         name: "",
-        text: "Đó là email có tiêu đề: 'Thư ngỏ: Mời anh/chị Cựu sinh viên về thăm trường và làm diễn giả Lễ Kỷ niệm 20 năm UIT'. Thời gian là từ tháng 5",
+        text: "Đó là email có tiêu đề: 'Thư ngỏ: Mời anh/chị Cựu sinh viên về thăm trường và làm diễn giả Lễ Kỷ niệm 20 năm UIT'. Thời gian là từ tháng 5.",
         bg: "",
         sprite: "",
         nextId: "vp_06",
