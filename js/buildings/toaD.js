@@ -74,7 +74,7 @@ const storyToaC = [
         text: "Anh phải vượt qua thử thách 100 câu hỏi về lịch sử trường mình. Cảnh báo trước là đáp án bị hệ thống xáo trộn liên tục đó, anh phải thật tinh mắt mới chọn kịp.",
         bg: "",
         voice: "assets/voice/toaC/3.2.ogg",
-        sprite: "assets/images/Main.png",
+        sprite: "assets/images/chibi.png",
         noSkip: true,
         nextId: "c_09"
     },
@@ -93,7 +93,7 @@ const storyToaC = [
         text: "Chà, tự tin gớm ta! Để xem cựu sinh viên nhớ trường được bao nhiêu phần trăm nhé.",
         bg: "",
         voice: "assets/voice/toaC/5.ogg",
-        sprite: "assets/images/Main.png",
+        sprite: "assets/images/chibi.png",
         noSkip: true,
         nextId: null
     },

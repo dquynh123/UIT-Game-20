@@ -137,31 +137,43 @@ window.StoryToaD = StoryToaD;
 // 2. HÀM CHUYỂN CẢNH (THOẠI -> GAME TÒA D)
 // ==========================================
 function transitionToToaD() {
-    // Ẩn Tòa B đi
-    document.getElementById('toa-b').style.display = 'none';
+    // 1. Ẩn Tòa B đi
+    const toaB = document.getElementById('toa-b');
+    if (toaB) toaB.style.display = 'none';
 
-    // Chạy máy đọc kịch bản Tòa D
+    // 2. Chạy máy đọc kịch bản Tòa D (Chỉ gọi 1 lần duy nhất)
     if (typeof window.playVN === 'function') {
+        // Xóa sạch trạng thái hội thoại cũ nếu có để tránh bị kẹt
+        const vnScreen = document.getElementById('vn-screen');
+        if (vnScreen) vnScreen.style.display = 'flex'; 
+
         window.playVN(StoryToaD, "d_01", () => {
-            window.playVN(window.StoryToaD, "d_01", () => {
+            // Callback này CHỈ chạy khi đã đọc đến câu cuối cùng (d_14)
+            console.log("Đã đọc xong kịch bản Tòa D, chuẩn bị vào game...");
+
+            // Chuyển bản đồ sang tòa D
+            if (typeof window.switchBuilding === 'function') {
+                window.switchBuilding('toa-d');
+            }
             
-            // --- KHÚC NÀY MỚI QUAN TRỌNG NÈ ---
-            // Lệnh này chỉ được chạy khi đã đọc xong câu CUỐI CÙNG (d_14)
-            // (Không được để nó chạy ngang xương lúc vừa load xong d_01)
-            
-            window.switchBuilding('toa-d');
-            
-            // Tắt giao diện Hội thoại (vn-screen)
-            const vnScreen = document.getElementById('vn-screen');
+            // Tắt giao diện Hội thoại
             if (vnScreen) vnScreen.style.display = 'none';
 
-            // Bật màn hình Start chờ chơi của Tòa D
+            // Bật màn hình Start của Tòa D
             const startScreenD = document.getElementById('start-screen-toa-d');
             const gameScreenD = document.getElementById('game-screen-toa-d');
+            
             if (startScreenD) startScreenD.classList.remove('hidden');
             if (gameScreenD) gameScreenD.classList.add('hidden');
-        });
-            
+
+            // --- QUAN TRỌNG CHO AUTO-SAVE ---
+            // Cập nhật trạng thái game là đã đến Tòa D để F5 không bị quay lại Tòa B
+            if (window.saveGameData) {
+                window.saveGameData({
+                    currentBuilding: 'toa-d',
+                    currentStep: 'START_GAME_D'
+                });
+            }
         });
     }
 }
