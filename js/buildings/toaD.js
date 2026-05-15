@@ -119,32 +119,7 @@ function transitionToToaC() {
         });
     }
 }
-/*function transitionToToaC() {
-    // 1. Ẩn toàn bộ giao diện Tòa D đi
-    const toaD = document.getElementById('toa-d');
-    if (toaD) toaD.style.display = 'none';
 
-    // 2. Chạy máy đọc kịch bản Tòa C
-    if (typeof window.playVN === 'function') {
-        window.playVN(storyToaC, "c_01", () => {
-            console.log("Đã đọc xong thoại Tòa C. Mở giao diện Tòa C...");
-            
-            // 3. Đọc xong thì ẩn màn hình VN, hiển thị Tòa C trực tiếp
-            const vnScreen = document.getElementById('vn-screen');
-            const toaC = document.getElementById('toa-c');
-            
-            if (vnScreen) vnScreen.style.display = 'none';
-            if (toaC) toaC.style.display = 'block';
-            
-            // 4. Chỉ bật màn hình Start Tòa C, giấu màn hình Game đi chờ người chơi bấm Bắt đầu
-            const startScreenC = document.getElementById('start-screen-toa-c');
-            const gameScreenC = document.getElementById('game-screen-toa-c');
-            
-            if (startScreenC) startScreenC.classList.remove('hidden');
-            if (gameScreenC) gameScreenC.classList.add('hidden');
-        });
-    }
-}*/
 /**
  * Tòa D - Typing game
  */
