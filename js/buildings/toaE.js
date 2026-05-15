@@ -461,7 +461,7 @@ const storyToaA = [
         text: "Anh ơi, anh ơi! Rảnh không anh, qua cứu em với! Tự nhiên hôm nay thư viện nhập sách nhiều quá em xếp không kịp, sắp bị đè bẹp tới nơi rồi!",
         bg: "",
         voice: "assets/voice/toaA/2_toaA.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/CTV_toaA.png",
         nextId: "ht_04" 
     },
     {
@@ -479,7 +479,7 @@ const storyToaA = [
         text: "Dạ chuyện là em đăng ký làm cộng tác viên thư viện. Sáng nay trường về lô sách mới, sách cần xếp lên kệ nhiều như núi ý!",
         bg: "",
         voice: "assets/voice/toaA/4_toaA.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/CTV_toaA.png",
         nextId: "ht_06" 
     },
 
@@ -499,7 +499,7 @@ const storyToaA = [
         text: "Dạ? Em nãy giờ chỉ thấy toàn là sách thôi. Mà hình như thỉnh thoảng em cũng thấy mấy đốm sáng bay bay. Chắc tại phân loại sách nhiều quá mờ cả mắt rồi.",
         bg: "",
         voice: "assets/voice/toaA/6_toaA.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/CTV_toaA.png",
         nextId: "ht_08"
     },
 
@@ -572,7 +572,7 @@ const storyToaA = [
         text: "Ôi anh ơi một xe tải sách tới nữa rồi kìa huhu.",
         bg: "",
         voice: "assets/voice/toaA/11.1_toaA.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/CTV_toaA.png",
         nextId: "ht_16"
     },
     {
@@ -581,7 +581,7 @@ const storyToaA = [
         text: "Anh ráng nhặt sách rồi xếp vào đúng 9 cái kệ đằng kia nha. Đừng để rớt cuốn nào đấy, rớt là em bị thủ thư la mất!",
         bg: "",
         voice: "assets/voice/toaA/11.2_toaA.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/CTV_toaA.png",
         noSkip: true,
         nextId: "ht_17"
     },
@@ -601,7 +601,7 @@ const storyToaA = [
         text: "Sao em biết được???",
         bg: "",
         voice: "assets/voice/toaA/13_toaA.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/CTV_toaA.png",
         nextId: "ht_19"
     },
     {
@@ -629,7 +629,7 @@ const storyToaA = [
         text: "Anh sẵn sàng chưa? Thêm xe tải sách thứ ba rồi kìaaa!!",
         bg: "",
         voice: "assets/voice/toaA/16_toaA.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/CTV_toaA.png",
         nextId: "ht_22"
     },
     {

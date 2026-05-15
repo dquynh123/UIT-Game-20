@@ -9,7 +9,7 @@ const storyToaC = [
         text: "Em cảm ơn anh nhiều lắm!",
         bg: "", 
         voice: "assets/voice/toaD/11.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/bithu.png",
         noSkip: true,
         nextId: "c_02"
     },
@@ -28,7 +28,7 @@ const storyToaC = [
         text: "Anh về dự kỷ niệm 20 năm nha! Lúc đó em sẽ khoe thành tích Đoàn của nhiệm kỳ em.",
         bg: "", 
         voice: "assets/voice/toaD/13.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/bithu.png",
         nextId: "c_04"
     },
     {
@@ -46,7 +46,7 @@ const storyToaC = [
         text: "Anh trai ơi! Đi đâu mà vội mà vàng, ghé ngang gian hàng Ban Học Tập làm bài test kiến thức lấy quà không? Đang vắng khách quá nè!",
         bg: "",
         voice: "assets/voice/toaC/1.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/BHTCNPM.png",
         nextId: "c_06"
     },
     {
@@ -64,7 +64,7 @@ const storyToaC = [
         text: "Có luôn! Tụi em có cái cúp mica gắn LED chớp tắt bao chói mắt! Nhưng mà muốn lấy thì khoai lắm nha.",
         bg: "",
         voice: "assets/voice/toaC/3.1.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/BHTCNPM.png",
         nextId: "c_08"
     },
 
@@ -74,7 +74,7 @@ const storyToaC = [
         text: "Anh phải vượt qua thử thách 100 câu hỏi về lịch sử trường mình. Cảnh báo trước là đáp án bị hệ thống xáo trộn liên tục đó, anh phải thật tinh mắt mới chọn kịp.",
         bg: "",
         voice: "assets/voice/toaC/3.2.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/BHTCNPM.png",
         noSkip: true,
         nextId: "c_09"
     },
@@ -93,7 +93,7 @@ const storyToaC = [
         text: "Chà, tự tin gớm ta! Để xem cựu sinh viên nhớ trường được bao nhiêu phần trăm nhé.",
         bg: "",
         voice: "assets/voice/toaC/5.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/BHTCNPM.png",
         noSkip: true,
         nextId: null
     },

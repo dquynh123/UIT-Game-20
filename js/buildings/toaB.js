@@ -25,7 +25,7 @@ const StoryToaD = [
         text: "Anh… anh có phải là anh {PLAYER} không ạ? Hồi trước làm Bí thư Đoàn khoa CNPM ấy?",
         bg: "",
         voice: "assets/voice/toaD/2.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/bithu.png",
         nextId: "d_04"
     },
 
@@ -45,7 +45,7 @@ const StoryToaD = [
         text: "Trời ạ, đúng anh thật rồi! Em tên Vũ, khoá… 2022 ạ! Hồi em năm nhất, anh đang năm bốn. Hôm đó anh ngầu lắm. Anh không nhớ em, nhưng em nhớ anh rõ lắm ý.",
         bg: "",
         voice: "assets/voice/toaD/4.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/bithu.png",
         nextId: "d_06"
     },
 
@@ -65,7 +65,7 @@ const StoryToaD = [
         text: "Dạ, hôm nay là ngày Chủ Nhật Xanh của trường, lẽ ra có mười mấy đứa tình nguyện viên. Mà tự nhiên sáng nay tụi nó kêu mưa, kêu nắng, rồi đứa thì ngủ quên… cuối cùng chỉ còn một mình em.",
         bg: "",
         voice: "assets/voice/toaD/6.1.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/bithu.png",
         nextId: "d_08"
     },
     {
@@ -74,7 +74,7 @@ const StoryToaD = [
         text: "Cái sân này, em quét từ 7h sáng, quét mãi không hết, vì gió cứ thổi lá từ khắp nơi sang.",
         bg: "",
         voice: "assets/voice/toaD/6.2.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/bithu.png",
         nextId: "d_09"
     },
     {
@@ -83,7 +83,7 @@ const StoryToaD = [
         text: "Mới nãy em còn tự nhủ: “Giá mà hồi xưa anh {PLAYER} còn làm Bí thư, chắc ảnh kéo cả đội đến giúp”.",
         bg: "",
         voice: "assets/voice/toaD/6.3.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/bithu.png",
         nextId: "d_10"
     },
     {
@@ -101,7 +101,7 @@ const StoryToaD = [
         text: "Dạ không ạ. Anh giúp em một tay với, em còn deadline DEVO Challenge nữa huhu.",
         bg: "",
         voice: "assets/voice/toaD/8.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/bithu.png",
         nextId: "d_12"
     },
     {

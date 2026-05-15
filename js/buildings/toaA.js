@@ -14,7 +14,7 @@ const StoryToaB = [
     {
         id: "test_01",
         name: "",
-        text: "{PLAYER} đang thong thả bước, tay sờ vào túi áo nơi có hai mảnh ký ức (E và A). Anh ngước nhìn lên tấm bảng chỉ dẫn “B1.20”,  “B5.02” Một cảm giác hoài niệm ùa về.",
+        text: "{PLAYER} đang thong thả bước, tay sờ vào túi áo nơi có hai mảnh ký ức (E và A). Anh ngước nhìn lên tòa B. Một cảm giác hoài niệm ùa về.",
         bg: "",
         sprite: "",
         noSkip: true,

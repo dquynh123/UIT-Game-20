@@ -430,7 +430,7 @@ const storyScene2_UIT = [
         text: "Anh lên tầng mấy ạ? Để em bấm cho.",
         bg: "",
         voice: "assets/voice/toaE/1_toaE.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/namtoaE.png",
         nextId: "s2_18"
     },
     {
@@ -448,7 +448,7 @@ const storyScene2_UIT = [
         text: "Lạ thật, chẳng có đèn nào sáng. Em thử tầng 5, tầng 8 cũng không được. Chắc thang máy hỏng rồi anh ạ.",
         bg: "",
         voice: "assets/voice/toaE/3_toaE.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/namtoaE.png",
         nextId: "s2_20"
     },
 
@@ -458,7 +458,7 @@ const storyScene2_UIT = [
         text: "Trời ạ, thang máy Tòa E nổi tiếng chậm, nhưng hôm nay nó ngủ luôn à? Em còn phải lên nghe seminar, trễ là mất điểm danh.",
         bg: "",
         voice: "assets/voice/toaE/4_toaE.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/namtoaE.png",
         nextId: "s2_21"
     },
 
@@ -477,7 +477,7 @@ const storyScene2_UIT = [
         text: "Dạ em học Truyền thông đa phương tiện, năm nhất. Còn anh? Nhìn anh… không giống sinh viên lắm.",
         bg: "",
         voice: "assets/voice/toaE/6_toaE.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/namtoaE.png",
         nextId: "s2_23"
     },
     {
@@ -495,7 +495,7 @@ const storyScene2_UIT = [
         text: "Ối, senpai khóa 2018 cơ à? Trông anh trẻ thật đấy!",
         bg: "",
         voice: "assets/voice/toaE/8_toaE.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/namtoaE.png",
         nextId: "s2_25"
     },
     {
@@ -524,7 +524,7 @@ const storyScene2_UIT = [
         text: "Ai nói thế? Loa tự nhiên phát ra giọng lạ. Anh có nghe thấy không ạ? Hay em bị ảo giác?",
         bg: "",
         voice: "assets/voice/toaE/10_toaE.ogg",
-        sprite: "assets/images/chibi.png",
+        sprite: "assets/images/namtoaE.png",
         nextId: "s2_28"
     },
     {
@@ -630,8 +630,34 @@ window.playVN = playVN;
 const SAVE_KEY = "UIT_VN_SAVEDATA";
 window.currentCheckpoint = "scene1"; 
 
-// 1. HÀM LƯU GAME
-window.saveGameProgress = () => {
+function syncMainMenuButtons() {
+    const btnContinue = document.getElementById('main-continue-btn');
+    const btnStart = document.getElementById('main-start-btn');
+    const hasSavedGame = !!localStorage.getItem(SAVE_KEY);
+
+    if (btnContinue) {
+        if (hasSavedGame) {
+            btnContinue.classList.remove('hidden');
+            btnContinue.style.display = 'block';
+        } else {
+            btnContinue.classList.add('hidden');
+            btnContinue.style.display = 'none';
+            btnContinue.onclick = null;
+        }
+    }
+
+    if (btnStart) {
+        btnStart.innerText = hasSavedGame ? 'CHƠI LẠI TỪ ĐẦU' : 'START';
+    }
+}
+
+window.resetMainMenuAfterEnding = () => {
+    localStorage.removeItem(SAVE_KEY);
+    syncMainMenuButtons();
+};
+
+// 1. HÀM LƯU GAME (Đã nâng cấp hỗ trợ Auto-save)
+window.saveGameProgress = (isSilent = false) => {
     const gameData = {
         playerName: localStorage.getItem('currentPlayerName') || "Bạn",
         stats: window.UITGameStats, 
@@ -640,24 +666,19 @@ window.saveGameProgress = () => {
         // Dòng này rất quan trọng: Chụp lại ID của câu thoại đang đọc!
         vnLine: window.currentVNLine 
     };
+    
     localStorage.setItem(SAVE_KEY, JSON.stringify(gameData));
-    alert("💾 Đã lưu tiến trình game thành công!");
-};
-window.autoSaveGame = () => {
-    const gameData = {
-        playerName: localStorage.getItem('currentPlayerName') || "Bạn",
-        stats: window.UITGameStats, 
-        checkpoint: window.currentCheckpoint, 
-        toaEState: window.toaEState,
-        vnLine: window.currentVNLine 
-    };
-    localStorage.setItem(SAVE_KEY, JSON.stringify(gameData));
+    
+    // Chỉ hiện Alert nếu người chơi bấm nút SAVE thủ công
+    if (!isSilent) {
+        alert("💾 Đã lưu tiến trình game thành công!");
+    }
 };
 
-// THÊM MỚI: TỰ ĐỘNG LƯU KHI NGƯỜI CHƠI ẤN F5 HOẶC ĐÓNG TAB
-window.addEventListener('beforeunload', () => {
-    window.autoSaveGame();
-});
+// Khai báo hàm Auto-save cho máy đọc kịch bản (dialogue.js) gọi
+window.autoSaveGame = () => {
+    window.saveGameProgress(true); // Tham số true = Lưu ngầm, không hiện thông báo
+};
 
 // 2. HÀM TẢI GAME
 window.loadGameProgress = () => {
@@ -685,12 +706,14 @@ window.loadGameProgress = () => {
     document.getElementById('name-screen').classList.add('hidden');
     document.getElementById('game-scene').classList.remove('hidden');
 
+    alert(`📂 Đã tải lại game! Điểm ĐRL: ${window.UITGameStats.totalScore}`);
     resumeFromCheckpoint(window.currentCheckpoint, window.currentVNLine);
 };
 
 // 4. KẾT NỐI NÚT "TIẾP TỤC" (CONTINUE BUTTON)
 document.addEventListener('DOMContentLoaded', () => {
     const btnSave = document.getElementById('btn-save-game');
+    const btnLoad = document.getElementById('btn-load-game');
     const btnContinue = document.getElementById('main-continue-btn'); 
 
     // Nếu có dữ liệu cũ -> Bật nút Tiếp Tục
@@ -708,7 +731,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (btnSave) btnSave.addEventListener('click', window.saveGameProgress);
-
+    if (btnLoad) btnLoad.addEventListener('click', window.loadGameProgress);
 });
 
 // 3. ĐIỀU PHỐI MỞ ĐÚNG MÀN ĐANG CHƠI DỞ HOẶC THOẠI ĐANG ĐỌC DỞ
@@ -802,9 +825,6 @@ function resumeFromCheckpoint(checkpoint, vnLine) {
     if (checkpoint === "scene1") {
         if (typeof window.startGame === 'function') window.startGame();
     } else {
-        if (window.currentVoice) { window.currentVoice.pause(); window.currentVoice.currentTime = 0; }
-        if (window.currentSFX) { window.currentSFX.pause(); window.currentSFX.currentTime = 0; }
-
         const targetScreen = document.getElementById(checkpoint);
         if (targetScreen) targetScreen.style.display = 'block';
 
@@ -823,38 +843,27 @@ function resumeFromCheckpoint(checkpoint, vnLine) {
     }
 }
 
-// 4. GẮN LỆNH VÀO CÁC NÚT BẤM (MAIN MENU & CÀI ĐẶT)
+// 4. GẮN LỆNH VÀO 2 NÚT BẤM BẠN ĐÃ TẠO SẴN Ở HTML
 document.addEventListener('DOMContentLoaded', () => {
     const btnSave = document.getElementById('btn-save-game');
-    const btnContinue = document.getElementById('main-continue-btn'); 
-    const btnStart = document.getElementById('main-start-btn'); // Lấy cái nút Bắt Đầu ra để xử lý
+    const btnLoad = document.getElementById('btn-load-game');
+    const btnContinue = document.getElementById('main-continue-btn'); // Nút Tiếp tục ở Main Menu
 
-    // --- ĐOẠN KIỂM TRA DỮ LIỆU CŨ ---
+    // --- ĐOẠN KIỂM TRA DỮ LIỆU CŨ (BƯỚC 2) ---
     const savedData = localStorage.getItem(SAVE_KEY);
     if (savedData && btnContinue) {
-        // TRƯỜNG HỢP 1: ĐÃ TỪNG CHƠI VÀ CÓ FILE LƯU
+        // Nếu có dữ liệu cũ, hiện nút Tiếp tục lên
         btnContinue.classList.remove('hidden');
         btnContinue.style.display = 'block';
         
-        // BÍ KÍP Ở ĐÂY: Tự động đổi tên nút "BẮT ĐẦU" thành "CHƠI LẠI TỪ ĐẦU"
-        if (btnStart) {
-            btnStart.innerText = "CHƠI LẠI TỪ ĐẦU";
-        }
-        
-        // Khi bấm Tiếp tục, chạy màn rèm đen rồi load game
+        // Khi bấm nút Tiếp tục ở màn hình chính, gọi hàm Load
         btnContinue.onclick = () => {
-            sceneTransition(() => {
-                window.loadGameProgress();
-            });
+            window.loadGameProgress();
         };
-    } else {
-        // TRƯỜNG HỢP 2: LẦN ĐẦU CHƠI (KHÔNG CÓ FILE LƯU)
-        // Chữ vẫn giữ nguyên là "BẮT ĐẦU" (như trong HTML)
-        if (btnStart) {
-            btnStart.innerText = "BẮT ĐẦU";
-        }
     }
+    // ----------------------------------------
 
-    // Gắn lệnh cho nút Lưu bên trong Menu Cài đặt (đã xóa nút Load)
+    // Gắn lệnh cho nút Lưu/Tải bên trong Menu Cài đặt
     if (btnSave) btnSave.addEventListener('click', window.saveGameProgress);
+    if (btnLoad) btnLoad.addEventListener('click', window.loadGameProgress);
 });
