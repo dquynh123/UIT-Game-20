@@ -137,8 +137,8 @@ const startScreenToaD = document.getElementById('start-screen-toa-d');
 const endScreenToaD = document.getElementById('end-screen-toa-d');
 
 const configToaD = {
-    gameDuration: 60,
-    spawnInterval: 1500, // Tăng tốc độ ra lá 
+    gameDuration: 120,
+    spawnInterval: 1200, // Tăng tốc độ ra lá 
     maxLeavesAllowed: 12, 
     wordsEasy: ["dog", "cat", "sun", "fish", "bird", "tree", "home", "book", "pink", "blue", "red", "cloud", "phone", "chair", "table", "house", "river", "flower", "moon", "star", "start", "game"],
     wordsHard: ["university", "technology", "information", "celebration", "computer", "vietnam", "diversity", "education"]
@@ -250,7 +250,7 @@ window.addEventListener('keydown', (e) => {
                 let foundIndex = leavesToaD.findIndex(l => l.word.toLowerCase() === currentInput.toLowerCase());
                 
                 if (foundIndex !== -1) {
-                    let pts = (leavesToaD[foundIndex].type === "hard") ? 5 : 2;
+                    let pts = (leavesToaD[foundIndex].type === "hard") ? 2 : 1;
                     scoreToaD = Math.min(100, scoreToaD + pts);
                     leavesToaD.splice(foundIndex, 1);
                     scoreElToaD.innerText = scoreToaD;
@@ -359,7 +359,7 @@ function initToaD() {
     timeLeftToaD = configToaD.gameDuration;
     currentInput = "";
     scoreElToaD.innerText = "0";
-    timerElToaD.innerText = "01:00"; 
+    timerElToaD.innerText = "02:00"; 
     
     startScreenToaD.style.display = 'none';
     endScreenToaD.style.display = 'none';
