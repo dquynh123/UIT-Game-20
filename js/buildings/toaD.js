@@ -19,7 +19,7 @@ const storyToaC = [
         text: "Em làm tốt lắm rồi. Chỉ cần nhớ: làm bí thư mà một mình quét sân cũng không sao, nhưng nhớ gọi điện kêu đồng đội phụ. Còn anh đi đây nhé.",
         bg: "",
         voice: "assets/voice/toaD/12.ogg",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         nextId: "c_03"
     },
     {
@@ -37,7 +37,7 @@ const storyToaC = [
         text: "Tòa C cuối cùng - chắc là nơi mình lưu giữ những thứ quan trọng nhất.",
         bg: "",
         voice: "assets/voice/toaD/14.ogg",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         nextId: "c_05"
     },
     {
@@ -55,7 +55,7 @@ const storyToaC = [
         text: "Anh đang kiếm đồ. Ở chỗ em có cái cục gì lấp lánh, phát sáng không?",
         bg: "",
         voice: "assets/voice/toaC/2.ogg",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         nextId: "c_07"
     },
     {
@@ -74,7 +74,7 @@ const storyToaC = [
         text: "Anh phải vượt qua thử thách 100 câu hỏi về lịch sử trường mình. Cảnh báo trước là đáp án bị hệ thống xáo trộn liên tục đó, anh phải thật tinh mắt mới chọn kịp.",
         bg: "",
         voice: "assets/voice/toaC/3.2.ogg",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         noSkip: true,
         nextId: "c_09"
     },
@@ -84,7 +84,7 @@ const storyToaC = [
         text: "100 câu à? Được. Anh sẵn sàng rồi.",
         bg: "",
         voice: "assets/voice/toaC/4.ogg",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         nextId: "c_10"
     },
     {
@@ -93,13 +93,33 @@ const storyToaC = [
         text: "Chà, tự tin gớm ta! Để xem cựu sinh viên nhớ trường được bao nhiêu phần trăm nhé.",
         bg: "",
         voice: "assets/voice/toaC/5.ogg",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         noSkip: true,
         nextId: null
     },
 ];
-
+window.storyToaC = storyToaC;
 function transitionToToaC() {
+    // Chạy máy đọc kịch bản Tòa C
+    if (typeof window.playVN === 'function') {
+        window.playVN(storyToaC, "c_01", () => {
+            console.log("Đã đọc xong thoại Tòa C. Mở giao diện Tòa C...");
+            
+            // DÙNG LỆNH NÀY ĐỂ HỆ THỐNG TỰ ĐỘNG LƯU CHECKPOINT TÒA C
+            if (typeof window.switchBuilding === 'function') {
+                window.switchBuilding('toa-c');
+            }
+            
+            // Chỉ bật màn hình Start Tòa C, giấu màn hình Game đi chờ người chơi bấm Bắt đầu
+            const startScreenC = document.getElementById('start-screen-toa-c');
+            const gameScreenC = document.getElementById('game-screen-toa-c');
+            
+            if (startScreenC) startScreenC.classList.remove('hidden');
+            if (gameScreenC) gameScreenC.classList.add('hidden');
+        });
+    }
+}
+/*function transitionToToaC() {
     // 1. Ẩn toàn bộ giao diện Tòa D đi
     const toaD = document.getElementById('toa-d');
     if (toaD) toaD.style.display = 'none';
@@ -124,7 +144,7 @@ function transitionToToaC() {
             if (gameScreenC) gameScreenC.classList.add('hidden');
         });
     }
-}
+}*/
 /**
  * Tòa D - Typing game
  */
@@ -379,3 +399,15 @@ if (startBtn) {
 if (typeof window !== 'undefined') {
     window.initToaD = initToaD;
 }
+// HÀM RESET TÒA D KHI LOAD GAME
+window.resetToaD = function() {
+    isGameActive = false;
+    cleanupToaD(); // Dọn sạch lá rụng dở dang
+    currentInput = ""; // Xóa chữ gõ dở
+    
+    // Bật lại màn hình Start chờ người chơi
+    const startScreenToaD = document.getElementById('start-screen-toa-d');
+    const endScreenToaD = document.getElementById('end-screen-toa-d');
+    if (startScreenToaD) startScreenToaD.style.display = 'block';
+    if (endScreenToaD) endScreenToaD.style.display = 'none';
+};

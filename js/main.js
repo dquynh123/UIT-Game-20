@@ -150,6 +150,7 @@ window.UITGameStats = {
 };
 
 window.switchBuilding = (buildingId) => {
+    window.currentCheckpoint = buildingId;
     sceneTransition(() => {
         const allBuildings = ['vn-screen','toa-a', 'toa-b', 'toa-c', 'toa-d', 'toa-e'];
         allBuildings.forEach(id => {
@@ -233,7 +234,7 @@ const storyScene1 = [
         text: " UIT...?",
         voice: "assets/voice/scene1/voice1_scene1.ogg",
         bg: "",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         nextId: "s1_04"
     },
     {
@@ -250,7 +251,7 @@ const storyScene1 = [
         text: "Ụa máy tính bị gì v…",
         voice: "assets/voice/scene1/voice2_scene1.ogg",
         bg: "",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         noSkip: true,
         nextId: null // Kích hoạt hiệu ứng Nổ
     }
@@ -274,7 +275,7 @@ const storyScene2_UIT = [
         text: "Ủa... đây là trường mình mà? Sao vắng hoe vậy?",
         bg: "",
         voice: "assets/voice/scene2/1_scene2.ogg",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         nextId: "s2_03"
     },
     {
@@ -283,7 +284,7 @@ const storyScene2_UIT = [
         text: "Chào bạn. Lạc đường hả?",
         bg: "",
         voice: "assets/voice/scene2/2_scene2.ogg",
-        sprite: "assets/images/test_guide.png", 
+        sprite: "assets/images/Đậu đậu.png", 
         nextId: "s2_04"
     },
     {
@@ -292,7 +293,7 @@ const storyScene2_UIT = [
         text: "Ai, Ai vậy?",
         bg: "",
         voice: "assets/voice/scene2/3_scene2.ogg",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         nextId: "s2_05"
     },
     {
@@ -301,7 +302,7 @@ const storyScene2_UIT = [
         text: "Bình tĩnh nào, cứ coi tôi là admin tạm thời của khu vực này đi. ",
         bg: "",
         voice: "assets/voice/scene2/4.1_scene2.ogg",
-        sprite: "assets/images/test_guide.png", 
+        sprite: "assets/images/Đậu đậu.png", 
         nextId: "s2_06"
     },
     {
@@ -310,7 +311,7 @@ const storyScene2_UIT = [
         text: "Lúc anh click vào cái mail đó, anh đã vô tình đăng nhập vào một không gian đặc biệt... ",
         bg: "",
         voice: "assets/voice/scene2/4.2_scene2.ogg",
-        sprite: "assets/images/test_guide.png", 
+        sprite: "assets/images/Đậu đậu.png", 
         nextId: "s2_07"
     },
     {
@@ -319,7 +320,7 @@ const storyScene2_UIT = [
         text: "Nơi này giống như một cái server được tạo nên từ chính những ký ức của hàng ngàn sinh viên trường mình suốt 20 năm qua vậy. Và hiện tại, anh đang kẹt trong server đó",
         bg: "",
         voice: "assets/voice/scene2/4.3_scene2.ogg",
-        sprite: "assets/images/test_guide.png", 
+        sprite: "assets/images/Đậu đậu.png", 
         nextId: "s2_08"
     },
 
@@ -329,7 +330,7 @@ const storyScene2_UIT = [
         text: "Hả? Cái gì cơ? Server ? Ký ức ? Tôi có đang nằm mơ không vậy?",
         bg: "",
         voice: "assets/voice/scene2/5_scene2.ogg",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         nextId: "s2_09"
     },
 
@@ -339,7 +340,7 @@ const storyScene2_UIT = [
         text: "Cứ cho là anh đang mơ đi. Ở đây logic đời thực không xài được đâu. Mấy tòa nhà này không chỉ là cục bê tông, mà nó chứa cả bộ nhớ kỷ niệm của bao nhiêu khóa sinh viên đấy. Giờ thì... anh cũng kẹt lại trong mớ dữ liệu đó rồi.",
         bg: "",
         voice: "assets/voice/scene2/7_scene2.ogg",
-        sprite: "assets/images/test_guide.png", 
+        sprite: "assets/images/Đậu đậu.png", 
         nextId: "s2_10"
     },
 
@@ -349,7 +350,7 @@ const storyScene2_UIT = [
         text: "Vậy rốt cuộc làm sao để thoát ra?",
         bg: "",
         voice: "assets/voice/scene2/8_scene2.ogg",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         nextId: "s2_11"
     },
 
@@ -359,7 +360,7 @@ const storyScene2_UIT = [
         text: "Anh phải đi nhặt lại mấy mảnh ký ức đang rơi tứ tung ở các tòa nhà. Gom đủ thì về nhà ngủ tiếp. Không thì...",
         bg: "",
         voice: "assets/voice/scene2/9_scene2.ogg",
-        sprite: "assets/images/test_guide.png", 
+        sprite: "assets/images/Đậu đậu.png", 
         nextId: "s2_12"
     },
 
@@ -369,7 +370,7 @@ const storyScene2_UIT = [
         text: "Thì thì sao cơ???",
         bg: "",
         voice: "assets/voice/scene2/10_scene2.ogg",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         nextId: "s2_13"
     },
 
@@ -379,7 +380,7 @@ const storyScene2_UIT = [
         text: "Thì reset tài khoản, ở lại đây học lại từ năm nhất tới già chứ sao .",
         bg: "",
         voice: "assets/voice/scene2/11_scene2.ogg",
-        sprite: "assets/images/test_guide.png", 
+        sprite: "assets/images/Đậu đậu.png", 
         nextId: "s2_14"
     },
 
@@ -389,7 +390,7 @@ const storyScene2_UIT = [
         text: "Đi làm chạy deadline chưa đủ khổ hay sao trời, tới giờ đi ngủ rồi mà còn...",
         bg: "",
         voice: "assets/voice/scene2/12_scene2.ogg",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         nextId: "s2_15"
     },
 
@@ -399,7 +400,7 @@ const storyScene2_UIT = [
         text: "Bắt đầu từ Tòa E nhé. Lên hội trường, có người đang đợi anh đấy. Chúc may mắn .",
         bg: "",
         voice: "assets/voice/scene2/13_scene2.ogg",
-        sprite: "assets/images/test_guide.png", 
+        sprite: "assets/images/Đậu đậu.png", 
         nextId: "s2_16"
     },
 
@@ -428,7 +429,7 @@ const storyScene2_UIT = [
         text: "Bấm giùm anh tầng 12 với.",
         bg: "",
         voice: "assets/voice/toaE/2_toaE.ogg",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         nextId: "s2_19"
     },
     {
@@ -457,7 +458,7 @@ const storyScene2_UIT = [
         text: "Hồi anh học cỡ sáu bảy năm trước, thang này đã chậm rồi. Mà em học khoa gì?",
         bg: "",
         voice: "assets/voice/toaE/5_toaE.ogg",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         nextId: "s2_22"
     },
     {
@@ -475,7 +476,7 @@ const storyScene2_UIT = [
         text: "Anh học Kỹ thuật phần mềm. Cựu sinh viên khóa 2018. Ra trường cũng ngót nghét năm năm rồi, tự nhiên lạc vào đây.",
         bg: "",
         voice: "assets/voice/toaE/7_toaE.ogg",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         nextId: "s2_24"
     },
     {
@@ -521,7 +522,7 @@ const storyScene2_UIT = [
         text: "Có. Là cái hệ thống hướng dẫn đấy. Hồi nãy anh gặp rồi. Có vẻ chỉ mình anh mới tương tác được.",
         bg: "",
         voice: "assets/voice/toaE/11_toaE.ogg",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         nextId: "s2_29"
     },
     {
@@ -614,23 +615,21 @@ window.startGame = function() {
 window.playVN = playVN;
 
 // ==========================================
-// HỆ THỐNG LƯU / TẢI GAME (CHECKPOINT SYSTEM)
+// HỆ THỐNG LƯU / TẢI GAME ĐỈNH CAO (EXACT STATE)
 // ==========================================
 const SAVE_KEY = "UIT_VN_SAVEDATA";
-
-// Biến này sẽ nhớ xem người chơi đang ở giai đoạn nào của game
 window.currentCheckpoint = "scene1"; 
 
 // 1. HÀM LƯU GAME
 window.saveGameProgress = () => {
-    // Thu thập dữ liệu hiện tại
     const gameData = {
         playerName: localStorage.getItem('currentPlayerName') || "Bạn",
-        stats: window.UITGameStats, // Lưu toàn bộ điểm rèn luyện và lịch sử
-        checkpoint: window.currentCheckpoint // Lưu mốc cốt truyện
+        stats: window.UITGameStats, 
+        checkpoint: window.currentCheckpoint, 
+        toaEState: window.toaEState,
+        // Dòng này rất quan trọng: Chụp lại ID của câu thoại đang đọc!
+        vnLine: window.currentVNLine 
     };
-
-    // Nén thành chuỗi và cất vào LocalStorage
     localStorage.setItem(SAVE_KEY, JSON.stringify(gameData));
     alert("💾 Đã lưu tiến trình game thành công!");
 };
@@ -638,60 +637,164 @@ window.saveGameProgress = () => {
 // 2. HÀM TẢI GAME
 window.loadGameProgress = () => {
     const savedString = localStorage.getItem(SAVE_KEY);
-    
     if (!savedString) {
         alert("❌ Không tìm thấy dữ liệu lưu nào!");
         return;
     }
-
-    // Giải nén dữ liệu
     const gameData = JSON.parse(savedString);
 
-    // Bơm dữ liệu ngược lại vào game
     localStorage.setItem('currentPlayerName', gameData.playerName);
     if (gameData.stats) {
         window.UITGameStats.totalScore = gameData.stats.totalScore || 0;
         window.UITGameStats.stageResults = gameData.stats.stageResults || [];
     }
-    window.currentCheckpoint = gameData.checkpoint;
+    if (gameData.toaEState) window.toaEState = gameData.toaEState;
 
-    // Đóng bảng Menu Cài đặt
+    window.currentCheckpoint = gameData.checkpoint;
+    window.currentVNLine = gameData.vnLine || null; // Kéo dòng thoại ra lại
+
     const menuScreen = document.getElementById('vn-menu-screen');
     if (menuScreen) menuScreen.classList.remove('active');
 
-    // Tắt Menu ngoài cùng, ép bật vào Game Scene
     document.getElementById('main-menu').style.display = 'none';
     document.getElementById('name-screen').classList.add('hidden');
     document.getElementById('game-scene').classList.remove('hidden');
 
-    alert(`📂 Đã tải lại game! Bắt đầu từ mốc: ${window.currentCheckpoint}\nĐiểm Rèn Luyện hiện tại: ${window.UITGameStats.totalScore}`);
+    alert(`📂 Đã tải lại game! Điểm ĐRL: ${window.UITGameStats.totalScore}`);
+    resumeFromCheckpoint(window.currentCheckpoint, window.currentVNLine);
+};
 
-    // DỌN SẠCH CÁC MÀN HÌNH CŨ
-    const allScreens = ['vn-screen', 'toa-a', 'toa-b', 'toa-c', 'toa-d', 'toa-e'];
-    allScreens.forEach(id => {
+// 4. KẾT NỐI NÚT "TIẾP TỤC" (CONTINUE BUTTON)
+document.addEventListener('DOMContentLoaded', () => {
+    const btnSave = document.getElementById('btn-save-game');
+    const btnLoad = document.getElementById('btn-load-game');
+    const btnContinue = document.getElementById('main-continue-btn'); 
+
+    // Nếu có dữ liệu cũ -> Bật nút Tiếp Tục
+    const savedData = localStorage.getItem(SAVE_KEY);
+    if (savedData && btnContinue) {
+        btnContinue.classList.remove('hidden');
+        btnContinue.style.display = 'block';
+        
+        btnContinue.onclick = () => {
+            // Dùng Transition kéo rèm đen xuống cho mượt, rồi mới load
+            sceneTransition(() => {
+                window.loadGameProgress();
+            });
+        };
+    }
+
+    if (btnSave) btnSave.addEventListener('click', window.saveGameProgress);
+    if (btnLoad) btnLoad.addEventListener('click', window.loadGameProgress);
+});
+
+// 3. ĐIỀU PHỐI MỞ ĐÚNG MÀN ĐANG CHƠI DỞ HOẶC THOẠI ĐANG ĐỌC DỞ
+function resumeFromCheckpoint(checkpoint, vnLine) {
+    const allBuildings = ['vn-screen', 'toa-a', 'toa-b', 'toa-c', 'toa-d', 'toa-e'];
+    allBuildings.forEach(id => {
         const el = document.getElementById(id);
         if (el) el.style.display = 'none';
     });
 
-    // KHỞI ĐỘNG LẠI TỪ MỐC ĐÃ LƯU
-    resumeFromCheckpoint(window.currentCheckpoint);
-};
+    // ==========================================
+    // TRƯỜNG HỢP 1: ĐANG ĐỌC DỞ THOẠI
+    // ==========================================
+    if (vnLine) {
+        if (vnLine.startsWith("s1_")) {
+            window.playVN(typeof storyScene1 !== 'undefined' ? storyScene1 : window.storyScene1, vnLine, () => {
+                window.playVN(typeof storyScene2_UIT !== 'undefined' ? storyScene2_UIT : window.storyScene2_UIT, "s2_01", () => {
+                    window.currentCheckpoint = "toa-e";
+                    window.switchBuilding('toa-e');
+                });
+            });
+        } 
+        else if (vnLine.startsWith("s2_")) {
+            window.playVN(typeof storyScene2_UIT !== 'undefined' ? storyScene2_UIT : window.storyScene2_UIT, vnLine, () => {
+                window.currentCheckpoint = "toa-e";
+                window.switchBuilding('toa-e');
+            });
+        }
+        else if (vnLine.startsWith("ht_") || vnLine.startsWith("a_")) {
+            window.playVN(window.storyToaA, vnLine, () => { window.switchBuilding('toa-a'); });
+        }
 
-// 3. HÀM ĐIỀU PHỐI ĐỂ MỞ ĐÚNG CHỖ ĐANG CHƠI DỞ
-function resumeFromCheckpoint(checkpoint) {
+        // 🌟 TÒA B: Kéo bằng chữ b_
+        else if (vnLine.startsWith("test_")) {
+            window.playVN(window.StoryToaB, vnLine, () => { 
+                window.switchBuilding('toa-b');
+                if (typeof window.resetToaB === 'function') window.resetToaB();
+            });
+        }
+
+        // 🌟 TÒA D: Kéo bằng chữ d_
+        else if (vnLine.startsWith("d_")) {
+            window.playVN(window.StoryToaD, vnLine, () => { 
+                window.switchBuilding('toa-d');
+                const startScreenD = document.getElementById('start-screen-toa-d');
+                const gameScreenD = document.getElementById('game-screen-toa-d');
+                if (startScreenD) startScreenD.style.display = 'block';
+                if (gameScreenD) gameScreenD.style.display = 'none';
+            });
+        }
+
+        // 🌟 TÒA C: Kéo bằng chữ c_
+        else if (vnLine.startsWith("c_")) {
+            window.playVN(window.storyToaC, vnLine, () => { 
+                window.switchBuilding('toa-c');
+                const startScreenC = document.getElementById('start-screen-toa-c');
+                const gameScreenC = document.getElementById('game-screen-toa-c');
+                if (startScreenC) startScreenC.classList.remove('hidden');
+                if (gameScreenC) gameScreenC.classList.add('hidden');
+            });
+        }
+
+        // 🌟 CÁC CẢNH ENDING
+        else if (vnLine.startsWith("bad_")) {
+            window.playVN(window.storyBadToaC, vnLine, () => { 
+                import('./ending.js').then(module => {
+                    if (module.triggerBadEndingEffect) module.triggerBadEndingEffect();
+                });
+            });
+        }
+        else if (vnLine.startsWith("true_")) {
+            let targetStory = parseInt(vnLine.split('_')[1]) <= 5 ? window.storyTrueToaC_Part1 : window.storyTrueToaC_Part2;
+            window.playVN(targetStory, vnLine, () => { 
+                window.playVN(window.storyVanPhong, "vp_01", () => {
+                    if (typeof window.showEndCredits === 'function') window.showEndCredits();
+                });
+            });
+        }
+        else if (vnLine.startsWith("vp_")) {
+            window.playVN(window.storyVanPhong, vnLine, () => { 
+                if (typeof window.showEndCredits === 'function') window.showEndCredits();
+            });
+        }
+
+        return; 
+    }
+
+    // ==========================================
+    // TRƯỜNG HỢP 2: KHÔNG CÓ THOẠI (Chơi dở game)
+    // ==========================================
     if (checkpoint === "scene1") {
-        // Trở lại ngay đầu game
         if (typeof window.startGame === 'function') window.startGame();
-    } 
-    else if (checkpoint === "toa-e") {
-        // Đang chơi dở mini-game Tòa E
-        window.switchBuilding('toa-e');
+    } else {
+        const targetScreen = document.getElementById(checkpoint);
+        if (targetScreen) targetScreen.style.display = 'block';
+
+        if (checkpoint === "toa-e" && typeof window.updateToaEUI === 'function') {
+            window.updateToaEUI(); // Tòa E chơi theo lượt nên nhớ chính xác
+        }
+        else if (checkpoint === "toa-b" && typeof window.resetToaB === 'function') {
+            window.resetToaB(); // Tòa B lật thẻ tính giờ -> Reset vạch xuất phát
+        }
+        else if (checkpoint === "toa-c" && typeof window.resetToaC === 'function') {
+            window.resetToaC(); // Tòa C chơi realtime nên trả về vạch xuất phát
+        }
+        else if (checkpoint === "toa-d" && typeof window.resetToaD === 'function') {
+            window.resetToaD(); // Tòa D chơi realtime nên trả về vạch xuất phát
+        }
     }
-    else if (checkpoint === "toa-a") {
-        // Đang ở Tòa A
-        window.switchBuilding('toa-a');
-    }
-    // Bạn có thể thêm các if-else khác cho Tòa B, C, D ở đây
 }
 
 // 4. GẮN LỆNH VÀO 2 NÚT BẤM BẠN ĐÃ TẠO SẴN Ở HTML

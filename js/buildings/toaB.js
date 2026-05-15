@@ -1,128 +1,128 @@
 const StoryToaD = [
     {
-        id: "test_01",
+        id: "d_01",
         name: "",
         text: "{PLAYER} bước ra từ hành lang Tòa B, tay cầm chìa khóa Tòa D vừa nhận được.",
         bg: "",
         sprite: "",
         noSkip: true,
-        nextId: "test_02"
+        nextId: "d_02"
     },
 
     {
-        id: "test_02",
+        id: "d_02",
         name: "{PLAYER}",
         text: "Tòa D… hồi xưa toàn lên đây họp Đoàn, làm báo cáo, phát động phong trào. Mà sao giờ vắng lặng thế này?",
         bg: "",
         voice: "assets/voice/toaD/1.ogg",
-        sprite: "assets/images/test_main.png",
-        nextId: "test_03"
+        sprite: "assets/images/Main.png",
+        nextId: "d_03"
     },
 
     {
-        id: "test_03",
+        id: "d_03",
         name: "Bí thư đoàn",
         text: "Anh… anh có phải là anh {PLAYER} không ạ? Hồi trước làm Bí thư Đoàn khoa CNPM ấy?",
         bg: "",
         voice: "assets/voice/toaD/2.ogg",
         sprite: "assets/images/chibi.png",
-        nextId: "test_04"
+        nextId: "d_04"
     },
 
     {
-        id: "test_04",
+        id: "d_04",
         name: "{PLAYER}",
         text: "Ủa, em biết anh? Anh nhìn em… cũng quen mắt nhưng mà chưa nhớ ra.",
         bg: "",
         voice: "assets/voice/toaD/3.ogg",
-        sprite: "assets/images/test_main.png",
-        nextId: "test_05"
+        sprite: "assets/images/Main.png",
+        nextId: "d_05"
     },
 
     {
-        id: "test_05",
+        id: "d_05",
         name: "Bí thư đoàn",
         text: "Trời ạ, đúng anh thật rồi! Em tên Vũ, khoá… 2022 ạ! Hồi em năm nhất, anh đang năm bốn. Hôm đó anh ngầu lắm. Anh không nhớ em, nhưng em nhớ anh rõ lắm ý",
         bg: "",
         voice: "assets/voice/toaD/4.ogg",
         sprite: "assets/images/chibi.png",
-        nextId: "test_06"
+        nextId: "d_06"
     },
 
     {
-        id: "test_06",
+        id: "d_06",
         name: "{PLAYER}",
         text: "À Vũ à, anh nhớ ra rồi.",
         bg: "",
         voice: "assets/voice/toaD/5.ogg",
-        sprite: "assets/images/test_main.png",
-        nextId: "test_07"
+        sprite: "assets/images/Main.png",
+        nextId: "d_07"
     },
 
     {
-        id: "test_07",
+        id: "d_07",
         name: "Bí thư Vũ",
         text: "Dạ, hôm nay là ngày Chủ Nhật Xanh của trường, lẽ ra có mười mấy đứa tình nguyện viên. Mà tự nhiên sáng nay tụi nó kêu mưa, kêu nắng, rồi đứa thì ngủ quên… cuối cùng chỉ còn một mình em.",
         bg: "",
         voice: "assets/voice/toaD/6.1.ogg",
         sprite: "assets/images/chibi.png",
-        nextId: "test_08"
+        nextId: "d_08"
     },
     {
-        id: "test_08",
+        id: "d_08",
         name: "Bí thư Vũ",
         text: "Cái sân này, em quét từ 7h sáng, quét mãi không hết, vì gió cứ thổi lá từ khắp nơi sang.",
         bg: "",
         voice: "assets/voice/toaD/6.2.ogg",
         sprite: "assets/images/chibi.png",
-        nextId: "test_09"
+        nextId: "d_09"
     },
     {
-        id: "test_09",
+        id: "d_09",
         name: "Bí thư Vũ",
         text: "Mới nãy em còn tự nhủ: “Giá mà hồi xưa anh {PLAYER} còn làm Bí thư, chắc ảnh kéo cả đội đến giúp”.",
         bg: "",
         voice: "assets/voice/toaD/6.3.ogg",
         sprite: "assets/images/chibi.png",
-        nextId: "test_10"
+        nextId: "d_10"
     },
     {
-        id: "test_10",
+        id: "d_10",
         name: "{PLAYER}",
         text: "Em nịnh đấy à? Mà em có thấy cái gì lấp lánh ở đây không?",
         bg: "",
         voice: "assets/voice/toaD/7.ogg",
-        sprite: "assets/images/test_main.png",
-        nextId: "test_11"
+        sprite: "assets/images/Main.png",
+        nextId: "d_11"
     },
     {
-        id: "test_11",
+        id: "d_11",
         name: "Bí thư Vũ",
         text: "Dạ không ạ. Anh giúp em một tay với, em còn deadline DEVO Challenge nữa huhu",
         bg: "",
         voice: "assets/voice/toaD/8.ogg",
         sprite: "assets/images/chibi.png",
-        nextId: "test_12"
+        nextId: "d_12"
     },
     {
-        id: "test_12",
+        id: "d_12",
         name: "",
         text: "Bỗng nhiên, những chiếc lá khô trên sân bắt đầu phát sáng nhè nhẹ",
         bg: "",
         sprite: "",
-        nextId: "test_13"
+        nextId: "d_13"
     },
     {
-        id: "test_13",
+        id: "d_13",
         name: "{PLAYER}",
         text: "Ủa khoan...",
         bg: "",
         voice: "assets/voice/toaD/9.ogg",
-        sprite: "assets/images/test_main.png",
-        nextId: "test_14"
+        sprite: "assets/images/Main.png",
+        nextId: "d_14"
     },
     {
-        id: "test_14",
+        id: "d_14",
         name: "Người hướng dẫn",
         text: "Chào mừng cựu sinh viên đã đến với Tòa D. ^ ^ lại một mini game nhỏ nữa đây một bàn phím ảo xuất hiện, và anh phải gõ nhanh những từ ngữ xuất hiện trên màn hình. Mỗi từ đúng, một chiếc lá thật ngoài sân biến mất. Anh có 2 phút, chơi không?",
         bg: "",
@@ -132,7 +132,7 @@ const StoryToaD = [
         nextId: null
     }
 ];
-
+window.StoryToaD = StoryToaD;
 // ==========================================
 // 2. HÀM CHUYỂN CẢNH (THOẠI -> GAME TÒA D)
 // ==========================================
@@ -142,23 +142,25 @@ function transitionToToaD() {
 
     // Chạy máy đọc kịch bản Tòa D
     if (typeof window.playVN === 'function') {
-        window.playVN(StoryToaD, "test_01", () => {
-            console.log("Đã đọc xong thoại Tòa D. Mở giao diện Tòa D...");
+        window.playVN(StoryToaD, "d_01", () => {
+            window.playVN(window.StoryToaD, "d_01", () => {
             
-            // Ẩn vn-screen, hiển thị toa-d trực tiếp
+            // --- KHÚC NÀY MỚI QUAN TRỌNG NÈ ---
+            // Lệnh này chỉ được chạy khi đã đọc xong câu CUỐI CÙNG (d_14)
+            // (Không được để nó chạy ngang xương lúc vừa load xong d_01)
+            
+            window.switchBuilding('toa-d');
+            
+            // Tắt giao diện Hội thoại (vn-screen)
             const vnScreen = document.getElementById('vn-screen');
-            const toaD = document.getElementById('toa-d');
-            
             if (vnScreen) vnScreen.style.display = 'none';
-            if (toaD) toaD.style.display = 'block';
-            
-            // === ĐOẠN SỬA MỚI: CHỈ BẬT MÀN HÌNH START, KHÔNG TỰ CHẠY GAME ===
+
+            // Bật màn hình Start chờ chơi của Tòa D
             const startScreenD = document.getElementById('start-screen-toa-d');
             const gameScreenD = document.getElementById('game-screen-toa-d');
-            
-            // Đảm bảo Màn hình Start hiện ra, và Màn hình Game bị ẩn đi
             if (startScreenD) startScreenD.classList.remove('hidden');
             if (gameScreenD) gameScreenD.classList.add('hidden');
+        });
             
         });
     }
@@ -418,27 +420,44 @@ document.addEventListener('DOMContentLoaded', () => {
     // Lấy các element của Tòa B
     const startScreenB = document.getElementById('start-screen-toa-b');
     const gameScreenB = document.getElementById('game-screen-toa-b');
-    
     const btnStartB = document.getElementById('toa-b-start-btn');
 
-    let toaB_Instance = null;
+    // Đưa instance ra toàn cục để hệ thống có thể can thiệp
+    window.toaB_Instance = null;
 
-    // Khi bấm "BẮT ĐẦU" -> Chuyển thẳng vào game (bỏ màn hình hướng dẫn)
+    // Khi bấm "BẮT ĐẦU" -> Chuyển thẳng vào game
     if (btnStartB) {
         btnStartB.addEventListener('click', () => {
             startScreenB.classList.add('hidden');
             gameScreenB.classList.remove('hidden');
             
-            // Chỉ khởi tạo game 1 lần duy nhất
-            if (!toaB_Instance) {
-                toaB_Instance = new ToaBGame('game-container');
-                toaB_Instance.startGame();
+            if (!window.toaB_Instance) {
+                window.toaB_Instance = new ToaBGame('game-container');
+                window.toaB_Instance.startGame();
             } else {
-                // Nếu đã có instance rồi (chơi lại), thì gọi hàm reset
-                toaB_Instance.currentRound = 0;
-                toaB_Instance.drl = 0;
-                toaB_Instance.startGame();
+                // Nếu đã có instance rồi (chơi lại / reset), thì dọn dẹp bộ đếm giờ cũ
+                if (window.toaB_Instance.timer) clearInterval(window.toaB_Instance.timer);
+                window.toaB_Instance.currentRound = 0;
+                window.toaB_Instance.drl = 0;
+                window.toaB_Instance.startGame();
             }
         });
     }
 });
+
+// ==========================================
+// HÀM RESET TÒA B KHI LOAD GAME
+// ==========================================
+window.resetToaB = function() {
+    // 1. Tắt game đang chạy dở
+    if (window.toaB_Instance) {
+        window.toaB_Instance.isPlaying = false;
+        if (window.toaB_Instance.timer) clearInterval(window.toaB_Instance.timer);
+    }
+
+    // 2. Bật lại màn hình Start chờ người chơi
+    const startScreenB = document.getElementById('start-screen-toa-b');
+    const gameScreenB = document.getElementById('game-screen-toa-b');
+    if (startScreenB) startScreenB.classList.remove('hidden');
+    if (gameScreenB) gameScreenB.classList.add('hidden');
+};

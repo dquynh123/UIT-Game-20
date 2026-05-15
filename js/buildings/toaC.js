@@ -272,3 +272,18 @@ setTimeout(() => {
 }, 500);
 
 window.startToaCGame = startToaCGame;
+// HÀM RESET TÒA C KHI LOAD GAME
+window.resetToaC = function() {
+    if (gameInterval) clearInterval(gameInterval);
+    if (animationId) cancelAnimationFrame(animationId);
+    gameState = "MENU";
+    score = 0; currentLevel = 0; wrongCount = 0;
+    if (scoreEl) scoreEl.innerText = score;
+    if (toaCContainer) toaCContainer.classList.remove("game-playing");
+
+    // Bật lại màn hình Start chờ người chơi
+    const startScreenC = document.getElementById('start-screen-toa-c');
+    const gameScreenC = document.getElementById('game-screen-toa-c');
+    if (startScreenC) startScreenC.classList.remove('hidden');
+    if (gameScreenC) gameScreenC.classList.add('hidden');
+};

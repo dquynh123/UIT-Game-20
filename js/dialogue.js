@@ -71,6 +71,7 @@ function showLine(lineId) {
         if (onStoryComplete) {
             const tempCb = onStoryComplete;
             onStoryComplete = null; // THÊM DÒNG NÀY (Xóa trí nhớ callback)
+            window.currentVNLine = null;
             tempCb();
         }
         return;
@@ -90,6 +91,7 @@ function showLine(lineId) {
         }
     }
     currentLineId = lineId;
+    window.currentVNLine = lineId;
 
     choiceContainer.innerHTML = '';
     choiceContainer.classList.add('hidden');
@@ -236,6 +238,7 @@ function goNextLine() {
         if (onStoryComplete) {
             const tempCb = onStoryComplete;
             onStoryComplete = null; 
+            window.currentVNLine = null;
             tempCb();
         }
     }

@@ -45,7 +45,7 @@ container.innerHTML = `
     `;
 
     // 2. KHỞI TẠO TRẠNG THÁI GAME
-    let state = {
+    window.toaEState = window.toaEState || {
         pos: 1,
         drl: 200,
         turns: 0,
@@ -55,6 +55,7 @@ container.innerHTML = `
         isNight: false,
         dayNightCycle: 0
     };
+    let state = window.toaEState;
 
     // 3. CẤU TRÚC DỮ LIỆU ĐIỀU HƯỚNG (Hash Map)
     // Key là ô hiện tại, Value là ô sẽ nhảy tới (Thang máy lên hoặc xuống)
@@ -273,7 +274,7 @@ function rollDice(diceType, cost) {
         }, rollDelay); 
     }
 
-function updateUI() {
+    function updateUI() {
         displayDrl.innerText = state.drl;
         displayTurn.innerText = `${state.turns}/${state.maxTurns}`;
         displayPos.innerText = state.pos;
@@ -305,6 +306,7 @@ function updateUI() {
             chibi.style.left = `${leftPercentage + 1.5}%`;
             chibi.style.bottom = `${bottomPercentage + 1.25}%`;
         }
+        window.updateToaEUI = updateUI;
     }
 
     function endGame(reason) {
@@ -415,7 +417,7 @@ const storyToaA = [
         text: "Ra đây là mảnh ký ức. Nhìn nó cứ như viên kẹo ngậm hồi bé, thèm quá... à không, chắc mình không nên thử.",
         bg: "",
         voice: "assets/voice/toaE/1_sautoaE.ogg",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         noSkip: true,
         nextId: "ht_01"
     },
@@ -425,7 +427,7 @@ const storyToaA = [
         text: "Chìa khóa Tòa A? Vậy giờ phải đi qua thư viện tòa A thôi nhỉ?",
         bg: "",
         voice: "assets/voice/toaE/2_sautoaE.ogg",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         noSkip: true,
         nextId: "a_00" 
     },
@@ -448,7 +450,7 @@ const storyToaA = [
         name: "{PLAYER}",
         text: "Cái quái gì thế này? Hồi xưa thư viện tòa A yên tĩnh lắm mà ?",
         bg: "",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         voice: "assets/voice/toaA/1_toaA.ogg",
         noSkip: true,
         nextId: "ht_03" 
@@ -468,7 +470,7 @@ const storyToaA = [
         text: "Từ từ đã nhóc. Thư viện gì mà chơi nguyên cái băng chuyền công nghiệp thế này? Giải thích cho anh với.",
         bg: "",
         voice: "assets/voice/toaA/3_toaA.ogg",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         nextId: "ht_05" 
     },
     {
@@ -487,7 +489,7 @@ const storyToaA = [
         text: "Àaaaaaaa. Mà nãy giờ em có thấy cái gì phát sáng rớt quanh đây không?",
         bg: "",
         voice: "assets/voice/toaA/5_toaA.ogg",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         nextId: "ht_07"
     },
 
@@ -516,7 +518,7 @@ const storyToaA = [
         text: "Thế cái đống máy móc đang chạy rầm rầm này là do tôi tự tưởng tượng ra hả?",
         bg: "",
         voice: "assets/voice/toaA/8_toaA.ogg",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         nextId: "ht_10"
     },
     {
@@ -561,7 +563,7 @@ const storyToaA = [
         text: "...Bệnh nghề nghiệp nặng tới mức mang cả dây chuyền vào trong tưởng tượng. Chịu luôn rồi.",
         bg: "",
         voice: "assets/voice/toaA/10_toaA.ogg",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         nextId: "ht_15"
     },
     {
@@ -589,7 +591,7 @@ const storyToaA = [
         text: "Chuyện nhỏ. Phân loại 9 kệ đúng không? Tới đây... Ủa khoan, sao mấy cuốn sách bám đầy bụi này nặng thế? Anh nhấc không lên!",
         bg: "",
         voice: "assets/voice/toaA/12_toaA.ogg",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         noSkip: true,
         nextId: "ht_18"
     },
@@ -618,7 +620,7 @@ const storyToaA = [
         text: "Gỡ nó ra. Rõ rồi. Và không động vào sách cũ. Okay luôn!",
         bg: "",
         voice: "assets/voice/toaA/15_toaA.ogg",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         nextId: "ht_21"
     },
     {
@@ -636,11 +638,13 @@ const storyToaA = [
         text: "Được rồi. Bắt đầu thôi!",
         bg: "",
         voice: "assets/voice/toaA/17_toaA.ogg",
-        sprite: "assets/images/test_main.png",
+        sprite: "assets/images/Main.png",
         noskip: true,
         nextId: null
     }
 ];
+window.storyToaA = storyToaA;
+
 let hasTransitionedToToaA = false;
 function transitionToToaA() {
     if (hasTransitionedToToaA) return;

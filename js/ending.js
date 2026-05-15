@@ -56,7 +56,7 @@ const storyBadToaC = [
         text: "Dữ liệu không khớp. Anh đã quên hết những ký ức trước đây. Anh sẽ kẹt ở đây mãi mãi.", 
         bg: "", 
         voice: "assets/voice/ending/5_bad.ogg",
-        sprite: "assets/images/test_guide.png", 
+        sprite: "assets/images/Đậu đậu.png", 
         noSkip: true,
         nextId: null
     }
@@ -97,7 +97,7 @@ const storyTrueToaC_Part1 = [
         text: "Cái giọng điệu này... Cậu là cái hệ thống admin lúc nãy? Thôi được rồi, trò chơi kết thúc. Tôi đã gom đủ 4 mảnh. Mở cửa cho tôi thoát ra khỏi đây", 
         bg: "", 
         voice: "assets/voice/ending/2.ogg",
-        sprite: "assets/images/test_main.png", 
+        sprite: "assets/images/Main.png", 
         noSkip: true,
         nextId: "true_05" 
     },
@@ -186,7 +186,12 @@ const storyVanPhong = [
         nextId: null
     }
 ];
-
+// BƠM DỮ LIỆU ENDING RA TOÀN CỤC ĐỂ MAIN.JS GỌI ĐƯỢC
+window.storyBadToaC = storyBadToaC;
+window.storyTrueToaC_Part1 = storyTrueToaC_Part1;
+window.storyTrueToaC_Part2 = storyTrueToaC_Part2;
+window.storyVanPhong = storyVanPhong;
+window.showEndCredits = showEndCredits; // Cho phép gọi hàm chạy Credit
 // ---------------------------------------------------------
 // 2. CÁC HÀM HIỆU ỨNG KỸ XẢO
 // ---------------------------------------------------------
