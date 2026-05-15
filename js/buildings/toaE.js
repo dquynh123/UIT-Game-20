@@ -106,8 +106,15 @@ container.innerHTML = `
         if (visualBoard) {
             if (state.isNight) {
                 visualBoard.classList.add('night-mode');
+                let powerOnSound = new Audio('assets/sound/switch.ogg');
+                powerOnSound.volume = 0.8;
+                powerOnSound.play().catch(e => console.log("Lỗi âm thanh bật đèn: ", e));
             } else {
                 visualBoard.classList.remove('night-mode');
+                // 💡 CHÈN ÂM THANH BẬT ĐÈN VÀO ĐÂY:
+                let powerOnSound = new Audio('assets/sound/switch.ogg');
+                powerOnSound.volume = 0.8;
+                powerOnSound.play().catch(e => console.log("Lỗi âm thanh bật đèn: ", e));
             }
         }
         
@@ -449,7 +456,7 @@ const storyToaA = [
     {
         id: "ht_03",
         name: "CTV CNPM",
-        text: "Anh ơi, anh i! Rảnh không anh, qua cứu em với! Tự nhiên hôm nay thư viện nhập sách nhiều quá em xếp không kịp, sắp bị đè bẹp tới nơi rồi!",
+        text: "Anh ơi, anh ơi! Rảnh không anh, qua cứu em với! Tự nhiên hôm nay thư viện nhập sách nhiều quá em xếp không kịp, sắp bị đè bẹp tới nơi rồi!",
         bg: "",
         voice: "assets/voice/toaA/2_toaA.ogg",
         sprite: "assets/images/chibi.png",

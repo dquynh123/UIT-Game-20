@@ -28,7 +28,7 @@ function sceneTransition(action) {
 }
 
 // LOGIC MÀN HÌNH CHÍNH & NHẬP TÊN
-// Chuyển từ Menu chính sang Màn nhập tên (Dùng hiệu ứng Slide + Fade cũ)
+// Chuyển từ Menu chính sang Màn nhập tên 
 startBtn.addEventListener('click', () => {
 
     mainMenu.classList.add('fade-out-left');
@@ -126,7 +126,6 @@ import './buildings/toaE.js';
 import './buildings/toaC.js';
 import './buildings/toaD.js';
 
-/**
 // --- HỆ THỐNG TỔNG ĐIỂM TOÀN CỤC ---  */
 window.UITGameStats = {
     totalScore: 0,
@@ -163,9 +162,7 @@ window.switchBuilding = (buildingId) => {
     });
 };
 
-// ==========================================
 // HÀM GỌI BẢNG TỔNG KẾT DÙNG CHUNG (GLOBAL)
-// ==========================================
 window.showGlobalSummaryBoard = function(stageName, currentScore, timeSec, isWin, nextActionCallback) {
     const overlay = document.getElementById('global-summary-overlay');
     const title = document.getElementById('summary-title');
@@ -212,9 +209,7 @@ window.showGlobalSummaryBoard = function(stageName, currentScore, timeSec, isWin
     overlay.classList.remove('hidden');
 };
 
-// ==========================================
 // 1. KỊCH BẢN CẢNH 1 & 2 
-// ==========================================
 const storyScene1 = [
     {
         id: "s1_01",
@@ -495,7 +490,7 @@ const storyScene2_UIT = [
     {
         id: "s2_25",
         name: "",
-        text: "Cả hai lại thử ấn vài nút, thang máy vẫn im re. Đèn nhấp nháy yếu ớt.Bỗng từ loa thang máy phát ra giọng nói rõ ràng.",
+        text: "Cả hai lại thử ấn vài nút, thang máy vẫn im re. Đèn nhấp nháy yếu ớt. Bỗng từ loa thang máy phát ra giọng nói rõ ràng.",
         bg: "",
         sfx: "assets/sound/press_elevator.ogg",
         sprite: "",
@@ -504,7 +499,7 @@ const storyScene2_UIT = [
     {
         id: "s2_26",
         name: "Người hướng dẫn",
-        text: "Chào mừng cựu sinh viên khoa Công nghệ phần mềm. Tôi là hệ thống hướng dẫn. Ở không gian này, muốn lên tầng thì không bấm bằng tay đâu - phải xài Điểm Rèn Luyện. Anh có 200 ĐRL để tiêu đấy",
+        text: "Chào mừng cựu sinh viên khoa Công nghệ phần mềm. Tôi là hệ thống hướng dẫn. Ở không gian này, muốn lên tầng thì không bấm bằng tay đâu - phải xài Điểm Rèn Luyện. Anh có 200 ĐRL để tiêu đấy.",
         bg: "",
         voice: "assets/voice/toaE/9_toaE.ogg",
         sprite: "",
@@ -575,7 +570,6 @@ window.startGame = function() {
         let glitchSound = new Audio('assets/sound/glitch_canh1.mp3'); // SỬA TÊN FILE TẠI ĐÂY
         glitchSound.volume = 1.0; // Chỉnh âm lượng (từ 0.0 đến 1.0)
         glitchSound.play();       // Lệnh phát nhạc!
-        // --> BẠN PLAY SOUND GLITCH CỦA BẠN Ở ĐÂY <--
         // let glitchSound = new Audio('assets/sounds/glitch_distort.mp3'); 
         // glitchSound.play();
 
