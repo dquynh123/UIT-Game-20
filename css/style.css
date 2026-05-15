@@ -97,7 +97,7 @@ body { margin: 0; padding: 0; overflow: hidden; }
 #main-start-btn img { width: 280px; transition: transform 0.3s ease; }
 #main-start-btn:hover img { transform: scale(1.1); }
 
-#name-screen { background-image: url('../assets/images/anh1.webp'); }
+#name-screen { background-image: url('../assets/images/yourname.jpg'); }
 .name-content { display: flex; flex-direction: column; align-items: center; text-align: center; color: #000; }
 .name-content h2 { font-size: 2rem; margin-bottom: 15px; }
 .name-content input { width: 300px; padding: 12px; font-size: 18px; border: 2px solid #000; border-radius: 5px; background: rgba(255, 255, 255, 0.9); outline: none; margin-bottom: 20px;}
