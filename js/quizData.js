@@ -300,6 +300,11 @@ const uitQuizBank = [
     options: ["028", "090", "012", "088"],
     correct: "028"
     },
+    {
+    q: "Trong hệ nhị phân, số thập phân 7 được biểu diễn thành gì?",
+    options: ["101", "110", "111", "011"],
+    correct: "111"
+    },
     // 61-70
     {
     q: "Số lượng tòa nhà chính có tên bằng chữ cái tại UIT hiện nay là bao nhiêu?",
