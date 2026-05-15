@@ -69,7 +69,7 @@
     max-width: 400px; 
     aspect-ratio: 10 / 12; 
 
-    background-color: #b7cad3; /* Cho một cái màu nền sáng sủa làm sàn nhà */
+    background-color: #b7d1d3; /* Cho một cái màu nền sáng sủa làm sàn nhà */
     background-image: url('../../assets/images/board.png');
     background-size: cover;
     position: relative; 
