@@ -5,7 +5,61 @@
 @import url('./buildings/toaD.css');
 @import url('./buildings/mainscreen.css');
 
+/* ===================================================
+   LÀM ĐẸP NÚT NGOÀI MÀN HÌNH CHÍNH
+   =================================================== */
+.main-menu-actions {
+    display: flex;
+    flex-direction: column; /* Xếp dọc 2 nút */
+    align-items: center;
+    gap: 15px; /* Khoảng cách giữa 2 nút */
+    margin-top: 3vh;
+    z-index: 100;
+    position: relative;
+}
 
+.main-ui-btn {
+    width: 280px;
+    padding: 12px 20px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 50px; /* Bo tròn 2 đầu dạng viên thuốc */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    letter-spacing: 1px;
+}
+
+/* Nút Tiếp Tục: Màu Xanh nổi bật, thu hút ánh nhìn */
+.btn-continue {
+    background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 210, 255, 0.4);
+}
+
+.btn-continue:hover {
+    transform: translateY(-3px); /* Hiệu ứng nảy lên khi rê chuột */
+    box-shadow: 0 6px 20px rgba(0, 210, 255, 0.6);
+}
+
+/* Nút Bắt Đầu Mới: Màu tối giản, chìm hơn một chút để tránh bấm nhầm */
+.btn-start {
+    background: transparent;
+    color: #333333; /* Màu xám đậm */
+    border: 2px solid #555555; /* Chỉ có viền */
+}
+
+.btn-start:hover {
+    background: #333333;
+    color: #ffffff;
+    transform: translateY(-3px);
+}
+
+/* Ẩn nút đi mượt mà khi chưa có dữ liệu save */
+.hidden {
+    display: none !important;
+}
 /* THÊM DÒNG NÀY ĐỂ SỬA LỖI HIỆN TẤT CẢ CÙNG LÚC */
 .hidden {
     display: none !important;
@@ -746,4 +800,27 @@ body.cursed-mode #btnShowLeaderboard {
 /* 6. Giãn cách riêng cho xịn xò phần Lồng tiếng (vì có 2 dòng/người) */
 .voice-cast p {
     margin-bottom: 20px; 
+}
+
+/* ===================================================
+   CHỐNG LỖI KÉO NHẦM GIAO DIỆN VÀ BÔI ĐEN CHỮ (TÒA A)
+   =================================================== */
+
+/* 1. Cấm bôi đen chữ trên toàn bộ Tòa A */
+#toa-a {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+}
+
+/* 2. Biến thanh thông số (Thời gian, Điểm, Mạng) thành "tàng hình" với chuột. 
+   Chuột sẽ xuyên qua nó, không bao giờ túm nhầm được nữa */
+#toa-a .game-header {
+    pointer-events: none !important;
+}
+
+/* 3. Ngăn túm nhầm cái chữ "Sách Dày" bên trong cuốn sách tạ */
+.conveyor-book * {
+    pointer-events: none !important;
 }

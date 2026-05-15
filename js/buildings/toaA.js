@@ -47,6 +47,7 @@ const StoryToaB = [
         text: "Giấy tờ bay tứ tung, điện thoại rơi “bịch” xuống sàn",
         bg: "",
         sprite: "",
+        stopSfx: true,
         nextId: "test_05"
     },
 

@@ -93,6 +93,10 @@ function showLine(lineId) {
     currentLineId = lineId;
     window.currentVNLine = lineId;
 
+    if (typeof window.autoSaveGame === 'function') {
+        window.autoSaveGame();
+    }
+
     choiceContainer.innerHTML = '';
     choiceContainer.classList.add('hidden');
     nextIndicator.style.display = 'block';
@@ -152,35 +156,46 @@ function showLine(lineId) {
         window.currentVoice.volume = voiceVolume; // Áp mức âm lượng từ Menu Cài đặt
         window.currentVoice.play().catch(e => console.log("Chưa thể phát giọng nói: ", e));
     }
+    // 🌟 CÔNG TẮC CHỦ ĐỘNG: Tắt SFX cũ nếu kịch bản yêu cầu
+    if (line.stopSfx && window.currentSFX) {
+        window.currentSFX.pause();
+        window.currentSFX.currentTime = 0;
+        window.currentSFX = null;
+    }
+
     // 3. PHÁT HIỆU ỨNG ÂM THANH (SFX)
     if (line.sfx) {
-        let sfxAudio = new Audio(line.sfx);
-        
-        // Mức âm lượng bắt đầu (mặc định là 100%, nếu kịch bản có yêu cầu thì chỉnh theo kịch bản)
-        sfxAudio.volume = line.sfxVolume !== undefined ? line.sfxVolume : 1.0; 
-        
-        if (line.sfxLoop) {
-            sfxAudio.loop = true;
-        }
+        // NẾU ĐANG SKIP: Chặn không cho phát SFX rác (Chỉ tha cho âm thanh lặp như Băng chuyền)
+        if (isSkipMode && !line.sfxLoop) {
+            // Không làm gì cả, giữ im lặng
+        } else {
+            // Nếu có SFX ngắn đang phát thì tắt nó đi để không bị vang đè lên nhau
+            if (window.currentSFX && !window.currentSFX.loop) {
+                window.currentSFX.pause();
+                window.currentSFX.currentTime = 0;
+            }
 
-        // Lưu lại để lát nữa chuyển sang Minigame có thể gọi ra để tắt
-        window.currentSFX = sfxAudio; 
-        
-        sfxAudio.play().catch(e => console.log("Chưa thể phát SFX: ", e));
+            let sfxAudio = new Audio(line.sfx);
+            sfxAudio.volume = line.sfxVolume !== undefined ? line.sfxVolume : 1.0; 
+            
+            if (line.sfxLoop) {
+                sfxAudio.loop = true;
+            }
 
-        // 🌟 TÍNH NĂNG MỚI: TỰ ĐỘNG HẠ ÂM LƯỢNG (FADE) 🌟
-        if (line.sfxFadeTo !== undefined) {
-            // Chờ 2.5 giây (2500ms) để người chơi cảm nhận độ ồn
-            setTimeout(() => {
-                // Sau đó bắt đầu hạ nhỏ dần mỗi 150 mili-giây
-                let fadeInterval = setInterval(() => {
-                    if (sfxAudio.volume > line.sfxFadeTo) {
-                        sfxAudio.volume = Math.max(line.sfxFadeTo, sfxAudio.volume - 0.05); // Giảm dần
-                    } else {
-                        clearInterval(fadeInterval); // Khi chạm mốc 15% thì giữ nguyên luôn
-                    }
-                }, 150); 
-            }, 2500); 
+            window.currentSFX = sfxAudio; 
+            sfxAudio.play().catch(e => console.log("Chưa thể phát SFX: ", e));
+
+            if (line.sfxFadeTo !== undefined) {
+                setTimeout(() => {
+                    let fadeInterval = setInterval(() => {
+                        if (sfxAudio.volume > line.sfxFadeTo) {
+                            sfxAudio.volume = Math.max(line.sfxFadeTo, sfxAudio.volume - 0.05);
+                        } else {
+                            clearInterval(fadeInterval);
+                        }
+                    }, 150); 
+                }, 2500); 
+            }
         }
     }
     typeWriter(rawText, line);
@@ -268,6 +283,12 @@ dialogueBox.onclick = (e) => {
         clearInterval(typeInterval);
         vnText.innerHTML = currentLine.text.replace(/{PLAYER}/g, localStorage.getItem('currentPlayerName') || "Main");
         isTyping = false;
+        /*
+        // (Chỉ cắt SFX ngắn, không cắt âm thanh lặp sfxLoop)
+        if (window.currentSFX && !window.currentSFX.loop) {
+            window.currentSFX.pause();
+        }*/
+
         checkChoices(currentLine);
         
         if (isAutoMode && !isWaitingForChoice) {

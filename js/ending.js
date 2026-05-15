@@ -395,7 +395,7 @@ export const handleGameEnding = async (finalTotalScore, isWin, playerName, total
     };
 
     // ======= KỊCH BẢN 1: BAD ENDING =======
-    if (finalTotalScore < 0) { 
+    if (finalTotalScore < 180) { 
         if (vnScreen) vnScreen.classList.add('light-glitch-effect');
         if (typeof window.playVN === 'function') {
             window.playVN(storyBadToaC, "bad_01", async () => {

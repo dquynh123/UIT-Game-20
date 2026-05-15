@@ -151,6 +151,14 @@ window.UITGameStats = {
 
 window.switchBuilding = (buildingId) => {
     window.currentCheckpoint = buildingId;
+    if (window.currentVoice) {
+        window.currentVoice.pause();
+        window.currentVoice.currentTime = 0;
+    }
+    if (window.currentSFX) {
+        window.currentSFX.pause();
+        window.currentSFX.currentTime = 0;
+    }
     sceneTransition(() => {
         const allBuildings = ['vn-screen','toa-a', 'toa-b', 'toa-c', 'toa-d', 'toa-e'];
         allBuildings.forEach(id => {
@@ -225,6 +233,7 @@ const storyScene1 = [
         name: "",
         text: "Tiếng thông báo tin nhắn công việc, email kêu liên tục. Giữa một nùi thông báo, một email popup lên: 'UIT 20th - Thư mời...'",
         bg: "",
+        sfx: "assets/sound/tiengtbao.ogg",
         sprite: "",
         nextId: "s1_03"
     },
@@ -235,6 +244,7 @@ const storyScene1 = [
         voice: "assets/voice/scene1/voice1_scene1.ogg",
         bg: "",
         sprite: "assets/images/Main.png",
+        stopSfx: true,
         nextId: "s1_04"
     },
     {
@@ -248,7 +258,7 @@ const storyScene1 = [
     {
         id: "s1_05",
         name: "{PLAYER}",
-        text: "Ụa máy tính bị gì v…",
+        text: "Ụa máy tính bị gì vậy",
         voice: "assets/voice/scene1/voice2_scene1.ogg",
         bg: "",
         sprite: "assets/images/Main.png",
@@ -505,6 +515,7 @@ const storyScene2_UIT = [
         voice: "assets/voice/toaE/9_toaE.ogg",
         sprite: "",
         noSkip: true,
+        stopSfx: true,
         nextId: "s2_27"
     },
     {
@@ -614,9 +625,8 @@ window.startGame = function() {
 };
 window.playVN = playVN;
 
-// ==========================================
-// HỆ THỐNG LƯU / TẢI GAME ĐỈNH CAO (EXACT STATE)
-// ==========================================
+// HỆ THỐNG LƯU / TẢI GAME 
+
 const SAVE_KEY = "UIT_VN_SAVEDATA";
 window.currentCheckpoint = "scene1"; 
 
@@ -633,6 +643,21 @@ window.saveGameProgress = () => {
     localStorage.setItem(SAVE_KEY, JSON.stringify(gameData));
     alert("💾 Đã lưu tiến trình game thành công!");
 };
+window.autoSaveGame = () => {
+    const gameData = {
+        playerName: localStorage.getItem('currentPlayerName') || "Bạn",
+        stats: window.UITGameStats, 
+        checkpoint: window.currentCheckpoint, 
+        toaEState: window.toaEState,
+        vnLine: window.currentVNLine 
+    };
+    localStorage.setItem(SAVE_KEY, JSON.stringify(gameData));
+};
+
+// THÊM MỚI: TỰ ĐỘNG LƯU KHI NGƯỜI CHƠI ẤN F5 HOẶC ĐÓNG TAB
+window.addEventListener('beforeunload', () => {
+    window.autoSaveGame();
+});
 
 // 2. HÀM TẢI GAME
 window.loadGameProgress = () => {
@@ -660,14 +685,12 @@ window.loadGameProgress = () => {
     document.getElementById('name-screen').classList.add('hidden');
     document.getElementById('game-scene').classList.remove('hidden');
 
-    alert(`📂 Đã tải lại game! Điểm ĐRL: ${window.UITGameStats.totalScore}`);
     resumeFromCheckpoint(window.currentCheckpoint, window.currentVNLine);
 };
 
 // 4. KẾT NỐI NÚT "TIẾP TỤC" (CONTINUE BUTTON)
 document.addEventListener('DOMContentLoaded', () => {
     const btnSave = document.getElementById('btn-save-game');
-    const btnLoad = document.getElementById('btn-load-game');
     const btnContinue = document.getElementById('main-continue-btn'); 
 
     // Nếu có dữ liệu cũ -> Bật nút Tiếp Tục
@@ -685,7 +708,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (btnSave) btnSave.addEventListener('click', window.saveGameProgress);
-    if (btnLoad) btnLoad.addEventListener('click', window.loadGameProgress);
+
 });
 
 // 3. ĐIỀU PHỐI MỞ ĐÚNG MÀN ĐANG CHƠI DỞ HOẶC THOẠI ĐANG ĐỌC DỞ
@@ -779,6 +802,9 @@ function resumeFromCheckpoint(checkpoint, vnLine) {
     if (checkpoint === "scene1") {
         if (typeof window.startGame === 'function') window.startGame();
     } else {
+        if (window.currentVoice) { window.currentVoice.pause(); window.currentVoice.currentTime = 0; }
+        if (window.currentSFX) { window.currentSFX.pause(); window.currentSFX.currentTime = 0; }
+
         const targetScreen = document.getElementById(checkpoint);
         if (targetScreen) targetScreen.style.display = 'block';
 
@@ -797,27 +823,38 @@ function resumeFromCheckpoint(checkpoint, vnLine) {
     }
 }
 
-// 4. GẮN LỆNH VÀO 2 NÚT BẤM BẠN ĐÃ TẠO SẴN Ở HTML
+// 4. GẮN LỆNH VÀO CÁC NÚT BẤM (MAIN MENU & CÀI ĐẶT)
 document.addEventListener('DOMContentLoaded', () => {
     const btnSave = document.getElementById('btn-save-game');
-    const btnLoad = document.getElementById('btn-load-game');
-    const btnContinue = document.getElementById('main-continue-btn'); // Nút Tiếp tục ở Main Menu
+    const btnContinue = document.getElementById('main-continue-btn'); 
+    const btnStart = document.getElementById('main-start-btn'); // Lấy cái nút Bắt Đầu ra để xử lý
 
-    // --- ĐOẠN KIỂM TRA DỮ LIỆU CŨ (BƯỚC 2) ---
+    // --- ĐOẠN KIỂM TRA DỮ LIỆU CŨ ---
     const savedData = localStorage.getItem(SAVE_KEY);
     if (savedData && btnContinue) {
-        // Nếu có dữ liệu cũ, hiện nút Tiếp tục lên
+        // TRƯỜNG HỢP 1: ĐÃ TỪNG CHƠI VÀ CÓ FILE LƯU
         btnContinue.classList.remove('hidden');
         btnContinue.style.display = 'block';
         
-        // Khi bấm nút Tiếp tục ở màn hình chính, gọi hàm Load
+        // BÍ KÍP Ở ĐÂY: Tự động đổi tên nút "BẮT ĐẦU" thành "CHƠI LẠI TỪ ĐẦU"
+        if (btnStart) {
+            btnStart.innerText = "CHƠI LẠI TỪ ĐẦU";
+        }
+        
+        // Khi bấm Tiếp tục, chạy màn rèm đen rồi load game
         btnContinue.onclick = () => {
-            window.loadGameProgress();
+            sceneTransition(() => {
+                window.loadGameProgress();
+            });
         };
+    } else {
+        // TRƯỜNG HỢP 2: LẦN ĐẦU CHƠI (KHÔNG CÓ FILE LƯU)
+        // Chữ vẫn giữ nguyên là "BẮT ĐẦU" (như trong HTML)
+        if (btnStart) {
+            btnStart.innerText = "BẮT ĐẦU";
+        }
     }
-    // ----------------------------------------
 
-    // Gắn lệnh cho nút Lưu/Tải bên trong Menu Cài đặt
+    // Gắn lệnh cho nút Lưu bên trong Menu Cài đặt (đã xóa nút Load)
     if (btnSave) btnSave.addEventListener('click', window.saveGameProgress);
-    if (btnLoad) btnLoad.addEventListener('click', window.loadGameProgress);
 });
